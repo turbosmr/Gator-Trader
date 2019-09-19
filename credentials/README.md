@@ -7,16 +7,16 @@
 
 # Blow is a list of items required. Missing items will causes points to be deducted from multiple milestone submissions.
 
-1. Server URL or IP
-2. SSH username
-3. SSH password or key.
-    <br> If a ssh key is used please upload the key to the credentials folder.
-4. Database URL or IP and port used.
-    <br><strong> NOTE THIS DOES NOT MEAN YOUR DATABASE NEEDS A PUBLIC FACING PORT.</strong> But knowing the IP and port number will help with SSH tunneling into the database. The default port is more than sufficient for this class.
-5. Database username
-6. Database password
-7. Database name (basically the name that contains all your tables)
-8. Instructions on how to use the above information.
+1. Server IP: 18.223.247.243
+2. SSH username: ubuntu
+3. SSH key: admin.pem
+4. Database IP: csc648-team03.cnzsqesnuc2l.us-east-2.rds.amazonaws.com, Database Port: 3306
+5. Database username: admin
+6. Database password: RLa2OAk0bCqzlweqFUH1
+7. Database name: csc648-team03
+8. Instructions on how to use the above information:<br>
+	a) To connect to server: Open terminal or command prompt, navigate to folder containing SSH key file, paste the following command "ssh -i "admin.pem" ubuntu@ec2-18-223-247-243.us-east-2.compute.amazonaws.com", and press enter.<br>
+	b) To connect to database: First, download and install a MySQL client (Workbench, DataGrip). Then, enter the database information provided above to connect.<br>
 
 # Most important things to Remember
 ## These values need to kept update to date throughout the semester. <br>
