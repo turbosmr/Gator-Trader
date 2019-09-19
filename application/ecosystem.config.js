@@ -1,7 +1,7 @@
 module.exports = {
   apps: [{
     name: 'csc648-team03-sfsu-buy-sell',
-    script: './application/index.js',
+    script: './index.js',
     cwd : "/application/"
   }],
   deploy: {
