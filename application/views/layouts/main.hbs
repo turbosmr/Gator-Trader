@@ -3,6 +3,7 @@
 
 <head>
   <title>{{title}}</title>
+  <link rel="stylesheet" href="/stylesheets/main.css">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -13,7 +14,7 @@
 
 <body style="background-color:white;">
   <!-- Nav Bar-->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top">
     <!-- Brand -->
     <a class="navbar-brand" href="/">Home</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -35,17 +36,17 @@
     </div>
   </nav>
 
-  <div class="container">
+  <div class="container main">
     <div class="row">
       {{{body}}}
     </div>
   </div>
 
-  <div class="jumbotron text-center" style="margin-bottom:0">
+  <div class="footer" style="margin-bottom:0">
     <p>
-      <a href="#">Sell</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-      <a href="/about">About</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-      <a href="#">Terms & Conditions</a>&nbsp;&nbsp;&nbsp;
+      <a href="#" style="color: black">Sell</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+      <a href="/about" style="color: black">About</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+      <a href="#" style="color: black">Terms & Conditions</a>&nbsp;&nbsp;&nbsp;
     </p>
     <p>For demonstrational and educational purposes only.</p>
     <p>Copyright © 2019 SFSU CSC 648 Team 03 Buy & Sell Inc for Students. All rights reserved.</p>
