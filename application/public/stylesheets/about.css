@@ -1,0 +1,58 @@
+.about {
+    width: 75%;
+    text-align: center;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 64px;
+}
+
+.indiv-container {
+    margin-bottom: 50px;
+}
+
+.avatar {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.name-position-container {
+    margin-top: 10px;
+}
+
+h3.name {
+    padding: 0px;
+    margin: 5px;
+}
+
+h4.position {
+    font-size: 15px;
+    padding: 0px;
+    margin: 0px;
+}
+
+a {
+    color: black;
+}
+
+a:hover {
+    color: grey;
+    text-decoration: none;
+}
+
+img {
+    transition: filter .2s ease-in-out;
+    transition: opacity .2s ease-in-out;
+}
+
+img:hover {
+    -webkit-filter: grayscale(50%);
+    filter: grayscale(50%);
+    opacity: 0.7;
+}
+
+.avatar-container {
+    text-align: center;
+}
