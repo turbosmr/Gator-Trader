@@ -1,2 +1,10 @@
 .DS_Store
 **/.DS_Store
+node_modules
+.gitignore
+node_modules
+.DS_Store
+views/.DS_Store
+views/.DS_Store
+.DS_Store
+.DS_Store
