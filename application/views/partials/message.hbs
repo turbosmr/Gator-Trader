@@ -1,0 +1,29 @@
+{{!-- General error --}}
+{{#if error}}
+<div class="alert alert-danger" role="alert">
+    {{error}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{{/if}}
+
+{{!-- General success --}}
+{{#if success}}
+<div class="alert alert-success" role="alert">
+    {{success}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{{/if}}
+
+{{!-- Registration error --}}
+{{#each regError}}
+<div class="alert alert-danger" role="alert">
+    {{this.message}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{{/each}}

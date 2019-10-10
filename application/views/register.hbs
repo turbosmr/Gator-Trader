@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="container header">
+        <h1>Register</h1>
+    </div>
+    <!-- Register form -->
+    <div class="container" style="width: 30%">
+        <!-- Display any error or success messages -->
+        <div>
+            {{> message}}
+        </div>
+        <form action="/users/register" method="POST">
+            <div class="form-group">
+                <input type="email" id="username" name="username" class="form-control"
+                    placeholder="Enter SFSU email address" value="{{username}}" maxlength="50" required/>
+            </div>
+            <div class="form-group">
+                <input type="text" id="sid" name="sid" class="form-control" placeholder="Enter SFSU ID" value="{{sid}}"
+                    maxlength="9" required/>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" name="password" class="form-control" placeholder="Create password"
+                    maxlength="20" required/>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password2" name="password2" class="form-control"
+                    placeholder="Confirm password" maxlength="20" required/>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+                Register
+            </button>
+        </form>
+        <h5 class="welcome-login-reg-shadow">
+            Have an account? <a href="/users/login">Login</a>
+        </h5>
+    </div>
+</div>
