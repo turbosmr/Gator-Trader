@@ -1,0 +1,11 @@
+.resultsImage {
+    height: 400px;
+}
+.results-container {
+    background-color: white;
+    margin: 15px;
+}
+.results-margin {
+    margin-top:15px;
+    margin-bottom:15px;
+}
