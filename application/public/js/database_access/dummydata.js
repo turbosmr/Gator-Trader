@@ -3,10 +3,10 @@
 //imports database for use
 var db = require('../auth/db_config.js');
 
-var createItem = function(name) {
+var createItem = function (name) {
     let sql = "INSERT INTO SalesItems (productId, productName, sellerId) VALUES (?,?,?)";
-    db.query(sql,[createId(),name, '911689186'], function(err, result){
-        if(err) {
+    db.query(sql, [createId(), name, '911689186'], function (err, result) {
+        if (err) {
             console.log("Error retriving userid: " + err);
             return false;
         } else {
@@ -15,7 +15,7 @@ var createItem = function(name) {
     });
 }
 
-var createId = function() {
+var createId = function () {
     let id = "";
     for (let i = 0; i < 20; i++) {
         id += Math.floor(Math.random() * 10);
