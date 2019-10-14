@@ -3,9 +3,9 @@
 //imports database for use
 var db = require('../auth/db_config.js');
 
-var createItem = function (name) {
-    let sql = "INSERT INTO SalesItems (productId, productName, sellerId) VALUES (?,?,?)";
-    db.query(sql, [createId(), name, '911689186'], function (err, result) {
+var createItem = function (name, description, cat) {
+    let sql = "INSERT INTO SalesItems (productId, productName, category, description, sellerId) VALUES (?,?,?,?,?)";
+    db.query(sql, [createId(), name, cat, description, '911689186'], function (err, result) {
         if (err) {
             console.log("Error retriving userid: " + err);
             return false;
@@ -24,5 +24,5 @@ var createId = function () {
 }
 
 for (var i = 0; i < 10; i++) {
-    createItem("name" + i);
+    createItem("pen " + i, "This a high quality pen that was cafted by a master of pens.", "writing");
 }
