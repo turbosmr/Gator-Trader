@@ -1,6 +1,5 @@
 .main {
-    min-height: 450px;
-    margin-top: 60px;
+    min-height: 300px;
 }
 
 .navbar {
@@ -42,4 +41,7 @@
 .searchbar {
     margin-bottom: 0px;
     max-width: 50%;
+}
+.sidebar {
+background-color: white;
 }

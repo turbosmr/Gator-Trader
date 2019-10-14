@@ -3,9 +3,14 @@
 }
 .results-container {
     background-color: white;
-    margin: 15px;
+
 }
-.results-margin {
-    margin-top:15px;
-    margin-bottom:15px;
+.results-item-image {
+}
+.results-item {
+    margin-top:25px;
+    margin-bottom:25px;
+}
+.margin {
+    margin: 5px;
 }
