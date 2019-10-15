@@ -44,37 +44,29 @@
       </div>
     </div>
 
-
-
-    {{#if loggedInUser}}
     <ul class="navbar-nav ml-auto">
-      <!-- Dropdown -->
+      <!-- User dropdown menu -->
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-          Hello, {{loggedInUser.email}}
+          {{#if loggedInUser}}
+            Hello, {{loggedInUser.email}}
+          {{else}}
+            Hello, Sign in
+          {{/if}}
         </a>
         <div class="dropdown-menu">
-          <a class="dropdown-item" href="#"><span class="fa fa-user"></span> Dashboard</a>
-          <a class="dropdown-item" href="#">Orders</a>
-          <a class="dropdown-item" href="/users/logout"><span class="fa fa-sign-out"></span> Logout</a>
+          {{#if loggedInUser}}
+            <a class="dropdown-item" href="#"><span class="fa fa-user"></span> Dashboard</a>
+            <a class="dropdown-item" href="#"><span class="fa fa-shopping-cart"></span> Orders</a>
+            <a class="dropdown-item" href="/users/logout"><span class="fa fa-sign-out"></span> Log Out</a>
+          {{else}}
+            <a class="dropdown-item" href="/users/login"><span class="fa fa-sign-in"></span> Sign in</a>
+            <a class="dropdown-item" href="#"><span class="fa fa-user"></span> Dashboard</a>
+            <a class="dropdown-item" href="#"><span class="fa fa-shopping-cart"></span> Orders</a>
+          {{/if}}
         </div>
       </li>
     </ul>
-    {{else}}
-    <ul class="navbar-nav ml-auto">
-      <!-- Dropdown -->
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-          Hello, Sign in
-        </a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="/users/login"><span class=""></span> Sign in</a>
-          <a class="dropdown-item" href="#"><span class="fa fa-user"></span> Dashboard</a>
-          <a class="dropdown-item" href="#">Orders</a>
-        </div>
-      </li>
-    </ul>
-    {{/if}}
   </nav>
 
   <nav class="navbar navbar-expand-sm justify-content-center">
@@ -103,7 +95,7 @@
         <a class="nav-link" href="#">Checklist</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="results">Results</a>
+        <a class="nav-link" href="/results">Results</a>
       </li>
     </ul>
   </nav>
