@@ -6,7 +6,7 @@ const db = require('./db');
 module.exports = () => {
     passport.use('local-login', new LocalStrategy(
         (username, password, done) => {
-            db.query("SELECT * FROM Users WHERE email = ? LIMIT 1", username, (error, result) => {
+            db.query("SELECT * FROM RegisteredUsers WHERE email = ? LIMIT 1", username, (error, result) => {
                 if (error) return done(error);
                 if (result.length == 0) {
                     return done(null, false, { message: 'Username and/or password is incorrect' });
@@ -26,13 +26,13 @@ module.exports = () => {
     ));
 
     passport.serializeUser((user, done) => {
-        return done(null, user.ID);
+        return done(null, user.sid);
     });
 
     passport.deserializeUser((id, done) => {
-        db.query("SELECT * FROM Users WHERE ID = ?", id, (error, result) => {
+        db.query("SELECT * FROM RegisteredUsers WHERE sid = ?", id, (error, result) => {
             if (error) throw error;
-            return done(null, result);
+            return done(null, result[0]);
         });
     });
 };

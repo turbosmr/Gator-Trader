@@ -27,7 +27,7 @@ router.post('/login',
         failureRedirect: '/users/login',
         failureFlash: true
     }),
-    (req, res) => {}
+    (req, res) => { }
 );
 
 // Handle user registration route
@@ -66,23 +66,23 @@ router.post('/register', (req, res) => {
     else {
         // Input validation passed
         // Check if username already exists
-        db.query("SELECT * FROM Users WHERE email = ? LIMIT 1", username, (error, result) => {
+        db.query("SELECT * FROM RegisteredUsers WHERE sid = ? OR email = ?", [sid, username], (error, result) => {
             if (error) throw error;
-            if (result.length == 1) {
+            if (result.length >= 1) {
                 regError.push({ message: 'Such user already exists. Please log in.' });
                 res.render('register', {
                     regError
                 });
             }
             else {
-                // Creat a hashed password
+                // Create a hashed password
                 bcrypt.genSalt(10, (error, salt) => {
                     if (error) throw error;
                     bcrypt.hash(password, salt, (error, hash) => {
                         if (error) throw error;
                         password = hash;
                         // Insert new user into database
-                        db.query("INSERT INTO Users (ID, email, password) VALUES (?, ?, ?)", [sid, username, password], (error, result) => {
+                        db.query("INSERT INTO RegisteredUsers (sid, email, password) VALUES (?, ?, ?)", [sid, username, password], (error, result) => {
                             if (error) throw error;
                             req.flash('success', 'Successfully registered, please login.');
                             res.redirect('/users/login');
@@ -92,6 +92,13 @@ router.post('/register', (req, res) => {
             }
         });
     }
+});
+
+// Logout
+router.get('/logout', (req, res) => {
+    req.logout();
+    req.flash('success', 'You are logged out');
+    res.redirect('/');
 });
 
 module.exports = router;

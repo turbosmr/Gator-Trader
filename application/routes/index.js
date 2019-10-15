@@ -5,7 +5,8 @@ const router = express.Router();
 
 // Home page
 router.get('/', (req, res) => {
-    res.render('home');
+    res.render('home', {
+    loggedInUser: req.user});
 });
 
 module.exports = router;
