@@ -25,7 +25,8 @@ router.post('/login',
     passport.authenticate('local-login', {
         successRedirect: '/',
         failureRedirect: '/users/login',
-        failureFlash: true
+        failureFlash: true,
+        badRequestMessage: 'Please fill in all fields'
     }),
     (req, res) => { }
 );
@@ -37,7 +38,7 @@ router.post('/register', (req, res) => {
 
     // Check required fields
     if (!username || !sid || !password || !password2) {
-        regError.push({ message: 'Please enter all fields' });
+        regError.push({ message: 'Please fill in all fields' });
     }
     else {
         if (!(validator.validate(username))) {
