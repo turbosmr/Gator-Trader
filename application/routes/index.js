@@ -9,4 +9,12 @@ router.get('/', (req, res) => {
     loggedInUser: req.user});
 });
 
+router.get('/account', function(req, res) {
+    res.render('account');
+});
+
+router.get('/results', function(req, res) {
+    res.render('results');
+});
+
 module.exports = router;

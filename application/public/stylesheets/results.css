@@ -1,0 +1,16 @@
+.resultsImage {
+    height: 400px;
+}
+.results-container {
+    background-color: white;
+
+}
+.results-item-image {
+}
+.results-item {
+    margin-top:25px;
+    margin-bottom:25px;
+}
+.margin {
+    margin: 5px;
+}
