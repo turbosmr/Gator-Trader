@@ -1,6 +1,6 @@
 var express = require('express');
 var app = express();
-var salesItem = require('../database_access/sales_item');
+var salesItem = require('../public/js/database_access/sales_item.js');
 
 
 app.set('views', __dirname + '/views');
@@ -18,8 +18,8 @@ app.get('/search', function (req, res) {
         if (err) throw err;
         var data = [];
         for (i = 0; i < rows.length; i++) {
-            data.push(rows[i].productName);
-            console.log(rows[i].productName);
+            data.push(rows[i]);
+            console.log(JSON.stringify(rows[i]));
         }
         res.end(JSON.stringify(data));
     });
