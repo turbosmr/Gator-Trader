@@ -19,6 +19,7 @@ app.set('view engine', 'hbs');
 // Routes
 app.use('/', require('./routes/index.js'));
 app.use('/about', require('./routes/about.js'));
+app.use('/search', require('./routes/search.js'));
 
 // Set port number
 app.set('port', 3000);

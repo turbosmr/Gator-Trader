@@ -8,16 +8,18 @@ var newSaleItem = function () {
     return 0;
 } 
 
-var getSaleItems = function () {
+exports.getSaleItems = function (callback) {
     let sql = "SELECT * FROM SalesItems";
     db.query(sql, (err, result) => {
-        if (err) throw err;
+        if (err){
+            callback(err,null)
+        }
         console.log(result);
-        return result;
+        callback(null, result);
     });
 }
 
-exports.percentLikeTest = function (term, callback) {
+exports.percentLikeResults = function (term, callback) {
     let sql = "SELECT * FROM SalesItems WHERE productName LIKE ? OR description LIKE ? OR category LIKE ?";
     db.query(sql,['%'+term +'%','%'+ term +'%','%'+ term +'%'], (err, result) => {
         if (err){ 

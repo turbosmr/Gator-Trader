@@ -1,30 +1,37 @@
-var express = require('express');
-var app = express();
-var salesItem = require('../public/js/database_access/sales_item.js');
+const express = require('express');
+const router = express.Router();
+const salesItem = require('../public/js/database_access/sales_item.js');
+const db = require('../public/js/auth/db_config.js');
 
-
-app.set('views', __dirname + '/views');
-app.use(express.static(__dirname + '/JS'));
-app.set('view engine', 'ejs');
-app.engine('html', require('ejs').renderFile);
-
-app.get('/', function (req, res) {
-    res.render('index.html');
+router.get('/', (req, res) => {
+    res.render('search');
 });
 
 
-app.get('/search', function (req, res) {
-    salesItem.percentLikeTest(req.query.key, function (err, rows, fields) {
+router.get('/result', (req, res) => {
+    salesItem.percentLikeResults(req.query.key, function (err, rows) {
         if (err) throw err;
         var data = [];
-        for (i = 0; i < rows.length; i++) {
-            data.push(rows[i]);
+        for (let i = 0; i < rows.length; i++) {
+            data.push(rows[i].productName);
             console.log(JSON.stringify(rows[i]));
         }
-        res.end(JSON.stringify(data));
+        res.send(JSON.stringify(data));
     });
 });
 
-var server = app.listen(3000, function () {
-    console.log("We have started our server on port 3000");
+router.get('/all', (req, res) => {
+    let sql = "SELECT * FROM SalesItems";
+    var item = [];
+    db.query(sql, (err, result) => {
+        if (err){
+            callback(err,null)
+        }
+        for (let i = 0; i < result.length; i++) {
+            item.push(result[i].productName)
+        }
+        res.render('result', {items: item})
+    });
 });
+
+module.exports = router;
