@@ -19,8 +19,8 @@ exports.getSaleItems = function (callback) {
 }
 
 exports.percentLikeResults = function (term, callback) {
-    let sql = "SELECT * FROM SalesItems WHERE productName LIKE ? OR description LIKE ? OR category LIKE ?";
-    db.query(sql,['%'+term +'%','%'+ term +'%','%'+ term +'%'], (err, result) => {
+    let sql = "SELECT * FROM SalesItems WHERE productName LIKE ? OR description LIKE ?";
+    db.query(sql,['%'+term +'%','%'+ term +'%'], (err, result) => {
         if (err){ 
             callback(err, null);
         }

@@ -7,13 +7,29 @@ router.get('/', (req, res) => {
     res.render('search');
 });
 
-
-router.get('/result', (req, res) => {
-    salesItem.percentLikeResults(req.query.key, (err, rows) => {
+router.post('/', (req, res) => {
+    let sql = "SELECT * FROM SalesItems WHERE productName LIKE ? OR description LIKE ?";
+    let term = req.body.typeahead;
+    db.query(sql,['%'+term +'%','%'+ term +'%'], (err, result) => {
         if (err) throw err;
         var data = [];
-        for (let i = 0; i < rows.length; i++) {
-            data.push(rows[i].productName);
+        for (let i = 0; i < result.length; i++) {
+            data.push(result[i]);
+        }
+        res.render('result', {items: data});
+    });
+    //console.log(req.body.typeahead);
+});
+
+
+router.get('/result', (req, res) => {
+    let sql = "SELECT * FROM SalesItems WHERE productName LIKE ? OR description LIKE ?";
+    let term = req.query.key;
+    db.query(sql,['%'+term +'%','%'+ term +'%'], (err, result) => {
+        if (err) throw err;
+        var data = [];
+        for (let i = 0; i < result.length; i++) {
+            data.push(result[i].productName);
         }
         res.send(JSON.stringify(data));
     });
@@ -21,7 +37,8 @@ router.get('/result', (req, res) => {
 
 router.get('/all', (req, res) => {
     var item = [];
-    salesItem.getSaleItems((err,result) => {
+    let sql = "SELECT * FROM SalesItems";
+    db.query(sql, (err, result) => {
         if (err) throw err;
         for (let i = 0; i < result.length; i++) {
             item.push(result[i]);

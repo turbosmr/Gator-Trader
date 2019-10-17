@@ -2,6 +2,7 @@ const express = require('express');
 const http = require('http');
 const path = require('path');
 const exphbs = require('express-handlebars');
+const bodyParser = require('body-parser');
 
 const app = express();
 const server = http.Server(app);
@@ -15,6 +16,8 @@ app.engine('hbs', exphbs({
     extname: '.hbs'
 }));
 app.set('view engine', 'hbs');
+
+app.use(bodyParser.urlencoded({ extended: false}));
 
 // Routes
 app.use('/', require('./routes/index.js'));
