@@ -1,16 +1,67 @@
-.resultsImage {
-    height: 400px;
-}
-.results-container {
-    background-color: white;
 
-}
-.results-item-image {
-}
-.results-item {
-    margin-top:25px;
-    margin-bottom:25px;
-}
-.margin {
-    margin: 5px;
-}
+* {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    width: 100%;
+    height: 100%;
+  }
+
+  body{
+    margin: 0 auto;
+  }
+
+    .column {
+    float: left;   
+    width: 100%;
+    padding: 10px;
+  }
+
+  /* Responsive items and the side bar */
+  @media screen and (max-width: 700px) {
+    .column {
+      width: 100%;
+      display: block;
+      margin-bottom: 20px;
+    }
+    .sidebar {
+        display: none;
+        padding-top: 15px;}
+  }
+  
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    text-align: left;
+    background-color: #fffefe;
+  }
+
+.sidebar {
+    float: left;
+    height: auto;
+    width: 200px;
+    padding: 16px;
+    text-align: center;
+    background-color: #ffffff;
+    background-repeat: repeat-y;
+    border-right: lightgray 3px solid;
+    margin-top: 10px;
+    text-align: left;
+
+  }
+  
+  .sidebar a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #0c0208;
+    display: block;
+  }
+  
+  .sidebar a:hover {
+    color: rgb(139, 125, 139);
+  }
+  
+  
+  
