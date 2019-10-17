@@ -17,4 +17,7 @@ router.get('/results', function(req, res) {
     res.render('results');
 });
 
+router.get('/items', function(req, res) {
+    res.render('items');
+});
 module.exports = router;
