@@ -9,29 +9,26 @@ router.get('/', (req, res) => {
 
 
 router.get('/result', (req, res) => {
-    salesItem.percentLikeResults(req.query.key, function (err, rows) {
+    salesItem.percentLikeResults(req.query.key, (err, rows) => {
         if (err) throw err;
         var data = [];
         for (let i = 0; i < rows.length; i++) {
             data.push(rows[i].productName);
-            console.log(JSON.stringify(rows[i]));
         }
         res.send(JSON.stringify(data));
     });
 });
 
 router.get('/all', (req, res) => {
-    let sql = "SELECT * FROM SalesItems";
     var item = [];
-    db.query(sql, (err, result) => {
-        if (err){
-            callback(err,null)
-        }
+    salesItem.getSaleItems((err,result) => {
+        if (err) throw err;
         for (let i = 0; i < result.length; i++) {
-            item.push(result[i].productName)
+            item.push(result[i]);
         }
-        res.render('result', {items: item})
+        res.render('result', {items: item});
     });
+    
 });
 
 module.exports = router;
