@@ -18,7 +18,6 @@
     padding: 10px;
   }
 
-  /* Responsive items and the side bar */
   @media screen and (max-width: 700px) {
     .column {
       width: 100%;
@@ -30,12 +29,6 @@
         padding-top: 15px;}
   }
   
-  .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
-    padding: 20px;
-    text-align: left;
-    background-color: #fffefe;
-  }
 
 .sidebar {
     float: left;
@@ -44,24 +37,206 @@
     padding: 16px;
     text-align: center;
     background-color: #ffffff;
-    background-repeat: repeat-y;
     border-right: lightgray 3px solid;
     margin-top: 10px;
     text-align: left;
-
   }
   
   .sidebar a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
-    font-size: 25px;
-    color: #0c0208;
+    font-size: 20px;
+    color: #030002;
     display: block;
   }
   
   .sidebar a:hover {
-    color: rgb(139, 125, 139);
+    color: #d3ae0a;
+  }
+
+  .reviews .stars {
+    display: inline-block;
+    list-style: none;
+    padding: 0;
+  }
+  .reviews .stars > li {
+    display: inline-block;
+  }
+    .reviews .stars > li .fa {
+    color: #f7c01b;
+  } 
+  .reviews .stars > li .fa:hover {
+    color: #ffe601;
+  } 
+
+  .reviews > span {
+    font-size: 14px;
+    margin-left: 5px;
+    color: #555;
   }
   
-  
+
+  .card {
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.3);
+    transition: 200ms;
+    background: #fff;
+    padding-top: 20px;
+  }
+  .card .card_title {
+    display: flex;
+    align-items: center;
+    padding: 30px 40px;
+  }
+  .card .card_title h3 {
+    flex: 0 1 200px;
+    text-align: right;
+    margin: 0;
+    color: #2c2c2c;
+    font-weight: 600;
+    font-size: 20px;
+  }
+
+  .card .card_body {
+    padding: 0 40px;
+    display: flex;
+    flex-flow: row no-wrap;
+    margin-bottom: 25px;
+  }
+  .card .card_body > .photo {
+    box-sizing: border-box;
+    padding: 0 15px;
+    flex: 1 0 40%;
+  }
+
+  .card .card_body > .info {
+    box-sizing: border-box;
+    padding: 0 15px;
+    flex: 1 0 60%;
+  }
+
+  .card .card_body .featured_text h1 {
+    margin: 0;
+    padding: 0;
+    font-weight: 800;
+    line-height: 50px;
+    color: #181e28;
+  }
+  .card .card_body .featured_text p {
+    margin: 0;
+    padding: 0;
+  }
+  .card .card_body .featured_text p.sub {
+    font-size: 20px;
+    text-transform: uppercase;
+    color: #686e77;
+    font-weight: 300;
+    margin-bottom: 5px;
+  }
+  .card .card_body .featured_text p.price {
+    color: #252525;
+    font-size: 26px;
+  }
+  .card .card_body .image {
+    padding-top: 15px;
+    width: 100%;
+  }
+  .card .card_body .image img {
+    display: block;
+    max-width: 50%;
+    height: auto;
+  }
+  .card .card_body .description {
+    margin-bottom: 25px;
+  }
+  .card .card_body .description p {
+    margin: 0;
+    font-weight: 300;
+    line-height: 27px;
+    font-size: 16px;
+    color: #555;
+  }
+
+  .card .card_footer {
+    padding: 30px 40px;
+    display: flex;
+    flex-flow: row no-wrap;
+    align-items: center;
+    position: relative;
+  }
+
+  .card .card_footer .reviews .stars {
+    display: inline-block;
+    list-style: none;
+    padding: 0;
+  }
+  .card .card_footer .reviews .stars > li {
+    display: inline-block;
+  }
+  .card .card_footer .reviews .stars > li .fa {
+    color: #f7c01b;
+  } 
+  .card .card_footer .reviews > span {
+    font-size: 14px;
+    margin-left: 5px;
+    color: #555;
+  }
+
+  .card .card_footer::before {
+    content: "";
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 40px;
+    width: calc(100% - 40px);
+    height: 3px;
+    background: #000000;
+    background: linear-gradient(to right, #000000 0%, #000000 20%, lightgray 20%, lightgray 100%);
+  }
+  .card .card_footer .seller {
+    flex: 1 0 10px;
+  }
+  .card .card_footer .seller p {
+    margin: 0;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 14px;
+    color: #555;
+  }
+  .card .card_footer .seller h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #000000;
+  }
+
+  .card .card_footer .action2 button {
+    cursor: pointer;
+    border: 1px solid #178054;
+    padding: 9px 15px;
+    border-radius: 5px;
+    color: #fff;
+    background: #178054;
+    font-size: 14px;
+    transition: 200ms;
+  }
+  .card .card_footer .action2 button:hover {
+    background: #fff;
+    color: #178054;
+  }
+
+  .card .card_footer .action button {
+    cursor: pointer;
+    border: 1px solid #d3ae0a;
+    padding: 14px 30px;
+    border-radius: 5px;
+    color: #fff;
+    background: #d3ae0a;
+    font-size: 16px;
+    transition: 200ms;
+  }
+  .card .card_footer .action button:hover {
+    background: #fff;
+    color: #d3ae0a;
+  }
   
