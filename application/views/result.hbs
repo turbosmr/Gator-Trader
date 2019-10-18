@@ -2,7 +2,9 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="/js/typeahead.min.js"></script>
     <script type="text/javascript" src="/js/inputHandle.js"></script>
+    <script type="text/javascript" src="/js/sortAlphabetically.js"></script>
     <link rel="stylesheet" href="/stylesheets/search.css">
+    <link rel="stylesheet" href="/stylesheets/main.css">
 </head>
 
 <body>
@@ -16,7 +18,10 @@
 
             </form>
         </div>
-        <ul>
+        <p>Click the button to sort the products alphabetically:</p>
+        <button onclick="sortList()">Sort</button>
+        
+        <ul id="list">
             {{#each items}}
             <li><a href="/products/{{this.productId}}">{{this.productName}}</a></li>
             {{/each}}

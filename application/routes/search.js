@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const salesItem = require('../public/js/database_access/sales_item.js');
 const db = require('../public/js/auth/db_config.js');
 
 router.get('/', (req, res) => {

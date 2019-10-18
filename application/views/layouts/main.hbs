@@ -12,6 +12,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/typeahead.min.js"></script>
+  <script type="text/javascript" src="/js/inputHandle.js"></script>
 </head>
 
 <body style="background-color:white;">
@@ -31,10 +34,13 @@
           <a class="nav-link" href="/about">About</a>
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
+      <div class="bs-example" id="bar">
+        <form class="form-inline my-2 my-lg-0" action="/search" method="POST">
+          <input type="text" name="typeahead" class="typeahead tt-query" autocomplete="off" spellcheck="false"
+            placeholder="Enter a Product Name">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
     </div>
   </nav>
 
