@@ -40,10 +40,13 @@ app.engine('hbs', exphbs({
 }));
 app.set('view engine', 'hbs');
 
+app.use(bodyParser.urlencoded({ extended: false}));
+
 // Routes
 app.use('/', require('./routes/index'));
 app.use('/users', require('./routes/users'));
 app.use('/about', require('./routes/about'));
+app.use('/search', require('./routes/search.js'));
 
 // Set port number
 app.set('port', 3000);
