@@ -16,7 +16,10 @@ router.get('/:keyword', (req, res) => {
         for (let i = 0; i < result.length; i++) {
             product.push(result[i]);
         }
-        res.render('result', { product: product });
+        res.render('results', { 
+            product: product, 
+            keyword: keyword
+        });
     });
 });
 

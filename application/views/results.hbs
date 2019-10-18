@@ -1,30 +1,136 @@
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-2 sidebar ">sidebar</div>
-        <div class="col-sm-10">
-            <div class="row results-item">
-                <div class="col-sm-3">
-                    <a href="/results"><img src="/images/about/rightHereEh.jpg"
-                            class="resultsImage results-item-image"></a>
+    {{#if product}}
+    <!-- Side Bar -->
+    <div class="sidebar">
+        <h2>Sort By:</h2>
+        <br>
+        <h3>Seller Rating</h3>
+        <div class="reviews">
+            <ul class="stars">
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+            </ul>
+        </div>
+        <div class="reviews">
+            <ul class="stars">
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star-o"></i></li>
+            </ul>
+        </div>
+        <div class="reviews">
+            <ul class="stars">
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star-o"></i></li>
+                <li><i class="fa fa-star-o"></i></li>
+            </ul>
+        </div>
+        <div class="reviews">
+            <ul class="stars">
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star-o"></i></li>
+                <li><i class="fa fa-star-o"></i></li>
+                <li><i class="fa fa-star-o"></i></li>
+            </ul>
+        </div>
+        <div class="reviews">
+            <ul class="stars">
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star-o"></i></li>
+                <li><i class="fa fa-star-o"></i></li>
+                <li><i class="fa fa-star-o"></i></li>
+                <li><i class="fa fa-star-o"></i></li>
+            </ul>
+        </div>
+        <h2>Price</h2>
+        <div>
+            <a href="#">Under $25</a>
+            <a href="#">$25 to $50</a>
+            <a href="#">$50 to $200</a>
+            <a href="#">$200 and Above</a>
+        </div>
+        <h2>Condition</h2>
+        <div>
+            <a href="#">Excellent :)</a>
+            <a href="#">Good</a>
+            <a href="#">Decent</a>
+            <a href="#">Bad :(</a>
+        </div>
+
+    </div>
+
+    <table style="width: 70%">
+        {{#each product}}
+        <tr>
+            <th>
+                <div class="col-sm-12">
+                    <div class="column">
+                        <div class="card">
+                            <div class="card_body">
+                                <div class="photo">
+                                    <div class="image">
+                                        <img src="https://thumbs-prod.si-cdn.com/mHAHLSMfYOtZJs_PDnkqAgPFd6Q=/fit-in/1600x0/https://public-media.si-cdn.com/filer/00/a1/00a1f7bf-556f-48ef-a4da-10ea981a9337/mona.jpg"
+                                            alt="Picture">
+                                    </div>
+                                </div>
+                                <div class="info">
+                                    <div class="featured_text">
+                                        <h1><a href="/products/{{this.productId}}">{{this.productName}}</a></h1>
+                                        <p class="sub">Nice Painting</p>
+                                        <p class="price">$2.00</p>
+                                    </div>
+                                    <div class="description">
+                                        <p>Found in the Garage, Need to sell asap</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="card_footer">
+                                <div class="seller">
+                                    <p>Seller: </p>
+                                    <h3>Sergei Katukhov</h3>
+                                    <div class="reviews">
+                                        <ul class="stars">
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star-o"></i></li>
+                                        </ul>
+                                        <span>(10 reviews)</span>
+                                    </div>
+                                    <div class="action2">
+                                        <button type="button">Contact Seller</button>
+                                    </div>
+                                </div>
+                                <div class="action">
+                                    <button type="button">Buy It Now</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-                <div class="col-sm-9">
-                    <h3>Your fricken descriptions go right here!!!</h3>
-                </div>
-            </div>
-            <div class="row results-item">
-                <div class="col-sm-3">
-                    <a href="/results"><img src="/images/about/rightHereEh.jpg"
-                            class="resultsImage results-item-image"></a>
-                </div>
-                <div class="col-sm-9">
-                    <h3>Your fricken descriptions go right here!!!</h3>
-                </div>
+            </th>
+        </tr>
+        {{/each}}
+    </table>
+    {{else}}
+    <div class="col-sm-4" style="margin: auto;">
+        <div class="column">
+            <div class="card" style="">
+                <h2>No results found for {{keyword}}.</h2>
+                <h5>Try checking your spelling or use more general terms</h5>
             </div>
         </div>
     </div>
-
-</div>
-
-
-<br><br><br><br>
+    {{/if}}
 </div>
