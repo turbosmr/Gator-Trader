@@ -17,32 +17,22 @@
     min-height: calc(100% - 89px);
 }
 
-.form-inline{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
+.color {
+    background-color: rgb(139, 125, 139);
+    color: white;
+}
 
-  .search-bar {
-    min-width: 400px;
-  }
-  .color {
-      background-color: rgb(139, 125, 139);
-      color: white;
-  }
-  #bars {
+#bars {
     color: black;
     font-size: 20px;
     margin-right: 20px;
     margin-left: 20px;
 }
+
 .center {
     justify-content: center;
 }
-.searchbar {
-    margin-bottom: 0px;
-    max-width: 50%;
-}
+
 .sidebar {
-background-color: white;
+    background-color: white;
 }

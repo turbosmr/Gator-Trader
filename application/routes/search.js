@@ -3,48 +3,60 @@ const router = express.Router();
 const db = require('../config/db');
 
 router.get('/', (req, res) => {
-    res.render('search');
+    res.redirect('/');
+});
+
+router.get('/:keyword', (req, res) => {
+    let sql = "SELECT * FROM SalesItems WHERE productName LIKE ? OR description LIKE ?";
+    let keyword = req.params.keyword;
+    let product = [];
+
+    db.query(sql, ['%' + keyword + '%', '%' + keyword + '%'], (error, result) => {
+        if (error) throw error;
+        for (let i = 0; i < result.length; i++) {
+            product.push(result[i]);
+        }
+        res.render('result', { product: product });
+    });
 });
 
 router.post('/', (req, res) => {
-    let sql = "SELECT * FROM SalesItems WHERE productName LIKE ? OR description LIKE ?";
-    let term = req.body.typeahead;
-    db.query(sql,['%'+term +'%','%'+ term +'%'], (err, result) => {
-        if (err) throw err;
-        var data = [];
-        for (let i = 0; i < result.length; i++) {
-            data.push(result[i]);
-        }
-        res.render('result', {items: data});
-    });
-    //console.log(req.body.typeahead);
+    let keyword = req.body.keyword;
+
+    if (keyword !== '') {
+        res.redirect('/search/' + keyword);
+    }
+    else {
+        res.redirect('/');
+    }
 });
 
-
-router.get('/result', (req, res) => {
+router.get('/result/typeahead', (req, res) => {
     let sql = "SELECT * FROM SalesItems WHERE productName LIKE ? OR description LIKE ?";
-    let term = req.query.key;
-    db.query(sql,['%'+term +'%','%'+ term +'%'], (err, result) => {
-        if (err) throw err;
-        var data = [];
+    let keyword = req.query.key;
+    let product = [];
+
+    db.query(sql, ['%' + keyword + '%', '%' + keyword + '%'], (error, result) => {
+        if (error) throw error;
         for (let i = 0; i < result.length; i++) {
-            data.push(result[i].productName);
+            product.push(result[i].productName);
         }
-        res.send(JSON.stringify(data));
+        res.send(JSON.stringify(product));
     });
 });
 
 router.get('/all', (req, res) => {
-    var item = [];
     let sql = "SELECT * FROM SalesItems";
-    db.query(sql, (err, result) => {
-        if (err) throw err;
+    let product = [];
+
+    db.query(sql, (error, result) => {
+        if (error) throw error;
         for (let i = 0; i < result.length; i++) {
-            item.push(result[i]);
+            product.push(result[i]);
         }
-        res.render('result', {items: item});
+        res.render('result', { product: product });
     });
-    
+
 });
 
 module.exports = router;

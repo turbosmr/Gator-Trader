@@ -17,7 +17,7 @@ app.use(session({
     saveUninitialized: false
 }));
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -44,9 +44,9 @@ app.use(bodyParser.urlencoded({ extended: false}));
 
 // Routes
 app.use('/', require('./routes/index'));
-app.use('/users', require('./routes/users'));
 app.use('/about', require('./routes/about'));
-app.use('/search', require('./routes/search.js'));
+app.use('/users', require('./routes/users'));
+app.use('/search', require('./routes/search'));
 
 // Set port number
 app.set('port', 3000);
