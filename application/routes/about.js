@@ -1,4 +1,4 @@
-/* This file handles "/about" routes */
+/* This file handles "/about" route */
 
 const express = require('express');
 const router = express.Router();

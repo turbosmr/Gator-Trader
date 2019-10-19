@@ -1,12 +1,11 @@
-/* This file handles "/" route */
+/* This file handles "/account" route */
 
 const express = require('express');
 const router = express.Router();
 
-// Render home page
+// Render dashboard page
 router.get('/', (req, res) => {
-    res.render('home', {
-    loggedInUser: req.user});
+    res.render('dashboard');
 });
 
 module.exports = router;
