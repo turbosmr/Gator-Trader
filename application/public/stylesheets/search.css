@@ -4,17 +4,6 @@
     color: white;
 }
 
-.dropdown-menu {
-    background-color: #FFFFFF;
-    border: 2px solid rgba(0, 0, 0, 0.2);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    padding: 8px 0;
-}
-
-.dropdown-item:hover {
-    background-color: rgb(194, 194, 194);
-}
-
 .typeahead,
 .tt-query,
 .tt-hint {

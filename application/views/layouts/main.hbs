@@ -17,7 +17,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="/js/typeahead.min.js"></script>
   <script type="text/javascript" src="/js/typeahead.js"></script>
-  <script type="text/javascript" src="/js/sortAlphabetically.js"></script>
+  <script type="text/javascript" src="/js/sortSearchResults.js"></script>
 </head>
 
 <body style="background-color:rgb(243, 243, 243);">
@@ -59,12 +59,12 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
           {{#if loggedInUser}}
-          Hello, {{loggedInUser.email}}
+          Hello, <b>{{loggedInUser.email}}</b>
           {{else}}
           Hello, Sign in
           {{/if}}
         </a>
-        <div class="dropdown-menu">
+        <div class="dropdown-menu user-dropdown-menu">
           {{#if loggedInUser}}
           <a class="dropdown-item" href="#"><span class="fa fa-user"></span> Dashboard</a>
           <a class="dropdown-item" href="#"><span class="fa fa-shopping-cart"></span> Orders</a>

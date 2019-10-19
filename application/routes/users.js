@@ -67,7 +67,7 @@ router.post('/register', (req, res) => {
     else {
         // Input validation passed
         // Check if username already exists
-        db.query("SELECT * FROM RegisteredUsers WHERE sid = ? OR email = ?", [sid, username], (error, result) => {
+        db.query("SELECT * FROM RegisteredUser WHERE sid = ? OR email = ?", [sid, username], (error, result) => {
             if (error) throw error;
             if (result.length >= 1) {
                 regError.push({ message: 'Such user already exists. Please log in.' });
@@ -83,7 +83,7 @@ router.post('/register', (req, res) => {
                         if (error) throw error;
                         password = hash;
                         // Insert new user into database
-                        db.query("INSERT INTO RegisteredUsers (sid, email, password) VALUES (?, ?, ?)", [sid, username, password], (error, result) => {
+                        db.query("INSERT INTO RegisteredUser (sid, email, password) VALUES (?, ?, ?)", [sid, username, password], (error, result) => {
                             if (error) throw error;
                             req.flash('success', 'Successfully registered, please login.');
                             res.redirect('/users/login');

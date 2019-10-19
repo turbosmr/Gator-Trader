@@ -84,19 +84,19 @@
                                 </div>
                                 <div class="info">
                                     <div class="featured_text">
-                                        <h1><a href="/products/{{this.productId}}">{{this.productName}}</a></h1>
+                                        <h1><a href="/products/{{this.pid}}">{{this.name}}</a></h1>
                                         <p class="sub">Nice Painting</p>
-                                        <p class="price">$2.00</p>
+                                        <p class="price">${{this.price}}</p>
                                     </div>
                                     <div class="description">
-                                        <p>Found in the Garage, Need to sell asap</p>
+                                        <p>{{this.description}}</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="card_footer">
                                 <div class="seller">
                                     <p>Seller: </p>
-                                    <h3>Sergei Katukhov</h3>
+                                    <h3>{{this.seller}}</h3>
                                     <div class="reviews">
                                         <ul class="stars">
                                             <li><i class="fa fa-star"></i></li>
@@ -126,7 +126,7 @@
     <div class="col-sm-4" style="margin: auto;">
         <div class="column">
             <div class="card" style="">
-                <h2>No results found for {{keyword}}.</h2>
+                <h2>No results found for "{{keyword}}".</h2>
                 <h5>Try checking your spelling or use more general terms</h5>
             </div>
         </div>
