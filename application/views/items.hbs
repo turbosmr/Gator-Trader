@@ -6,18 +6,30 @@
                     <div class="column">
                         <div class="card">
                             <div class="card_body">
-                                <div class="photo">
-                                    <div class="image">
-                                        <img src="https://thumbs-prod.si-cdn.com/mHAHLSMfYOtZJs_PDnkqAgPFd6Q=/fit-in/1600x0/https://public-media.si-cdn.com/filer/00/a1/00a1f7bf-556f-48ef-a4da-10ea981a9337/mona.jpg"
-                                            alt="Picture">
-                                    </div>    
-                                    <div class = "how_would_you_like_to_buy">
-                                      <h2> How would you like to buy? </h2>
-                                    </div>                                
+                                <div class = "mini_photos">
+                                    <div class="mini_photos">
+                                        <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6364/6364575_sd.jpg;maxHeight=640;maxWidth=550" alt="" style="width:200%"  onclick="myFunction(this);">
+                                    </div>
+                                    <div class="mini_photos">
+                                        <img src="https://www.potterybarn.com/pbimgs/rk/images/dp/wcm/201936/0812/aaron-dining-chair-c.jpg" alt="" style="width:200%" onclick="myFunction(this);">
+                                    </div>
+                                    <div class="mini_photos">
+                                        <img src="https://masshirecentralcc.com/wp-content/uploads/BOOKS-600x338.jpg" alt="" style="width:200%" onclick="myFunction(this);">
+                                    </div>
+                                    <div class="mini_photos">
+                                        <img src="https://brightkidz.co.uk/wp-content/uploads/2018/09/pencils-mix-1024x1024.jpg" alt="" style="width:200%" onclick="myFunction(this);">
+                                    </div>
                                 </div>
+
+                                <div class="photo"> 
+                                    <!-- change size pic here -->
+                                    <img id="expandedImg" style="width:78%">
+                                    <div id="imgtext"></div>
+                                </div>                                
+
                                 <div class="info">
                                     <div class="featured_text">
-                                        <h1>Title of item goes here.</h1>
+                                        <h1>Title of item.</h1>
                                     </div>
                                     <div class="description">
                                         <p>Description goes here.</p>
@@ -26,13 +38,18 @@
 
                                 <div class = "user_contact">
                                   <p class="price">$$$$$$$$</p>
-                                  <button type="button">Buy Now</button>
                                   <br><br>
                                   <button type="button">Contact Seller</button>                       
                                 </div>                                        
                             </div>     
                             
-                            <div class = "user_buy">
+                            <div class = "question">
+                                 <div class = "q1">
+                                    <h2>How would you like to buy? </h2>
+                                 </div>
+                            </div> 
+
+                            <div class = "user_buy">                                              
                               <div class = "buy_somewhere">
                                 <h3> Meet somewhere: </h3>
                                 <ul>
@@ -44,7 +61,6 @@
 
                               <div class = "shipping">
                                   <h3>Ship to me: </h3>     
-
                                   <ul>
                                     <li>Your Address</li>                                    
                                   </ul>                              
@@ -59,3 +75,13 @@
         
     </table>
 </div>
+
+<script>
+    function myFunction(imgs) {
+    var expandImg = document.getElementById("expandedImg");
+    var imgText = document.getElementById("imgtext");
+    expandImg.src = imgs.src;
+    imgText.innerHTML = imgs.alt;
+    expandImg.parentElement.style.display = "block";
+    }
+</script>

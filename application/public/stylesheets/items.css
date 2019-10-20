@@ -17,7 +17,7 @@
     padding: 10px;
   }
 
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 800px) {
     .column {
       width: 100%;
       display: block;
@@ -75,22 +75,42 @@
     flex-flow: row no-wrap;
     margin-bottom: 25px;
   }
+
+  .card .card_body > .mini_photos {
+    box-sizing: border-box;
+    padding: 30px;
+    flex: 1 0 8%;
+  }
+
   .card .card_body > .photo {
     box-sizing: border-box;
     padding: 0 15px;
-    flex: 1 0 30%;
+    flex: 1 0 35%;
   }
 
   .card .card_body > .info {
     box-sizing: border-box;
     padding: 0 15px;
-    flex: 1 0 50%;
+    flex: 1 0 40%;
   }
 
   .card .card_body > .user_contact {
     box-sizing: border-box;
     padding: 0 15px;
-    flex: 1 0 20%;
+    flex: 1 0 5%;
+  }
+
+  .card .card_body > .question {
+    padding: 0 40px;
+    display: flex;
+    flex-flow: row no-wrap;
+    margin-bottom: 25px;
+  }
+
+  .card .question > .q1 {
+    box-sizing: border-box;
+    padding: 0 15px;
+    flex: 1 0 50%;
   }
 
   .card .user_buy {
@@ -128,7 +148,7 @@
     color: #252525;
     font-size: 26px;
   }
-  .card .card_body .image {
+  .card .card_body .photo .image {
     padding-top: 15px;
     width: 100%;
   }
