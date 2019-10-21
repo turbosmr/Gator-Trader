@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 // Render dashboard page
-router.get('/', (req, res) => {
+router.get('/dashboard', (req, res) => {
     res.render('dashboard');
 });
 

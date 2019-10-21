@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="/stylesheets/about.css">
   <link rel="stylesheet" href="/stylesheets/results.css">
   <link rel="stylesheet" href="/stylesheets/search.css">
+  <link rel="stylesheet" href="/stylesheets/dashboard.css">
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -66,12 +67,12 @@
         </a>
         <div class="dropdown-menu user-dropdown-menu">
           {{#if loggedInUser}}
-          <a class="dropdown-item" href="#"><span class="fa fa-user"></span> Dashboard</a>
+          <a class="dropdown-item" href="/account/dashboard"><span class="fa fa-user"></span> Dashboard</a>
           <a class="dropdown-item" href="#"><span class="fa fa-shopping-cart"></span> Orders</a>
           <a class="dropdown-item" href="/users/logout"><span class="fa fa-sign-out"></span> Log Out</a>
           {{else}}
           <a class="dropdown-item" href="/users/login"><span class="fa fa-sign-in"></span> Sign in</a>
-          <a class="dropdown-item" href="#"><span class="fa fa-user"></span> Dashboard</a>
+          <a class="dropdown-item" href="/account/dashboard"><span class="fa fa-user"></span> Dashboard</a>
           <a class="dropdown-item" href="#"><span class="fa fa-shopping-cart"></span> Orders</a>
           {{/if}}
         </div>
