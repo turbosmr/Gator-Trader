@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="container header">
+        <h1>Posting an Item for Sale</h1>
+    </div>
+    <div class="row">
+        <form>
+            <div class="form-group row">
+                <div class="col-xs-2">
+                    <label for="product">Product Name:</label>
+                    <input class="form-control" id="produxt" type="text">
+                </div>
+                <div class="col-xs-2">
+                    <label for="price">Price ($):</label>
+                    <input class="form-control" id="price" type="text">
+                </div>
+            </div>
+        </form>
+    </div>
+    <p>Catagory</p>
+    <form>
+        <select name="catagory" class="custom-select mb-3">
+            <option selected>----------</option>
+            <option value="books">Books</option>
+            <option value="supplies">Supplies</option>
+            <option value="services">Services</option>
+            <option value="electronics">Electronics</option>
+            <option value="furniture">Furniture</option>
+            <option value="other">Other</option>
+        </select>
+        <p>Location</p>
+        <select name="location" class="custom-select mb-3">
+            <option selected>----------</option>
+            <option value="library">Library</option>
+            <option value="19thave">19th Ave</option>
+            <option value="shipping">Ship only</option>
+        </select>
+    </form>
+</div>
+
+<div class="container">
+    <form action="action">
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea class="form-control" rows="5" id="description" name="text"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
