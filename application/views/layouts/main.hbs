@@ -18,6 +18,7 @@
   <script type="text/javascript" src="/js/typeahead.min.js"></script>
   <script type="text/javascript" src="/js/typeahead.js"></script>
   <script type="text/javascript" src="/js/sortSearchResults.js"></script>
+  <script type="text/javascript" src="/js/filterResults.js"></script>
 </head>
 
 <body style="background-color:rgb(243, 243, 243);">
@@ -46,7 +47,7 @@
         </div>
         <!-- Search input field -->
         <input type="text" name="keyword" class="typeahead tt-query" autocomplete="off" spellcheck="false"
-          placeholder="What are you looking for?" value="{{keyword}}">
+          placeholder="What are you looking for?" value="{{keyword}}" id="searchKeyword">
         <!-- Submit search button -->
         <div class="input-group-append">
           <button class="btn search-button" type="submit"><i class="fa fa-search"></i></button>
