@@ -65,9 +65,10 @@ router.get('/filter/price/:keyword', (req, res) => {
     let min;
     let max;
     let product = [];
+    console.log(req.query);
     if (price == "under25") {
         //handle logic to filter product results
-        min = 0.00;
+        min = -0.01;
         max = 25.00;
     } else if (price == "25to50") {
         min = 24.99;
@@ -85,7 +86,6 @@ router.get('/filter/price/:keyword', (req, res) => {
         for (let i = 0; i < result.length; i++) {
             product.push(result[i]);
         }
-        console.log(product);
         res.render('results', { 
             loggedInUser: req.user, 
             keyword: keyword,
