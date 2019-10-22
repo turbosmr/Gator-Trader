@@ -79,7 +79,7 @@
     box-shadow: 0 6px 6px rgba(0, 0, 0, 0.3);
     transition: 200ms;
     background: #fff;
-    padding-top: 20px;
+    border: 0;
   }
   .card .card_title {
     display: flex;

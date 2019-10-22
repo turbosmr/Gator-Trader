@@ -5,7 +5,7 @@ const router = express.Router();
 const db = require('../config/db');
 
 router.get('/', (req, res) => {
-    let sql = "SELECT * FROM Product";
+    let sql = "SELECT * FROM SalesItem";
     let product = [];
 
     db.query(sql, (error, result) => {
@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:keyword', (req, res) => {
-    let sql = "SELECT * FROM Product WHERE name LIKE ? OR description LIKE ?";
+    let sql = "SELECT * FROM SalesItem WHERE name LIKE ? OR description LIKE ?";
     let keyword = req.params.keyword;
     let product = [];
 
@@ -46,7 +46,7 @@ router.post('/', (req, res) => {
 });
 
 router.get('/suggestions/typeahead', (req, res) => {
-    let sql = "SELECT * FROM Product WHERE name LIKE ? OR description LIKE ?";
+    let sql = "SELECT * FROM SalesItem WHERE name LIKE ? OR description LIKE ?";
     let keyword = req.query.key;
     let product = [];
 
