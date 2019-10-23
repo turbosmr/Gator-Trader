@@ -1,0 +1,145 @@
+<div class="container-fluid">
+    {{#if product}}
+    <!-- Side Bar -->
+    <div class="sidebar">
+        <h2>Sort By:</h2>
+        <p>Click the button to sort the products alphabetically:</p>
+        <button onclick="sortTable()">Sort</button>
+        <h3>Seller Rating</h3>
+        <div class="reviews">
+            <ul class="stars">
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+            </ul>
+        </div>
+        <div class="reviews">
+            <ul class="stars">
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star-o"></i></li>
+            </ul>
+        </div>
+        <div class="reviews">
+            <ul class="stars">
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star-o"></i></li>
+                <li><i class="fa fa-star-o"></i></li>
+            </ul>
+        </div>
+        <div class="reviews">
+            <ul class="stars">
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star-o"></i></li>
+                <li><i class="fa fa-star-o"></i></li>
+                <li><i class="fa fa-star-o"></i></li>
+            </ul>
+        </div>
+        <div class="reviews">
+            <ul class="stars">
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star-o"></i></li>
+                <li><i class="fa fa-star-o"></i></li>
+                <li><i class="fa fa-star-o"></i></li>
+                <li><i class="fa fa-star-o"></i></li>
+            </ul>
+        </div>
+        <div class="category">
+            <h2>Price</h2>
+            <a href="#" id="under25">Under $25</a>
+            <a href="#" id="25to50">$25 to $50</a>
+            <a href="#" id="50to200">$50 to $200</a>
+            <a href="#" id="over200">$200 and Above</a>
+        </div>
+        <div class="category">
+            <h2>Category</h2>
+            <input type="radio" name="category" value="Books"> Books<br>
+            <input type="radio" name="category" value="Electronics"> Electronics<br>
+            <input type="radio" name="category" value="Furniture"> Furniture<br>
+            <input type="radio" name="category" value="Services"> Services<br>
+            <input type="radio" name="category" value="Supplies"> Supplies<br>
+            <input type="radio" name="category" value="Other"> Other<br>
+
+        </div>
+        <div class="category">
+            <h2>Condition</h2>
+            <a href="#">Excellent :)</a>
+            <a href="#">Good</a>
+            <a href="#">Decent</a>
+            <a href="#">Bad :(</a>
+        </div>
+
+    </div>
+
+    <table id="search-results" style="width: 70%">
+        {{#each product}}
+        <tr>
+            <td>
+                <div class="col-sm-12">
+                    <div class="column">
+                        <div class="card">
+                            <div class="card_body">
+                                <div class="photo">
+                                    <div class="image">
+                                        <img src="https://thumbs-prod.si-cdn.com/mHAHLSMfYOtZJs_PDnkqAgPFd6Q=/fit-in/1600x0/https://public-media.si-cdn.com/filer/00/a1/00a1f7bf-556f-48ef-a4da-10ea981a9337/mona.jpg"
+                                            alt="Picture">
+                                    </div>
+                                </div>
+                                <div class="info">
+                                    <div class="featured_text">
+                                        <h1><a href="/products/{{this.pid}}">{{this.name}}</a></h1>
+                                        <p class="sub">Nice Painting</p>
+                                        <p class="price">${{this.price}}</p>
+                                    </div>
+                                    <div class="description">
+                                        <p>{{this.description}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card_footer">
+                                <div class="seller">
+                                    <p>Seller: </p>
+                                    <h3>{{this.seller}}</h3>
+                                    <div class="reviews">
+                                        <ul class="stars">
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star-o"></i></li>
+                                        </ul>
+                                        <span>(10 reviews)</span>
+                                    </div>
+                                    <div class="action2">
+                                        <button type="button">Contact Seller</button>
+                                    </div>
+                                </div>
+                                <div class="action">
+                                    <button type="button">Buy It Now</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        {{/each}}
+    </table>
+    {{else}}
+    <div class="col-sm-4" style="margin: auto;">
+        <div class="column">
+            <div class="card" style="">
+                <h2>No results found for "{{keyword}}".</h2>
+                <h5>Try checking your spelling or use more general terms</h5>
+            </div>
+        </div>
+    </div>
+    {{/if}}
+</div>

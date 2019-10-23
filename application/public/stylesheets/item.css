@@ -1,0 +1,174 @@
+* {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    width: 100%;
+    height: 100%;
+  }
+
+  body{
+    margin: 0 auto;
+  }
+
+    .column {
+    float: left;   
+    width: 100%;
+    padding: 10px;
+  }
+
+  @media screen and (max-width: 800px) {
+    .column {
+      width: 100%;
+      display: block;
+      margin-bottom: 20px;
+    }
+    .sidebar {
+        display: none;
+        padding-top: 15px;}
+  }
+  
+
+.sidebar {
+    float: left;
+    height: auto;
+    width: 200px;
+    padding: 16px;
+    text-align: center;
+    background-color: #ffffff;
+    border-right: lightgray 3px solid;
+    margin-top: 10px;
+    text-align: left;
+  }
+  
+  .sidebar a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #030002;
+    display: block;
+  }
+  
+  .card {
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.3);
+    transition: 200ms;
+    background: #fff;
+    padding-top: 20px;
+  }
+  .card .card_title {
+    display: flex;
+    align-items: center;
+    padding: 30px 40px;
+  }
+  .card .card_title h3 {
+    flex: 0 1 200px;
+    text-align: right;
+    margin: 0;
+    color: #2c2c2c;
+    font-weight: 600;
+    font-size: 20px;
+  }
+
+  .card .card_body {
+    padding: 0 40px;
+    display: flex;
+    flex-flow: row no-wrap;
+    margin-bottom: 25px;
+  }
+
+  .card .card_body > .mini_photos {
+    box-sizing: border-box;
+    padding: 30px;
+    flex: 1 0 8%;
+  }
+
+  .card .card_body > .photo {
+    box-sizing: border-box;
+    padding: 0 15px;
+    flex: 1 0 35%;
+  }
+
+  .card .card_body > .info {
+    box-sizing: border-box;
+    padding: 0 15px;
+    flex: 1 0 40%;
+  }
+
+  .card .card_body > .user_contact {
+    box-sizing: border-box;
+    padding: 0 15px;
+    flex: 1 0 5%;
+  }
+
+  .card .card_body > .question {
+    padding: 0 40px;
+    display: flex;
+    flex-flow: row no-wrap;
+    margin-bottom: 25px;
+  }
+
+  .card .question > .q1 {
+    box-sizing: border-box;
+    padding: 0 15px;
+    flex: 1 0 50%;
+  }
+
+  .card .user_buy {
+    padding: 0 40px;
+    display: flex;
+    flex-flow: row no-wrap;
+    margin-bottom: 25px;
+  }
+
+  .card .user_buy > .buy_somewhere {
+    box-sizing: border-box;
+    padding: 0 15px;
+    flex: 1 0 60%;
+  }
+
+  .card .user_buy > .shipping {
+    box-sizing: border-box;
+    padding: 0 15px;
+    flex: 1 0 40%;
+  }
+
+  .card .card_body .featured_text h1 {
+    margin: 0;
+    padding: 0;
+    font-weight: 800;
+    line-height: 50px;
+    color: #181e28;
+  }
+  .card .card_body .featured_text p {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .card .card_body .user_contact p.price {
+    color: #252525;
+    font-size: 26px;
+  }
+  .card .card_body .photo .image {
+    padding-top: 15px;
+    width: 100%;
+  }
+  .card .card_body .how_would_you_like_to_buy {
+    padding-top: 20px;
+    width: 200%;
+  }
+  .card .card_body .image img {
+    display: block;
+    max-width: 50%;
+    height: auto;
+  }
+  .card .card_body .description {
+    margin-bottom: 25px;
+  }
+  .card .card_body .description p {
+    margin: 0;
+    font-weight: 300;
+    line-height: 27px;
+    font-size: 16px;
+    color: #555;
+  }
+

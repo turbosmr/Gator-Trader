@@ -1,11 +1,9 @@
 .main {
-    min-height: 450px;
-    margin-top: 120px;
+    min-height: 300px;
 }
 
 .navbar {
     background-color: lightgray;
-    color: white;
 }
 
 .footer {
@@ -17,4 +15,36 @@
 
 .footer-pushdown {
     min-height: calc(100% - 89px);
+}
+
+.color {
+    background-color: rgb(139, 125, 139);
+    color: white;
+}
+
+#bars {
+    color: black;
+    font-size: 20px;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.center {
+    justify-content: center;
+}
+
+.dropdown-menu {
+    background-color: #FFFFFF;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    padding: 8px 0;
+}
+
+.dropdown-item:hover {
+    background-color: rgb(194, 194, 194);
+}
+
+.user-dropdown-menu {
+    left: auto;
+    right: 0;
 }

@@ -1,11 +1,15 @@
-/* This file handles "/" routes */
+/* This file handles "/" route */
 
 const express = require('express');
 const router = express.Router();
 
-// Home page
-router.get('/', function (req, res) {
+// Render home page
+router.get('/', (req, res) => {
     res.render('home');
+});
+
+router.get('/sell', (req, res) => {
+    res.render('sell');
 });
 
 module.exports = router;

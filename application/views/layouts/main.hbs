@@ -6,47 +6,113 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="/stylesheets/main.css">
   <link rel="stylesheet" href="/stylesheets/about.css">
-
+  <link rel="stylesheet" href="/stylesheets/results.css">
+  <link rel="stylesheet" href="/stylesheets/search.css">
+  <link rel="stylesheet" href="/stylesheets/home.css">
+  <link rel="stylesheet" href="/stylesheets/dashboard.css">
+  <link rel="stylesheet" href="/stylesheets/sell.css">
+  <link rel="stylesheet" href="/stylesheets/item.css">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/js/typeahead.min.js"></script>
+  <script type="text/javascript" src="/js/typeahead.js"></script>
+  <script type="text/javascript" src="/js/sortSearchResults.js"></script>
+  <script type="text/javascript" src="/js/filterResults.js"></script>
 </head>
 
-<body style="background-color:white;">
+<body style="background-color:rgb(243, 243, 243);">
   <!-- Nav Bar-->
-  <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-    <!-- Brand -->
-    <a class="navbar-brand" href="/">Home</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <nav class="navbar navbar-expand-sm sticky-top">
+    <a class="navbar-brand" id="bars" href="/">Team 03</a>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/about">About</a>
+      </li>
+    </ul>
+    <!-- Search bar -->
+    <form action="/search" method="POST" class="product-search-form">
+      <div class="input-group">
+        <!-- Category filter dropdown menu -->
+        <div class="input-group-prepend">
+          <select name="categories" class="btn category-button dropdown-toggle">
+            <option value="all">All Categories</option>
+            {{#if category}}
+            {{#each category}}
+            <option value="{{this.cid}}" {{#if (isEqual this.cid @root.selectedCategory)}} selected {{/if}}>{{this.name}}</option>
+            {{/each}}
+            {{/if}}
+          </select>
+        </div>
+        <!-- Search input field -->
+        <input type="text" name="keyword" class="typeahead tt-query" autocomplete="off" spellcheck="false"
+          placeholder="What are you looking for?" value="{{keyword}}" id="searchKeyword">
+        <!-- Submit search button -->
+        <div class="input-group-append">
+          <button class="btn search-button" type="submit"><i class="fa fa-search"></i></button>
+        </div>
+      </div>
+    </form>
 
-    <!-- Links -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="/about">About</a>
-        </li>
-      </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
-    </div>
+    <ul class="navbar-nav ml-auto">
+      <!-- User dropdown menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+          {{#if loggedInUser}}
+          Hello, <b>{{loggedInUser.email}}</b>
+          {{else}}
+          Hello, Sign in
+          {{/if}}
+        </a>
+        <div class="dropdown-menu user-dropdown-menu">
+          {{#if loggedInUser}}
+          <a class="dropdown-item" href="/account/dashboard"><span class="fa fa-user"></span> Dashboard</a>
+          <a class="dropdown-item" href="/users/logout"><span class="fa fa-sign-out"></span> Log Out</a>
+          {{else}}
+          <a class="dropdown-item" href="/users/login"><span class="fa fa-sign-in"></span> Sign in</a>
+          <a class="dropdown-item" href="/account/dashboard"><span class="fa fa-user"></span> Dashboard</a>
+          {{/if}}
+        </div>
+      </li>
+    </ul>
   </nav>
 
-  <div class="container main">
-    <div class="row">
-      {{{body}}}
-    </div>
+  <nav class="navbar navbar-expand-sm justify-content-center">
+    <ul class="navbar-nav">
+      <!-- Dropdown -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+          Shop by Category
+        </a>
+        <div class="dropdown-menu">
+
+            {{#if category}}
+            {{#each category}}
+          <a class="dropdown-item" href="#">{{this.name}}</a>
+          {{/each}}
+          {{/if}}
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/sell">Sell</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Popular</a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="main">
+    {{{body}}}
   </div>
 
   <div class="footer" style="margin-bottom:0">
     <p>
-      <a href="#" style="color: black">Sell</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+      <a href="/sell" style="color: black">Sell</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
       <a href="/about" style="color: black">About</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
       <a href="#" style="color: black">Terms & Conditions</a>&nbsp;&nbsp;&nbsp;
     </p>
@@ -54,5 +120,4 @@
     <p>Copyright © 2019 SFSU CSC 648 Team 03 Buy & Sell Inc for Students. All rights reserved.</p>
   </div>
 </body>
-
 </html>
