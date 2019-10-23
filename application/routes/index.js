@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
     res.render('home');
 });
 
-router.get('/sell', function(req, res) {
+router.get('/sell', (req, res) => {
     res.render('sell');
 });
 
