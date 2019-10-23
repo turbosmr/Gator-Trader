@@ -1,0 +1,19 @@
+.home-page {
+    color: black;
+}
+ /* Make the image fully responsive */
+ .carousel-inner img {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+  }
+  .carousel-main {
+    margin-top: 20px;
+    margin-bottom: 100px;
+  }
+  .header {
+    margin-top: 50px;
+}
+
+.category-img {
+}

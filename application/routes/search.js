@@ -27,7 +27,6 @@ router.get('/', (req, res) => {
     let product = [];
     let sql = "";
     let placeholders = [];
-    console.log(req.query)
 
     if (keyword) {
         if (category && category != 'all') {
