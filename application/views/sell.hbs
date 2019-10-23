@@ -1,0 +1,82 @@
+<div class="container">
+    <div class="container header">
+        <h1>Posting an Item for Sale</h1>
+    </div>
+
+    <form>
+        <div class="row">
+            <div class="col-sm">
+                <label for="product">Product Name:</label>
+                <input class="form-control" id="produxt" type="text">
+            </div>
+            <div class="col-sm">
+                <label for="price">Price ($):</label>
+                <input class="form-control" id="price" type="text">
+            </div>
+        </div>
+    </form>
+
+    <form>
+        <p>Catagory</p>
+        <input type="checkbox" id="books" name="catagory">
+        <label for="defaultCheck">Books</label>
+        <input type="checkbox" id="supplies" name="catagory">
+        <label for="defaultCheck">Supplies</label>
+        <input type="checkbox" id="service" name="catagory">
+        <label for="defaultCheck">Service</label>
+        <input type="checkbox" id="electronics" name="catagory">
+        <label for="defaultCheck">Electronics</label>
+        <input type="checkbox" id="furniture" name="catagory">
+        <label for="defaultCheck">Furniture</label>
+        <input type="checkbox" id="other" name="catagory">
+        <label for="defaultCheck">Other</label>
+
+        <p>Condition</p>
+        <input type="checkbox" id="service" name="catagory">
+        <label for="defaultCheck">Excellent</label>
+        <input type="checkbox" id="electronics" name="catagory">
+        <label for="defaultCheck">Good</label>
+        <input type="checkbox" id="furniture" name="catagory">
+        <label for="defaultCheck">Decent</label>
+        <input type="checkbox" id="other" name="catagory">
+        <label for="defaultCheck">Bad</label>
+
+
+        <p>Location</p>
+        <input type="checkbox" id="library" name="location">
+        <label for="defaultCheck">Library</label>
+        <input type="checkbox" id="19th ave" name="location">
+        <label for="defaultCheck">19th Ave</label>
+        <input type="checkbox" id="shipping" name="location">
+        <label for="defaultCheck">Ship only</label>
+
+        <p>Add Image here</p>
+        <div class="custom-file mb-3">
+            <input type="file" class="custom-file-input" id="customFile" name="filename">
+            <label class="custom-file-label" for="customFile">Choose file</label>
+        </div>
+
+    </form>
+</div>
+
+<div class="container">
+    <form action="action">
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea class="form-control" rows="5" id="description" name="text"></textarea>
+        </div>
+        <div class="row">
+            <div class="col-sm"><button type="cancel">Cancel</button></div>
+            <div="col-sm"><button type="submit">Submit</button>
+        </div>
+</div>
+
+<script>
+    $(".custom-file-input").on("change", function () {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
+
+</form>
+</div>
