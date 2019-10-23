@@ -73,4 +73,39 @@ router.get('/suggestions/typeahead', (req, res) => {
     });
 });
 
+router.get('/filter/price/:keyword', (req, res) => {
+    let price = req.params.keyword;
+    let keyword = req.query.searchKeyword;
+    let min;
+    let max;
+    let product = [];
+    
+    if (price == "under25") {
+        //handle logic to filter product results
+        min = -0.01;
+        max = 25.00;
+    } else if (price == "25to50") {
+        min = 24.99;
+        max = 50.00;
+    } else if (price == "50to200") {
+        min = 49.99;
+        max = 200.00;
+    } else if (price == "over200") {
+        min = 199.99;
+        max = 10000000000.00;
+    }
+    let sql = "SELECT * FROM SalesItem WHERE (name LIKE ? OR description LIKE ?) AND (price > ?) AND (price < ?)";
+    db.query(sql, ['%' + keyword + '%','%' + keyword + '%', min, max], (error, result) => {
+        if (error) throw error;
+        for (let i = 0; i < result.length; i++) {
+            product.push(result[i]);
+        }
+        res.render('results', { 
+            keyword: keyword,
+            product: product,
+            filter: price
+        });
+    });
+});
+
 module.exports = router;
