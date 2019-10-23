@@ -23,7 +23,7 @@
 <body style="background-color:rgb(243, 243, 243);">
   <!-- Nav Bar-->
   <nav class="navbar navbar-expand-sm sticky-top">
-    <a class="navbar-brand" id="bars" href="/">Home</a>
+    <a class="navbar-brand" id="bars" href="/">Team 03</a>
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <a class="nav-link" href="/about">About</a>
@@ -34,15 +34,14 @@
       <div class="input-group">
         <!-- Category filter dropdown menu -->
         <div class="input-group-prepend">
-          <button class="btn category-button dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">All</button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-            <div role="separator" class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Separated link</a>
-          </div>
+          <select name="categories" class="btn category-button dropdown-toggle">
+            <option value="all">All Categories</option>
+            {{#if category}}
+            {{#each category}}
+            <option value="{{this.cid}}" {{#if (isEqual this.cid @root.selectedCategory)}} selected {{/if}}>{{this.name}}</option>
+            {{/each}}
+            {{/if}}
+          </select>
         </div>
         <!-- Search input field -->
         <input type="text" name="keyword" class="typeahead tt-query" autocomplete="off" spellcheck="false"
@@ -84,15 +83,15 @@
       <!-- Dropdown -->
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-          Buy
+          Categories
         </a>
         <div class="dropdown-menu">
-          <a class="dropdown-item" href="#">Books</a>
-          <a class="dropdown-item" href="#">Electronics</a>
-          <a class="dropdown-item" href="#">Furnature</a>
-          <a class="dropdown-item" href="#">Services</a>
-          <a class="dropdown-item" href="#">Supplies</a>
-          <a class="dropdown-item" href="#">Other</a>
+
+            {{#if category}}
+            {{#each category}}
+          <a class="dropdown-item" href="#">{{this.name}}</a>
+          {{/each}}
+          {{/if}}
         </div>
       </li>
       <li class="nav-item">
@@ -124,5 +123,4 @@
     <p>Copyright © 2019 SFSU CSC 648 Team 03 Buy & Sell Inc for Students. All rights reserved.</p>
   </div>
 </body>
-
 </html>

@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const session = require("express-session");
 const flash = require('connect-flash');
+const db = require('./config/db');
 
 const app = express();
 const server = http.Server(app);
@@ -26,21 +27,37 @@ require('./config/passport')(passport);
 // Connect flash
 app.use(flash());
 
+var category = [];
+
+function retrieveCategory() {
+    let sql = "SELECT * FROM Category";
+
+    db.query(sql, (error, rows) => {
+        if (error) throw error;
+        for (let i = 0; i < rows.length; i++) {
+            category.push(rows[i]);
+        }
+    });
+}
+
+retrieveCategory();
+
 // Global variables
 app.use((req, res, next) => {
+    res.locals.loggedInUser = req.user;
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
+    res.locals.category = category;
     next();
 });
 
 // Handlebars
 app.engine('hbs', exphbs({
     defaultLayout: 'main',
-    extname: '.hbs'
+    extname: '.hbs',
+    helpers: require('./config/handlebars-helpers')
 }));
 app.set('view engine', 'hbs');
-
-app.use(bodyParser.urlencoded({ extended: false}));
 
 // Routes
 app.use('/', require('./routes/index'));
@@ -56,5 +73,8 @@ app.set('port', 3000);
 server.listen(app.get('port'), function () {
     console.log('Starting server on port ' + app.get('port'));
 });
+
+// Limit max concurrent connections to 50 (non-functional requirement)
+server.maxConnections = 50;
 
 module.exports = app;
