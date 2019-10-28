@@ -7,6 +7,14 @@
     padding-right: 10px;
 }
 
+.account_container {
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
 h1 {
     font-size: 40px;
     margin: 20px;
@@ -145,3 +153,18 @@ td {
     flex-basis: 25%;
     font-weight: bold;
 }
+
+#account{
+    text-align: center;
+    font-weight: 600;
+    background-color: #fff;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
+    margin: 5px 5px 5px 5px;
+    padding: 3px;
+
+}
+
+#account:hover {
+    background:rgba(182, 165, 182, 0.767);
+    color:#FFFFFF;
+  }
