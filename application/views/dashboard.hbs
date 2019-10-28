@@ -13,25 +13,19 @@
             <div class="col col-3">Category</div>
             <div class="col col-4">Price</div>
         </li>
+        {{#if product}}
+        {{#each product}}
         <li class="table-row">
-            <div class="col col-1">Chair</div>
-            <div class="col col-2">Active</div>
-            <div class="col col-3">Furniture</div>
-            <div class="col col-4">$300</div>
+            <div class="col col-1">{{this.name}}</div>
+            <div class="col col-2">{{this.status}}</div>
+            <div class="col col-3">{{this.category}}</div>
+            <div class="col col-4">${{this.price}}</div>
 
         </li>
-        <li class="table-row">
-            <div class="col col-1">Book</div>
-            <div class="col col-2">Active</div>
-            <div class="col col-3">Books</div>
-            <div class="col col-4">$50</div>
-        </li>
-        <li class="table-row">
-            <div class="col col-1">Computer</div>
-            <div class="col col-2">Active</div>
-            <div class="col col-3">Electronics</div>
-            <div class="col col-4">$1000</div>
-        </li>
+        {{/each}}
+        {{else}}
+        No active listings.
+        {{/if}}
     </ul>
 </div>
 
