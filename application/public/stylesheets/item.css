@@ -48,10 +48,6 @@ body {
   float: left;  
 }
 
-.items_page_column_left .items_page_mini_photos .img {
-  border: 5px solid red;
-}
-
 
 .items_page_column_left .items_page_main_photo {
   width: 30%;
