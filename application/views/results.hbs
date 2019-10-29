@@ -1,4 +1,7 @@
 <div class="container-fluid">
+    <!-- Results info -->
+    {{{resultsInfo offset pageLimit totalProducts keyword}}}
+
     {{#if product}}
     <!-- Side Bar -->
     <div class="sidebar">
@@ -132,6 +135,15 @@
         </tr>
         {{/each}}
     </table>
+
+    {{#if (gt pageCount 1)}}
+    <nav aria-label="Results page navigation">
+        <ul class="pagination justify-content-center">
+            {{{pagination pageCount currentPage selectedCategory keyword}}}
+        </ul>
+    </nav>
+    {{/if}}
+
     {{else}}
     <div class="col-sm-4" style="margin: auto;">
         <div class="column">
