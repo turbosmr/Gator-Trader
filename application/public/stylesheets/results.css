@@ -1,25 +1,13 @@
 
-* {
-    box-sizing: border-box;
-  }
-
-  html, body {
-    width: 100%;
-    height: 100%;
-  }
-
-  body{
-    margin: 0 auto;
-  }
-
-    .column {
-    float: left;   
-    width: 100%;
-    padding: 10px;
-  }
+/* General  */
+.results_column {
+  float: left;   
+  width: 100%;
+  padding: 10px;
+}
 
   @media screen and (max-width: 700px) {
-    .column {
+    .results_column {
       width: 100%;
       display: block;
       margin-bottom: 20px;
@@ -29,7 +17,8 @@
         padding-top: 15px;}
   }
   
-
+/* ----------------------------------------------------------------- */
+/* Side Bar Styling */
 .sidebar {
     float: left;
     height: auto;
@@ -43,38 +32,46 @@
     margin-top: 32px;
     text-align: left;
   }
-  
-  .sidebar a {
+
+  .sidebar .condition a {
     text-decoration: none;
     font-size: 18px;
     color: #030002;
     display: block;
   }
   
-  .sidebar a:hover {
+  .sidebar .condition a:hover {
     color: #d3ae0a;
   }
 
-  .reviews .stars {
+  .sidebar .price_range a {
+    text-decoration: none;
+    font-size: 18px;
+    color: #030002;
+    display: block;
+  }
+  
+  .sidebar .price_range a:hover {
+    color: #d3ae0a;
+  }
+  
+  .sidebar .reviews .stars {
     display: inline-block;
     list-style: none;
     padding: 0;
   }
-  .reviews .stars > li {
+  .sidebar .reviews .stars > li {
     display: inline-block;
   }
-    .reviews .stars > li .fa {
+  .sidebar .reviews .stars > li .fa {
     color: #f7c01b;
   } 
-  .reviews .stars > li .fa:hover {
+  .sidebar .reviews .stars > li .fa:hover {
     color: #ffe601;
   } 
-
-  .reviews > span {
-    font-size: 14px;
-    margin-left: 5px;
-    color: #555;
-  }
+/* End of Sidebar Styling */
+/* ----------------------------------------------------------------------------- */
+  /* Product Card Styling */
 
   .card {
     box-shadow: 0 6px 6px rgba(0, 0, 0, 0.3);
@@ -240,15 +237,6 @@
     background: #fff;
     color: #d3ae0a;
   }
+    /* End of Product Card Styling */
+  /* ----------------------------------------------------------------------------------- */
 
-
-  .category {
-    text-decoration: none;
-    font-size: 18px;
-    color: #030002;
-    display: block;
-  }
-  
-  .category h2 {
-    margin-top: 20px;
-  }
