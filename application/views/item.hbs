@@ -1,34 +1,43 @@
-<div class="items-page">
-    <div class="items-page-column-left">
-        <div class="items-page-column-background">
-            <div class ="items-page-column-left-mini-photos">
-                <img src="/images/about/color_pencil.jpg" alt="" style="width:100%"  onclick="myFunction(this);">
-                <img src="/images/about/shopping.jpeg" alt="" style="width:100%" onclick="myFunction(this);">
-                <img src="/images/about/book.jpeg" alt="" style="width:100%" onclick="myFunction(this);">
-                <img src="/images/about/eraser.jpeg" alt="" style="width:100%" onclick="myFunction(this);">
-            </div>
+<div class="row">
+  <div class="items_page_left_side">
+    <div class="items_page_column_left">
+      <div class = "items_page_mini_photos">
+        <img src="/images/about/color_pencil.jpg" alt="" style="width:50%"   onclick="myFunction(this);">
+        <img src="/images/about/shopping.jpeg" alt="" style="width:50%"  onclick="myFunction(this);">
+        <img src="/images/about/book.jpeg" alt="" style="width:50%"  onclick="myFunction(this);">
+        <img src="/images/about/eraser.jpeg" alt="" style="width:50%"  onclick="myFunction(this);">
+      </div>             
+             
+      <div class = "items_page_main_photo">
+        <img id="expandedImg" style="width:90%">
+        <div id="imgtext"></div>
+      </div>
 
-            <div class ="items-page-column-left-main-photo">
-                <!-- change size pic here -->
-                <img id="expandedImg" style="width:100%">
-                <div id="imgtext"></div>
-            </div>
-            
-            <div class ="items-page-column-left-description">
-                <p>description</p>
-            </div>
+      <div class = "items_page_description">
+          <p>Title goes here</p>
+          <br>
+          <p>
+              This is a description..... for.....about....anything......
+              for...and.....item....longer....to make sure everything
+              allignes to the left......
+          </p>
+      </div>
 
-          
+    </div>
+  </div>
+
+  <div class="items_page_right_side">
+    <div class="items_page_column_right">
+        <div class ="items_page_price">
+            <p>Price goes here</p>
+        </div>
+
+        <div class = "items_page_contact_seller">
+            <button type="button" class="btn btn-primary">Contact Seller</button>
         </div>
     </div>
+  </div>
 
-    <div class="items-page-column-right">
-        <div class="items-page-column-background">
-          <h3>Card 2</h3>
-          <p>Some text</p>
-          <p>Some text</p>
-        </div>
-    </div>
 </div>
 
 <script>
