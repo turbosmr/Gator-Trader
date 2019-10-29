@@ -24,33 +24,69 @@ router.post('/', (req, res) => {
 router.get('/', (req, res) => {
     let keyword = req.query.k;
     let category = req.query.c;
+    let priceFilter = req.query.pf;
+    let min, max = 0;
     let product = [];
-    let sql = "";
+    let sql = "SELECT * FROM SalesItem";
     let placeholders = [];
+
+    if (priceFilter == "under25") {
+        min = -0.01;
+        max = 25.00;
+    }
+    else if (priceFilter == "25to50") {
+        min = 24.99;
+        max = 50.00;
+    }
+    else if (priceFilter == "50to200") {
+        min = 49.99;
+        max = 200.00;
+    }
+    else if (priceFilter == "over200") {
+        min = 199.99;
+        max = 99999.99;
+    }
 
     if (keyword) {
         if (category && category != 'all') {
-            sql = "SELECT * FROM SalesItem WHERE (name LIKE ? OR description LIKE ?) AND category = ?";
+            sql += " WHERE (name LIKE ? OR description LIKE ?) AND category = ?";
             placeholders = ['%' + keyword + '%', '%' + keyword + '%', category];
+            if (priceFilter) {
+                sql += " AND (price > ?) AND (price < ?)";
+                placeholders = ['%' + keyword + '%', '%' + keyword + '%', category, min, max];
+            }
         }
         else {
-            sql = "SELECT * FROM SalesItem WHERE name LIKE ? OR description LIKE ?";
+            sql += " WHERE (name LIKE ? OR description LIKE ?)";
             placeholders = ['%' + keyword + '%', '%' + keyword + '%'];
+            if (priceFilter) {
+                sql += " AND (price > ?) AND (price < ?)";
+                placeholders = ['%' + keyword + '%', '%' + keyword + '%', min, max];
+            }
         }
     }
     else if (category && category != 'all') {
-        sql = "SELECT * FROM SalesItem WHERE category = ?";
+        sql += " WHERE category = ?";
         placeholders = [category];
+        if (priceFilter) {
+            sql += " AND (price > ?) AND (price < ?)";
+            placeholders = [category, min, max];
+        }
     }
     else {
-        sql = "SELECT * FROM SalesItem";
+        if (priceFilter) {
+            sql += " WHERE (price > ?) AND (price < ?)";
+            placeholders = [min, max];
+        }
     }
 
     db.query(sql, placeholders, (error, result) => {
         if (error) throw error;
+
         for (let i = 0; i < result.length; i++) {
             product.push(result[i]);
         }
+
         res.render('results', {
             keyword: keyword,
             selectedCategory: category,
@@ -65,46 +101,14 @@ router.get('/suggestions/typeahead', (req, res) => {
     let product = [];
 
     db.query(sql, ['%' + keyword + '%', '%' + keyword + '%'], (error, result) => {
+
         if (error) throw error;
+
         for (let i = 0; i < result.length; i++) {
             product.push(result[i].name);
         }
-        res.send(JSON.stringify(product));
-    });
-});
 
-router.get('/filter/price/:keyword', (req, res) => {
-    let price = req.params.keyword;
-    let keyword = req.query.searchKeyword;
-    let min;
-    let max;
-    let product = [];
-    
-    if (price == "under25") {
-        //handle logic to filter product results
-        min = -0.01;
-        max = 25.00;
-    } else if (price == "25to50") {
-        min = 24.99;
-        max = 50.00;
-    } else if (price == "50to200") {
-        min = 49.99;
-        max = 200.00;
-    } else if (price == "over200") {
-        min = 199.99;
-        max = 10000000000.00;
-    }
-    let sql = "SELECT * FROM SalesItem WHERE (name LIKE ? OR description LIKE ?) AND (price > ?) AND (price < ?)";
-    db.query(sql, ['%' + keyword + '%','%' + keyword + '%', min, max], (error, result) => {
-        if (error) throw error;
-        for (let i = 0; i < result.length; i++) {
-            product.push(result[i]);
-        }
-        res.render('results', { 
-            keyword: keyword,
-            product: product,
-            filter: price
-        });
+        res.send(JSON.stringify(product));
     });
 });
 
