@@ -48,6 +48,9 @@ let pages = (req, res, next) => {
         min = 199.99;
         max = 99999.99;
     }
+    else {
+        priceFilter = undefined;
+    }
 
     if (keyword) {
         if (category && category != 'all') {

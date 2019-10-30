@@ -1,5 +1,5 @@
 .main {
-    min-height: 300px;
+    min-height: 500px;
 }
 
 .navbar {
@@ -20,6 +20,12 @@
 .color {
     background-color: rgb(139, 125, 139);
     color: white;
+}
+
+.header {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 #bars {

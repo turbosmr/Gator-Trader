@@ -1,8 +1,10 @@
 
 $(document).ready(function () {
+    /* ---------- Filter by price ----------*/
     $('#under25').click(function () {
         var url = new URL(window.location.href);
         url.searchParams.set('pf', 'under25');
+        url.searchParams.delete('page');
         url = url.toString();
 
         $.ajax({
@@ -13,6 +15,7 @@ $(document).ready(function () {
     $('#25to50').click(function () {
         var url = new URL(window.location.href);
         url.searchParams.set('pf', '25to50');
+        url.searchParams.delete('page');
         url = url.toString();
 
         $.ajax({
@@ -23,6 +26,7 @@ $(document).ready(function () {
     $('#50to200').click(function () {
         var url = new URL(window.location.href);
         url.searchParams.set('pf', '50to200');
+        url.searchParams.delete('page');
         url = url.toString();
 
         $.ajax({
@@ -33,6 +37,7 @@ $(document).ready(function () {
     $('#over200').click(function () {
         var url = new URL(window.location.href);
         url.searchParams.set('pf', 'over200');
+        url.searchParams.delete('page');
         url = url.toString();
 
         $.ajax({
