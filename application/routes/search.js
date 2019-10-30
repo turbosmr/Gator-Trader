@@ -4,6 +4,8 @@ const express = require('express');
 const router = express.Router();
 const db = require('../config/db');
 
+const pageLimit = 10;
+
 router.post('/', (req, res) => {
     let keyword = req.body.keyword;
     let category = req.body.categories;
@@ -21,12 +23,12 @@ router.post('/', (req, res) => {
     }
 });
 
-router.get('/', (req, res) => {
+let pages = (req, res, next) => {
+    let currentPage = parseInt(req.query.page) || 1;
     let keyword = req.query.k;
     let category = req.query.c;
     let priceFilter = req.query.pf;
     let min, max = 0;
-    let product = [];
     let sql = "SELECT * FROM SalesItem";
     let placeholders = [];
 
@@ -80,7 +82,41 @@ router.get('/', (req, res) => {
         }
     }
 
+    res.locals.sql = sql;
+    res.locals.placeholders = placeholders;
+
     db.query(sql, placeholders, (error, result) => {
+        if (error) throw (error);
+
+        res.locals.currentPage = currentPage;
+        res.locals.totalPages = Math.ceil(parseInt(result.length) / pageLimit);
+        res.locals.totalProducts = result.length;
+
+        next();
+    });
+}
+
+router.get('/', pages, (req, res) => {
+    let keyword = req.query.k;
+    let category = req.query.c;
+    let product = [];
+
+    if (res.locals.currentPage > res.locals.totalPages || res.locals.currentPage < 1) {
+        return res.redirect('/');
+    }
+
+    let limit = pageLimit;
+    let offset = (pageLimit * res.locals.currentPage) - pageLimit;
+
+    if (offset < 0) {
+        limit += offset;
+        offset = 0;
+    }
+
+    res.locals.sql += " LIMIT ? OFFSET ?";
+    res.locals.placeholders.push(limit, offset);
+
+    db.query(res.locals.sql, res.locals.placeholders, (error, result) => {
         if (error) throw error;
 
         for (let i = 0; i < result.length; i++) {
@@ -88,9 +124,14 @@ router.get('/', (req, res) => {
         }
 
         res.render('results', {
-            keyword: keyword,
             selectedCategory: category,
-            product: product
+            keyword: keyword,
+            product: product,
+            pageLimit: limit,
+            offset: offset,
+            totalProducts: res.locals.totalProducts,
+            pageCount: res.locals.totalPages,
+            currentPage: res.locals.currentPage
         });
     });
 });
@@ -101,7 +142,6 @@ router.get('/suggestions/typeahead', (req, res) => {
     let product = [];
 
     db.query(sql, ['%' + keyword + '%', '%' + keyword + '%'], (error, result) => {
-
         if (error) throw error;
 
         for (let i = 0; i < result.length; i++) {

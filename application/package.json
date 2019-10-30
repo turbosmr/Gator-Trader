@@ -15,6 +15,7 @@
     "email-validator": "^2.0.4",
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
+    "express-paginatorjs": "^1.0.1",
     "express-session": "^1.16.2",
     "mysql": "^2.17.1",
     "nodemon": "^1.19.2",
