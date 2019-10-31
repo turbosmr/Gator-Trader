@@ -80,9 +80,12 @@ body {
 /* 
   this is the actual description TEXT that is inside the 
   description box and i align text to always stay on the left
+
+  https://www.w3schools.com/cssref/pr_font_font-size.asp
 */
 .items_page_column_left .items_page_description p {
   text-align: left;
+  font-size: 15px;
 }
 
 /* 
