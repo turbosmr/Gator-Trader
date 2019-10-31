@@ -44,4 +44,27 @@ $(document).ready(function () {
             success: window.location.href = url
         });
     });
+
+    /* ---------- Filter by condition ----------*/
+    $('#new').click(function () {
+        var url = new URL(window.location.href);
+        url.searchParams.set('cond', 'New');
+        url.searchParams.delete('page');
+        url = url.toString();
+
+        $.ajax({
+            success: window.location.href = url
+        });
+    });
+
+    $('#used').click(function () {
+        var url = new URL(window.location.href);
+        url.searchParams.set('cond', 'Used');
+        url.searchParams.delete('page');
+        url = url.toString();
+
+        $.ajax({
+            success: window.location.href = url
+        });
+    });
 });

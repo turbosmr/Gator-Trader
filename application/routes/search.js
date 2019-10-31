@@ -28,6 +28,7 @@ let pages = (req, res, next) => {
     let keyword = req.query.k;
     let category = req.query.c;
     let priceFilter = req.query.pf;
+    let conditionFilter = req.query.cond;
     let min, max = 0;
     let sql = "SELECT * FROM SalesItem";
     let placeholders = [];
@@ -58,7 +59,11 @@ let pages = (req, res, next) => {
             placeholders = ['%' + keyword + '%', '%' + keyword + '%', category];
             if (priceFilter) {
                 sql += " AND (price > ?) AND (price < ?)";
-                placeholders = ['%' + keyword + '%', '%' + keyword + '%', category, min, max];
+                placeholders.push(min, max);
+            } 
+            if (conditionFilter) {
+                sql += " AND `condition` = ?";
+                placeholders.push(conditionFilter);
             }
         }
         else {
@@ -66,7 +71,11 @@ let pages = (req, res, next) => {
             placeholders = ['%' + keyword + '%', '%' + keyword + '%'];
             if (priceFilter) {
                 sql += " AND (price > ?) AND (price < ?)";
-                placeholders = ['%' + keyword + '%', '%' + keyword + '%', min, max];
+                placeholders.push(min, max);
+            } 
+            if (conditionFilter) {
+                sql += " AND `condition` = ?";
+                placeholders.push(conditionFilter);
             }
         }
     }
@@ -75,13 +84,21 @@ let pages = (req, res, next) => {
         placeholders = [category];
         if (priceFilter) {
             sql += " AND (price > ?) AND (price < ?)";
-            placeholders = [category, min, max];
+            placeholders.push(min, max);
+        } 
+        if (conditionFilter) {
+            sql += " AND `condition` = ?";
+            placeholders.push(conditionFilter);
         }
     }
     else {
         if (priceFilter) {
             sql += " WHERE (price > ?) AND (price < ?)";
             placeholders = [min, max];
+        } 
+        if (conditionFilter) {
+            sql += " WHERE `condition` = ?";
+            placeholders = [conditionFilter];
         }
     }
 
