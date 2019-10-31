@@ -1,7 +1,10 @@
 
 <div class="row">
+  <!-- this is the left side of the page, more of the left column-->
   <div class="items_page_left_side">
+    <!-- this is the actual left column -->
     <div class="items_page_column_left">
+      <!-- this is the mini photos on the left side column-->
       <div class = "items_page_mini_photos">
         <img src="/images/about/color_pencil.jpg" alt="" style="width:50%" onmouseover="myFunction(this);">
         <img src="/images/about/shopping.jpeg" alt="" style="width:50%"  onmouseover="myFunction(this);">
@@ -9,39 +12,49 @@
         <img src="/images/about/eraser.jpeg" alt="" style="width:50%"  onmouseover="myFunction(this);">
       </div>             
              
+      <!-- this is the big photo on the left side next to the mini photos -->
       <div class = "items_page_main_photo">
         <img id="expandedImg" style="width:90%">
         <div id="imgtext"></div>
       </div>
 
+      <!-- this is the description next to the main photo -->
       <div class = "items_page_description">
-          <p>Title goes here</p>
-          <br>
-          <p>
-              This is a description..... for.....about....anything......
-              for...and.....item....longer....to make sure everything
-              allignes to the left......
-          </p>
+        <p>Title goes here</p>
+        <br>
+        <p>
+          This is a description..... for.....about....anything......
+          for...and.....item....longer....to asdfasdf  make sure everything
+          allignes to the left......
+        </p>
       </div>
-
     </div>
   </div>
 
+  <!-- the right column -->
   <div class="items_page_right_side">
     <div class="items_page_column_right">
-        <div class ="items_page_price">
-            <p>Price goes here</p>
-        </div>
+      <!-- the price section of the item -->
+      <div class ="items_page_price">
+        <p>Price goes here</p>
+      </div>
 
-        <div class = "items_page_contact_seller">
-            <button type="button" class="btn btn-primary">Contact Seller</button>
-        </div>
+      <!-- contact seller section -->
+      <div class = "items_page_contact_seller">
+        <button type="button" class="btn btn-primary">Contact Seller</button>
+      </div>
     </div>
   </div>
 
 </div>
 
 <script>
+    /*
+      used from here 
+
+      https://www.w3schools.com/howto/howto_js_tab_img_gallery.asp
+    */
+    
     function myFunction(imgs) {
         var expandImg = document.getElementById("expandedImg");
         var imgText = document.getElementById("imgtext");

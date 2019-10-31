@@ -7,24 +7,31 @@ body {
 }
 
 /* Float four columns side by side */
+
+/* 
+  the overall items page of the left side 
+  that is why the width is 70%, so the box is 70% big 
+  while the right side is 30%
+*/
 .items_page_left_side {
   float: left;
   width: 70%;
   padding: 0 10px;
 }
 
+/* the overall items page of the right side */
 .items_page_right_side {
   float: left;
   width: 30%;
   padding: 0 10px;
 }
 
-/* Remove extra left and right margins, due to padding */
+/* this pads the whole overall page, the whole screen */
 .row {
   margin: 0 -5px;
 }
 
-/* Style the counter cards */
+/* this is the actual left side container column where all the photos go inside */
 .items_page_column_left{
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 16px;
@@ -34,6 +41,7 @@ body {
   margin: 10px;
 }
 
+/* this is the actual right side container column where all the $$$ and contact seller */
 .items_page_column_right{
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 16px;
@@ -42,32 +50,53 @@ body {
   margin: 10px;
 }
 
+/* 
+  this is the mini photos part that is inside the column left item page 
+*/
 .items_page_column_left .items_page_mini_photos {
-  width: 20%;
+  width: 15%;
   text-align: left;
   float: left;  
 }
 
-
+/* 
+  this is the main photo part that is inside the 
+  column left item page and next to the mini photos 
+*/
 .items_page_column_left .items_page_main_photo {
-  width: 30%;
+  width: 20%;
   float: left;
 }
 
+/* 
+  this is the description part that is inside the 
+  column left item page and next to the main photo
+*/
 .items_page_column_left .items_page_description {
-  width: 50%;
+  width: 65%;
   float: left;
 }
 
+/* 
+  this is the actual description TEXT that is inside the 
+  description box and i align text to always stay on the left
+*/
 .items_page_column_left .items_page_description p {
   text-align: left;
 }
 
+/* 
+  this is the where the item price is that is in the right column
+  and i did float:bottom so whatever we put after, it'll be under this
+*/
 .items_page_column_right .items_page_price {
   text-align: left;
   float: bottom;
 }
 
+/* 
+  this is the where the contact seller is that is in the right column
+*/
 .items_page_column_right .items_page_contact_seller {
   text-align: left;
 }
