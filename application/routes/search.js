@@ -53,52 +53,70 @@ let pages = (req, res, next) => {
         priceFilter = undefined;
     }
 
+    // Check if keyword criteria exist
     if (keyword) {
+        // Check if category criteria exist
         if (category && category != 'all') {
             sql += " WHERE (name LIKE ? OR description LIKE ?) AND category = ?";
             placeholders = ['%' + keyword + '%', '%' + keyword + '%', category];
+            // Check if price filter exist
             if (priceFilter) {
                 sql += " AND (price > ?) AND (price < ?)";
                 placeholders.push(min, max);
-            } 
+            }
+            // Check if condition filter exist
             if (conditionFilter) {
                 sql += " AND `condition` = ?";
                 placeholders.push(conditionFilter);
             }
         }
+        // Keyword criteria exist, but category criteria does not
         else {
             sql += " WHERE (name LIKE ? OR description LIKE ?)";
             placeholders = ['%' + keyword + '%', '%' + keyword + '%'];
+            // Check if price filter exist
             if (priceFilter) {
                 sql += " AND (price > ?) AND (price < ?)";
                 placeholders.push(min, max);
-            } 
+            }
+            // Check if condition filter exist
             if (conditionFilter) {
                 sql += " AND `condition` = ?";
                 placeholders.push(conditionFilter);
             }
         }
     }
+    // Keyword criteria does not exist, check if category criteria exist
     else if (category && category != 'all') {
         sql += " WHERE category = ?";
         placeholders = [category];
+        // Check if price filter exist
         if (priceFilter) {
             sql += " AND (price > ?) AND (price < ?)";
             placeholders.push(min, max);
-        } 
+        }
+        // Check if condition filter exist
         if (conditionFilter) {
             sql += " AND `condition` = ?";
             placeholders.push(conditionFilter);
         }
     }
+    // Keyword and category criteria does not exist
     else {
+        // Check if price filter exists
         if (priceFilter) {
             sql += " WHERE (price > ?) AND (price < ?)";
-            placeholders = [min, max];
-        } 
-        if (conditionFilter) {
+            placeholders.push(min, max);
+            // Check if condition filter exists
+            if (conditionFilter) {
+                sql += " AND `condition` = ?";
+                placeholders.push(conditionFilter);
+            }
+        }
+        // Check if condition filter exists
+        else if (conditionFilter) {
             sql += " WHERE `condition` = ?";
-            placeholders = [conditionFilter];
+            placeholders.push(conditionFilter);
         }
     }
 
