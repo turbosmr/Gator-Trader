@@ -48,7 +48,7 @@ $(document).ready(function () {
     /* ---------- Filter by condition ----------*/
     $('#new').click(function () {
         var url = new URL(window.location.href);
-        url.searchParams.set('cond', 'New');
+        url.searchParams.set('cond', 'new');
         url.searchParams.delete('page');
         url = url.toString();
 
@@ -59,7 +59,7 @@ $(document).ready(function () {
 
     $('#used').click(function () {
         var url = new URL(window.location.href);
-        url.searchParams.set('cond', 'Used');
+        url.searchParams.set('cond', 'used');
         url.searchParams.delete('page');
         url = url.toString();
 

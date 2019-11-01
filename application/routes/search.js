@@ -11,7 +11,7 @@ router.post('/', (req, res) => {
     let category = req.body.categories;
 
     if (keyword) {
-        if (category) {
+        if (category && category != 'all') {
             res.redirect('/search?k=' + keyword + '&c=' + category);
         }
         else {
@@ -139,8 +139,10 @@ router.get('/', pages, (req, res) => {
     let category = req.query.c;
     let product = [];
 
-    if (res.locals.currentPage > res.locals.totalPages || res.locals.currentPage < 1) {
-        return res.redirect('/');
+    if (res.locals.totalPages > 0) {
+        if (res.locals.currentPage > res.locals.totalPages || res.locals.currentPage < 1) {
+            return res.redirect('/');
+        }
     }
 
     let limit = pageLimit;

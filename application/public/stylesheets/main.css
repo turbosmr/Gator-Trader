@@ -1,5 +1,5 @@
 .main {
-    min-height: 500px;
+    min-height: 350px;
 }
 
 .navbar {
@@ -24,7 +24,6 @@
 
 .header {
     text-align: center;
-    margin-top: 30px;
     margin-bottom: 30px;
 }
 

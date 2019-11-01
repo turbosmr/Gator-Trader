@@ -1,5 +1,6 @@
-.home-page {
+.home {
     color: black;
+    text-align: center;
 }
  /* Make the image fully responsive */
  .carousel-inner img {
