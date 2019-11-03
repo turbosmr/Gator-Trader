@@ -1,0 +1,182 @@
+/* Page Containers */
+.approved_container {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.unapproved_container {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.admin_messages_container {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.account_container {
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* ------------------------------------------------------------- */
+/* Account Boxes Styling */
+#account{
+    text-align: center;
+    font-weight: 600;
+    background-color: #fff;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
+    margin: 5px 5px 5px 5px;
+    padding: 3px;
+
+}
+
+#account:hover {
+    background:rgba(182, 165, 182, 0.767);
+    color:#FFFFFF;
+  }
+
+.account_container h1 {
+    font-size: 40px;
+    margin: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+/* ------------------------------------------------------------- */
+/* Unapproved Styling */
+
+.unapproved li {
+    border-radius: 5px;
+    padding: 20px 20px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+.unapproved .table-header {
+    background-color: #c03c3c;
+    font-size: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.unapproved .table-row {
+    background-color: #fff;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
+}
+.unapproved .col-1 {
+    font-weight: bold;
+}
+.unapproved .table-row .col-2 {
+    font-weight: bold;
+
+}
+.unapproved .col-3 {
+    float: right;
+}
+
+.unapproved_container h2 {
+    font-size: 30px;
+    margin: 20px;
+    text-align: center;
+}
+
+/* --------------------------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------- */
+/* Approved Styling */
+
+.approved li {
+    border-radius: 5px;
+    padding: 20px 20px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+.approved .table-header {
+    background-color: #68b174;
+    font-size: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.approved .table-row {
+    background-color: #fff;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
+}
+.approved .col-1 {
+    font-weight: bold;
+}
+.approved .table-row .col-2 {
+    font-weight: bold;
+
+}
+.approved .col-3 {
+    float: left;
+}
+
+.approved_container h2 {
+    font-size: 30px;
+    margin: 20px;
+    text-align: center;
+}
+
+/* --------------------------------------------------------------------------------------------------- */
+/* Messages Styling*/
+
+
+.admin_messages li {
+    border-radius: 5px;
+    padding: 20px 20px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+.admin_messages .table-header {
+    background-color: #686fb1;
+    font-size: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.admin_messages .table-row {
+    background-color: #fff;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
+}
+.admin_messages .col-1 {
+    flex-basis: 20%;
+    font-weight: bold;
+}
+.admin_messages .table-row .col-2 {
+    flex-basis: 20%;
+    font-weight: bold;
+
+}
+.admin_messages .col-3 {
+    flex-basis: 20%;
+    text-decoration: underline;
+}
+.admin_messages .col-4 {
+    flex-basis: 20%;
+    font-weight: bold;
+}
+.admin_messages .col-5 {
+    flex-basis: 20%;
+    font-weight: bold;
+}
+
+.admin_messages_container h2 {
+    font-size: 30px;
+    margin: 20px;
+    text-align: center;
+}
+
+.admin_messages_container btn {
+    float: right;
+}

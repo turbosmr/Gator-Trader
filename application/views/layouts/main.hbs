@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="/stylesheets/dashboard.css">
   <link rel="stylesheet" href="/stylesheets/sell.css">
   <link rel="stylesheet" href="/stylesheets/item.css">
+  <link rel="stylesheet" href="/stylesheets/adminDashboard.css">
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -43,7 +44,8 @@
             <option value="all">All Categories</option>
             {{#if category}}
             {{#each category}}
-            <option value="{{this.cid}}" {{#if (eq this.cid @root.selectedCategory)}} selected {{/if}}>{{this.name}}</option>
+            <option value="{{this.cid}}" {{#if (eq this.cid @root.selectedCategory)}} selected {{/if}}>{{this.name}}
+            </option>
             {{/each}}
             {{/if}}
           </select>
@@ -71,9 +73,11 @@
         <div class="dropdown-menu user-dropdown-menu">
           {{#if loggedInUser}}
           <a class="dropdown-item" href="/account/dashboard"><span class="fa fa-user"></span> Dashboard</a>
+          <a class="dropdown-item" href="/account/adminDashboard"><span class="fa fa-user"></span> Admin Dashboard</a>
           <a class="dropdown-item" href="/users/logout"><span class="fa fa-sign-out"></span> Log Out</a>
           {{else}}
           <a class="dropdown-item" href="/users/login"><span class="fa fa-sign-in"></span> Sign in</a>
+          <a class="dropdown-item" href="/account/adminDashboard"><span class="fa fa-user"></span> Admin Dashboard</a>
           <a class="dropdown-item" href="/account/dashboard"><span class="fa fa-user"></span> Dashboard</a>
           {{/if}}
         </div>
@@ -90,8 +94,8 @@
         </a>
         <div class="dropdown-menu">
 
-            {{#if category}}
-            {{#each category}}
+          {{#if category}}
+          {{#each category}}
           <a class="dropdown-item" href="#">{{this.name}}</a>
           {{/each}}
           {{/if}}
@@ -120,4 +124,5 @@
     <p>Copyright © 2019 SFSU CSC 648 Team 03 Buy & Sell Inc for Students. All rights reserved.</p>
   </div>
 </body>
+
 </html>
