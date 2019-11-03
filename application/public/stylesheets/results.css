@@ -14,8 +14,9 @@
     }
     .sidebar {
         display: none;
-        padding-top: 15px;}
-  }
+        padding-top: 15px;
+      }
+    }
   
 /* ----------------------------------------------------------------- */
 /* Side Bar Styling */
@@ -78,7 +79,7 @@
     transition: 200ms;
     background: #fff;
     padding-top: 20px;
-    margin-top: 20px;
+    margin-top: 10px;
   }
   .card .card_title {
     display: flex;
