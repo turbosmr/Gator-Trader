@@ -54,7 +54,7 @@ body {
   this is the mini photos part that is inside the column left item page 
 */
 .items_page_column_left .items_page_mini_photos {
-  width: 15%;
+  width: 5%;
   text-align: left;
   float: left;  
 }
