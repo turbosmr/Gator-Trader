@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const session = require("express-session");
 const flash = require('connect-flash');
-const db = require('./config/db');
+const categories = require('./controllers/categoriesController');
 
 const app = express();
 const server = http.Server(app);
@@ -27,27 +27,12 @@ require('./config/passport')(passport);
 // Connect flash
 app.use(flash());
 
-var category = [];
-
-function retrieveCategory() {
-    let sql = "SELECT * FROM Category";
-
-    db.query(sql, (error, rows) => {
-        if (error) throw error;
-        for (let i = 0; i < rows.length; i++) {
-            category.push(rows[i]);
-        }
-    });
-}
-
-retrieveCategory();
-
 // Global variables
 app.use((req, res, next) => {
-    res.locals.loggedInUser = req.user;
-    res.locals.success = req.flash('success');
-    res.locals.error = req.flash('error');
-    res.locals.category = category;
+    app.locals.loggedInUser = req.user;
+    app.locals.success = req.flash('success');
+    app.locals.error = req.flash('error');
+    app.locals.category = categories.retrieve();
     next();
 });
 
