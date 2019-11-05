@@ -1,16 +1,26 @@
+body {
+    background-color:rgb(216, 215, 215);
+}
+
 .main {
-    min-height: 350px;
+    min-height: 550px;
 }
 
 .navbar {
-    background-color: lightgray;
+    background-color: rgb(74, 54, 78);
+}
+.navbar a {
+    color:white;
 }
 
 .footer {
-    background-color: lightgrey;
-    color: black;
+    background-color:rgb(74, 54, 78);
+    color: white;
     text-align: center;
     padding: 30px;
+}
+.footer a {
+    color: white;
 }
 
 .footer-pushdown {
@@ -25,6 +35,8 @@
 .header {
     text-align: center;
     margin-bottom: 30px;
+    color: black;
+    text-shadow: 2px 2px 2px rgb(139, 125, 139);
 }
 
 #bars {
@@ -39,7 +51,7 @@
 }
 
 .dropdown-menu {
-    background-color: #FFFFFF;
+    background-color:rgb(139, 125, 139);
     border: 2px solid rgba(0, 0, 0, 0.2);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     padding: 8px 0;
@@ -52,4 +64,9 @@
 .user-dropdown-menu {
     left: auto;
     right: 0;
+}
+
+.navbar-brand {
+    -webkit-filter: drop-shadow(5px 5px 5px #222);
+    filter: drop-shadow(5px 5px 5px #222);
 }
