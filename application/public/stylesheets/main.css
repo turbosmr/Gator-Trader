@@ -70,3 +70,13 @@ body {
     -webkit-filter: drop-shadow(5px 5px 5px #222);
     filter: drop-shadow(5px 5px 5px #222);
 }
+.sell {
+    padding-left: 20px;
+}
+.sell-button {
+  color:black;
+    background-color: rgb(235, 233, 109);
+}
+.sell-button a {
+    color:black;
+  }

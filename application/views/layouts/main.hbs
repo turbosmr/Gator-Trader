@@ -24,14 +24,19 @@
   <script type="text/javascript" src="/js/sortSearchResults.js"></script>
   <script type="text/javascript" src="/js/filterResults.js"></script>
 </head>
-
+  
 <body>
+
   <!-- Nav Bar-->
+  
   <nav class="navbar navbar-expand-sm sticky-top">
     <a class="navbar-brand" href="/">
-          <img src="/images/main/GatorTraderLogo2.png"style="width:150px"alt="">
-        </a>
+      <img src="/images/main/GatorTraderLogo2.png" style="width:150px" alt="">
+    </a>
     <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/about">About</a>
+      </li>
     </ul>
     <!-- Search bar -->
     <form action="/search" method="POST" class="product-search-form">
@@ -42,7 +47,8 @@
             <option value="all">All Categories</option>
             {{#if category}}
             {{#each category}}
-            <option value="{{this.cid}}" {{#if (eq this.cid @root.selectedCategory)}} selected {{/if}}>{{this.name}}</option>
+            <option value="{{this.cid}}" {{#if (eq this.cid @root.selectedCategory)}} selected {{/if}}>{{this.name}}
+            </option>
             {{/each}}
             {{/if}}
           </select>
@@ -56,6 +62,14 @@
         </div>
       </div>
     </form>
+
+    <ul class="navbar-nav sell">
+      <li class="nav-item">
+        <button class="btn sell-button">
+         <a href="/sell">Sell</a>
+        </button>
+      </li>
+    </ul>
 
     <ul class="navbar-nav ml-auto">
       <!-- User dropdown menu -->
@@ -82,25 +96,29 @@
 
   <nav class="navbar navbar-expand-sm justify-content-center">
     <ul class="navbar-nav">
-      <!-- Dropdown -->
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-          Shop by Category
-        </a>
-        <div class="dropdown-menu">
-
-            {{#if category}}
-            {{#each category}}
-          <a class="dropdown-item" href="#">{{this.name}}</a>
-          {{/each}}
-          {{/if}}
-        </div>
+      <li class="nav-item">
+        <a class="nav-link" href="/sell">Books</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/sell">Sell</a>
+        <a class="nav-link" href="/sell">Electronic</a>
       </li>
-    <li class="nav-item">
-        <a class="nav-link" href="/about">About</a>
+      <li class="nav-item">
+        <a class="nav-link" href="/sell">Supplies</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/sell">Health</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/sell">Furniture</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/sell">Services</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/sell">Sports</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/sell">Other</a>
       </li>
     </ul>
   </nav>
@@ -119,4 +137,5 @@
     <p>Copyright © 2019 SFSU CSC 648 Team 03 Buy & Sell Inc for Students. All rights reserved.</p>
   </div>
 </body>
+
 </html>
