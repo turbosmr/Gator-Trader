@@ -3,7 +3,7 @@
 const express = require('express');
 const router = express.Router();
 
-// Render home page
+// GET home page
 router.get('/', (req, res) => {
     res.render('home');
 });

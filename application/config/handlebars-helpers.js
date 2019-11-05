@@ -54,28 +54,28 @@ module.exports = {
 
         // Previous button
         if (x === 1) {
-            html += "<li class=\"page-item disabled\"><a class=\"page-link\" href=\"/search?c=" + category + "&k=" + keyword + "&page=" + (x - 1) + "\">Previous</a></li>";
+            html += "<li class=\"page-item disabled\"><a class=\"page-link\" href=\"/search?k=" + keyword + "&c=" + category + "&page=" + (x - 1) + "\">Previous</a></li>";
         }
         else {
-            html += "<li class=\"page-item\"><a class=\"page-link\" href=\"/search?c=" + category + "&k=" + keyword + "&page=" + (x - 1) + "\">Previous</a></li>";
+            html += "<li class=\"page-item\"><a class=\"page-link\" href=\"/search?k=" + keyword + "&c=" + category + "&page=" + (x - 1) + "\">Previous</a></li>";
         }
 
         // Page button
         for (let i = 1; i <= pageCount; i++) {
             if (currentPage === i) {
-                html += "<li class=\"page-item active\"><a class=\"page-link\" href=\"/search?c=" + category + "&k=" + keyword + "&page=" + i + "\">" + i + "</a></li>";
+                html += "<li class=\"page-item active\"><a class=\"page-link\" href=\"/search?k=" + keyword + "&c=" + category + "&page=" + i + "\">" + i + "</a></li>";
             }
             else {
-                html += "<li class=\"page-item\"><a class=\"page-link\" href=\"/search?c=" + category + "&k=" + keyword + "&page=" + i + "\">" + i + "</a></li>";
+                html += "<li class=\"page-item\"><a class=\"page-link\" href=\"/search?k=" + keyword + "&c=" + category + "&page=" + i + "\">" + i + "</a></li>";
             }
         }
 
         // Next button
         if (x >= pageCount) {
-            html += "<li class=\"page-item disabled\"><a class=\"page-link\" href=\"/search?c=" + category + "&k=" + keyword + "&page=" + (x - 1) + "\">Next</a></li>";
+            html += "<li class=\"page-item disabled\"><a class=\"page-link\" href=\"/search?k=" + keyword + "&c=" + category + "&page=" + (x - 1) + "\">Next</a></li>";
         }
         else {
-            html += "<li class=\"page-item\"><a class=\"page-link\" href=\"/search?c=" + category + "&k=" + keyword + "&page=" + (x + 1) + "\">Next</a></li>";
+            html += "<li class=\"page-item\"><a class=\"page-link\" href=\"/search?k=" + keyword + "&c=" + category + "&page=" + (x + 1) + "\">Next</a></li>";
         }
 
         return html;

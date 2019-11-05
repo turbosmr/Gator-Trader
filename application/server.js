@@ -64,8 +64,9 @@ app.use('/', require('./routes/index'));
 app.use('/about', require('./routes/about'));
 app.use('/users', require('./routes/users'));
 app.use('/search', require('./routes/search'));
-app.use('/account', require('./routes/account'));
 app.use('/products', require('./routes/products'));
+app.use('/dashboard', require('./routes/registeredUserDashboard'));
+app.use('/admin', require('./routes/administratorDashboard'));
 
 // Set port number
 app.set('port', 3000);

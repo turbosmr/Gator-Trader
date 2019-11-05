@@ -1,11 +1,7 @@
-/* This file handles "/account" route */
-
-const express = require('express');
-const router = express.Router();
 const db = require('../config/db');
 
-// Render dashboard page
-router.get('/dashboard', (req, res) => {
+// Display registered user's dashboard page 
+exports.index = (req, res, next) => {
     // Render active listings
     if (req.user) {
         let product = [];
@@ -25,6 +21,4 @@ router.get('/dashboard', (req, res) => {
     else {
         res.render('dashboard');
     }
-});
-
-module.exports = router;
+}
