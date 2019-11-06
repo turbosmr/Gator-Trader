@@ -9,7 +9,7 @@ const paginationController = require('../controllers/paginationController');
 router.post('/', searchController.post);
 
 // GET request to paginate and show search results
-router.get('/', paginationController.searchResults(10), searchController.get);
+router.get('/', paginationController.search_results(10), searchController.get);
 
 // GET request for search suggestions
 router.get('/suggestions/typeahead', searchController.suggestions);

@@ -3,9 +3,14 @@ const passport = require('passport');
 const validator = require('email-validator');
 const bcrypt = require('bcryptjs');
 
-// Handle user login authentication via Passport API on GET
-exports.login = (req, res, next) => {
-    passport.authenticate('local-login', {
+// Handle showing registered user login page on GET
+exports.login_get = (req, res, next) => {
+    res.render('registeredUserLogin');
+}
+
+// Handle registered user login authentication via Passport API on POST
+exports.login_post = (req, res, next) => {
+    passport.authenticate('registered-user-login', {
         successRedirect: '/',
         failureRedirect: '/users/login',
         failureFlash: true,
@@ -13,8 +18,13 @@ exports.login = (req, res, next) => {
     })(req, res, next);
 }
 
-// Handle user registration on POST
-exports.register = (req, res, next) => {
+// Handle showing registration page for registered user on GET
+exports.register_get = (req, res, next) => {
+    res.render('register');
+}
+
+// Handle registration for registered user on POST
+exports.register_post = (req, res, next) => {
     let { username, sid, password, password2 } = req.body;
     let regError = [];
 
@@ -49,7 +59,7 @@ exports.register = (req, res, next) => {
     else {
         // Input validation passed
         // Check if username already exists
-        db.query("SELECT * FROM RegisteredUser WHERE sid = ? OR email = ?", [sid, username], (error, result) => {
+        db.query("SELECT * FROM RegisteredUser WHERE sid = ? OR username = ?", [sid, username], (error, result) => {
             if (error) throw error;
             if (result.length >= 1) {
                 regError.push({ message: 'Such user already exists. Please log in.' });
@@ -65,7 +75,7 @@ exports.register = (req, res, next) => {
                         if (error) throw error;
                         password = hash;
                         // Insert new user into database
-                        db.query("INSERT INTO RegisteredUser (sid, email, password) VALUES (?, ?, ?)", [sid, username, password], (error, result) => {
+                        db.query("INSERT INTO RegisteredUser (sid, username, password) VALUES (?, ?, ?)", [sid, username, password], (error, result) => {
                             if (error) throw error;
                             req.flash('success', 'Successfully registered, please login.');
                             res.redirect('/users/login');
@@ -77,7 +87,7 @@ exports.register = (req, res, next) => {
     }
 }
 
-// Handle user logout on GET
+// Handle registered user logout on GET
 exports.logout = (req, res, next) => {
     req.logout();
     req.flash('success', 'You are logged out');

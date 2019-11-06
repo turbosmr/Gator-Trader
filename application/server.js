@@ -22,14 +22,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(passport.initialize());
 app.use(passport.session());
-require('./config/passport')(passport);
+require('./config/registeredUserPassport')(passport);
+require('./config/administratorPassport')(passport);
 
 // Connect flash
 app.use(flash());
 
 // Global variables
 app.use((req, res, next) => {
-    app.locals.loggedInUser = req.user;
+    app.locals.loggedIn = req.user;
     app.locals.success = req.flash('success');
     app.locals.error = req.flash('error');
     app.locals.category = categories.retrieve;
@@ -40,7 +41,7 @@ app.use((req, res, next) => {
 app.engine('hbs', exphbs({
     defaultLayout: 'main',
     extname: '.hbs',
-    helpers: require('./config/handlebars-helpers')
+    helpers: require('./config/handlebarsHelpers')
 }));
 app.set('view engine', 'hbs');
 
@@ -51,7 +52,7 @@ app.use('/users', require('./routes/users'));
 app.use('/search', require('./routes/search'));
 app.use('/products', require('./routes/products'));
 app.use('/dashboard', require('./routes/registeredUserDashboard'));
-app.use('/admin', require('./routes/administratorDashboard'));
+app.use('/admin', require('./routes/administrator'));
 
 // Set port number
 app.set('port', 3000);

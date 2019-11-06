@@ -1,6 +1,6 @@
 const db = require('../config/db');
 
-// Display registered user's dashboard page 
+// Display registered user's dashboard page on GET
 exports.index = (req, res, next) => {
     // Render active listings
     if (req.user) {

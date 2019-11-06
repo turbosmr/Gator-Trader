@@ -75,16 +75,21 @@
       <!-- User dropdown menu -->
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-          {{#if loggedInUser}}
-          Hello, <b>{{loggedInUser.email}}</b>
+          {{#if loggedIn}}
+          Hello, <b>{{loggedIn.username}}</b>
           {{else}}
           Hello, Sign in
           {{/if}}
         </a>
         <div class="dropdown-menu user-dropdown-menu">
-          {{#if loggedInUser}}
+          {{#if loggedIn}}
+          {{#if loggedIn.aid}}
+          <a class="dropdown-item" href="/admin"><span class="fa fa-user"></span> Dashboard</a>
+          <a class="dropdown-item" href="/admin/logout"><span class="fa fa-sign-out"></span> Log Out</a>
+          {{else}}
           <a class="dropdown-item" href="/dashboard"><span class="fa fa-user"></span> Dashboard</a>
           <a class="dropdown-item" href="/users/logout"><span class="fa fa-sign-out"></span> Log Out</a>
+          {{/if}}
           {{else}}
           <a class="dropdown-item" href="/users/login"><span class="fa fa-sign-in"></span> Sign in</a>
           <a class="dropdown-item" href="/dashboard"><span class="fa fa-user"></span> Dashboard</a>

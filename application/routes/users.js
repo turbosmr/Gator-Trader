@@ -4,28 +4,24 @@ const express = require('express');
 const router = express.Router();
 const usersController = require('../controllers/usersController');
 
-// GET request to redirect to login page
+// GET request to redirect to registered user login page
 router.get('/', (req, res) => {
     res.redirect('users/login');
 });
 
-// GET user login page
-router.get('/login', (req, res) => {
-    res.render('login');
-});
+// GET registered user login page
+router.get('/login', usersController.login_get);
 
-// GET user registration page
-router.get('/register', (req, res) => {
-    res.render('register');
-});
+// POST request for authenticating registered user login
+router.post('/login', usersController.login_post);
 
-// POST request for authenticating user login
-router.post('/login', usersController.login);
+// GET registration page for registered user
+router.get('/register', usersController.register_get);
 
-// POST request for user registration
-router.post('/register', usersController.register);
+// POST request for registration page of registered user
+router.post('/register', usersController.register_post);
 
-// GET request for user logout
+// GET request for registered user logout
 router.get('/logout', usersController.logout);
 
 module.exports = router;

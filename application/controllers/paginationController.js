@@ -1,7 +1,7 @@
 const db = require('../config/db');
 
 // Handle pagination of search results on GET
-exports.searchResults = (limit) => {
+exports.search_results = (limit) => {
     const pageLimit = limit;
 
     return (req, res, next) => {
