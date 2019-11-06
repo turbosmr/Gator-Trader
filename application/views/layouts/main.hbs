@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
   <link rel="stylesheet" href="/stylesheets/main.css">
   <link rel="stylesheet" href="/stylesheets/about.css">
   <link rel="stylesheet" href="/stylesheets/results.css">
@@ -85,7 +85,7 @@
         <div class="dropdown-menu user-dropdown-menu">
           {{#if loggedIn}}
           {{#if loggedIn.aid}}
-          <a class="dropdown-item" href="/admin"><span class="fa fa-user"></span> Dashboard</a>
+          <a class="dropdown-item" href="/admin"><span class="fas fa-users-cog"></span> Dashboard</a>
           <a class="dropdown-item" href="/admin/logout"><span class="fa fa-sign-out"></span> Log Out</a>
           {{else}}
           <a class="dropdown-item" href="/dashboard"><span class="fa fa-user"></span> Dashboard</a>
@@ -94,6 +94,7 @@
           {{else}}
           <a class="dropdown-item" href="/users/login"><span class="fa fa-sign-in"></span> Sign in</a>
           <a class="dropdown-item" href="/dashboard"><span class="fa fa-user"></span> Dashboard</a>
+          <a class="dropdown-item" href="/admin/login"><span class="fas fa-users-cog"></span> Admin</a>
           {{/if}}
         </div>
       </li>
