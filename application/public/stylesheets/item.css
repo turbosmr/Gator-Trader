@@ -1,174 +1,105 @@
 * {
-    box-sizing: border-box;
-  }
+  box-sizing: border-box;
+}
 
-  html, body {
-    width: 100%;
-    height: 100%;
-  }
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
 
-  body{
-    margin: 0 auto;
-  }
+/* Float four columns side by side */
 
-    .column {
-    float: left;   
-    width: 100%;
-    padding: 10px;
-  }
+/* 
+  the overall items page of the left side 
+  that is why the width is 70%, so the box is 70% big 
+  while the right side is 30%
+*/
+.items_page_left_side {
+  float: left;
+  width: 70%;
+  padding: 0 10px;
+}
 
-  @media screen and (max-width: 800px) {
-    .column {
-      width: 100%;
-      display: block;
-      margin-bottom: 20px;
-    }
-    .sidebar {
-        display: none;
-        padding-top: 15px;}
-  }
-  
+/* the overall items page of the right side */
+.items_page_right_side {
+  float: left;
+  width: 30%;
+  padding: 0 10px;
+}
 
-.sidebar {
-    float: left;
-    height: auto;
-    width: 200px;
-    padding: 16px;
-    text-align: center;
-    background-color: #ffffff;
-    border-right: lightgray 3px solid;
-    margin-top: 10px;
-    text-align: left;
-  }
-  
-  .sidebar a {
-    padding: 6px 8px 6px 16px;
-    text-decoration: none;
-    font-size: 20px;
-    color: #030002;
-    display: block;
-  }
-  
-  .card {
-    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.3);
-    transition: 200ms;
-    background: #fff;
-    padding-top: 20px;
-  }
-  .card .card_title {
-    display: flex;
-    align-items: center;
-    padding: 30px 40px;
-  }
-  .card .card_title h3 {
-    flex: 0 1 200px;
-    text-align: right;
-    margin: 0;
-    color: #2c2c2c;
-    font-weight: 600;
-    font-size: 20px;
-  }
+/* this pads the whole overall page, the whole screen */
+.row {
+  margin: 0 -5px;
+}
 
-  .card .card_body {
-    padding: 0 40px;
-    display: flex;
-    flex-flow: row no-wrap;
-    margin-bottom: 25px;
-  }
+/* this is the actual left side container column where all the photos go inside */
+.items_page_column_left{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: white;
+  float: left;
+  margin: 10px;
+}
 
-  .card .card_body > .mini_photos {
-    box-sizing: border-box;
-    padding: 30px;
-    flex: 1 0 8%;
-  }
+/* this is the actual right side container column where all the $$$ and contact seller */
+.items_page_column_right{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: white;
+  margin: 10px;
+}
 
-  .card .card_body > .photo {
-    box-sizing: border-box;
-    padding: 0 15px;
-    flex: 1 0 35%;
-  }
+/* 
+  this is the mini photos part that is inside the column left item page 
+*/
+.items_page_column_left .items_page_mini_photos {
+  width: 5%;
+  text-align: left;
+  float: left;  
+}
 
-  .card .card_body > .info {
-    box-sizing: border-box;
-    padding: 0 15px;
-    flex: 1 0 40%;
-  }
+/* 
+  this is the main photo part that is inside the 
+  column left item page and next to the mini photos 
+*/
+.items_page_column_left .items_page_main_photo {
+  width: 20%;
+  float: left;
+}
 
-  .card .card_body > .user_contact {
-    box-sizing: border-box;
-    padding: 0 15px;
-    flex: 1 0 5%;
-  }
+/* 
+  this is the description part that is inside the 
+  column left item page and next to the main photo
+*/
+.items_page_column_left .items_page_description {
+  width: 65%;
+  float: left;
+}
 
-  .card .card_body > .question {
-    padding: 0 40px;
-    display: flex;
-    flex-flow: row no-wrap;
-    margin-bottom: 25px;
-  }
+/* 
+  this is the actual description TEXT that is inside the 
+  description box and i align text to always stay on the left
 
-  .card .question > .q1 {
-    box-sizing: border-box;
-    padding: 0 15px;
-    flex: 1 0 50%;
-  }
+  https://www.w3schools.com/cssref/pr_font_font-size.asp
+*/
+.items_page_column_left .items_page_description p {
+  text-align: left;
+  font-size: 15px;
+}
 
-  .card .user_buy {
-    padding: 0 40px;
-    display: flex;
-    flex-flow: row no-wrap;
-    margin-bottom: 25px;
-  }
+/* 
+  this is the where the item price is that is in the right column
+  and i did float:bottom so whatever we put after, it'll be under this
+*/
+.items_page_column_right .items_page_price {
+  text-align: left;
+  float: bottom;
+}
 
-  .card .user_buy > .buy_somewhere {
-    box-sizing: border-box;
-    padding: 0 15px;
-    flex: 1 0 60%;
-  }
-
-  .card .user_buy > .shipping {
-    box-sizing: border-box;
-    padding: 0 15px;
-    flex: 1 0 40%;
-  }
-
-  .card .card_body .featured_text h1 {
-    margin: 0;
-    padding: 0;
-    font-weight: 800;
-    line-height: 50px;
-    color: #181e28;
-  }
-  .card .card_body .featured_text p {
-    margin: 0;
-    padding: 0;
-  }
-  
-  .card .card_body .user_contact p.price {
-    color: #252525;
-    font-size: 26px;
-  }
-  .card .card_body .photo .image {
-    padding-top: 15px;
-    width: 100%;
-  }
-  .card .card_body .how_would_you_like_to_buy {
-    padding-top: 20px;
-    width: 200%;
-  }
-  .card .card_body .image img {
-    display: block;
-    max-width: 50%;
-    height: auto;
-  }
-  .card .card_body .description {
-    margin-bottom: 25px;
-  }
-  .card .card_body .description p {
-    margin: 0;
-    font-weight: 300;
-    line-height: 27px;
-    font-size: 16px;
-    color: #555;
-  }
-
+/* 
+  this is the where the contact seller is that is in the right column
+*/
+.items_page_column_right .items_page_contact_seller {
+  text-align: left;
+}
