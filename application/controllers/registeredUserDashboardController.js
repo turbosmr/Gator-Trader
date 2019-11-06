@@ -7,18 +7,18 @@ exports.index = (req, res, next) => {
         let product = [];
         let sql = "SELECT SalesItem.name, SalesItem.status, Category.name AS category, SalesItem.price FROM SalesItem INNER JOIN Category ON SalesItem.category = Category.cid WHERE seller = ? AND status != 'unapproved'";
         let placeholders = [req.user.sid];
-        
+
         db.query(sql, placeholders, (error, result) => {
             if (error) throw error;
 
             for (let i = 0; i < result.length; i++) {
-                 product.push(result[i]);
+                product.push(result[i]);
             }
-            
-            res.render('dashboard', { product: product });
+
+            res.render('registeredUserDashboard', { product: product });
         });
     }
     else {
-        res.render('dashboard');
+        res.render('registeredUserDashboard');
     }
 }

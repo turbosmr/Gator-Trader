@@ -2,7 +2,7 @@ const passport = require('passport');
 
 // Display administrator's dashboard page on GET
 exports.index = (req, res, next) => {
-    res.render('dashboard')
+    res.render('adminDashboard');
 }
 
 // Display administrator's login page on GET
