@@ -32,7 +32,7 @@ app.use((req, res, next) => {
     app.locals.loggedInUser = req.user;
     app.locals.success = req.flash('success');
     app.locals.error = req.flash('error');
-    app.locals.category = categories.retrieve();
+    app.locals.category = categories.retrieve;
     next();
 });
 
