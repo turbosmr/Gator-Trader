@@ -11,79 +11,18 @@
         <h1>Welcome to Gator Trader</h1>
     </div>
     <div class="row home-page-icons">
+        {{#if category}}
+        {{#each category}}
         <div class="col-md-3">
             <div class="card home-card img-fluid">
-                <img class="card-img home-image" src="/images/main/booksColor.png" alt="Card image">
+                <img class="card-img home-image" src="/images/main/{{this.imgFileName}}" alt="Card image">
                 <div class="card-img-overlay">
-                    <h4 class="card-title home-page text-center">Books</h2>
+                    <h4 class="card-title home-page text-center">{{this.name}}</h2>
                         <a href="#" class="stretched-link"></a>
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="card home-card img-fluid">
-                <img class="card-img home-image" src="/images/main/electronicsColor.png" alt="Card image">
-                <div class="card-img-overlay">
-                    <h4 class="card-title home-page text-center">Electronics</h2>
-                        <a href="#" class="stretched-link"></a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card home-card img-fluid">
-                <img class="card-img home-image" src="/images/main/suppliesColor.png" alt="Card image">
-                <div class="card-img-overlay">
-                    <h4 class="card-title home-page text-center">Supplies</h2>
-                        <a href="#" class="stretched-link"></a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card home-card img-fluid">
-                <img class="card-img home-image" src="/images/main/healthColor.png" alt="Card image">
-                <div class="card-img-overlay">
-                    <h4 class="card-title home-page text-center">Health</h2>
-                        <a href="#" class="stretched-link"></a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3">
-            <div class="card home-card img-fluid">
-                <img class="card-img home-image" src="/images/main/furnitureColor.png" alt="Card image">
-                <div class="card-img-overlay">
-                    <h4 class="card-title home-page text-center">Furniture</h2>
-                        <a href="#" class="stretched-link"></a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card home-card img-fluid">
-                <img class="card-img home-image" src="/images/main/servicesColor.png" alt="Card image">
-                <div class="card-img-overlay">
-                    <h4 class="card-title home-page text-center">Services</h4>
-                    <a href="#" class="stretched-link"></a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card home-card img-fluid">
-                <img class="card-img home-image" src="/images/main/sportsColor.png" alt="Card image">
-                <div class="card-img-overlay">
-                    <h4 class="card-title home-page text-center">Sports</h4>
-                    <a href="#" class="stretched-link"></a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card home-card img-fluid">
-                <img class="card-img home-image" src="/images/main/otherColor.png" alt="Card image">
-                <div class="card-img-overlay">
-                    <h4 class="card-title home-page text-center">Other</h4>
-                    <a href="#" class="stretched-link"></a>
-                </div>
-            </div>
-        </div>
+        {{/each}}
+        {{/if}}
     </div>
 </div>
