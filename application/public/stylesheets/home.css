@@ -2,23 +2,25 @@
     color: black;
     text-align: center;
 }
-  .home-card {
+
+.home-card {
     height: 150px;
-  }
-  .home-image {
+    margin-bottom: 20px;
+}
+
+.home-image {
     height: 100%;
     object-fit: scale-down;
     padding-bottom: 50px;
     padding-top: 5px;
     -webkit-filter: drop-shadow(5px 5px 5px #222);
     filter: drop-shadow(5px 5px 5px #222);
-  }
-  .home-page {
+}
+
+.home-page {
     margin-top: 90px;
-  }
-  .home-page-icons {
+}
+
+.home-page-icons {
     margin-bottom: 20px;
-  }
-  .disclaimer {
-    text-align: center;
 }

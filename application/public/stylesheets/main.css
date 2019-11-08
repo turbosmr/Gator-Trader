@@ -1,5 +1,5 @@
 body {
-    background-color:rgb(216, 215, 215);
+    background-color: rgb(216, 215, 215);
 }
 
 .main {
@@ -8,28 +8,31 @@ body {
 
 .navbar {
     background-color: rgb(74, 54, 78);
+    padding: 0rem 1rem;
 }
+
+.navbar-brand {
+    -webkit-filter: drop-shadow(5px 5px 5px #222);
+    filter: drop-shadow(5px 5px 5px #222);
+}
+
 .navbar a {
-    color:white;
+    color: white;
 }
 
 .footer {
-    background-color:rgb(74, 54, 78);
+    background-color: rgb(74, 54, 78);
     color: white;
     text-align: center;
     padding: 30px;
 }
+
 .footer a {
     color: white;
 }
 
 .footer-pushdown {
     min-height: calc(100% - 89px);
-}
-
-.color {
-    background-color: rgb(139, 125, 139);
-    color: white;
 }
 
 .header {
@@ -39,6 +42,15 @@ body {
     text-shadow: 2px 2px 2px rgb(139, 125, 139);
 }
 
+a {
+    color: black;
+}
+
+a:hover {
+    color: grey;
+    text-decoration: none;
+}
+
 #bars {
     color: black;
     font-size: 20px;
@@ -46,15 +58,15 @@ body {
     margin-left: 20px;
 }
 
-.center {
-    justify-content: center;
-}
-
 .dropdown-menu {
-    background-color:rgb(139, 125, 139);
+    background-color: #FFFFFF;
     border: 2px solid rgba(0, 0, 0, 0.2);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     padding: 8px 0;
+}
+
+.dropdown-menu a {
+    color: black;
 }
 
 .dropdown-item:hover {
@@ -66,17 +78,33 @@ body {
     right: 0;
 }
 
-.navbar-brand {
-    -webkit-filter: drop-shadow(5px 5px 5px #222);
-    filter: drop-shadow(5px 5px 5px #222);
-}
 .sell {
-    padding-left: 20px;
+    padding-right: 100px;
 }
+
 .sell-button {
-  color:black;
-    background-color: rgb(235, 233, 109);
+    background-color: #FDE21C;
+    border: 1px solid #FDE21C;
 }
+
 .sell-button a {
-    color:black;
-  }
+    color: black;
+}
+
+.sell-button:hover {
+    background: #fff;
+    color: #d3ae0a;
+}
+
+.disclaimer {
+    margin-top: 10px;
+    color: #FDE21C;
+    font-style: italic;
+}
+
+.product-search-form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

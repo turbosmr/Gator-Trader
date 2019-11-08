@@ -1,4 +1,5 @@
 /* Page Containers */
+
 .sell_container {
     max-width: 1000px;
     margin-left: auto;
@@ -6,7 +7,6 @@
     padding-left: 10px;
     padding-right: 10px;
 }
-
 
 .messages_container {
     max-width: 1000px;
@@ -25,21 +25,22 @@
 }
 
 /* ------------------------------------------------------------- */
+
 /* Account Boxes Styling */
-#account{
+
+#account {
     text-align: center;
     font-weight: 600;
     background-color: #fff;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
     margin: 5px 5px 5px 5px;
     padding: 3px;
-
 }
 
 #account:hover {
-    background:rgba(182, 165, 182, 0.767);
-    color:#FFFFFF;
-  }
+    background: rgba(182, 165, 182, 0.767);
+    color: #FFFFFF;
+}
 
 .account_container h1 {
     font-size: 40px;
@@ -49,6 +50,7 @@
 }
 
 /* ------------------------------------------------------------- */
+
 /* Selling Styling */
 
 .selling li {
@@ -58,29 +60,34 @@
     justify-content: space-between;
     margin-bottom: 15px;
 }
+
 .selling .table-header {
     background-color: #68b174;
     font-size: 15px;
     font-weight: bold;
     text-transform: uppercase;
 }
+
 .selling .table-row {
     background-color: #fff;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
 }
+
 .selling .col-1 {
     flex-basis: 20%;
     font-weight: bold;
 }
+
 .selling .table-row .col-2 {
     flex-basis: 20%;
     color: green;
     font-weight: bold;
-
 }
+
 .selling .col-3 {
     flex-basis: 20%;
 }
+
 .selling .col-4 {
     flex-basis: 20%;
     font-weight: bold;
@@ -98,8 +105,8 @@
 }
 
 /* --------------------------------------------------------------------------------------------------- */
-/* Messages Styling*/
 
+/* Messages Styling*/
 
 .messages li {
     border-radius: 5px;
@@ -108,33 +115,39 @@
     justify-content: space-between;
     margin-bottom: 15px;
 }
+
 .messages .table-header {
     background-color: #686fb1;
     font-size: 15px;
     font-weight: bold;
     text-transform: uppercase;
 }
+
 .messages .table-row {
     background-color: #fff;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
 }
+
 .messages .col-1 {
     flex-basis: 20%;
     font-weight: bold;
 }
+
 .messages .table-row .col-2 {
     flex-basis: 20%;
     font-weight: bold;
-
 }
+
 .messages .col-3 {
     flex-basis: 20%;
     text-decoration: underline;
 }
+
 .messages .col-4 {
     flex-basis: 20%;
     font-weight: bold;
 }
+
 .messages .col-5 {
     flex-basis: 20%;
     font-weight: bold;

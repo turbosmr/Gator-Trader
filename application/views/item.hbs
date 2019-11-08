@@ -4,11 +4,15 @@
     <!-- this is the actual left column -->
     <div class="items_page_column_left">
       <!-- this is the mini photos on the left side column-->
-      <div class = "items_page_mini_photos">
-        <img id="sm001" src="/images/items_photos/chair.jpg" alt="img1" class="img-thumbnail" data-img="/images/items_photos/chair.jpg">
-        <img id="sm001" src="/images/items_photos/pencil.jpg" alt="img2" class="img-thumbnail" data-img="/images/items_photos/pencil.jpg">
-        <img id="sm002" src="/images/items_photos/eraser.jpg" alt="img3" class="img-thumbnail" data-img="/images/items_photos/eraser.jpg">
-        <img id="sm003" src="/images/items_photos/table.jpg" alt="img4" class="img-thumbnail" data-img="/images/items_photos/table.jpg">
+      <div class="items_page_mini_photos">
+        <img id="sm001" src="/images/items_photos/chair.jpg" alt="img1" class="img-thumbnail"
+          data-img="/images/items_photos/chair.jpg">
+        <img id="sm001" src="/images/items_photos/pencil.jpg" alt="img2" class="img-thumbnail"
+          data-img="/images/items_photos/pencil.jpg">
+        <img id="sm002" src="/images/items_photos/eraser.jpg" alt="img3" class="img-thumbnail"
+          data-img="/images/items_photos/eraser.jpg">
+        <img id="sm003" src="/images/items_photos/table.jpg" alt="img4" class="img-thumbnail"
+          data-img="/images/items_photos/table.jpg">
 
         <!-- 
         <img src="/images/about/color_pencil.jpg" alt="" style="width:50%" onmouseover="myFunction(this);">
@@ -16,11 +20,12 @@
         <img src="/images/about/book.jpeg" alt="" style="width:50%"  onmouseover="myFunction(this);">
         <img src="/images/about/eraser.jpeg" alt="" style="width:50%"  onmouseover="myFunction(this);">
         -->
-      </div>             
-             
+      </div>
+
       <!-- this is the big photo on the left side next to the mini photos -->
-      <div class = "items_page_main_photo">
-        <img data-enlargable width="100" style="cursor: zoom-in"  src="/images/items_photos/chair.jpg" id="ProductImage" class="img-fluid" data-toggle="modal" data-target="#exampleModalCenter" alt="Responsive image">
+      <div class="items_page_main_photo">
+        <img data-enlargable width="100" style="cursor: zoom-in" src="/images/items_photos/chair.jpg" id="ProductImage"
+          class="img-fluid" data-toggle="modal" data-target="#exampleModalCenter" alt="Responsive image">
 
         <!-- 
         <img id="expandedImg" style="width:90%">
@@ -32,12 +37,12 @@
       </div>
 
       <!-- this is the description next to the main photo -->
-      <div class = "items_page_description">
+      <div class="items_page_description">
         <p>Title goes here</p>
         <br>
         <p>
           This is a description..... for.....about....anything......
-          for...and.....item....longer....to asdfasdf  make sure everything
+          for...and.....item....longer....to asdfasdf make sure everything
           allignes to the left......
         </p>
       </div>
@@ -48,12 +53,12 @@
   <div class="items_page_right_side">
     <div class="items_page_column_right">
       <!-- the price section of the item -->
-      <div class ="items_page_price">
+      <div class="items_page_price">
         <p>Price goes here</p>
       </div>
 
       <!-- contact seller section -->
-      <div class = "items_page_contact_seller">
+      <div class="items_page_contact_seller">
         <button type="button" class="btn btn-primary">Contact Seller</button>
       </div>
     </div>
@@ -84,25 +89,25 @@
 
 <!-- https://stackoverflow.com/a/49295093 for the hover photos -->
 <script>
-  $('img[id^=sm00]').hover(function() {
+  $('img[id^=sm00]').hover(function () {
     $('#ProductImage').attr('src', $(this).data('img'));
   });
 </script>
 
 <!-- https://stackoverflow.com/a/50430187 for when enlarging photos when click-->
 <script>
-  $('img[data-enlargable]').addClass('img-enlargable').click(function(){
+  $('img[data-enlargable]').addClass('img-enlargable').click(function () {
     var src = $(this).attr('src');
     $('<div>').css({
-        background: 'RGBA(0,0,0,.5) url('+src+') no-repeat center',
-        backgroundSize: 'contain',
-        width:'100%', height:'100%',
-        position:'fixed',
-        zIndex:'10000',
-        top:'0', left:'0',
-        cursor: 'zoom-out'
-    }).click(function(){
-        $(this).remove();
+      background: 'RGBA(0,0,0,.5) url(' + src + ') no-repeat center',
+      backgroundSize: 'contain',
+      width: '100%', height: '100%',
+      position: 'fixed',
+      zIndex: '10000',
+      top: '0', left: '0',
+      cursor: 'zoom-out'
+    }).click(function () {
+      $(this).remove();
     }).appendTo('body');
-});
+  });
 </script>

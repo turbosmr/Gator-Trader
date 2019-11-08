@@ -1,25 +1,42 @@
+/* Results Info Bar */
 
-/* General  */
-.results_column {
-  float: left;   
-  width: 100%;
-  padding: 10px;
+.results-info {
+    color: black;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
 }
 
-  @media screen and (max-width: 700px) {
+/* General  */
+
+.results_column {
+    float: left;
+    width: 100%;
+    margin-top: 15px;
+}
+
+@media screen and (max-width: 700px) {
     .results_column {
-      width: 100%;
-      display: block;
-      margin-bottom: 20px;
+        width: 100%;
+        display: block;
+        margin-bottom: 20px;
     }
     .sidebar {
         display: none;
         padding-top: 15px;
-      }
     }
-  
+}
+
+#search-results tr td {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
 /* ----------------------------------------------------------------- */
+
 /* Side Bar Styling */
+
 .sidebar {
     float: left;
     height: auto;
@@ -28,216 +45,249 @@
     text-align: center;
     border-radius: 5px;
     background-color: #ffffff;
-    border-right: lightgray 3px solid;
     box-shadow: 0 6px 6px rgba(0, 0, 0, 0.3);
-    margin-top: 32px;
+    margin-top: 15px;
     text-align: left;
-  }
+}
 
-  .sidebar .condition a {
+.sidebar .condition a {
     text-decoration: none;
     font-size: 18px;
     color: #030002;
     display: block;
-  }
-  
-  .sidebar .condition a:hover {
-    color: #d3ae0a;
-  }
+}
 
-  .sidebar .price_range a {
+.sidebar .condition a:hover {
+    color: #d3ae0a;
+}
+
+.sidebar .price_range a {
     text-decoration: none;
     font-size: 18px;
     color: #030002;
     display: block;
-  }
-  
-  .sidebar .price_range a:hover {
+}
+
+.sidebar .price_range a:hover {
     color: #d3ae0a;
-  }
-  
-  .sidebar .reviews .stars {
+}
+
+.sidebar .reviews .stars {
     display: inline-block;
     list-style: none;
     padding: 0;
-  }
-  .sidebar .reviews .stars > li {
-    display: inline-block;
-  }
-  .sidebar .reviews .stars > li .fa {
-    color: #f7c01b;
-  } 
-  .sidebar .reviews .stars > li .fa:hover {
-    color: #ffe601;
-  } 
-/* End of Sidebar Styling */
-/* ----------------------------------------------------------------------------- */
-  /* Product Card Styling */
+}
 
-  .card {
+.sidebar .reviews .stars>li {
+    display: inline-block;
+}
+
+.sidebar .reviews .stars>li .fa {
+    color: #f7c01b;
+}
+
+.sidebar .reviews .stars>li .fa:hover {
+    color: #ffe601;
+}
+
+/* End of Sidebar Styling */
+
+/* ----------------------------------------------------------------------------- */
+
+/* Product Card Styling */
+
+.card {
     box-shadow: 0 6px 6px rgba(0, 0, 0, 0.3);
     transition: 200ms;
     background: #fff;
     padding-top: 20px;
-    margin-top: 10px;
-  }
-  .card .card_title {
+    border: 0;
+}
+
+.card .card_title {
     display: flex;
     align-items: center;
     padding: 30px 40px;
-  }
-  .card .card_title h3 {
+}
+
+.card .card_title h3 {
     flex: 0 1 200px;
     text-align: right;
     margin: 0;
     color: #2c2c2c;
     font-weight: 600;
     font-size: 20px;
-  }
+}
 
-  .card .card_body {
+.card .card_body {
     padding: 0 40px;
     display: flex;
     flex-flow: row no-wrap;
     margin-bottom: 25px;
-  }
-  .card .card_body > .photo {
+}
+
+.card .card_body>.photo {
     box-sizing: border-box;
     padding: 0 15px;
     flex: 1 0 40%;
-  }
+}
 
-  .card .card_body > .info {
+.card .card_body>.info {
     box-sizing: border-box;
     padding: 0 15px;
     flex: 1 0 60%;
-  }
+}
 
-  .card .card_body .featured_text h1 {
+.card .card_body .featured_text h1 {
     margin: 0;
     padding: 0;
     font-weight: 800;
     line-height: 50px;
     color: #181e28;
-  }
-  .card .card_body .featured_text p {
+}
+
+.card .card_body .featured_text p {
     margin: 0;
     padding: 0;
-  }
-  .card .card_body .featured_text p.sub {
+}
+
+.card .card_body .featured_text p.sub {
     font-size: 20px;
     text-transform: uppercase;
     color: #686e77;
     font-weight: 300;
     margin-bottom: 5px;
-  }
-  .card .card_body .featured_text p.price {
+}
+
+.card .card_body .featured_text p.price {
     color: #252525;
     font-size: 26px;
-  }
-  .card .card_body .image {
+}
+
+.card .card_body .image {
     padding-top: 15px;
     width: 100%;
-  }
-  .card .card_body .image img {
+}
+
+.card .card_body .image img {
     display: block;
     max-width: 50%;
     height: auto;
-  }
-  .card .card_body .description {
+}
+
+.card .card_body .description {
     margin-bottom: 25px;
-  }
-  .card .card_body .description p {
+}
+
+.card .card_body .description p {
     margin: 0;
     font-weight: 300;
     line-height: 27px;
     font-size: 16px;
     color: #555;
-  }
+}
 
-  .card .card_footer {
+.card .card_footer {
     padding: 30px 40px;
     display: flex;
     flex-flow: row no-wrap;
     align-items: center;
     position: relative;
-  }
+}
 
-  .card .card_footer .reviews .stars {
+.card .card_footer .reviews .stars {
     display: inline-block;
     list-style: none;
     padding: 0;
-  }
-  .card .card_footer .reviews .stars > li {
+}
+
+.card .card_footer .reviews .stars>li {
     display: inline-block;
-  }
-  .card .card_footer .reviews .stars > li .fa {
+}
+
+.card .card_footer .reviews .stars>li .fa {
     color: #f7c01b;
-  } 
-  .card .card_footer .reviews > span {
+}
+
+.card .card_footer .reviews>span {
     font-size: 14px;
     margin-left: 5px;
     color: #555;
-  }
+}
 
-  .card .card_footer::before {
+.card .card_footer::before {
     content: "";
     position: absolute;
     display: block;
     top: 0;
     left: 40px;
-    width: calc(100% - 40px);
+    width: calc(100% - 80px);
     height: 3px;
-    background: #000000;
-    background: linear-gradient(to right, #000000 0%, #000000 20%, lightgray 20%, lightgray 100%);
-  }
-  .card .card_footer .seller {
+    background: lightgray;
+}
+
+.card .card_footer .seller {
     flex: 1 0 10px;
-  }
-  .card .card_footer .seller p {
+}
+
+.card .card_footer .seller p {
     margin: 0;
     text-transform: uppercase;
     font-weight: 600;
     font-size: 14px;
     color: #555;
-  }
-  .card .card_footer .seller h3 {
+}
+
+.card .card_footer .seller h3 {
     margin: 0;
     font-size: 20px;
     font-weight: 600;
     text-transform: uppercase;
     color: #000000;
-  }
+}
 
-  .card .card_footer .action2 button {
+.card .card_footer .action button {
     cursor: pointer;
     border: 1px solid rgb(139, 125, 139);
-    padding: 9px 15px;
-    border-radius: 5px;
-    color: #fff;
-    background: rgb(139, 125, 139);
-    font-size: 14px;
-    transition: 200ms;
-  }
-  .card .card_footer .action2 button:hover {
-    background: #fff;
-    color: rgb(139, 125, 139);
-  }
-
-  .card .card_footer .action button {
-    cursor: pointer;
-    border: 1px solid #d3ae0a;
     padding: 14px 30px;
     border-radius: 5px;
     color: #fff;
-    background: #d3ae0a;
+    background: rgb(139, 125, 139);
     font-size: 16px;
     transition: 200ms;
-  }
-  .card .card_footer .action button:hover {
-    background: #fff;
-    color: #d3ae0a;
-  }
-    /* End of Product Card Styling */
-  /* ----------------------------------------------------------------------------------- */
+}
 
+.card .card_footer .action button:hover {
+    background: #fff;
+    color: rgb(139, 125, 139);
+}
+
+/* End of Product Card Styling */
+
+.pagination-container {
+    margin-top: 20px;
+}
+
+.page-item, .page-item a {
+    color: black;
+}
+
+.page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: rgb(139, 125, 139);
+    border-color: rgb(139, 125, 139);
+    color: white;
+}
+
+.page-item.active:hover .page-link:hover {
+    color: rgb(139, 125, 139);
+    background-color: white;
+    border-color: rgb(139, 125, 139);
+}
+
+.page-item:hover .page-link:hover {
+    color: grey;
+}
+
+/* ----------------------------------------------------------------------------------- */

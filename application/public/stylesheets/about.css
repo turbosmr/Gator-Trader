@@ -28,15 +28,6 @@ h4.position {
     margin: 0px;
 }
 
-a {
-    color: black;
-}
-
-a:hover {
-    color: grey;
-    text-decoration: none;
-}
-
 img {
     transition: filter .2s ease-in-out;
     transition: opacity .2s ease-in-out;
