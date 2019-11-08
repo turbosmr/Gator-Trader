@@ -24,6 +24,7 @@ exports.post = (req, res, next) => {
 exports.get = (req, res, next) => {
     let keyword = req.query.k;
     let category = req.query.c;
+    let selectedCategoryName = "";
     let product = [];
 
     if (res.locals.totalPages > 0) {
@@ -42,6 +43,14 @@ exports.get = (req, res, next) => {
     res.locals.sql += " LIMIT ? OFFSET ?";
     res.locals.placeholders.push(res.locals.pageLimit, offset);
 
+    db.query('SELECT name FROM Category WHERE cid = ?', category, (error, result) => {
+        if (error) throw error;
+
+        if (result.length > 0) {
+            selectedCategoryName = result[0].name;
+        }
+    });
+
     db.query(res.locals.sql, res.locals.placeholders, (error, result) => {
         if (error) throw error;
 
@@ -50,7 +59,8 @@ exports.get = (req, res, next) => {
         }
 
         res.render('results', {
-            selectedCategory: category,
+            selectedCategoryVal: category,
+            selectedCategoryName: selectedCategoryName,
             keyword: keyword,
             product: product,
             pageLimit: res.locals.pageLimit,

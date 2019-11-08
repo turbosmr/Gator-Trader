@@ -11,7 +11,7 @@
 .home-image {
     height: 100%;
     object-fit: scale-down;
-    padding-bottom: 50px;
+    padding-bottom: 30px;
     padding-top: 5px;
     -webkit-filter: drop-shadow(5px 5px 5px #222);
     filter: drop-shadow(5px 5px 5px #222);

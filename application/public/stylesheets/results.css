@@ -6,6 +6,23 @@
     padding-top: 10px;
     padding-bottom: 10px;
     padding-left: 20px;
+    align-items: center!important;
+}
+
+.results-sort-button-container {
+    padding-right: 30px;
+}
+
+.results-sort-button {
+    background-color: transparent;
+    border: 1;
+    border-color: black;
+}
+
+.results-sort-button:hover {
+    background-color: #c5c5c5;
+    border: 1;
+    border-color: #FDE21C;
 }
 
 /* General  */
@@ -61,6 +78,10 @@
     color: #d3ae0a;
 }
 
+.sidebar .price_range {
+    margin-bottom: 10px;
+}
+
 .sidebar .price_range a {
     text-decoration: none;
     font-size: 18px;
@@ -69,7 +90,7 @@
 }
 
 .sidebar .price_range a:hover {
-    color: #d3ae0a;
+    color: #FDE21C;
 }
 
 .sidebar .reviews .stars {
@@ -101,6 +122,7 @@
     transition: 200ms;
     background: #fff;
     padding-top: 20px;
+    padding-bottom: 20px;
     border: 0;
 }
 
@@ -128,7 +150,6 @@
 
 .card .card_body>.photo {
     box-sizing: border-box;
-    padding: 0 15px;
     flex: 1 0 40%;
 }
 
@@ -188,7 +209,9 @@
 }
 
 .card .card_footer {
-    padding: 30px 40px;
+    padding-top: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
     display: flex;
     flex-flow: row no-wrap;
     align-items: center;

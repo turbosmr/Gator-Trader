@@ -1,18 +1,27 @@
-<div class="results-info">
-    {{{resultsInfo offset pageLimit totalProducts keyword}}}
+{{#if product}}
+<div class="d-flex results-info">
+    <div class="mr-auto">
+        {{{resultsInfo offset pageLimit totalProducts keyword}}}
+    </div>
+    <div class="results-sort-button-container">
+        <button type="button" class="btn results-sort-button dropdown-toggle" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Sort By:
+        </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Price: Low to High</a>
+            <a class="dropdown-item" href="#">Price: High to Low</a>
+            <a class="dropdown-item" href="#">Alphabetical: A-Z</a>
+        </div>
+    </div>
 </div>
+{{/if}}
 
 <div class="container-fluid">
     {{#if product}}
-    <!-- Results info -->
-
 
     <!-- Side Bar -->
     <div class="sidebar">
-        <h2>Sort By:</h2>
-        <p>Click the button to sort the products alphabetically:</p>
-        <button onclick="sortTable()">Sort</button>
-
         <!--
         <h3>Seller Rating</h3>
         <div class="reviews">
@@ -62,18 +71,17 @@
         </div>
         -->
         <div class="price_range">
-            <h2>Price</h2>
+            <h4><b>Price</b></h4>
             <a href="#" id="under25">Under $25</a>
             <a href="#" id="25to50">$25 to $50</a>
             <a href="#" id="50to200">$50 to $200</a>
             <a href="#" id="over200">$200 and Above</a>
         </div>
         <div class="condition">
-            <h2>Condition</h2>
+            <h4><b>Condition</b></h4>
             <a href="#" id="new">New</a>
             <a href="#" id="used">Used</a>
         </div>
-
     </div>
 
     <table id="search-results">
@@ -105,6 +113,7 @@
                                 <div class="seller">
                                     <p>Seller: </p>
                                     <h3>{{this.seller}}</h3>
+                                    <!--
                                     <div class="reviews">
                                         <ul class="stars">
                                             <li><i class="fa fa-star"></i></li>
@@ -115,6 +124,7 @@
                                         </ul>
                                         <span>(10 reviews)</span>
                                     </div>
+                                    -->
                                 </div>
                                 <div class="action">
                                     <button type="button">Contact Seller</button>
@@ -131,15 +141,26 @@
     {{#if (gt pageCount 1)}}
     <div class="pagination-container">
         <ul class="pagination justify-content-center">
-            {{{pagination pageCount currentPage selectedCategory keyword}}}
+            {{{pagination pageCount currentPage selectedCategoryVal keyword}}}
         </ul>
     </div>
     {{/if}}
 
     {{else}}
-    <div class="mx-auto mt-4" style="width: 50%;">
-        <h3>No results for {{keyword}}.</h3>
-        <h6>Try checking your spelling or use more general terms</h6>
+    {{#if keyword}}
+    <div class="card mx-auto mt-4" style="width: 50%;">
+        <div style="padding-left: 20px;">
+            <h3>No results for {{keyword}}.</h3>
+            <h6>Try checking your spelling or use more general terms</h6>
+        </div>
     </div>
+    {{else}}
+    <div class="card mx-auto mt-4" style="width: 50%;">
+        <div style="padding-left: 20px;">
+            <h3>No results for category, {{selectedCategoryName}}.</h3>
+            <h6>Please select another category</h6>
+        </div>
+    </div>
+    {{/if}}
     {{/if}}
 </div>
