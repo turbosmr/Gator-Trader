@@ -57,7 +57,7 @@
                     <select name="categories" class="btn category-button dropdown-toggle">
                         <option value="all">All Categories</option>
                         {{#each category}}
-                        <option value="{{this.cid}}" {{#if (eq this.cid @root.selectedCategory)}} selected {{/if}}>
+                        <option value="{{this.cid}}" {{#if (eq this.cid @root.selectedCategoryVal)}} selected {{/if}}>
                             {{this.name}}
                         </option>
                         {{/each}}
