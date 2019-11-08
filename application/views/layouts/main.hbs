@@ -46,12 +46,10 @@
         <div class="input-group-prepend">
           <select name="categories" class="btn category-button dropdown-toggle">
             <option value="all">All Categories</option>
-            {{#if category}}
             {{#each category}}
             <option value="{{this.cid}}" {{#if (eq this.cid @root.selectedCategory)}} selected {{/if}}>{{this.name}}
             </option>
             {{/each}}
-            {{/if}}
           </select>
         </div>
         <!-- Search input field -->
@@ -103,30 +101,11 @@
 
   <nav class="navbar navbar-expand-sm justify-content-center">
     <ul class="navbar-nav">
+      {{#each category}}
       <li class="nav-item">
-        <a class="nav-link" href="/sell">Books</a>
+        <a class="nav-link" href="/search?c={{this.cid}}">{{this.name}}</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/sell">Electronics</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/sell">Furniture</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/sell">Health</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/sell">Services</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/sell">Sports</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/sell">Supplies</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/sell">Other</a>
-      </li>
+      {{/each}}
     </ul>
   </nav>
 
