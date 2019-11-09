@@ -8,7 +8,7 @@
         <div>
             {{> message}}
         </div>
-        <form action="/users/register" method="POST">
+        <form action="/user/register" method="POST">
             <div class="form-group">
                 <input type="email" id="username" name="username" class="form-control" placeholder="Enter SFSU email"
                     value="{{username}}" maxlength="50" required />
@@ -37,7 +37,7 @@
             </div>
         </form>
         <h5 class="">
-            <p>Already have an account? <a href="/users/login">Sign in</a></p>
+            <p>Already have an account? <a href="/user/login">Sign in</a></p>
         </h5>
     </div>
 </div>

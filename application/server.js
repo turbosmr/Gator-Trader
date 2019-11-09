@@ -48,10 +48,9 @@ app.set('view engine', 'hbs');
 // Routes
 app.use('/', require('./routes/index'));
 app.use('/about', require('./routes/about'));
-app.use('/users', require('./routes/users'));
+app.use('/user', require('./routes/registeredUser'));
 app.use('/search', require('./routes/search'));
 app.use('/products', require('./routes/products'));
-app.use('/dashboard', require('./routes/registeredUserDashboard'));
 app.use('/admin', require('./routes/administrator'));
 
 // Set port number

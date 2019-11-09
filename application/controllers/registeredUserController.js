@@ -12,7 +12,7 @@ exports.login_get = (req, res, next) => {
 exports.login_post = (req, res, next) => {
     passport.authenticate('registered-user-login', {
         successRedirect: '/',
-        failureRedirect: '/users/login',
+        failureRedirect: '/user/login',
         failureFlash: true,
         badRequestMessage: 'Please fill in all fields'
     })(req, res, next);
@@ -78,7 +78,7 @@ exports.register_post = (req, res, next) => {
                         db.query("INSERT INTO RegisteredUser (sid, username, password) VALUES (?, ?, ?)", [sid, username, password], (error, result) => {
                             if (error) throw error;
                             req.flash('success', 'Successfully registered, please login.');
-                            res.redirect('/users/login');
+                            res.redirect('/user/login');
                         });
                     });
                 });
@@ -92,4 +92,27 @@ exports.logout = (req, res, next) => {
     req.logout();
     req.flash('success', 'You are logged out');
     res.redirect('/');
+}
+
+// Display registered user's dashboard page on GET
+exports.dashboard = (req, res, next) => {
+    // Render active listings
+    if (req.user) {
+        let product = [];
+        let sql = "SELECT SalesItem.name, SalesItem.status, Category.name AS category, SalesItem.price FROM SalesItem INNER JOIN Category ON SalesItem.category = Category.cid WHERE seller = ? AND status != 'unapproved'";
+        let placeholders = [req.user.sid];
+
+        db.query(sql, placeholders, (error, result) => {
+            if (error) throw error;
+
+            for (let i = 0; i < result.length; i++) {
+                product.push(result[i]);
+            }
+
+            res.render('registeredUserDashboard', { product: product });
+        });
+    }
+    else {
+        res.render('registeredUserDashboard');
+    }
 }

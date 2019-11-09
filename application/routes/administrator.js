@@ -2,18 +2,23 @@
 
 const express = require('express');
 const router = express.Router();
-const admin = require('../controllers/administratorController');
+const administratorController = require('../controllers/administratorController');
 
-// GET administrator's dashboard page
-router.get('/', admin.index);
+// GET request to redirect to registered user login page
+router.get('/', (req, res) => {
+    res.redirect('admin/login');
+});
 
 // GET administrator's login page
-router.get('/login', admin.login_get);
+router.get('/login', administratorController.login_get);
 
 // POST request for authenticating administrator login
-router.post('/login', admin.login_post);
+router.post('/login', administratorController.login_post);
 
 // GET request for administrator logout
-router.get('/logout', admin.logout);
+router.get('/logout', administratorController.logout);
+
+// GET administrator's dashboard page
+router.get('/dashboard', administratorController.dashboard);
 
 module.exports = router;
