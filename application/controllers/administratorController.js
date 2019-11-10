@@ -23,28 +23,27 @@ exports.logout = (req, res, next) => {
     res.redirect('/');
 }
 
-//Handle the list of approved and unapproved items for admin.
+// Display the list of approved and unapproved items for administrator's dashboard page on GET
 // Author @Osbaldo Martinez
-exports.items = (req, res, next) => {
-    let approved = [];
-    let unapproved = [];
-    let sql = "SELECT * FROM SalesItem"; 
-   db.query(sql, (err, result) =>{
+exports.dashboard = (req, res, next) => {
+    let approvedSalesItem = [];
+    let unapprovedSalesItem = [];
+    let sql = "SELECT * FROM SalesItem";
+
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+
         for (let i = 0; i < result.length; i++) {
-            if(result[i].status == "approved") {
-                approved.push(result[i])
+            if (result[i].status == "approved") {
+                approvedSalesItem.push(result[i])
             } else {
-                unapproved.push(result[i]);
+                unapprovedSalesItem.push(result[i]);
             }
         }
-        res.render('adminDashboard',{
-            approved_items: approved,
-            unapproved_items: unapproved
-        });
-   });
-}
 
-// Display administrator's dashboard page on GET
-exports.dashboard = (req, res, next) => {
-    res.render('adminDashboard');
+        res.render('adminDashboard', {
+            approvedSalesItem: approvedSalesItem,
+            unapprovedSalesItem: unapprovedSalesItem
+        });
+    });
 }

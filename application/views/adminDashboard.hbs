@@ -40,8 +40,8 @@
                         Review/Approve/Remove
                     </div>
                 </li>
-                {{#if unapproved_items}}
-                {{#each unapproved_items}}
+                {{#if unapprovedSalesItem}}
+                {{#each unapprovedSalesItem}}
                 <li class="table-row">
                     <div class="col col-1">{{this.seller}} </div>
                     <div class="col col-2">{{this.name}}</div>
@@ -54,7 +54,7 @@
                 {{/each}}
                 {{else}}
                 <li class="table-row">
-                    No active listings.
+                    No listings to review for approval.
                 </li>
                 {{/if}}
             </ul>
@@ -71,8 +71,8 @@
                         Review/Block/Remove
                     </div>
                 </li>
-                {{#if approved_items}}
-                {{#each approved_items}}
+                {{#if approvedSalesItem}}
+                {{#each approvedSalesItem}}
                 <li class="table-row">
                     <div class="col col-1">{{this.seller}}</div>
                     <div class="col col-2">{{this.name}}</div>
