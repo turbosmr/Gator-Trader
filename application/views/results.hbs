@@ -88,32 +88,30 @@
         {{#each product}}
         <tr>
             <td>
-                <div class="col-sm-12">
-                    <div class="results_column">
-                        <div class="card">
-                            <div class="card_body">
-                                <div class="photo">
-                                    <div class="image">
-                                        <img src="https://thumbs-prod.si-cdn.com/mHAHLSMfYOtZJs_PDnkqAgPFd6Q=/fit-in/1600x0/https://public-media.si-cdn.com/filer/00/a1/00a1f7bf-556f-48ef-a4da-10ea981a9337/mona.jpg"
-                                            alt="Picture">
-                                    </div>
+                <div class="results_column">
+                    <div class="results_card_container">
+                        <div class="card_body">
+                            <div class="image">
+                                <img class="results_image"
+                                    src="https://thumbs-prod.si-cdn.com/mHAHLSMfYOtZJs_PDnkqAgPFd6Q=/fit-in/1600x0/https://public-media.si-cdn.com/filer/00/a1/00a1f7bf-556f-48ef-a4da-10ea981a9337/mona.jpg"
+                                    alt="Picture">
+                            </div>
+                            <div class="info">
+                                <div class="featured_text">
+                                    <h1><a href="/products/{{this.pid}}">{{this.name}}</a></h1>
+                                    <p class="sub">Nice Painting</p>
+                                    <p class="price">${{this.price}}</p>
                                 </div>
-                                <div class="info">
-                                    <div class="featured_text">
-                                        <h1><a href="/products/{{this.pid}}">{{this.name}}</a></h1>
-                                        <p class="sub">Nice Painting</p>
-                                        <p class="price">${{this.price}}</p>
-                                    </div>
-                                    <div class="description">
-                                        <p>{{this.description}}</p>
-                                    </div>
+                                <div class="description">
+                                    <p>{{this.description}}</p>
                                 </div>
                             </div>
-                            <div class="card_footer">
-                                <div class="seller">
-                                    <p>Seller: </p>
-                                    <h3>{{this.seller}}</h3>
-                                    <!--
+                        </div>
+                        <div class="card_footer">
+                            <div class="seller">
+                                <p>Seller: </p>
+                                <h3>{{this.seller}}</h3>
+                                <!--
                                     <div class="reviews">
                                         <ul class="stars">
                                             <li><i class="fa fa-star"></i></li>
@@ -125,10 +123,9 @@
                                         <span>(10 reviews)</span>
                                     </div>
                                     -->
-                                </div>
-                                <div class="action">
-                                    <button type="button">Contact Seller</button>
-                                </div>
+                            </div>
+                            <div class="action">
+                                <button type="button">Contact Seller</button>
                             </div>
                         </div>
                     </div>
