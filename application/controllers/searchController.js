@@ -43,16 +43,16 @@ exports.get = (req, res, next) => {
     res.locals.sql += " LIMIT ? OFFSET ?";
     res.locals.placeholders.push(res.locals.pageLimit, offset);
 
-    db.query('SELECT name FROM Category WHERE cid = ?', category, (error, result) => {
-        if (error) throw error;
+    db.query('SELECT name FROM Category WHERE cid = ?', category, (err, result) => {
+        if (err) throw err;
 
         if (result.length > 0) {
             selectedCategoryName = result[0].name;
         }
     });
 
-    db.query(res.locals.sql, res.locals.placeholders, (error, result) => {
-        if (error) throw error;
+    db.query(res.locals.sql, res.locals.placeholders, (err, result) => {
+        if (err) throw err;
 
         for (let i = 0; i < result.length; i++) {
             product.push(result[i]);
@@ -78,8 +78,8 @@ exports.suggestions = (req, res, next) => {
     let keyword = req.query.key;
     let product = [];
 
-    db.query(sql, ['%' + keyword + '%', '%' + keyword + '%'], (error, result) => {
-        if (error) throw error;
+    db.query(sql, ['%' + keyword + '%', '%' + keyword + '%'], (err, result) => {
+        if (err) throw err;
 
         for (let i = 0; i < result.length; i++) {
             product.push(result[i].name);

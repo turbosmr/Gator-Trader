@@ -106,8 +106,8 @@ exports.search_results = (limit) => {
         res.locals.pageLimit = pageLimit;
         res.locals.currentPage = currentPage;
 
-        db.query(sql, placeholders, (error, result) => {
-            if (error) throw (error);
+        db.query(sql, placeholders, (err, result) => {
+            if (err) throw (err);
 
             res.locals.totalPages = Math.ceil(parseInt(result.length) / pageLimit);
             res.locals.totalProducts = result.length;
