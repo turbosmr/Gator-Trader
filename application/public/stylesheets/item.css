@@ -1,116 +1,149 @@
-* {
-    box-sizing: border-box;
+.itemContainer {
+  min-width: 1000px;
+  height: auto;
+  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.3);
+  background: #fff;
+  border-radius: 5px;
+  padding-top: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.itemContainer .card_title {
+  display: flex;
+  align-items: center;
+  padding: 30px 40px;
+}
+.itemContainer .card_title > h3 {
+  flex: 0 1 200px;
+  text-align: right;
+  margin: 0;
+  color: #2c2c2c;
+  font-weight: 600;
+  font-size: 20px;
 }
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
+.itemContainer .card_body {
+  padding: 0 40px;
+  display: flex;
+  flex-flow: row no-wrap;
+  margin-bottom: 25px;
 }
 
-/* Float four columns side by side */
-
-/* 
-  the overall items page of the left side 
-  that is why the width is 70%, so the box is 70% big 
-  while the right side is 30%
-*/
-
-.items_page_left_side {
-    float: left;
-    width: 70%;
-    padding: 0 10px;
+.itemContainer .card_body .featured_text{
+  position: relative;
 }
 
-/* the overall items page of the right side */
-
-.items_page_right_side {
-    float: left;
-    width: 30%;
-    padding: 0 10px;
+.itemContainer .card_body .featured_text > .contact_button {
+position: absolute;
+right: 5px;
+top: 5px;
+cursor: pointer;
+border: 1px solid #f0c14b;
+padding: 9px 15px;
+border-radius: 5px;
+color: #fff;
+background: #f0c14b;
+font-size: 14px;
+transition: 200ms;
+font-weight: bold;
 }
 
-/* this pads the whole overall page, the whole screen */
-
-.row {
-    margin: 0 -5px;
+.itemContainer .card_body .featured_text > .pickup_map {
+  display: table;
+  position: absolute;
+  right: 5px;
+  top: 60px;
+  width: 320px;
+  height: 320px;
+  background-color: grey;
 }
 
-/* this is the actual left side container column where all the photos go inside */
 
-.items_page_column_left {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    padding: 16px;
-    text-align: center;
-    background-color: white;
-    float: left;
-    margin: 10px;
+.itemContainer .card_body .featured_text > .contact_button:hover {
+  background: #fff;
+  color: #f0c14b;
 }
 
-/* this is the actual right side container column where all the $$$ and contact seller */
 
-.items_page_column_right {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    padding: 16px;
-    text-align: center;
-    background-color: white;
-    margin: 10px;
+.itemContainer .card_body > .info {
+  box-sizing: border-box;
+  padding: 0 15px;
+  flex: 1 0 60%;
 }
 
-/* 
-  this is the mini photos part that is inside the column left item page 
-*/
+.itemContainer .card_body .featured_text > h1 {
+  margin: 0;
+  padding: 0;
+  font-weight: 600;
+  line-height: 50px;
+  color: #181e28;
+}
+.itemContainer .card_body .featured_text > p {
+  margin: 0;
+  padding: 0;
+}
+.itemContainer .card_body .featured_text > p.seller{
+  font-size: 17px;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+.itemContainer .card_body .featured_text > p.price {
+  color: #811b1b;
+  font-size: 26px;
+  font-weight: 500;
+}
 
-.items_page_column_left .items_page_mini_photos {
-    width: 5%;
+.itemContainer .card_body .featured_text > ul.brief_description {
+padding: 15px;
+width: 50%;
+}
+
+ .items_page_mini_photos {
+    width: 15%;
+    min-width: 50px;
     text-align: left;
     float: left;
-}
+} 
 
-/* 
-  this is the main photo part that is inside the 
-  column left item page and next to the mini photos 
-*/
-
-.items_page_column_left .items_page_main_photo {
-    width: 20%;
+.items_page_main_photo {
     float: left;
+    min-width: 500px;
+}
+.itemContainer .card_body .items_page_main_photo > .img-fluid {
+  width: 50vw;
+  float: left;
 }
 
-/* 
-  this is the description part that is inside the 
-  column left item page and next to the main photo
-*/
 
-.items_page_column_left .items_page_description {
-    width: 65%;
-    float: left;
+.itemContainer .additional_Info {
+  padding-top: 20px;
+  padding-left: 40px;
+  padding-right: 40px;
+  display: flex;
+  flex-flow: row no-wrap;
+  align-items: center;
+  position: relative;
 }
 
-/* 
-  this is the actual description TEXT that is inside the 
-  description box and i align text to always stay on the left
-
-  https://www.w3schools.com/cssref/pr_font_font-size.asp
-*/
-
-.items_page_column_left .items_page_description p {
-    text-align: left;
-    font-size: 15px;
+.itemContainer .additional_Info::before {
+  content: "";
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 40px;
+  width: calc(100% - 80px);
+  height: 3px;
+  background: lightgray;
 }
 
-/* 
-  this is the where the item price is that is in the right column
-  and i did float:bottom so whatever we put after, it'll be under this
-*/
-
-.items_page_column_right .items_page_price {
-    text-align: left;
-    float: bottom;
+.itemContainer .additional_Info .description {
+  margin-bottom: 25px;
+  margin-top: 10px;
 }
 
-/* 
-  this is the where the contact seller is that is in the right column
-*/
-
-.items_page_column_right .items_page_contact_seller {
-    text-align: left;
+.itemContainer .additional_Info .description p {
+  margin: 0;
+  font-weight: 450;
+  line-height: 25px;
+  font-size: 16px;
 }
