@@ -3,11 +3,11 @@ const db = require('../config/db');
 let category = [];
 let sql = "SELECT * FROM Category";
 
-db.query(sql, (err, rows) => {
+db.query(sql, (err, result) => {
     if (err) throw err;
     
-    for (let i = 0; i < rows.length; i++) {
-        category.push(rows[i]);
+    for (let i = 0; i < result.length; i++) {
+        category.push(result[i]);
     }
 });
 

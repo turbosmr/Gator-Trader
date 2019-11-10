@@ -23,7 +23,8 @@ exports.logout = (req, res, next) => {
     res.redirect('/');
 }
 
-// Display the list of approved and unapproved items for administrator's dashboard page on GET
+// Display administrator's dashboard page on GET
+// Contains list of approved and unapproved sales item
 // Author @Osbaldo Martinez
 exports.dashboard = (req, res, next) => {
     let approvedSalesItem = [];
