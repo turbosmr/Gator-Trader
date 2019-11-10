@@ -105,7 +105,7 @@ exports.dashboard = (req, res, next) => {
     // Retrieve sales items listed by current registered user
     if (req.user) {
         let product = [];
-        let sql = "SELECT SalesItem.name, SalesItem.status, Category.name AS category, SalesItem.price FROM SalesItem INNER JOIN Category ON SalesItem.category = Category.cid WHERE seller = ? AND status != 'unapproved'";
+        let sql = "SELECT SalesItem.name, SalesItem.status, Category.name AS category, SalesItem.price FROM SalesItem INNER JOIN Category ON SalesItem.category = Category.cid WHERE seller = ?";
         let placeholders = [req.user.sid];
 
         db.query(sql, placeholders, (error, result) => {

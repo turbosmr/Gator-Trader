@@ -60,7 +60,11 @@
                 {{#each product}}
                 <li class="table-row">
                     <div class="col col-1">{{this.name}}</div>
+                    {{#if (eq this.status "approved")}}
                     <div class="col col-2">{{this.status}}</div>
+                    {{else}}
+                    <div class="col col-2" style="color: red;">{{this.status}}</div>
+                    {{/if}}
                     <div class="col col-3">{{this.category}}</div>
                     <div class="col col-4">${{this.price}}</div>
                     <div class="col col-5">
