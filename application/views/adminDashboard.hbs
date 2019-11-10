@@ -40,23 +40,23 @@
                         Review/Approve/Remove
                     </div>
                 </li>
-                {{!-- {{#if product}}
-                    {{#each product}} --}}
+                {{#if unapproved_items}}
+                {{#each unapproved_items}}
                 <li class="table-row">
-                    <div class="col col-1">Ronald </div>
-                    <div class="col col-2">Socks</div>
+                    <div class="col col-1">{{this.seller}} </div>
+                    <div class="col col-2">{{this.name}}</div>
                     <div class="col-5 col-3">
                         <button type="button" class="btn btn-info btn-sm">Review</button>
                         <button type="button" class="btn btn-success btn-sm">Approve</button>
                         <button type="button" class="btn btn-danger btn-sm">Remove</button>
                     </div>
                 </li>
-                {{!-- {{/each}}
-                    {{else}}
-                    <li class="table-row">
-                        No active listings.
-                    </li>
-                    {{/if}} --}}
+                {{/each}}
+                {{else}}
+                <li class="table-row">
+                    No active listings.
+                </li>
+                {{/if}}
             </ul>
         </div>
     </div>
@@ -71,23 +71,23 @@
                         Review/Block/Remove
                     </div>
                 </li>
-                {{!-- {{#if product}}
-                    {{#each product}} --}}
+                {{#if approved_items}}
+                {{#each approved_items}}
                 <li class="table-row">
-                    <div class="col col-1">Johnny </div>
-                    <div class="col col-2">Pen</div>
+                    <div class="col col-1">{{this.seller}}</div>
+                    <div class="col col-2">{{this.name}}</div>
                     <div class="col-5 col-3">
                         <button type="button" class="btn btn-info btn-sm">Review</button>
                         <button type="button" class="btn btn-warning btn-sm">Block</button>
                         <button type="button" class="btn btn-danger btn-sm">Remove</button>
                     </div>
                 </li>
-                {{!-- {{/each}}
-                    {{else}}
-                    <li class="table-row">
-                        No active listings.
-                    </li>
-                    {{/if}} --}}
+                {{/each}}
+                {{else}}
+                <li class="table-row">
+                    No active listings.
+                </li>
+                {{/if}}
             </ul>
         </div>
     </div>

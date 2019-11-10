@@ -21,4 +21,7 @@ router.get('/logout', administratorController.logout);
 // GET administrator's dashboard page
 router.get('/dashboard', administratorController.dashboard);
 
+//GET request to get approved and unapproved items
+router.get('/items', administratorController.items);
+
 module.exports = router;
