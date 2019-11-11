@@ -1,4 +1,4 @@
-/* This file handles "/users" route */
+/* This file handles "/user" route */
 
 const express = require('express');
 const router = express.Router();

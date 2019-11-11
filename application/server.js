@@ -52,6 +52,7 @@ app.use('/user', require('./routes/registeredUser'));
 app.use('/search', require('./routes/search'));
 app.use('/products', require('./routes/products'));
 app.use('/admin', require('./routes/administrator'));
+app.use('/sell', require('./routes/sell'));
 
 // Set port number
 app.set('port', 3000);

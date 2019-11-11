@@ -1,4 +1,4 @@
-/* This file handles "/dashboard" route */
+/* This file handles "/admin" route */
 
 const express = require('express');
 const router = express.Router();

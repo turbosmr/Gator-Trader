@@ -3,42 +3,40 @@
         <h1>Posting an Item for Sale</h1>
     </div>
 
-    <form>
+    <form action="/sell" method="POST">
         <div class="row">
             <div class="col-sm">
                 <label for="product">Product Name:</label>
-                <input class="form-control" id="produxt" type="text">
+                <input type="text" id="product" name="product" class="form-control">
             </div>
             <div class="col-sm">
                 <label for="price">Price ($):</label>
-                <input class="form-control" id="price" type="text">
+                <input type="text" id="price" name="price" class="form-control">
             </div>
         </div>
-    </form>
 
-    <form>
-        <p>Catagory</p>
-        <input type="checkbox" id="books" name="catagory">
+        <p>Category</p>
+        <input type="checkbox" id="books" name="category">
         <label for="defaultCheck">Books</label>
-        <input type="checkbox" id="supplies" name="catagory">
+        <input type="checkbox" id="supplies" name="category">
         <label for="defaultCheck">Supplies</label>
-        <input type="checkbox" id="service" name="catagory">
+        <input type="checkbox" id="service" name="category">
         <label for="defaultCheck">Service</label>
-        <input type="checkbox" id="electronics" name="catagory">
+        <input type="checkbox" id="electronics" name="category">
         <label for="defaultCheck">Electronics</label>
-        <input type="checkbox" id="furniture" name="catagory">
+        <input type="checkbox" id="furniture" name="category">
         <label for="defaultCheck">Furniture</label>
-        <input type="checkbox" id="other" name="catagory">
+        <input type="checkbox" id="other" name="category">
         <label for="defaultCheck">Other</label>
 
         <p>Condition</p>
-        <input type="checkbox" id="service" name="catagory">
+        <input type="checkbox" id="condition" name="condition">
         <label for="defaultCheck">Excellent</label>
-        <input type="checkbox" id="electronics" name="catagory">
+        <input type="checkbox" id="condition" name="condition">
         <label for="defaultCheck">Good</label>
-        <input type="checkbox" id="furniture" name="catagory">
+        <input type="checkbox" id="condition" name="condition">
         <label for="defaultCheck">Decent</label>
-        <input type="checkbox" id="other" name="catagory">
+        <input type="checkbox" id="condition" name="condition">
         <label for="defaultCheck">Bad</label>
 
 
@@ -56,19 +54,15 @@
             <label class="custom-file-label" for="customFile">Choose file</label>
         </div>
 
-    </form>
-</div>
-
-<div class="container">
-    <form action="action">
         <div class="form-group">
             <label for="description">Description:</label>
             <textarea class="form-control" rows="5" id="description" name="text"></textarea>
         </div>
-        <div class="row">
-            <div class="col-sm"><button type="cancel">Cancel</button></div>
-            <div="col-sm"><button type="submit">Submit</button>
+        <div class="row justify-content-end">
+            <button type="reset">Reset</button>
+            <button type="submit">Submit</button>
         </div>
+    </form>
 </div>
 
 <script>
@@ -78,5 +72,4 @@
     });
 </script>
 
-</form>
 </div>
