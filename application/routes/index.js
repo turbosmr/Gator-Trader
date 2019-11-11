@@ -13,8 +13,8 @@ router.get('/sell', (req, res) => {
     res.render('sell');
 });
 
-router.get('/item', (req, res) => {
-    res.render('item');
+router.get('/error', (req, res) => {
+    res.render('error');
 });
 
 module.exports = router;
