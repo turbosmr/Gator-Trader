@@ -1,135 +1,87 @@
+
 .itemContainer {
-  min-width: 1000px;
-  height: auto;
   box-shadow: 0 6px 6px rgba(0, 0, 0, 0.3);
   background: #fff;
   border-radius: 5px;
-  padding-top: 20px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-.itemContainer .card_title {
-  display: flex;
-  align-items: center;
-  padding: 30px 40px;
-}
-.itemContainer .card_title > h3 {
-  flex: 0 1 200px;
-  text-align: right;
-  margin: 0;
-  color: #2c2c2c;
-  font-weight: 600;
-  font-size: 20px;
-}
-
-.itemContainer .card_body {
-  padding: 0 40px;
-  display: flex;
-  flex-flow: row no-wrap;
-  margin-bottom: 25px;
-}
-
-.itemContainer .card_body .featured_text{
-  position: relative;
-}
-
-.itemContainer .card_body .featured_text > .contact_button {
-position: absolute;
-right: 5px;
-top: 5px;
-cursor: pointer;
-border: 1px solid #f0c14b;
-padding: 9px 15px;
-border-radius: 5px;
-color: #fff;
-background: #f0c14b;
-font-size: 14px;
-transition: 200ms;
-font-weight: bold;
-}
-
-.itemContainer .card_body .featured_text > .pickup_map {
-  display: table;
-  position: absolute;
-  right: 5px;
-  top: 60px;
-  width: 320px;
-  height: 320px;
-  background-color: grey;
+  padding: 20px;  
+  margin: 15px;
 }
 
 
-.itemContainer .card_body .featured_text > .contact_button:hover {
-  background: #fff;
-  color: #f0c14b;
+.items_page_mini_photos {
+  width: 15%;
+  float: left;
+} 
+
+.items_page_main_photo {
+  width: 85%;
+  float: left;
 }
 
 
-.itemContainer .card_body > .info {
-  box-sizing: border-box;
-  padding: 0 15px;
-  flex: 1 0 60%;
-}
-
-.itemContainer .card_body .featured_text > h1 {
+.itemContainer .featured_text h1 {
   margin: 0;
   padding: 0;
   font-weight: 600;
   line-height: 50px;
   color: #181e28;
 }
-.itemContainer .card_body .featured_text > p {
+.itemContainer .featured_text p {
   margin: 0;
   padding: 0;
 }
-.itemContainer .card_body .featured_text > p.seller{
+.itemContainer .featured_text p.seller{
   font-size: 17px;
   font-weight: 300;
   margin-bottom: 20px;
 }
-.itemContainer .card_body .featured_text > p.price {
+.itemContainer .featured_text p.price {
   color: #811b1b;
   font-size: 26px;
   font-weight: 500;
 }
 
-.itemContainer .card_body .featured_text > ul.brief_description {
+.itemContainer .featured_text ul.brief_description {
 padding: 15px;
-width: 50%;
 }
 
- .items_page_mini_photos {
-    width: 15%;
-    min-width: 50px;
-    text-align: left;
-    float: left;
-} 
-
-.items_page_main_photo {
-    float: left;
-    min-width: 500px;
-}
-.itemContainer .card_body .items_page_main_photo > .img-fluid {
-  width: 50vw;
-  float: left;
-}
-
+.itemContainer .contact_button {
+  cursor: pointer;
+  border: 1px solid #f0c14b;
+  padding: 9px 15px;
+  border-radius: 5px;
+  color: #fff;
+  background: #f0c14b;
+  font-size: 14px;
+  transition: 200ms;
+  font-weight: bold;
+  }
+  
+  .itemContainer .pickup_map {
+    top: 5%;
+    min-height: 300px;
+    border-radius: 5px;
+    background-color: grey;
+  }
+  
+  
+  .itemContainer .contact_button:hover {
+    background: #fff;
+    color: #f0c14b;
+  }
 
 .itemContainer .additional_Info {
   padding-top: 20px;
   padding-left: 40px;
   padding-right: 40px;
-  display: flex;
-  flex-flow: row no-wrap;
-  align-items: center;
-  position: relative;
 }
 
 .itemContainer .additional_Info::before {
   content: "";
   position: absolute;
   display: block;
-  top: 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
   left: 40px;
   width: calc(100% - 80px);
   height: 3px;
@@ -141,9 +93,13 @@ width: 50%;
   margin-top: 10px;
 }
 
+.itemContainer .additional_Info .description h4 {
+padding-top: 20px;
+} 
+
 .itemContainer .additional_Info .description p {
   margin: 0;
   font-weight: 450;
   line-height: 25px;
   font-size: 16px;
-}
+} 
