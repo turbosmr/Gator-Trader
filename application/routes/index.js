@@ -2,7 +2,6 @@
 
 const express = require('express');
 const router = express.Router();
-const categories = require('../controllers/categoriesController');
 
 // GET home page
 router.get('/', (req, res) => {

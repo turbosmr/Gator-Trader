@@ -5,13 +5,15 @@ const bcrypt = require('bcryptjs');
 
 // Handle showing registered user login page on GET
 exports.login_get = (req, res, next) => {
-    res.render('registeredUserLogin');
+    res.render('registeredUserLogin', {
+        redirectUrl: req.query.redirectUrl
+    });
 }
 
 // Handle registered user login authentication via Passport API on POST
 exports.login_post = (req, res, next) => {
     passport.authenticate('registered-user-login', {
-        successRedirect: '/',
+        successRedirect: req.query.redirectUrl,
         failureRedirect: '/user/login',
         failureFlash: true,
         badRequestMessage: 'Please fill in all fields'

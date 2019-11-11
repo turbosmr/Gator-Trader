@@ -41,7 +41,7 @@ app.use((req, res, next) => {
 app.engine('hbs', exphbs({
     defaultLayout: 'main',
     extname: '.hbs',
-    helpers: require('./config/handlebarsHelpers')
+    helpers: require('./helpers/handlebarsHelpers')
 }));
 app.set('view engine', 'hbs');
 

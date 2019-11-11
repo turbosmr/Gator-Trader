@@ -30,8 +30,9 @@ module.exports = () => {
     });
 
     passport.deserializeUser((id, done) => {
-        db.query("SELECT * FROM Administrator WHERE aid = ?", id, (error, result) => {
-            if (error) throw error;
+        db.query("SELECT * FROM Administrator WHERE aid = ?", id, (err, result) => {
+            if (err) throw err;
+
             return done(null, result[0]);
         });
     });

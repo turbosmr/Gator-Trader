@@ -30,8 +30,9 @@ module.exports = () => {
     });
 
     passport.deserializeUser((id, done) => {
-        db.query("SELECT * FROM RegisteredUser WHERE sid = ?", id, (error, result) => {
-            if (error) throw error;
+        db.query("SELECT * FROM RegisteredUser WHERE sid = ?", id, (err, result) => {
+            if (err) throw err;
+
             return done(null, result[0]);
         });
     });

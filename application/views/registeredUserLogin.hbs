@@ -8,7 +8,7 @@
         <div>
             {{> message}}
         </div>
-        <form action="/user/login" method="POST">
+        <form action="/user/login?redirectUrl={{redirectUrl}}" method="POST">
             <div class="form-group">
                 <input type="username" id="username" name="username" class="form-control" placeholder="Enter SFSU email"
                     maxlength="50" required />
