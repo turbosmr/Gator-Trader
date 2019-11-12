@@ -15,6 +15,7 @@
 
 .items_page_main_photo {
   width: 85%;
+  max-height: 300px;  
   float: left;
 }
 
@@ -74,6 +75,7 @@ padding: 15px;
   padding-top: 20px;
   padding-left: 40px;
   padding-right: 40px;
+  margin-top: 50px;
 }
 
 .itemContainer .additional_Info::before {
