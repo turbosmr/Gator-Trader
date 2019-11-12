@@ -1,6 +1,6 @@
 {{!-- Container for account manipulations --}}
 <div class="account_container">
-    <h1>Welcome to your Dashboard, Mr. Admin!</h1>
+    <h1>Welcome to your Dashboard, {{loggedIn.username}}!</h1>
     {{!-- <div class="row">
         <div class="col">
             <div id="account">
@@ -31,24 +31,23 @@
 <div class="tab-content">
     <div class="tab-pane fade show active" id="unapproved_tab">
         <div class="unapproved_container">
-            <h2>Items to Approve </h2>
+            <h2>Items to Approve</h2>
             <ul class="unapproved">
                 <li class="table-header">
-                    <div class="col col-1">Seller</div>
-                    <div class="col col-2">Product</div>
-                    <div class="col-5 col-3">
-                        Review/Approve/Remove
+                    <div class="col col-7">Name</div>
+                    <div class="col col-2">Seller</div>
+                    <div class="col col-3">
+                        Actions
                     </div>
                 </li>
                 {{#if unapprovedSalesItem}}
                 {{#each unapprovedSalesItem}}
                 <li class="table-row">
-                    <div class="col col-1">{{this.seller}} </div>
-                    <div class="col col-2">{{this.name}}</div>
-                    <div class="col-5 col-3">
-                        <button type="button" class="btn btn-info btn-sm">Review</button>
-                        <button type="button" class="btn btn-success btn-sm">Approve</button>
-                        <button type="button" class="btn btn-danger btn-sm">Remove</button>
+                    <div class="col col-7"><a href="/products/{{this.pid}}">{{this.name}}</a></div>
+                    <div class="col col-2">{{this.seller}} </div>
+                    <div class="col col-3">
+                        <a href="#"><button type="button" class="btn btn-success btn-sm">Approve</button></a>
+                        <a href="#"><button type="button" class="btn btn-danger btn-sm">Remove</button></a>
                     </div>
                 </li>
                 {{/each}}
@@ -65,21 +64,20 @@
             <h2>Approved Items </h2>
             <ul class="approved">
                 <li class="table-header">
-                    <div class="col col-1">Seller</div>
-                    <div class="col col-2">Product</div>
-                    <div class="col-5 col-3">
-                        Review/Block/Remove
+                    <div class="col col-7">Name</div>
+                    <div class="col col-2">Seller</div>
+                    <div class="col col-3">
+                        Actions
                     </div>
                 </li>
                 {{#if approvedSalesItem}}
                 {{#each approvedSalesItem}}
                 <li class="table-row">
-                    <div class="col col-1">{{this.seller}}</div>
-                    <div class="col col-2">{{this.name}}</div>
-                    <div class="col-5 col-3">
-                        <button type="button" class="btn btn-info btn-sm">Review</button>
-                        <button type="button" class="btn btn-warning btn-sm">Block</button>
-                        <button type="button" class="btn btn-danger btn-sm">Remove</button>
+                    <div class="col col-7"><a href="/products/{{this.pid}}">{{this.name}}</a></div>
+                    <div class="col col-2">{{this.seller}} </div>
+                    <div class="col col-3">
+                        <a href="#"><button type="button" class="btn btn-warning btn-sm">Block</button></a>
+                        <a href="#"><button type="button" class="btn btn-danger btn-sm">Remove</button></a>
                     </div>
                 </li>
                 {{/each}}

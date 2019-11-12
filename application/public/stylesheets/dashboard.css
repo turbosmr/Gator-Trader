@@ -81,6 +81,10 @@
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
 }
 
+.selling .col-6 {
+    font-weight: bold;
+}
+
 .selling .col-1 {
     flex-basis: 20%;
     font-weight: bold;
@@ -94,16 +98,6 @@
 
 .selling .col-3 {
     flex-basis: 20%;
-}
-
-.selling .col-4 {
-    flex-basis: 20%;
-    font-weight: bold;
-}
-
-.selling .col-5 {
-    flex-basis: 20%;
-    font-weight: bold;
 }
 
 .sell_container h2 {

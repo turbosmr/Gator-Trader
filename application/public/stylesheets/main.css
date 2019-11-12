@@ -79,7 +79,10 @@ a:hover {
 }
 
 .sell {
-    padding-right: 125px;
+    position: absolute;
+    top: 50%;
+    left: 76%;
+    transform: translate(-50%, -50%);
 }
 
 .sell-button {

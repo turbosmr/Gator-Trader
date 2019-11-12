@@ -1,0 +1,149 @@
+{{#if data.isSeller}}
+<div class="itemContainer">
+    {{#if (eq data.salesItem.status "approved")}}
+    <b>Your item is for sale</b>
+    {{else}}
+    <b>Please revise your item</b>
+    {{/if}}
+</div>
+
+<div class="itemContainer">
+    <button type="button" class="btn btn-secondary btn-sm">Revise</button>
+    <button type="button" class="btn btn-danger btn-sm">End Listing</button>
+</div>
+{{/if}}
+
+{{#if data.isAdmin}}
+<div class="itemContainer">
+    {{#if (eq data.salesItem.status "unapproved")}}
+    <a href="#"><button type="button" class="btn btn-success btn-sm">Approve</button></a>
+    <a href="#"><button type="button" class="btn btn-danger btn-sm">Remove</button></a>
+    {{else}}
+    <a href="#"><button type="button" class="btn btn-warning btn-sm">Block</button></a>
+    <a href="#"><button type="button" class="btn btn-danger btn-sm">Remove</button></a>
+    {{/if}}
+</div>
+{{/if}}
+
+<div class="itemContainer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-5">
+                <div class="col">
+                    <div class="items_page_mini_photos">
+                        <img id="sm001" src="/images/items_photos/chair.jpg" alt="img1" class="img-thumbnail"
+                            data-img="/images/items_photos/chair.jpg">
+                        <img id="sm001" src="/images/items_photos/pencil.jpg" alt="img2" class="img-thumbnail"
+                            data-img="/images/items_photos/pencil.jpg">
+                        <img id="sm002" src="/images/items_photos/eraser.jpg" alt="img3" class="img-thumbnail"
+                            data-img="/images/items_photos/eraser.jpg">
+                        <img id="sm003" src="/images/items_photos/table.jpg" alt="img4" class="img-thumbnail"
+                            data-img="/images/items_photos/table.jpg">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="items_page_main_photo">
+                        <img data-enlargable style="cursor: zoom-in" src="/images/items_photos/chair.jpg"
+                            id="ProductImage" class="img-fluid" data-toggle="modal" data-target="#exampleModalCenter"
+                            alt="Responsive image">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="featured_text">
+                    <h1>{{data.salesItem.name}}</h1>
+                    <p class="seller"><a href="#">by {{data.salesItem.seller}}</a></p>
+                    <p class="price">Price: ${{data.salesItem.price}}</p>
+                    <ul class="brief_description">
+                        <h4>Features: </h4>
+                        <li>Condition: {{data.salesItem.condition}}</li>
+                        <li>Quantity: {{data.salesItem.quantity}} available</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <button class="contact_button" type="button">Contact Seller</button>
+                <div class="pickup_map" id="map"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="additional_Info">
+                    <div class="description">
+                        <h4>Description </h4>
+                        <p>{{data.salesItem.description}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    var locations = [
+        ['Loc 1', 37.721199, -122.476845, 4],
+        ['Loc 2', 37.721453, -122.479517, 5],
+        ['Loc 3', 37.723354, -122.477949, 3],
+
+    ];
+    // Initialize and add the map
+    function initMap() {
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 16,
+            center: new google.maps.LatLng(37.722492, -122.477718),
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+
+        var infowindow = new google.maps.InfoWindow();
+
+        var marker, i;
+
+        for (i = 0; i < locations.length; i++) {
+            marker = new google.maps.Marker({
+                position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                map: map
+            });
+
+            google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                return function () {
+                    infowindow.setContent(locations[i][0]);
+                    infowindow.open(map, marker);
+                }
+            })(marker, i));
+        }
+    }
+
+</script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFmPnJOHPJQCfqR09N0nUphOsLAEOVC0k&callback=initMap">
+    </script>
+
+
+
+<!-- https://stackoverflow.com/a/49295093 for the hover photos -->
+<script>
+    $('img[id^=sm00]').hover(function () {
+        $('#ProductImage').attr('src', $(this).data('img'));
+    });
+</script>
+
+<!-- https://stackoverflow.com/a/50430187 for when enlarging photos when click-->
+<script>
+    $('img[data-enlargable]').addClass('img-enlargable').click(function () {
+        var src = $(this).attr('src');
+        $('<div>').css({
+            background: 'RGBA(0,0,0,.5) url(' + src + ') no-repeat center',
+            backgroundSize: 'contain',
+            width: '100%', height: '100%',
+            position: 'fixed',
+            zIndex: '10000',
+            top: '0', left: '0',
+            cursor: 'zoom-out'
+        }).click(function () {
+            $(this).remove();
+        }).appendTo('body');
+    });
+</script>

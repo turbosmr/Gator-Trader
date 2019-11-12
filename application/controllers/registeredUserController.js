@@ -5,15 +5,27 @@ const bcrypt = require('bcryptjs');
 
 // Handle showing registered user login page on GET
 exports.login_get = (req, res, next) => {
+    let redirectUrl = req.query.redirectUrl;
+
+    /*if (!redirectUrl) {
+        redirectUrl = req.get('Referrer');
+    }*/
+
     res.render('registeredUserLogin', {
-        redirectUrl: req.query.redirectUrl
+        redirectUrl: redirectUrl
     });
 }
 
 // Handle registered user login authentication via Passport API on POST
 exports.login_post = (req, res, next) => {
+    let redirectUrl = req.query.redirectUrl;
+
+    if (redirectUrl == '') {
+        redirectUrl = '/user/dashboard';
+    }
+
     passport.authenticate('registered-user-login', {
-        successRedirect: req.query.redirectUrl,
+        successRedirect: redirectUrl,
         failureRedirect: '/user/login',
         failureFlash: true,
         badRequestMessage: 'Please fill in all fields'
@@ -79,11 +91,11 @@ exports.register_post = (req, res, next) => {
                         if (err) throw err;
 
                         password = hash;
-                        
+
                         // Insert new user into database
                         db.query("INSERT INTO RegisteredUser (sid, username, password) VALUES (?, ?, ?)", [sid, username, password], (error, result) => {
                             if (err) throw err;
-                            
+
                             req.flash('success', 'Successfully registered, please login.');
                             res.redirect('/user/login');
                         });
@@ -105,22 +117,17 @@ exports.logout = (req, res, next) => {
 // Contains list of sales item listed by current registered user
 exports.dashboard = (req, res, next) => {
     // Retrieve sales items listed by current registered user
-    if (req.user) {
-        let product = [];
-        let sql = "SELECT SalesItem.name, SalesItem.status, Category.name AS category, SalesItem.price FROM SalesItem INNER JOIN Category ON SalesItem.category = Category.cid WHERE seller = ?";
-        let placeholders = [req.user.sid];
+    let product = [];
+    let sql = "SELECT SalesItem.pid, SalesItem.name, SalesItem.status, Category.name AS category, SalesItem.price FROM SalesItem INNER JOIN Category ON SalesItem.category = Category.cid WHERE seller = ?";
+    let placeholders = [req.user.sid];
 
-        db.query(sql, placeholders, (error, result) => {
-            if (error) throw error;
+    db.query(sql, placeholders, (error, result) => {
+        if (error) throw error;
 
-            for (let i = 0; i < result.length; i++) {
-                product.push(result[i]);
-            }
+        for (let i = 0; i < result.length; i++) {
+            product.push(result[i]);
+        }
 
-            res.render('registeredUserDashboard', { product: product });
-        });
-    }
-    else {
-        res.render('registeredUserDashboard');
-    }
+        res.render('registeredUserDashboard', { product: product });
+    });
 }

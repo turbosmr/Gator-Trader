@@ -11,7 +11,7 @@ exports.search_results = (limit) => {
         let priceFilter = req.query.pf;
         let conditionFilter = req.query.cond;
         let min, max = 0;
-        let sql = "SELECT * FROM SalesItem";
+        let sql = "SELECT * FROM SalesItem WHERE status = 'approved'";
         let placeholders = [];
 
         if (priceFilter == "under25") {
@@ -38,7 +38,7 @@ exports.search_results = (limit) => {
         if (keyword) {
             // Check if category criteria exist
             if (category && category != 'all') {
-                sql += " WHERE (name LIKE ? OR description LIKE ?) AND category = ?";
+                sql += " AND (name LIKE ? OR description LIKE ?) AND category = ?";
                 placeholders = ['%' + keyword + '%', '%' + keyword + '%', category];
                 // Check if price filter exist
                 if (priceFilter) {
@@ -53,7 +53,7 @@ exports.search_results = (limit) => {
             }
             // Keyword criteria exist, but category criteria does not
             else {
-                sql += " WHERE (name LIKE ? OR description LIKE ?)";
+                sql += " AND (name LIKE ? OR description LIKE ?)";
                 placeholders = ['%' + keyword + '%', '%' + keyword + '%'];
                 // Check if price filter exist
                 if (priceFilter) {
@@ -69,7 +69,7 @@ exports.search_results = (limit) => {
         }
         // Keyword criteria does not exist, check if category criteria exist
         else if (category && category != 'all') {
-            sql += " WHERE category = ?";
+            sql += " AND category = ?";
             placeholders = [category];
             // Check if price filter exist
             if (priceFilter) {
@@ -86,7 +86,7 @@ exports.search_results = (limit) => {
         else {
             // Check if price filter exists
             if (priceFilter) {
-                sql += " WHERE (price > ?) AND (price < ?)";
+                sql += " AND (price > ?) AND (price < ?)";
                 placeholders.push(min, max);
                 // Check if condition filter exists
                 if (conditionFilter) {
@@ -96,7 +96,7 @@ exports.search_results = (limit) => {
             }
             // Check if condition filter exists
             else if (conditionFilter) {
-                sql += " WHERE `condition` = ?";
+                sql += " AND `condition` = ?";
                 placeholders.push(conditionFilter);
             }
         }

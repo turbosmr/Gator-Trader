@@ -2,11 +2,10 @@
 
 const express = require('express');
 const router = express.Router();
+const salesItemController = require('../controllers/salesItemController');
 
-// GET product page
-router.get('/:pid', (req, res) => {
-    res.render('item');
-});
+// GET sales item page
+router.get('/:pid', salesItemController.salesItem_get);
 
 // GET request to update sales item
 

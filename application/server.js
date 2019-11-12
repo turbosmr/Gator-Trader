@@ -30,10 +30,11 @@ app.use(flash());
 
 // Global variables
 app.use((req, res, next) => {
+    app.locals.category = categories.retrieve;
     app.locals.loggedIn = req.user;
     app.locals.success = req.flash('success');
     app.locals.error = req.flash('error');
-    app.locals.category = categories.retrieve;
+    app.locals.redirectUrl
     next();
 });
 
@@ -50,7 +51,7 @@ app.use('/', require('./routes/index'));
 app.use('/about', require('./routes/about'));
 app.use('/user', require('./routes/registeredUser'));
 app.use('/search', require('./routes/search'));
-app.use('/products', require('./routes/products'));
+app.use('/products', require('./routes/salesItem'));
 app.use('/admin', require('./routes/administrator'));
 app.use('/sell', require('./routes/sell'));
 

@@ -1,6 +1,6 @@
 {{!-- Container for account manipulations --}}
 <div class="account_container">
-    <h1>Welcome to your Dashboard, Mr. User!</h1>
+    <h1>Welcome to your Dashboard, {{loggedIn.username}}!</h1>
     {{!-- <div class="row">
         <div class="col">
             <div id="account">
@@ -48,28 +48,26 @@
             <h2>Items You are Selling </h2>
             <ul class="selling">
                 <li class="table-header">
-                    <div class="col col-1">Name</div>
+                    <div class="col col-6">Name</div>
+                    <div class="col col-1">Price</div>
                     <div class="col col-2">Status</div>
-                    <div class="col col-3">Category</div>
-                    <div class="col col-4">Price</div>
-                    <div class="col col-5">
-                        Edit/Remove
+                    <div class="col col-4">
+                        Actions
                     </div>
                 </li>
                 {{#if product}}
                 {{#each product}}
                 <li class="table-row">
-                    <div class="col col-1">{{this.name}}</div>
+                    <div class="col col-6"><a href="/products/{{this.pid}}">{{this.name}}</a></div>
+                    <div class="col col-1">${{this.price}}</div>
                     {{#if (eq this.status "approved")}}
                     <div class="col col-2">{{this.status}}</div>
                     {{else}}
                     <div class="col col-2" style="color: red;">{{this.status}}</div>
                     {{/if}}
-                    <div class="col col-3">{{this.category}}</div>
-                    <div class="col col-4">${{this.price}}</div>
-                    <div class="col col-5">
-                        <button type="button" class="btn btn-secondary btn-sm">Edit</button>
-                        <button type="button" class="btn btn-danger btn-sm">Remove</button>
+                    <div class="col col-4">
+                        <button type="button" class="btn btn-secondary btn-sm">Revise</button>
+                        <button type="button" class="btn btn-danger btn-sm">End Listing</button>
                     </div>
                 </li>
                 {{/each}}

@@ -89,7 +89,7 @@
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
 }
 
-.unapproved .col-1 {
+.unapproved .col-7 {
     font-weight: bold;
 }
 
@@ -133,7 +133,7 @@
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
 }
 
-.approved .col-1 {
+.approved .col-7 {
     font-weight: bold;
 }
 
@@ -142,7 +142,7 @@
 }
 
 .approved .col-3 {
-    float: left;
+    float: right;
 }
 
 .approved_container h2 {
