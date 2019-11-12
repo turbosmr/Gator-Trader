@@ -92,8 +92,20 @@
                             <div class="col">
                                 <div class="card_footer">
                                     <div class="contact_seller">
-                                        <button type="button">Contact Seller</button>
+                                        <button class="button" onclick="openForm()">Contact Seller</button>
                                     </div>
+                                    <!-- pop up messages -->
+                                    <div class="chat-popup" id="myForm">
+                                        <form action="/action_page.php" class="form-container">
+                                            <h4>item decription goes here</h4>
+                                            <h5>Seller's name goes here</h5>
+                                            <textarea placeholder="Type message.." name="msg" required></textarea>
+                                            <button type="submit" class="btn">Send</button>
+                                            <button type="button" class="btn cancel"
+                                                onclick="closeForm()">Close</button>
+                                        </form>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -137,4 +149,14 @@
             e.preventDefault();
         });
     });
+</script>
+
+<script>
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
+    }
+
+    function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+    }
 </script>
