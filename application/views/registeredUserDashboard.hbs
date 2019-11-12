@@ -58,7 +58,7 @@
                 {{#if product}}
                 {{#each product}}
                 <li class="table-row">
-                    <div class="col col-6"><a href="/products/{{this.pid}}">{{this.name}}</a></div>
+                    <div class="col col-6"><a href="/products/{{this.pid}}">{{this.name}}</a> </div>
                     <div class="col col-1">${{this.price}}</div>
                     {{#if (eq this.status "approved")}}
                     <div class="col col-2">{{this.status}}</div>
@@ -85,51 +85,51 @@
             <h2>Your Messages</h2>
             <ul class="messages">
                 <li class="table-header">
-                    <div class="col col-1">Item</div>
-                    <div class="col col-2">Message From</div>
-                    <div class="col col-3">Subject</div>
-                    <div class="col col-4">Received</div>
-                    <div class="col col-5">Chat</div>
+                    <div class="col-lg-3">Item</div>
+                    <div class="col-lg-2">From</div>
+                    <div class="col-lg-3 message_last">Last Message</div>
+                    <div class="col-lg-2 message_date">Received</div>
+                    <div class="col-lg-2 message_btn">Chat</div>
                 </li>
                 <li class="table-row">
-                    <div class="col col-1">Chair</div>
-                    <div class="col col-2">Jimmy13</div>
-                    <div class="col col-3">Pickup</div>
-                    <div class="col col-4">24 Oct, 2019</div>
-                    <div class="col col-5">
-                        <button type="button" class="btn btn-primary btn-sm"> Open Chat</button>
+                    <div class="col-lg-3 message_item">Chair1111111111111111111111111111111111 </div>
+                    <div class="col-lg-2 message_from">Jimmy13</div>
+                    <div class="col-lg-3 message_last">Pickup222222222222</div>
+                    <div class="col-lg-2 message_date">24 Oct, 2019</div>
+                    <div class="col-lg-2 message_btn">
+                        <button type="button" class="btn btn-primary btn-sm">Open</button>
 
                     </div>
 
                 </li>
                 <li class="table-row">
-                    <div class="col col-1">Chair</div>
-                    <div class="col col-2">Alex007</div>
-                    <div class="col col-3">Where?</div>
-                    <div class="col col-4">20 Oct, 2019</div>
-                    <div class="col col-5">
-                        <button type="button" class="btn btn-primary btn-sm"> Open Chat</button>
+                    <div class="col-lg-3 message_item">Chair</div>
+                    <div class="col-lg-2 message_from">Alex007</div>
+                    <div class="col-lg-3 message_last">Where?</div>
+                    <div class="col-lg-2 message_date">20 Oct, 2019</div>
+                    <div class="col-lg-2 message_btn">
+                        <button type="button" class="btn btn-primary btn-sm">Open</button>
 
                     </div>
 
                 </li>
                 <li class="table-row">
-                    <div class="col col-1">Book</div>
-                    <div class="col col-2">Mario777</div>
-                    <div class="col col-3">Discount</div>
-                    <div class="col col-4">27 Oct, 2019</div>
-                    <div class="col col-5">
-                        <button type="button" class="btn btn-primary btn-sm"> Open Chat</button>
+                    <div class="col-lg-3 message_item">Book</div>
+                    <div class="col-lg-2 message_from">Mario777</div>
+                    <div class="col-lg-3 message_last">Discount</div>
+                    <div class="col-lg-2 message_date">27 Oct, 2019</div>
+                    <div class="col-lg-2 message_btn">
+                        <button type="button" class="btn btn-primary btn-sm">Open</button>
 
                     </div>
                 </li>
                 <li class="table-row">
-                    <div class="col col-1">Computer</div>
-                    <div class="col col-2">Kate B</div>
-                    <div class="col col-3">My offer!!!</div>
-                    <div class="col col-4">17 Oct, 2019</div>
-                    <div class="col col-5">
-                        <button type="button" class="btn btn-primary btn-sm">Open Chat</button>
+                    <div class="col-lg-3 message_item">Computer</div>
+                    <div class="col-lg-2 message_from">Kate B</div>
+                    <div class="col-lg-3 message_last">My offer!!!</div>
+                    <div class="col-lg-2 message_date">17 Oct, 2019</div>
+                    <div class="col-lg-2 message_btn">
+                        <button type="button" class="btn btn-primary btn-sm">Open</button>
                     </div>
                 </li>
             </ul>
