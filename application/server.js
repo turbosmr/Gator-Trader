@@ -54,6 +54,12 @@ app.use('/products', require('./routes/products'));
 app.use('/admin', require('./routes/administrator'));
 app.use('/sell', require('./routes/sell'));
 
+// Error-handling middleware
+app.use(function(req, res, next) {
+    res.status(404);
+    res.render('error');    
+});
+
 // Set port number
 app.set('port', 3000);
 

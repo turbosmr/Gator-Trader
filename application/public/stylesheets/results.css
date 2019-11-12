@@ -45,6 +45,11 @@
     }
 }
 
+#search-results {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
 #search-results tr td {
     padding: 0 !important;
     margin: 0 !important;
