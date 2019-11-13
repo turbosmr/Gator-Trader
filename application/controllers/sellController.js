@@ -7,6 +7,6 @@ exports.sell_get = (req, res, next) => {
 
 // Handle submitting sales item for sell on POST
 exports.sell_post = (req, res, next) => {
-    //console.log(req.body);
+    console.log(req.body);
     res.render('sell');
 }

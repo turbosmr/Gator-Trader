@@ -1,21 +1,29 @@
-<div class="container">
+<div class="container my-4" style="width: 50%">
     <div class="container header">
         <h1>Posting an Item for Sale</h1>
     </div>
 
     <form action="/sell" method="POST">
-        <div class="row">
-            <div class="col-sm">
-                <label for="product">Product Name:</label>
-                <input type="text" id="product" name="product" class="form-control">
-            </div>
-            <div class="col-sm">
-                <label for="price">Price ($):</label>
-                <input type="text" id="price" name="price" class="form-control">
-            </div>
+        <div class="mb-4">
+            <h5>Product Name</h5>
+            <input type="text" id="product" name="product" class="form-control" style="color: black" maxlength="60">
         </div>
-
-        <p>Category</p>
+        <div class="mb-4">
+            <h5>Price ($)</h5>
+            <input type="number" id="price" name="price" class="form-control" style="color: black" max="99999">
+        </div>
+        <div class="mb-4">
+            <h5>Category</h5>
+            <select name="categories" class="">
+                <option value="">Choose a category</option>
+                {{#each category}}
+                <option value="{{this.cid}}" {{#if (eq this.cid @root.selectedCategoryVal)}} selected {{/if}}>
+                    {{this.name}}
+                </option>
+                {{/each}}
+            </select>
+        </div>
+        <!---
         <input type="checkbox" id="books" name="category">
         <label for="defaultCheck">Books</label>
         <input type="checkbox" id="supplies" name="category">
@@ -28,8 +36,19 @@
         <label for="defaultCheck">Furniture</label>
         <input type="checkbox" id="other" name="category">
         <label for="defaultCheck">Other</label>
+        -->
 
-        <p>Condition</p>
+        <div class="mb-4">
+            <h5>Condition</h5>
+            <select name="condition" class="">
+                <option value="New">New</option>
+                <option value="New">Used - Excellent</option>
+                <option value="New">Used - Good</option>
+                <option value="New">Used - Decent</option>
+                <option value="New">Used - Bad</option>
+            </select>
+        </div>
+        <!--
         <input type="checkbox" id="condition" name="condition">
         <label for="defaultCheck">Excellent</label>
         <input type="checkbox" id="condition" name="condition">
@@ -38,29 +57,31 @@
         <label for="defaultCheck">Decent</label>
         <input type="checkbox" id="condition" name="condition">
         <label for="defaultCheck">Bad</label>
+        -->
 
-
-        <p>Location</p>
-        <input type="checkbox" id="library" name="location">
-        <label for="defaultCheck">Library</label>
-        <input type="checkbox" id="19th ave" name="location">
-        <label for="defaultCheck">19th Ave</label>
-        <input type="checkbox" id="shipping" name="location">
-        <label for="defaultCheck">Ship only</label>
-
-        <p>Add Image here</p>
-        <div class="custom-file mb-3">
-            <input type="file" class="custom-file-input" id="customFile" name="filename">
-            <label class="custom-file-label" for="customFile">Choose file</label>
+        <div class="mb-4">
+            <h5>Location</h5>
+            <input type="checkbox" id="library" name="location">
+            <label for="defaultCheck">Library</label>&nbsp;&nbsp;&nbsp;
+            <input type="checkbox" id="19th ave" name="location">
+            <label for="defaultCheck">19th Ave</label>&nbsp;&nbsp;&nbsp;
+            <input type="checkbox" id="shipping" name="location">
+            <label for="defaultCheck">Ship</label>
         </div>
 
-        <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea class="form-control" rows="5" id="description" name="text"></textarea>
+        <div class="mb-4">
+            <h5>Add Image here</h5>
+            <input type="file" name="myFile">
         </div>
-        <div class="row justify-content-end">
-            <button type="reset">Reset</button>
-            <button type="submit">Submit</button>
+
+        <div class="mb-4">
+            <h5>Description:</h5>
+            <textarea class="form-control" rows="5" id="description" name="text" style="color: black"></textarea>
+        </div>
+
+        <div class="row justify-content-end mx-0">
+            <button type="reset" class="btn btn-danger">Reset</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="submit" class="btn btn-success">Submit</button>
         </div>
     </form>
 </div>

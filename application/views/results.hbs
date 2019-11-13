@@ -1,6 +1,27 @@
 <!-- Results Info Bar -->
 {{#if product}}
 <div class="d-flex results-info">
+
+    <div class="dropdown dropdown_sidebar">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            &#9776
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div class="price_range_dd">
+                <h4><b>Price</b></h4>
+                <a class="dropdown-item" href="#" id="under25">Under $25</a>
+                <a class="dropdown-item" href="#" id="25to50">$25 to $50</a>
+                <a class="dropdown-item" href="#" id="50to200">$50 to $200</a>
+                <a class="dropdown-item" href="#" id="over200">$200 and Above</a>
+            </div>
+            <div class="condition_dd">
+                <h4><b>Condition</b></h4>
+                <a class="dropdown-item" href="#" id="new">New</a>
+                <a class="dropdown-item" href="#" id="used">Used</a>
+            </div>
+        </div>
+    </div>
     <div class="mr-auto">
         {{{resultsInfo offset pageLimit totalProducts keyword}}}
     </div>
@@ -23,55 +44,8 @@
 
     <!-- Side Bar -->
     <div class="sidebar">
-        <!--
-        <h3>Seller Rating</h3>
-        <div class="reviews">
-            <ul class="stars">
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-            </ul>
-        </div>
-        <div class="reviews">
-            <ul class="stars">
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star-o"></i></li>
-            </ul>
-        </div>
-        <div class="reviews">
-            <ul class="stars">
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star-o"></i></li>
-                <li><i class="fa fa-star-o"></i></li>
-            </ul>
-        </div>
-        <div class="reviews">
-            <ul class="stars">
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star-o"></i></li>
-                <li><i class="fa fa-star-o"></i></li>
-                <li><i class="fa fa-star-o"></i></li>
-            </ul>
-        </div>
-        <div class="reviews">
-            <ul class="stars">
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star-o"></i></li>
-                <li><i class="fa fa-star-o"></i></li>
-                <li><i class="fa fa-star-o"></i></li>
-                <li><i class="fa fa-star-o"></i></li>
-            </ul>
-        </div>
-        -->
         <div class="price_range">
+
             <h4><b>Price</b></h4>
             <a href="#" id="under25">Under $25</a>
             <a href="#" id="25to50">$25 to $50</a>
@@ -89,51 +63,54 @@
         {{#each product}}
         <tr>
             <td>
-                <div class="col-sm-12">
-                    <div class="results_column">
-                        <div class="card">
-                            <div class="card_body">
-                                <div class="photo">
-                                    <div class="image">
-                                        <img src="https://thumbs-prod.si-cdn.com/mHAHLSMfYOtZJs_PDnkqAgPFd6Q=/fit-in/1600x0/https://public-media.si-cdn.com/filer/00/a1/00a1f7bf-556f-48ef-a4da-10ea981a9337/mona.jpg"
-                                            alt="Picture">
-                                    </div>
+                <div class="results_card_container">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="results_image">
+                                    <img width="150"
+                                        src="https://thumbs-prod.si-cdn.com/mHAHLSMfYOtZJs_PDnkqAgPFd6Q=/fit-in/1600x0/https://public-media.si-cdn.com/filer/00/a1/00a1f7bf-556f-48ef-a4da-10ea981a9337/mona.jpg"
+                                        alt="Picture">
                                 </div>
+                            </div>
+                            <div class="col-lg-8">
                                 <div class="info">
                                     <div class="featured_text">
                                         <h1><a href="/products/{{this.pid}}">{{this.name}}</a></h1>
-                                        <p class="sub">Nice Painting</p>
+                                        <div class="seller">
+                                            <p>by {{this.seller}}</p>
+                                        </div>
                                         <p class="price">${{this.price}}</p>
+
+                                        <div class="description">
+                                            <p>{{this.description}}</p>
+                                        </div>
                                     </div>
-                                    <div class="description">
-                                        <p>{{this.description}}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card_footer">
-                                <div class="seller">
-                                    <p>Seller: </p>
-                                    <h3>{{this.seller}}</h3>
-                                    <!--
-                                    <div class="reviews">
-                                        <ul class="stars">
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                        <span>(10 reviews)</span>
-                                    </div>
-                                    -->
-                                </div>
-                                <div class="action">
-                                    <button type="button">Contact Seller</button>
+
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="card_footer">
+                                    <div class="contact_seller">
+                                        <button class="button" onclick="openForm()">Contact Seller</button>
+                                    </div>
+                                    <!-- pop up messages -->
+                                    <div class="chat-popup" id="myForm">
+                                        <form action="/action_page.php" class="form-container">
+                                            <h4>item decription goes here</h4>
+                                            <h5>Seller's name goes here</h5>
+                                            <textarea placeholder="Type message.." name="msg" required></textarea>
+                                            <button type="submit" class="btn">Send</button>
+                                            <button type="button" class="btn cancel"
+                                                onclick="closeForm()">Close</button>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
             </td>
         </tr>
         {{/each}}
@@ -150,14 +127,14 @@
     {{else}}
     {{#if keyword}}
     <div class="card mx-auto mt-4" style="width: 50%;">
-        <div style="padding-left: 20px;">
+        <div class="px-3 py-3">
             <h3>No results for {{keyword}}.</h3>
             <h6>Try checking your spelling or use more general terms</h6>
         </div>
     </div>
     {{else}}
     <div class="card mx-auto mt-4" style="width: 50%;">
-        <div style="padding-left: 20px;">
+        <div class="px-3 py-3">
             <h3>No results for category, {{selectedCategoryName}}.</h3>
             <h6>Please select another category</h6>
         </div>
@@ -165,3 +142,23 @@
     {{/if}}
     {{/if}}
 </div>
+<script>
+    jQuery(document).ready(function () {
+        jQuery('.toggle-nav').click(function (e) {
+            jQuery(this).toggleClass('active');
+            jQuery('.sidebar ul').toggleClass('active');
+
+            e.preventDefault();
+        });
+    });
+</script>
+
+<script>
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
+    }
+
+    function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+    }
+</script>

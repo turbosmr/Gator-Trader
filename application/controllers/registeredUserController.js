@@ -7,9 +7,9 @@ const bcrypt = require('bcryptjs');
 exports.login_get = (req, res, next) => {
     let redirectUrl = req.query.redirectUrl;
 
-    /*if (!redirectUrl) {
+    if (!redirectUrl) {
         redirectUrl = req.get('Referrer');
-    }*/
+    }
 
     res.render('registeredUserLogin', {
         redirectUrl: redirectUrl
