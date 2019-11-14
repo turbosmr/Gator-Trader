@@ -79,15 +79,13 @@ a:hover {
 }
 
 .sell {
-    position: absolute;
-    top: 50%;
-    left: 76%;
-    transform: translate(-50%, -50%);
+    margin-left: 25px;
 }
 
 .sell-button {
     background-color: #FDE21C;
     border: 1px solid #FDE21C;
+    margin-right: 25px;
 }
 
 .sell-button a {
@@ -103,15 +101,6 @@ a:hover {
     margin-top: 10px;
     color: #FDE21C;
     font-style: italic;
-}
-
-@media screen and (min-width: 1000px) {
-    .product-search-form {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
 }
 
 .navbar-brand:hover {
