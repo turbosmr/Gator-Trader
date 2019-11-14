@@ -28,9 +28,6 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-sm sticky-top">
-        
-    </nav>
     <!-- Disclaimer -->
     <nav class="navbar navbar-expand-sm justify-content-center sticky-top">
         <div class="disclaimer">For demonstrational and educational purposes only.</div>
@@ -51,29 +48,30 @@
         </ul>
 
         <!-- Search bar -->
-              <ul class="navbar-nav ml-auto">
-        <form action="/search" method="POST" class="product-search-form">
-            <div class="input-group">
-                <!-- Category filter dropdown menu -->
-                <div class="input-group-prepend">
-                    <select name="categories" class="btn category-button dropdown-toggle">
-                        <option value="all">All Categories</option>
-                        {{#each category}}
-                        <option value="{{this.cid}}" {{#if (eq this.cid @root.selectedCategoryVal)}} selected {{/if}}>
-                            {{this.name}}
-                        </option>
-                        {{/each}}
-                    </select>
+        <ul class="navbar-nav ml-auto">
+            <form action="/search" method="POST" class="product-search-form">
+                <div class="input-group">
+                    <!-- Category filter dropdown menu -->
+                    <div class="input-group-prepend">
+                        <select name="categories" class="btn category-button dropdown-toggle">
+                            <option value="all">All Categories</option>
+                            {{#each category}}
+                            <option value="{{this.cid}}" {{#if (eq this.cid @root.selectedCategoryVal)}} selected
+                                {{/if}}>
+                                {{this.name}}
+                            </option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <!-- Search input field -->
+                    <input type="text" name="keyword" class="typeahead tt-query" autocomplete="off" spellcheck="false"
+                        placeholder="What are you looking for?" value="{{keyword}}" id="searchKeyword" maxlength="40">
+                    <!-- Submit search button -->
+                    <div class="input-group-append">
+                        <button class="btn search-button" type="submit"><i class="fa fa-search"></i></button>
+                    </div>
                 </div>
-                <!-- Search input field -->
-                <input type="text" name="keyword" class="typeahead tt-query" autocomplete="off" spellcheck="false"
-                    placeholder="What are you looking for?" value="{{keyword}}" id="searchKeyword" maxlength="40">
-                <!-- Submit search button -->
-                <div class="input-group-append">
-                    <button class="btn search-button" type="submit"><i class="fa fa-search"></i></button>
-                </div>
-            </div>
-        </form>
+            </form>
         </ul>
 
         <!-- Sell button -->
@@ -98,7 +96,8 @@
                 <div class="dropdown-menu user-dropdown-menu">
                     {{#if loggedIn}}
                     {{#if loggedIn.aid}}
-                    <a class="dropdown-item" href="/admin/dashboard"><span class="fas fa-users-cog"></span> Dashboard</a>
+                    <a class="dropdown-item" href="/admin/dashboard"><span class="fas fa-users-cog"></span>
+                        Dashboard</a>
                     <a class="dropdown-item" href="/admin/logout"><span class="fa fa-sign-out"></span> Log Out</a>
                     {{else}}
                     <a class="dropdown-item" href="/user/dashboard"><span class="fa fa-user"></span> Dashboard</a>
@@ -134,7 +133,8 @@
             <a href="/about">About</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
             <a href="#">Terms & Conditions</a>&nbsp;&nbsp;&nbsp;
         </p>
-        <p style="margin-bottom: 0;">Copyright © 2019 SFSU CSC 648 Team 03 Buy & Sell Inc for Students. All rights reserved.</p>
+        <p style="margin-bottom: 0;">Copyright © 2019 SFSU CSC 648 Team 03 Buy & Sell Inc for Students. All rights
+            reserved.</p>
     </div>
 </body>
 
