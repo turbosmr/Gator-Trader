@@ -64,8 +64,9 @@
                         </select>
                     </div>
                     <!-- Search input field -->
-                    <input type="text" name="keyword" class="typeahead tt-query" autocomplete="off" spellcheck="false"
-                        placeholder="What are you looking for?" value="{{keyword}}" id="searchKeyword" maxlength="40">
+                    <input type="text" name="keyword" class="form-control" autocomplete="off"
+                        spellcheck="false" placeholder="What are you looking for?" value="{{keyword}}"
+                        id="searchKeyword" maxlength="40">
                     <!-- Submit search button -->
                     <div class="input-group-append">
                         <button class="btn search-button" type="submit"><i class="fa fa-search"></i></button>
@@ -79,6 +80,10 @@
             <li class="nav-item">
                 <button class="btn sell-button">
                     <a href="/sell">Sell</a>
+                </button>
+                <button class="btn navbar-toggler results-sort-button dropdown-toggle" type="button"
+                    data-toggle="collapse" data-target="#collapsibleNavbar" style="color:white">
+                    <span>  <i class="fas fa-bars"></i></span>
                 </button>
             </li>
         </ul>
@@ -113,15 +118,22 @@
         </ul>
     </nav>
 
-    <nav class="navbar navbar-expand-sm justify-content-center">
-        <ul class="navbar-nav">
-            {{#each category}}
-            <li class="nav-item">
-                <a class="nav-link" href="/search?c={{this.cid}}">{{this.name}}</a>
-            </li>
-            {{/each}}
-        </ul>
+
+
+    <nav class="navbar navbar-expand-md">
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav mx-auto">
+                {{#each category}}
+                <li class="nav-item">
+                    <a class="nav-link" href="/search?c={{this.cid}}">{{this.name}}</a>
+                </li>
+                {{/each}}
+            </ul>
+        </div>
     </nav>
+
+
 
     <div class="main">
         {{{body}}}
