@@ -1,7 +1,7 @@
 /* Page Containers */
 
 .sell_container {
-    max-width: 80%;
+    max-width: 70%;
     margin-left: auto;
     margin-right: auto;
     padding-left: 10px;
@@ -9,7 +9,7 @@
 }
 
 .messages_container {
-    max-width: 80%;
+    max-width: 70%;
     margin-left: auto;
     margin-right: auto;
     padding-left: 10px;
@@ -82,23 +82,19 @@
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
 }
 
-.selling .col-6 {
+.selling .col-lg-5 {
     font-weight: bold;
 }
 
-.selling .col-1 {
+.selling .col-lg-1 {
     flex-basis: 20%;
     font-weight: bold;
 }
 
-.selling .table-row .col-2 {
+.selling .table-row .col-lg-2 {
     flex-basis: 20%;
     color: green;
     font-weight: bold;
-}
-
-.selling .col-3 {
-    flex-basis: 20%;
 }
 
 .sell_container h2 {
@@ -107,6 +103,9 @@
     text-align: center;
 }
 
+.sell_container .selling_info{
+    display: none;
+   }
 /* --------------------------------------------------------------------------------------------------- */
 
 /* Messages Styling*/
@@ -145,6 +144,9 @@
     text-overflow: ellipsis;
 
 }
+.messages_container .message_info{
+    display: none;
+}
 
 .messages_container h2 {
     font-size: 30px;
@@ -174,10 +176,32 @@
     .messages_container .messages .table-header {
         display: none;
     }
+
+    .sell_container .selling .table-header {
+        display: none;
+    }
+
    .messages_container .messages li{
        display: block;
    }
+
+   .sell_container .selling li{
+    display: block;
+   }
+
+   .sell_container .selling_btn{
+    text-align: right;
+   }
+
    .messages_container .message_btn{
-       text-align: center;
+       text-align: right;
+   }
+
+   .sell_container .selling_info{
+    display: inline-block;
+
+   }
+   .messages_container .message_info{
+       display: inline-block;
    }
 }

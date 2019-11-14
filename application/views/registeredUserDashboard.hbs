@@ -43,12 +43,38 @@
 
 <div class="tab-content">
     <div class="tab-pane fade show active" id="items_forSale_tab">
-        {{!-- Container for the selling section --}}
+
         <div class="sell_container">
             <h2>Items You are Selling </h2>
             <ul class="selling">
                 <li class="table-header">
-                    <div class="col col-6">Name</div>
+                    <div class="col-lg-5">Name</div>
+                    <div class="col-lg-1">Price</div>
+                    <div class="col-lg-2">Status</div>
+                    <div class="col-lg-4">
+                        Actions
+                    </div>
+                </li>
+                <li class="table-row">
+                    <div class="col-lg-5"> <span class="selling_info">Name:&nbsp; </span>Chair </div>
+                    <div class="col-lg-1"><span class="selling_info">Price:&nbsp; </span>$200</div>
+                    <div class="col-lg-2"><span style="color:black;" class="selling_info">Status:&nbsp; </span>Approved
+                    </div>
+
+                    <div class="col-lg-4 selling_btn">
+                        <button type="button" class="btn btn-secondary btn-sm">Revise</button>
+                        <button type="button" class="btn btn-danger btn-sm">End Listing</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        {{!-- Container for the selling section --}}
+        {{!-- <div class="sell_container">
+            <h2>Items You are Selling </h2>
+            <ul class="selling">
+                <li class="table-header">
+                    <div class="col col-5">Name</div>
                     <div class="col col-1">Price</div>
                     <div class="col col-2">Status</div>
                     <div class="col col-4">
@@ -58,7 +84,7 @@
                 {{#if product}}
                 {{#each product}}
                 <li class="table-row">
-                    <div class="col col-6"><a href="/products/{{this.pid}}">{{this.name}}</a> </div>
+                    <div class="col col-5"><a href="/products/{{this.pid}}">{{this.name}}</a> </div>
                     <div class="col col-1">${{this.price}}</div>
                     {{#if (eq this.status "approved")}}
                     <div class="col col-2">{{this.status}}</div>
@@ -77,7 +103,7 @@
                 </li>
                 {{/if}}
             </ul>
-        </div>
+        </div> --}}
     </div>
     <div class="tab-pane fade" id="dashboard_messages_tab">
         {{!-- Container for the messages section --}}
@@ -92,9 +118,13 @@
                     <div class="col-lg-2 message_btn">Chat</div>
                 </li>
                 <li class="table-row">
-                    <div class="col-lg-3 message_item">Chair1111111111111111111111111111111111 </div>
-                    <div class="col-lg-2 message_from">Jimmy13</div>
-                    <div class="col-lg-3 message_last">Pickup222222222222</div>
+                    <div class="col-lg-3 message_item">
+                        <span class="message_info">Item:&nbsp; </span>Chair
+                    </div>
+                    <div class="col-lg-2 message_from">
+                        <span class="message_info">From:&nbsp; </span>Jimmy13
+                    </div>
+                    <div class="col-lg-3 message_last">Pickup</div>
                     <div class="col-lg-2 message_date">24 Oct, 2019</div>
                     <div class="col-lg-2 message_btn">
                         <button type="button" class="btn btn-primary btn-sm">Open</button>
@@ -103,8 +133,12 @@
 
                 </li>
                 <li class="table-row">
-                    <div class="col-lg-3 message_item">Chair</div>
-                    <div class="col-lg-2 message_from">Alex007</div>
+                    <div class="col-lg-3 message_item">
+                        <span class="message_info">Item:&nbsp; </span>Chair
+                    </div>
+                    <div class="col-lg-2 message_from">
+                        <span class="message_info">From:&nbsp; </span>Alex007
+                    </div>
                     <div class="col-lg-3 message_last">Where?</div>
                     <div class="col-lg-2 message_date">20 Oct, 2019</div>
                     <div class="col-lg-2 message_btn">
@@ -114,8 +148,12 @@
 
                 </li>
                 <li class="table-row">
-                    <div class="col-lg-3 message_item">Book</div>
-                    <div class="col-lg-2 message_from">Mario777</div>
+                    <div class="col-lg-3 message_item">
+                        <span class="message_info">Item:&nbsp; </span>Book
+                    </div>
+                    <div class="col-lg-2 message_from">
+                        <span class="message_info">From:&nbsp; </span>Mario777
+                    </div>
                     <div class="col-lg-3 message_last">Discount</div>
                     <div class="col-lg-2 message_date">27 Oct, 2019</div>
                     <div class="col-lg-2 message_btn">
@@ -124,8 +162,12 @@
                     </div>
                 </li>
                 <li class="table-row">
-                    <div class="col-lg-3 message_item">Computer</div>
-                    <div class="col-lg-2 message_from">Kate B</div>
+                    <div class="col-lg-3 message_item">
+                        <span class="message_info">Item:&nbsp; </span>Computer
+                    </div>
+                    <div class="col-lg-2 message_from">
+                        <span class="message_info">From:&nbsp; </span>Kate B
+                    </div>
                     <div class="col-lg-3 message_last">My offer!!!</div>
                     <div class="col-lg-2 message_date">17 Oct, 2019</div>
                     <div class="col-lg-2 message_btn">
