@@ -11,6 +11,7 @@ exports.search_results = (limit) => {
         let priceFilter = req.query.pf;
         let conditionFilter = req.query.cond;
         let min, max = 0;
+        let sortF = req.query.sort;
         let sql = "SELECT * FROM SalesItem WHERE status = 'approved'";
         let placeholders = [];
 
@@ -50,6 +51,13 @@ exports.search_results = (limit) => {
                     sql += " AND `condition` = ?";
                     placeholders.push(conditionFilter);
                 }
+                if(sortF == "atoz") {
+                    sql += " ORDER BY name ASC";
+                } else if(sortF == "ltoh") {
+                    sql += " ORDER BY price ASC";
+                } else if(sortF == "htol") {
+                    sql += " ORDER BY price DESC";
+                }
             }
             // Keyword criteria exist, but category criteria does not
             else {
@@ -64,6 +72,13 @@ exports.search_results = (limit) => {
                 if (conditionFilter) {
                     sql += " AND `condition` = ?";
                     placeholders.push(conditionFilter);
+                }
+                if(sortF == "atoz") {
+                    sql += " ORDER BY name ASC";
+                } else if(sortF == "ltoh") {
+                    sql += " ORDER BY price ASC";
+                } else if(sortF == "htol") {
+                    sql += " ORDER BY price DESC";
                 }
             }
         }
@@ -80,6 +95,13 @@ exports.search_results = (limit) => {
             if (conditionFilter) {
                 sql += " AND `condition` = ?";
                 placeholders.push(conditionFilter);
+            }
+            if(sortF == "atoz") {
+                sql += " ORDER BY name ASC";
+            } else if(sortF == "ltoh") {
+                sql += " ORDER BY price ASC";
+            } else if(sortF == "htol") {
+                sql += " ORDER BY price DESC";
             }
         }
         // Keyword and category criteria does not exist
@@ -99,8 +121,15 @@ exports.search_results = (limit) => {
                 sql += " AND `condition` = ?";
                 placeholders.push(conditionFilter);
             }
+            if(sortF == "atoz") {
+                sql += " ORDER BY name ASC";
+            } else if(sortF == "ltoh") {
+                sql += " ORDER BY price ASC";
+            } else if(sortF == "htol") {
+                sql += " ORDER BY price DESC";
+            }
         }
-
+        console.log(sql);
         res.locals.sql = sql;
         res.locals.placeholders = placeholders;
         res.locals.pageLimit = pageLimit;

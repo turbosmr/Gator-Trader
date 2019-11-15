@@ -22,6 +22,9 @@ exports.post = (req, res, next) => {
 exports.get = (req, res, next) => {
     let keyword = req.query.k;
     let category = req.query.c;
+    let priceFilter = req.query.pf;
+    let conditionFilter = req.query.cond;
+    let sortF = req.query.sort;
     let selectedCategoryName = "";
     let product = [];
 
@@ -61,6 +64,9 @@ exports.get = (req, res, next) => {
             selectedCategoryName: selectedCategoryName,
             keyword: keyword,
             product: product,
+            selectedSort: sortF,
+            selectedFilterP: priceFilter,
+            selectedFilterC: conditionFilter,  
             pageLimit: res.locals.pageLimit,
             offset: offset,
             totalProducts: res.locals.totalProducts,

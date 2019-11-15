@@ -67,4 +67,41 @@ $(document).ready(function () {
             success: window.location.href = url
         });
     });
+
+    /* ---------- Sort Alphabetically ----------*/
+    $('#atoz').click(function () {
+        var url = new URL(window.location.href);
+        url.searchParams.set('sort', 'atoz');
+        url.searchParams.delete('page');
+        url = url.toString();
+
+        $.ajax({
+            success: window.location.href = url
+        });
+    });
+
+    /* ---------- Sort High Price to Low Price ----------*/
+    $('#htol').click(function () {
+        var url = new URL(window.location.href);
+        url.searchParams.set('sort', 'htol');
+        url.searchParams.delete('page');
+        url = url.toString();
+
+        $.ajax({
+            success: window.location.href = url
+        });
+    });
+
+    /* ---------- Sort Low Price to High Price ----------*/
+    $('#ltoh').click(function () {
+        var url = new URL(window.location.href);
+        url.searchParams.set('sort', 'ltoh');
+        url.searchParams.delete('page');
+        url = url.toString();
+
+        $.ajax({
+            success: window.location.href = url
+        });
+    });
+    
 });
