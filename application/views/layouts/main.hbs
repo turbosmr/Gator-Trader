@@ -73,8 +73,7 @@
                                         Hello, Sign in
                                         {{/if}}
                                     </a>
-                                    <div class="dropdown-menu"
-                                        aria-labelledby="dropdownMenuButton">
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         {{#if loggedIn}}
                                         {{#if loggedIn.aid}}
                                         <a class="dropdown-item" href="/admin/dashboard"><span
@@ -140,8 +139,9 @@
                                             style="height: 100%;">
                                             <option value="all">All Categories</option>
                                             {{#each category}}
-                                            <option value="{{this.cid}}" {{#if (eq this.cid @root.selectedCategoryVal)}}
-                                                selected {{/if}}>
+                                            <option value="{{this.cid}}"
+                                                {{#if (eq this.cid @root.searchCriteria.selectedCategoryVal)}} selected
+                                                {{/if}}>
                                                 {{this.name}}
                                             </option>
                                             {{/each}}
@@ -153,7 +153,7 @@
                                         <input type="text" name="keyword"
                                             class="form-control form-control form-control-borderless" autocomplete="off"
                                             spellcheck="false" placeholder="What are you looking for?"
-                                            value="{{keyword}}" id="searchKeyword" maxlength="40">
+                                            value="{{searchCriteria.keyword}}" id="searchKeyword" maxlength="40">
                                     </div>
 
                                     <!-- Submit search button -->

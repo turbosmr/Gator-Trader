@@ -27,34 +27,40 @@
     <div class="results-sort-button-container">
         <button type="button" class="btn results-sort-button dropdown-toggle" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            Sort By:
+            Sort by: 
+            {{#if (eq searchCriteria.sortF "ltoh")}}
+            Price: Low to High
+            {{/if}}
+            {{#if (eq searchCriteria.sortF "htol")}}
+            Price: High to Low
+            {{/if}}
+            {{#if (eq searchCriteria.sortF "atoz")}}
+            Alphabetically: A-Z
+            {{/if}}
         </button>
-        <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Price: Low to High</a>
-            <a class="dropdown-item" href="#">Price: High to Low</a>
-            <a class="dropdown-item" href="#">Alphabetical: A-Z</a>
+        <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="#" id="ltoh">Price: Low to High</a>
+            <a class="dropdown-item" href="#" id="htol">Price: High to Low</a>
+            <a class="dropdown-item" href="#" id="atoz">Alphabetically: A-Z</a>
         </div>
     </div>
 </div>
-{{/if}}
 
 <div class="container-fluid mb-3">
-    {{#if product}}
 
     <!-- Side Bar -->
     <div class="sidebar">
         <div class="price_range">
-
             <h4><b>Price</b></h4>
-            <a href="#" id="under25">Under $25</a>
-            <a href="#" id="25to50">$25 to $50</a>
-            <a href="#" id="50to200">$50 to $200</a>
-            <a href="#" id="over200">$200 and Above</a>
+            <a href="#" class="under25">Under $25</a>
+            <a href="#" class="25to50">$25 to $50</a>
+            <a href="#" class="50to200">$50 to $200</a>
+            <a href="#" class="over200">$200 and Above</a>
         </div>
         <div class="condition">
             <h4><b>Condition</b></h4>
-            <a href="#" id="new">New</a>
-            <a href="#" id="used">Used</a>
+            <a href="#" class="new">New</a>
+            <a href="#" class="used">Used</a>
         </div>
     </div>
 
@@ -119,17 +125,17 @@
     {{#if (gt pageCount 1)}}
     <div class="pagination-container">
         <ul class="pagination justify-content-center">
-            {{{pagination pageCount currentPage selectedCategoryVal keyword}}}
+            {{{pagination pageCount currentPage searchCriteria}}}
         </ul>
     </div>
     {{/if}}
 
-    {{else}}
-    {{#if keyword}}
+{{else}}
+    {{#if searchCriteria.keyword}}
     <div class="row">
         <div class="col-7 col-lg-6 mx-auto mt-4">
             <div style="font-size: 3vw;">
-                <b>No results for {{keyword}}.</b>
+                <b>No results for {{searchCriteria.keyword}}.</b>
             </div>
             <div style="font-size: 2vw;">
                 Try checking your spelling or use more general terms
@@ -140,39 +146,28 @@
         </div>
     </div>
     {{else}}
-    <div class="row">
-        <div class="col-7 col-lg-6 mx-auto mt-4">
-            <div style="font-size: 3vw;">
-                <b>No results for category, {{selectedCategoryName}}.</b>
-            </div>
-            <div style="font-size: 2vw;">
-                Please select another category
-            </div>
-            <div style="padding-top: 50px; text-align: center;">
-                <img src="/images/error_alligator_image/alligator.jpg" alt="Cartoon Aligator" style="max-width: 30%;">
+        {{#if searchCriteria.selectedCategoryName}}
+        <div class="row">
+            <div class="col-7 col-lg-6 mx-auto mt-4">
+                <div style="font-size: 3vw;">
+                    <b>No results for category, {{searchCriteria.selectedCategoryName}}.</b>
+                </div>
+                <div style="font-size: 2vw;">
+                    Please select another category
+                </div>
+                <div style="padding-top: 50px; text-align: center;">
+                    <img src="/images/error_alligator_image/alligator.jpg" alt="Cartoon Aligator" style="max-width: 30%;">
+                </div>
             </div>
         </div>
-    </div>
+        {{else}}
+        <div class="card mx-auto mt-4" style="width: 50%;">
+            <div class="px-3 py-3">
+                <h3>No results.</h3>
+                <h6>Try checking your spelling or use more general terms, or select another category</h6>
+            </div>
+        </div>
+        {{/if}}
     {{/if}}
-    {{/if}}
+{{/if}}
 </div>
-<script>
-    jQuery(document).ready(function () {
-        jQuery('.toggle-nav').click(function (e) {
-            jQuery(this).toggleClass('active');
-            jQuery('.sidebar ul').toggleClass('active');
-
-            e.preventDefault();
-        });
-    });
-</script>
-
-<script>
-    function openForm() {
-        document.getElementById("myForm").style.display = "block";
-    }
-
-    function closeForm() {
-        document.getElementById("myForm").style.display = "none";
-    }
-</script>

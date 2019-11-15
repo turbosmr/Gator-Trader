@@ -20,10 +20,13 @@ exports.post = (req, res, next) => {
 
 // Handle rendering of search results on GET
 exports.get = (req, res, next) => {
-    let keyword = req.query.k;
-    let category = req.query.c;
-    let selectedCategoryName = "";
     let product = [];
+    let searchCriteria = {};
+    searchCriteria.keyword = req.query.k;
+    searchCriteria.selectedCategoryVal = req.query.c;
+    searchCriteria.priceFilter = res.locals.priceFilter;
+    searchCriteria.conditionFilter = res.locals.conditionFilter;
+    searchCriteria.sortF = res.locals.sortF;
 
     if (res.locals.totalPages > 0) {
         if (res.locals.currentPage > res.locals.totalPages || res.locals.currentPage < 1) {
@@ -41,11 +44,11 @@ exports.get = (req, res, next) => {
     res.locals.sql += " LIMIT ? OFFSET ?";
     res.locals.placeholders.push(res.locals.pageLimit, offset);
 
-    db.query('SELECT name FROM Category WHERE cid = ?', category, (err, result) => {
+    db.query('SELECT name FROM Category WHERE cid = ?', searchCriteria.selectedCategoryVal, (err, result) => {
         if (err) throw err;
 
         if (result.length > 0) {
-            selectedCategoryName = result[0].name;
+            searchCriteria.selectedCategoryName = result[0].name;
         }
     });
 
@@ -57,10 +60,8 @@ exports.get = (req, res, next) => {
         }
 
         res.render('results', {
-            selectedCategoryVal: category,
-            selectedCategoryName: selectedCategoryName,
-            keyword: keyword,
             product: product,
+            searchCriteria: searchCriteria,
             pageLimit: res.locals.pageLimit,
             offset: offset,
             totalProducts: res.locals.totalProducts,
@@ -71,6 +72,7 @@ exports.get = (req, res, next) => {
 }
 
 // Handle rendering of search suggestions on GET
+// Author @Osbaldo Martinez
 exports.suggestions = (req, res, next) => {
     let sql = "SELECT * FROM SalesItem WHERE name LIKE ? OR description LIKE ?";
     let keyword = req.query.key;
