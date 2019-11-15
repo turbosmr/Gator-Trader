@@ -50,6 +50,8 @@ exports.search_results = (limit) => {
                 if (conditionFilter) {
                     sql += " AND `condition` = ?";
                     placeholders.push(conditionFilter);
+                } else {
+                    conditionFilter = undefined;
                 }
                 if(sortF == "atoz") {
                     sql += " ORDER BY name ASC";
@@ -72,6 +74,8 @@ exports.search_results = (limit) => {
                 if (conditionFilter) {
                     sql += " AND `condition` = ?";
                     placeholders.push(conditionFilter);
+                } else {
+                    conditionFilter = undefined;
                 }
                 if(sortF == "atoz") {
                     sql += " ORDER BY name ASC";
@@ -95,6 +99,8 @@ exports.search_results = (limit) => {
             if (conditionFilter) {
                 sql += " AND `condition` = ?";
                 placeholders.push(conditionFilter);
+            } else {
+                conditionFilter = undefined;
             }
             if(sortF == "atoz") {
                 sql += " ORDER BY name ASC";
@@ -114,12 +120,16 @@ exports.search_results = (limit) => {
                 if (conditionFilter) {
                     sql += " AND `condition` = ?";
                     placeholders.push(conditionFilter);
+                } else {
+                    conditionFilter = undefined;
                 }
             }
             // Check if condition filter exists
             else if (conditionFilter) {
                 sql += " AND `condition` = ?";
                 placeholders.push(conditionFilter);
+            } else {
+                conditionFilter = undefined;
             }
             if(sortF == "atoz") {
                 sql += " ORDER BY name ASC";
@@ -129,7 +139,9 @@ exports.search_results = (limit) => {
                 sql += " ORDER BY price DESC";
             }
         }
-        console.log(sql);
+        res.locals.cond = conditionFilter;
+        res.locals.pf = priceFilter;
+        res.locals.sortF = sortF;
         res.locals.sql = sql;
         res.locals.placeholders = placeholders;
         res.locals.pageLimit = pageLimit;

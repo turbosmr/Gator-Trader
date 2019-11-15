@@ -1,4 +1,5 @@
-
+//function used to filter and sort results
+//Author: @Osbaldo Martinez & @Johnson
 $(document).ready(function () {
     /* ---------- Filter by price ----------*/
     $('#under25').click(function () {
@@ -6,7 +7,7 @@ $(document).ready(function () {
         url.searchParams.set('pf', 'under25');
         url.searchParams.delete('page');
         url = url.toString();
-
+        
         $.ajax({
             success: window.location.href = url
         });
