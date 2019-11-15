@@ -14,15 +14,15 @@
             <form action="/user/register" method="POST">
                 <div class="form-group">
                     <input type="email" id="username" name="username" class="form-control"
-                        placeholder="Enter SFSU email" value="{{username}}" maxlength="50" required />
+                        placeholder="Enter SFSU email" value="{{dataPassedBack.username}}" maxlength="30" required />
                 </div>
                 <div class="form-group">
                     <input type="text" id="sid" name="sid" class="form-control" placeholder="Enter SFSU ID"
-                        value="{{sid}}" maxlength="9" required />
+                        value="{{dataPassedBack.sid}}" maxlength="9" required />
                 </div>
                 <div class="form-group">
                     <input type="password" id="password" name="password" class="form-control"
-                        placeholder="Create password" maxlength="20" required />
+                        placeholder="Create password (8-20 characters)" maxlength="20" required />
                 </div>
                 <div class="form-group">
                     <input type="password" id="password2" name="password2" class="form-control"

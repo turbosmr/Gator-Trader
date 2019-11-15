@@ -79,5 +79,13 @@ module.exports = {
         }
 
         return html;
+    },
+    usernameOf: (email) => {;
+        if (typeof email === 'string') {
+            return email.split("@")[0];
+        }
+        else {
+            return email;
+        }
     }
 }

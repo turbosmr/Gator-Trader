@@ -29,7 +29,7 @@ exports.logout = (req, res, next) => {
 exports.dashboard = (req, res, next) => {
     let approvedSalesItem = [];
     let unapprovedSalesItem = [];
-    let sql = "SELECT * FROM SalesItem";
+    let sql = "SELECT SI.*, RU.username AS sellerEmail FROM SalesItem SI INNER JOIN RegisteredUser RU on SI.seller = RU.sid";
 
     db.query(sql, (err, result) => {
         if (err) throw err;

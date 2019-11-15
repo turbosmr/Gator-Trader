@@ -1,6 +1,6 @@
 const db = require('../config/db');
 const passport = require('passport');
-const validator = require('email-validator');
+const emailValidator = require('../util/email-validator');
 const bcrypt = require('bcryptjs');
 
 // Handle showing registered user login page on GET
@@ -41,25 +41,32 @@ exports.register_get = (req, res, next) => {
 exports.register_post = (req, res, next) => {
     let { username, sid, password, password2 } = req.body;
     let regError = [];
+    let dataPassedBack = {};
 
     // Check required fields
     if (!username || !sid || !password || !password2) {
         regError.push({ message: 'Please fill in all fields' });
     }
     else {
-        if (!(validator.validate(username))) {
+        // Check if SFSU email is valid (i.e. contains a valid domain and email is <= 30 characters)
+        if (!(emailValidator.validate(username)) || username.length > 30) {
             regError.push({ message: 'Invalid SFSU email' });
         }
-        // Check if SFSU ID is exactly 9 characters
-        if (sid.length !== 9) {
+        // Check if SFSU ID is valid (i.e. a 9-digit number that starts with 9)
+        if (!(/^\d+$/.test(sid)) || !sid.startsWith("9") || sid.length !== 9) {
+            dataPassedBack.username = username;
             regError.push({ message: 'Invalid SFSU ID' });
         }
         // Check if password is between 8-20 characters
         if (password.length < 8 || password.length > 20) {
+            dataPassedBack.username = username;
+            dataPassedBack.sid = sid;
             regError.push({ message: 'Password must be between 8-20 characters' });
         }
         // Check if passwords match
         if (password !== password2) {
+            dataPassedBack.username = username;
+            dataPassedBack.sid = sid;
             regError.push({ message: 'Passwords do not match' });
         }
     }
@@ -67,7 +74,8 @@ exports.register_post = (req, res, next) => {
     // Render registration error messages if necessary
     if (regError.length > 0) {
         res.render('register', {
-            regError
+            regError,
+            dataPassedBack
         });
     }
     else {

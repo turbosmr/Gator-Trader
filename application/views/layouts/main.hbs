@@ -68,7 +68,7 @@
                                     <a class="dropdown-toggle" href="#" id="dropdownMenuButton" data-toggle="dropdown"
                                         aria-haspopup="true" aria-expanded="false" style="color: white;">
                                         {{#if loggedIn}}
-                                        Hello, <b>{{loggedIn.username}}</b>
+                                        Hello, <b>{{usernameOf loggedIn.username}}</b>
                                         {{else}}
                                         Hello, Sign in
                                         {{/if}}
@@ -191,7 +191,7 @@
                                 <a class="dropdown-toggle" href="#" id="dropdownMenuButton" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false" style="color: white;">
                                     {{#if loggedIn}}
-                                    Hello, <b>{{loggedIn.username}}</b>
+                                    Hello, <b>{{usernameOf loggedIn.username}}</b>
                                     {{else}}
                                     Hello, Sign in
                                     {{/if}}
