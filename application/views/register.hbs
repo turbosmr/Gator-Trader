@@ -1,43 +1,49 @@
 <div class="container mt-4">
-    <div class="header">
-        <h1>Create account</h1>
-    </div>
-    <!-- Register form -->
-    <div class="container" style="width: 30%">
-        <!-- Display any error or success messages -->
-        <div>
-            {{> message}}
+    <div class="row">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-4 mx-auto">
+            <div class="header">
+                <h1>Create account</h1>
+            </div>
+            
+            <!-- Display any error or success messages -->
+            <div>
+                {{> message}}
+            </div>
+
+            <!-- Register form -->
+            <form action="/user/register" method="POST">
+                <div class="form-group">
+                    <input type="email" id="username" name="username" class="form-control"
+                        placeholder="Enter SFSU email" value="{{username}}" maxlength="50" required />
+                </div>
+                <div class="form-group">
+                    <input type="text" id="sid" name="sid" class="form-control" placeholder="Enter SFSU ID"
+                        value="{{sid}}" maxlength="9" required />
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" name="password" class="form-control"
+                        placeholder="Create password" maxlength="20" required />
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password2" name="password2" class="form-control"
+                        placeholder="Confirm password" maxlength="20" required />
+                </div>
+                <div class="form-group">
+                    By clicking Register, you agree to our <a href="#" style="text-decoration: underline;">Terms</a>
+                    and
+                    that you have read our <a href="#" style="text-decoration: underline;">Data Use Policy</a>,
+                    including
+                    our <a href="#" style="text-decoration: underline;">Cookie Use</a>.
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">
+                        Register
+                    </button>
+                </div>
+            </form>
+            <h6>
+                <p>Already have an account? <a href="/user/login">Sign in</a></p>
+            </h6>
         </div>
-        <form action="/user/register" method="POST">
-            <div class="form-group">
-                <input type="email" id="username" name="username" class="form-control" placeholder="Enter SFSU email"
-                    value="{{username}}" maxlength="50" required />
-            </div>
-            <div class="form-group">
-                <input type="text" id="sid" name="sid" class="form-control" placeholder="Enter SFSU ID" value="{{sid}}"
-                    maxlength="9" required />
-            </div>
-            <div class="form-group">
-                <input type="password" id="password" name="password" class="form-control" placeholder="Create password"
-                    maxlength="20" required />
-            </div>
-            <div class="form-group">
-                <input type="password" id="password2" name="password2" class="form-control"
-                    placeholder="Confirm password" maxlength="20" required />
-            </div>
-            <div class="form-group">
-                By clicking Register, you agree to our <a href="#" style="text-decoration: underline;">Terms</a> and
-                that you have read our <a href="#" style="text-decoration: underline;">Data Use Policy</a>, including
-                our <a href="#" style="text-decoration: underline;">Cookie Use</a>.
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block">
-                    Register
-                </button>
-            </div>
-        </form>
-        <h5 class="">
-            <p>Already have an account? <a href="/user/login">Sign in</a></p>
-        </h5>
     </div>
 </div>

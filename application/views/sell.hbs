@@ -1,29 +1,32 @@
-<div class="container my-4" style="width: 50%">
-    <div class="container header">
-        <h1>Posting an Item for Sale</h1>
-    </div>
+<div class="container my-4">
+    <div class="row">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6 mx-auto">
+            <div class="container header">
+                <h1>Posting an Item for Sale</h1>
+            </div>
 
-    <form action="/sell" method="POST">
-        <div class="mb-4">
-            <h5>Product Name</h5>
-            <input type="text" id="product" name="product" class="form-control" style="color: black" maxlength="60">
-        </div>
-        <div class="mb-4">
-            <h5>Price ($)</h5>
-            <input type="number" id="price" name="price" class="form-control" style="color: black" max="99999">
-        </div>
-        <div class="mb-4">
-            <h5>Category</h5>
-            <select name="categories" class="">
-                <option value="">Choose a category</option>
-                {{#each category}}
-                <option value="{{this.cid}}" {{#if (eq this.cid @root.selectedCategoryVal)}} selected {{/if}}>
-                    {{this.name}}
-                </option>
-                {{/each}}
-            </select>
-        </div>
-        <!---
+            <form action="/sell" method="POST">
+                <div class="mb-4">
+                    <h5>Product Name</h5>
+                    <input type="text" id="product" name="product" class="form-control" style="color: black"
+                        maxlength="60">
+                </div>
+                <div class="mb-4">
+                    <h5>Price ($)</h5>
+                    <input type="number" id="price" name="price" class="form-control" style="color: black" max="99999">
+                </div>
+                <div class="mb-4">
+                    <h5>Category</h5>
+                    <select name="categories" class="">
+                        <option value="">Choose a category</option>
+                        {{#each category}}
+                        <option value="{{this.cid}}" {{#if (eq this.cid @root.selectedCategoryVal)}} selected {{/if}}>
+                            {{this.name}}
+                        </option>
+                        {{/each}}
+                    </select>
+                </div>
+                <!---
         <input type="checkbox" id="books" name="category">
         <label for="defaultCheck">Books</label>
         <input type="checkbox" id="supplies" name="category">
@@ -38,17 +41,17 @@
         <label for="defaultCheck">Other</label>
         -->
 
-        <div class="mb-4">
-            <h5>Condition</h5>
-            <select name="condition" class="">
-                <option value="New">New</option>
-                <option value="New">Used - Excellent</option>
-                <option value="New">Used - Good</option>
-                <option value="New">Used - Decent</option>
-                <option value="New">Used - Bad</option>
-            </select>
-        </div>
-        <!--
+                <div class="mb-4">
+                    <h5>Condition</h5>
+                    <select name="condition" class="">
+                        <option value="New">New</option>
+                        <option value="New">Used - Excellent</option>
+                        <option value="New">Used - Good</option>
+                        <option value="New">Used - Decent</option>
+                        <option value="New">Used - Bad</option>
+                    </select>
+                </div>
+                <!--
         <input type="checkbox" id="condition" name="condition">
         <label for="defaultCheck">Excellent</label>
         <input type="checkbox" id="condition" name="condition">
@@ -59,31 +62,35 @@
         <label for="defaultCheck">Bad</label>
         -->
 
-        <div class="mb-4">
-            <h5>Location</h5>
-            <input type="checkbox" id="library" name="location">
-            <label for="defaultCheck">Library</label>&nbsp;&nbsp;&nbsp;
-            <input type="checkbox" id="19th ave" name="location">
-            <label for="defaultCheck">19th Ave</label>&nbsp;&nbsp;&nbsp;
-            <input type="checkbox" id="shipping" name="location">
-            <label for="defaultCheck">Ship</label>
-        </div>
+                <div class="mb-4">
+                    <h5>Location</h5>
+                    <input type="checkbox" id="library" name="location">
+                    <label for="defaultCheck">Library</label>&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" id="19th ave" name="location">
+                    <label for="defaultCheck">19th Ave</label>&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" id="shipping" name="location">
+                    <label for="defaultCheck">Ship</label>
+                </div>
 
-        <div class="mb-4">
-            <h5>Add Image here</h5>
-            <input type="file" name="myFile">
-        </div>
+                <div class="mb-4">
+                    <h5>Add Image here</h5>
+                    <input type="file" name="myFile">
+                </div>
 
-        <div class="mb-4">
-            <h5>Description:</h5>
-            <textarea class="form-control" rows="5" id="description" name="text" style="color: black"></textarea>
-        </div>
+                <div class="mb-4">
+                    <h5>Description:</h5>
+                    <textarea class="form-control" rows="5" id="description" name="text"
+                        style="color: black"></textarea>
+                </div>
 
-        <div class="row justify-content-end mx-0">
-            <button type="reset" class="btn btn-danger">Reset</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button type="submit" class="btn btn-success">Submit</button>
+                <div class="row justify-content-end mx-0">
+                    <button type="reset" class="btn btn-danger">Reset</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
+
 </div>
 
 <script>

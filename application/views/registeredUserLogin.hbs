@@ -1,34 +1,39 @@
 <div class="container mt-4">
-    <div class="header">
-        <h1>Sign-In</h1>
-    </div>
-    <!-- Login form -->
-    <div class="container" style="width: 30%">
-        <!-- Display any error or success messages -->
-        <div>
-            {{> message}}
+    <div class="row">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-4 mx-auto">
+            <div class="header">
+                <h1>Sign-In</h1>
+            </div>
+
+            <!-- Display any error or success messages -->
+            <div>
+                {{> message}}
+            </div>
+            
+            <!-- Login form -->
+            <form action="/user/login?redirectUrl={{redirectUrl}}" method="POST">
+                <div class="form-group">
+                    <input type="username" id="username" name="username" class="form-control"
+                        placeholder="Enter SFSU email" maxlength="50" required />
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" name="password" class="form-control"
+                        placeholder="Enter password" maxlength="20" required />
+                </div>
+                <div class="form-group">
+                    By clicking Sign-In, you agree to our <a href="#" style="text-decoration: underline;">Terms</a> and
+                    that you have read our <a href="#" style="text-decoration: underline;">Data Use Policy</a>,
+                    including
+                    our <a href="#" style="text-decoration: underline;">Cookie Use</a>.
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">Sign-In</button>
+                </div>
+            </form>
+            <h6 class="">
+                <p><a href="#">Forgot Password?</a></p>
+                <p>New to Gator Trader? <a href="/user/register">Sign up</a></p>
+            </h6>
         </div>
-        <form action="/user/login?redirectUrl={{redirectUrl}}" method="POST">
-            <div class="form-group">
-                <input type="username" id="username" name="username" class="form-control" placeholder="Enter SFSU email"
-                    maxlength="50" required />
-            </div>
-            <div class="form-group">
-                <input type="password" id="password" name="password" class="form-control" placeholder="Enter password"
-                    maxlength="20" required />
-            </div>
-            <div class="form-group">
-                By clicking Sign-In, you agree to our <a href="#" style="text-decoration: underline;">Terms</a> and
-                that you have read our <a href="#" style="text-decoration: underline;">Data Use Policy</a>, including
-                our <a href="#" style="text-decoration: underline;">Cookie Use</a>.
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block">Sign-In</button>
-            </div>
-        </form>
-        <h5 class="">
-            <p><a href="#">Forgot Password?</a></p>
-            <p>New to Gator Trader? <a href="/user/register">Sign up</a></p>
-        </h5>
     </div>
 </div>

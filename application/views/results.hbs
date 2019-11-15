@@ -1,7 +1,6 @@
 <!-- Results Info Bar -->
 {{#if product}}
 <div class="d-flex results-info">
-
     <div class="dropdown dropdown_sidebar">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
@@ -107,10 +106,11 @@
                                                 onclick="closeForm()">Close</button>
                                         </form>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
             </td>
         </tr>
         {{/each}}
@@ -126,17 +126,31 @@
 
     {{else}}
     {{#if keyword}}
-    <div class="card mx-auto mt-4" style="width: 50%;">
-        <div class="px-3 py-3">
-            <h3>No results for {{keyword}}.</h3>
-            <h6>Try checking your spelling or use more general terms</h6>
+    <div class="row">
+        <div class="col-7 col-lg-6 mx-auto mt-4">
+            <div style="font-size: 3vw;">
+                <b>No results for {{keyword}}.</b>
+            </div>
+            <div style="font-size: 2vw;">
+                Try checking your spelling or use more general terms
+            </div>
+            <div style="padding-top: 50px; text-align: center;">
+                <img src="/images/error_alligator_image/alligator.jpg" alt="Cartoon Aligator" style="max-width: 30%;">
+            </div>
         </div>
     </div>
     {{else}}
-    <div class="card mx-auto mt-4" style="width: 50%;">
-        <div class="px-3 py-3">
-            <h3>No results for category, {{selectedCategoryName}}.</h3>
-            <h6>Please select another category</h6>
+    <div class="row">
+        <div class="col-7 col-lg-6 mx-auto mt-4">
+            <div style="font-size: 3vw;">
+                <b>No results for category, {{selectedCategoryName}}.</b>
+            </div>
+            <div style="font-size: 2vw;">
+                Please select another category
+            </div>
+            <div style="padding-top: 50px; text-align: center;">
+                <img src="/images/error_alligator_image/alligator.jpg" alt="Cartoon Aligator" style="max-width: 30%;">
+            </div>
         </div>
     </div>
     {{/if}}

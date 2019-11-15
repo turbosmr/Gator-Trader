@@ -6,6 +6,14 @@ body {
     min-height: 550px;
 }
 
+@media (min-width: 768px) {
+    .sticky-navbar-top {
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 1020 !important;
+    }
+}
+
 .navbar {
     background-color: rgb(74, 54, 78);
     padding: 0rem 1rem;
@@ -76,10 +84,6 @@ a:hover {
 .user-dropdown-menu {
     left: auto;
     right: 0;
-}
-
-.sell {
-  
 }
 
 .sell-button {
