@@ -85,7 +85,6 @@ a:hover {
 .sell-button {
     background-color: #FDE21C;
     border: 1px solid #FDE21C;
-    margin-right: 25px;
 }
 
 .sell-button a {
@@ -144,4 +143,47 @@ a:hover {
     100% {
         transform: translate(1px, -2px) rotate(-1deg);
     }
+}
+
+/*
+.col-12 {
+    text-align: center;
+}
+
+.col-sm-12 {
+    text-align: center;
+}
+
+@media (min-width: 992px) {
+    .col-lg-2 {
+        text-align: left;
+    }
+}
+
+@media (max-width: 992px) {
+    .col-lg-auto {
+        text-align: center;
+    }
+}*/
+
+@media (max-width: 768px) {
+    .col-auto {
+        margin: auto;
+    }
+    .navbar {
+        padding: 0.4rem 1rem;
+    }
+}
+
+@media (max-width: 425px) {
+    .col-12 {
+        margin: auto;
+    }
+}
+
+.scrollable-categories {
+    -webkit-overflow-scrolling: touch;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
 }
