@@ -2,7 +2,7 @@
 //Author: @Osbaldo Martinez & @Johnson
 $(document).ready(function () {
     /* ---------- Filter by price ----------*/
-    $('#under25').click(function () {
+    $('#under25, .under25').click(function () {
         var url = new URL(window.location.href);
         url.searchParams.set('pf', 'under25');
         url.searchParams.delete('page');
@@ -13,7 +13,7 @@ $(document).ready(function () {
         });
     });
 
-    $('#25to50').click(function () {
+    $('#25to50, .25to50').click(function () {
         var url = new URL(window.location.href);
         url.searchParams.set('pf', '25to50');
         url.searchParams.delete('page');
@@ -24,7 +24,7 @@ $(document).ready(function () {
         });
     });
 
-    $('#50to200').click(function () {
+    $('#50to200, .50to200').click(function () {
         var url = new URL(window.location.href);
         url.searchParams.set('pf', '50to200');
         url.searchParams.delete('page');
@@ -35,7 +35,7 @@ $(document).ready(function () {
         });
     });
 
-    $('#over200').click(function () {
+    $('#over200, .over200').click(function () {
         var url = new URL(window.location.href);
         url.searchParams.set('pf', 'over200');
         url.searchParams.delete('page');
@@ -47,7 +47,7 @@ $(document).ready(function () {
     });
 
     /* ---------- Filter by condition ----------*/
-    $('#new').click(function () {
+    $('#new, .new').click(function () {
         var url = new URL(window.location.href);
         url.searchParams.set('cond', 'new');
         url.searchParams.delete('page');
@@ -58,7 +58,7 @@ $(document).ready(function () {
         });
     });
 
-    $('#used').click(function () {
+    $('#used, .used').click(function () {
         var url = new URL(window.location.href);
         url.searchParams.set('cond', 'used');
         url.searchParams.delete('page');
@@ -69,8 +69,8 @@ $(document).ready(function () {
         });
     });
 
-    /* ---------- Sort Alphabetically ----------*/
-    $('#atoz').click(function () {
+    /* ---------- Sort Alphabetically: A-Z ----------*/
+    $('#atoz, .atoz').click(function () {
         var url = new URL(window.location.href);
         url.searchParams.set('sort', 'atoz');
         url.searchParams.delete('page');
@@ -81,20 +81,8 @@ $(document).ready(function () {
         });
     });
 
-    /* ---------- Sort High Price to Low Price ----------*/
-    $('#htol').click(function () {
-        var url = new URL(window.location.href);
-        url.searchParams.set('sort', 'htol');
-        url.searchParams.delete('page');
-        url = url.toString();
-
-        $.ajax({
-            success: window.location.href = url
-        });
-    });
-
-    /* ---------- Sort Low Price to High Price ----------*/
-    $('#ltoh').click(function () {
+    /* ---------- Sort by Price: Low to High ----------*/
+    $('#ltoh, .ltoh').click(function () {
         var url = new URL(window.location.href);
         url.searchParams.set('sort', 'ltoh');
         url.searchParams.delete('page');
@@ -104,5 +92,16 @@ $(document).ready(function () {
             success: window.location.href = url
         });
     });
-    
+
+    /* ---------- Sort by Price: High to Low ----------*/
+    $('#htol, .htol').click(function () {
+        var url = new URL(window.location.href);
+        url.searchParams.set('sort', 'htol');
+        url.searchParams.delete('page');
+        url = url.toString();
+
+        $.ajax({
+            success: window.location.href = url
+        });
+    });
 });

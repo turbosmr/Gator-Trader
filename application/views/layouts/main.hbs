@@ -58,7 +58,7 @@
                     <select name="categories" class="btn category-button dropdown-toggle">
                         <option value="all">All Categories</option>
                         {{#each category}}
-                        <option value="{{this.cid}}" {{#if (eq this.cid @root.selectedCategoryVal)}} selected {{/if}}>
+                        <option value="{{this.cid}}" {{#if (eq this.cid @root.searchCriteria.selectedCategoryVal)}} selected {{/if}}>
                             {{this.name}}
                         </option>
                         {{/each}}
@@ -66,7 +66,7 @@
                 </div>
                 <!-- Search input field -->
                 <input type="text" name="keyword" class="typeahead tt-query" autocomplete="off" spellcheck="false"
-                    placeholder="What are you looking for?" value="{{keyword}}" id="searchKeyword" maxlength="40">
+                    placeholder="What are you looking for?" value="{{searchCriteria.keyword}}" id="searchKeyword" maxlength="40">
                 <!-- Submit search button -->
                 <div class="input-group-append">
                     <button class="btn search-button" type="submit"><i class="fa fa-search"></i></button>

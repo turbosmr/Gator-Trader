@@ -44,38 +44,50 @@ module.exports = {
 
         return html;
     },
-    pagination: (pageCount, currentPage, category, keyword, priceFilter, conditionFilter, sortF) => {
+    pagination: (pageCount, currentPage, searchCriteria) => {
         let html = "";
         let x = currentPage;
 
-        if (!keyword) {
-            keyword = "";
+        if (!searchCriteria.keyword) {
+            searchCriteria.keyword = "";
         }
-
+        if (!searchCriteria.selectedCategoryVal) {
+            searchCriteria.selectedCategoryVal = "";
+        }
+        if (!searchCriteria.priceFilter) {
+            searchCriteria.priceFilter = "";
+        }
+        if (!searchCriteria.conditionFilter) {
+            searchCriteria.conditionFilter = "";
+        }
+        if (!searchCriteria.sortF) {
+            searchCriteria.sortF = "";
+        }
+        
         // Previous button
         if (x === 1) {
-            html += "<li class=\"page-item disabled\"><a class=\"page-link\" href=\"/search?k=" + keyword + "&c=" + category + "&sort=" + sortF +"&pf="+priceFilter+ "&page=" + (x - 1) + "\">Previous</a></li>";
+            html += "<li class=\"page-item disabled\"><a class=\"page-link\" href=\"/search?k=" + searchCriteria.keyword + "&c=" + searchCriteria.selectedCategoryVal + "&pf=" + searchCriteria.priceFilter + "&cond" + searchCriteria.conditionFilter + "&sort=" + searchCriteria.sortF + "&page=" + (x - 1) + "\">Previous</a></li>";
         }
         else {
-            html += "<li class=\"page-item\"><a class=\"page-link\" href=\"/search?k=" + keyword + "&c=" + category  + "&sort=" + sortF +"&pf="+priceFilter+ "&page=" + (x - 1) + "\">Previous</a></li>";
+            html += "<li class=\"page-item\"><a class=\"page-link\" href=\"/search?k=" + searchCriteria.keyword + "&c=" + searchCriteria.selectedCategoryVal + "&pf=" + searchCriteria.priceFilter + "&cond" + searchCriteria.conditionFilter + "&sort=" + searchCriteria.sortF + "&page=" + (x - 1) + "\">Previous</a></li>";
         }
 
         // Page button
         for (let i = 1; i <= pageCount; i++) {
             if (currentPage === i) {
-                html += "<li class=\"page-item active\"><a class=\"page-link\" href=\"/search?k=" + keyword + "&c=" + category + "&sort=" + sortF +"&pf="+priceFilter+ "&page=" + i + "\">" + i + "</a></li>";
+                html += "<li class=\"page-item active\"><a class=\"page-link\" href=\"/search?k=" + searchCriteria.keyword + "&c=" + searchCriteria.selectedCategoryVal + "&pf=" + searchCriteria.priceFilter + "&cond" + searchCriteria.conditionFilter + "&sort=" + searchCriteria.sortF + "&page=" + i + "\">" + i + "</a></li>";
             }
             else {
-                html += "<li class=\"page-item\"><a class=\"page-link\" href=\"/search?k=" + keyword + "&c=" + category  + "&sort=" + sortF +"&pf="+priceFilter+ "&page=" + i + "\">" + i + "</a></li>";
+                html += "<li class=\"page-item\"><a class=\"page-link\" href=\"/search?k=" + searchCriteria.keyword + "&c=" + searchCriteria.selectedCategoryVal + "&pf=" + searchCriteria.priceFilter + "&cond" + searchCriteria.conditionFilter + "&sort=" + searchCriteria.sortF + "&page=" + i + "\">" + i + "</a></li>";
             }
         }
 
         // Next button
         if (x >= pageCount) {
-            html += "<li class=\"page-item disabled\"><a class=\"page-link\" href=\"/search?k=" + keyword + "&c=" + category + "&sort=" + sortF +"&pf="+priceFilter+ "&page=" + (x - 1) + "\">Next</a></li>";
+            html += "<li class=\"page-item disabled\"><a class=\"page-link\" href=\"/search?k=" + searchCriteria.keyword + "&c=" + searchCriteria.selectedCategoryVal + "&pf=" + searchCriteria.priceFilter + "&cond" + searchCriteria.conditionFilter + "&sort=" + searchCriteria.sortF + "&page=" + (x - 1) + "\">Next</a></li>";
         }
         else {
-            html += "<li class=\"page-item\"><a class=\"page-link\" href=\"/search?k=" + keyword + "&c=" + category  + "&sort=" + sortF +"&pf="+priceFilter+ "&page=" + (x + 1) + "\">Next</a></li>";
+            html += "<li class=\"page-item\"><a class=\"page-link\" href=\"/search?k=" + searchCriteria.keyword + "&c=" + searchCriteria.selectedCategoryVal + "&pf=" + searchCriteria.priceFilter + "&cond" + searchCriteria.conditionFilter + "&sort=" + searchCriteria.sortF + "&page=" + (x + 1) + "\">Next</a></li>";
         }
 
         return html;

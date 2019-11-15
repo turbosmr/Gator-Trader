@@ -1,7 +1,6 @@
 <!-- Results Info Bar -->
 {{#if product}}
 <div class="d-flex results-info">
-
     <div class="dropdown dropdown_sidebar">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
@@ -28,12 +27,21 @@
     <div class="results-sort-button-container">
         <button type="button" class="btn results-sort-button dropdown-toggle" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            Sort By:
+            Sort by: 
+            {{#if (eq searchCriteria.sortF "ltoh")}}
+            Price: Low to High
+            {{/if}}
+            {{#if (eq searchCriteria.sortF "htol")}}
+            Price: High to Low
+            {{/if}}
+            {{#if (eq searchCriteria.sortF "atoz")}}
+            Alphabetically: A-Z
+            {{/if}}
         </button>
-        <div class="dropdown-menu">
+        <div class="dropdown-menu dropdown-menu-right">
             <a class="dropdown-item" href="#" id="ltoh">Price: Low to High</a>
             <a class="dropdown-item" href="#" id="htol">Price: High to Low</a>
-            <a class="dropdown-item" href="#" id="atoz">Alphabetical: A-Z</a>
+            <a class="dropdown-item" href="#" id="atoz">Alphabetically: A-Z</a>
         </div>
     </div>
 </div>
@@ -45,17 +53,16 @@
     <!-- Side Bar -->
     <div class="sidebar">
         <div class="price_range">
-
             <h4><b>Price</b></h4>
-            <a href="#" id="under25">Under $25</a>
-            <a href="#" id="25to50">$25 to $50</a>
-            <a href="#" id="50to200">$50 to $200</a>
-            <a href="#" id="over200">$200 and Above</a>
+            <a href="#" class="under25">Under $25</a>
+            <a href="#" class="25to50">$25 to $50</a>
+            <a href="#" class="50to200">$50 to $200</a>
+            <a href="#" class="over200">$200 and Above</a>
         </div>
         <div class="condition">
             <h4><b>Condition</b></h4>
-            <a href="#" id="new">New</a>
-            <a href="#" id="used">Used</a>
+            <a href="#" class="new">New</a>
+            <a href="#" class="used">Used</a>
         </div>
     </div>
 
@@ -119,46 +126,35 @@
     {{#if (gt pageCount 1)}}
     <div class="pagination-container">
         <ul class="pagination justify-content-center">
-            {{{pagination pageCount currentPage selectedCategoryVal keyword}}}
+            {{{pagination pageCount currentPage searchCriteria}}}
         </ul>
     </div>
     {{/if}}
 
     {{else}}
-    {{#if keyword}}
+    {{#if searchCriteria.keyword}}
     <div class="card mx-auto mt-4" style="width: 50%;">
         <div class="px-3 py-3">
-            <h3>No results for {{keyword}}.</h3>
+            <h3>No results for {{searchCriteria.keyword}}.</h3>
             <h6>Try checking your spelling or use more general terms</h6>
+        </div>
+    </div>
+    {{else}}
+    {{#if searchCriteria.selectedCategoryName}}
+    <div class="card mx-auto mt-4" style="width: 50%;">
+        <div class="px-3 py-3">
+            <h3>No results for category, {{searchCriteria.selectedCategoryName}}.</h3>
+            <h6>Please select another category</h6>
         </div>
     </div>
     {{else}}
     <div class="card mx-auto mt-4" style="width: 50%;">
         <div class="px-3 py-3">
-            <h3>No results for category, {{selectedCategoryName}}.</h3>
-            <h6>Please select another category</h6>
+            <h3>No results.</h3>
+            <h6>Try checking your spelling or use more general terms, or select another category</h6>
         </div>
     </div>
     {{/if}}
     {{/if}}
+    {{/if}}
 </div>
-<script>
-    jQuery(document).ready(function () {
-        jQuery('.toggle-nav').click(function (e) {
-            jQuery(this).toggleClass('active');
-            jQuery('.sidebar ul').toggleClass('active');
-
-            e.preventDefault();
-        });
-    });
-</script>
-
-<script>
-    function openForm() {
-        document.getElementById("myForm").style.display = "block";
-    }
-
-    function closeForm() {
-        document.getElementById("myForm").style.display = "none";
-    }
-</script>

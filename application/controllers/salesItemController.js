@@ -3,7 +3,7 @@ const db = require('../config/db');
 // Handle showing sales item page on GET
 exports.salesItem_get = (req, res, next) => {
     let sql = "SELECT * FROM SalesItem WHERE pid = ?";
-    const objToBePassed = {};
+    let objToBePassed = {};
 
     db.query(sql, [req.params.pid], (err, result) => {
         if (err) throw err;
