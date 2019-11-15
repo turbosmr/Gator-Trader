@@ -40,67 +40,74 @@
 <div class="container-fluid">
     {{#if product}}
 
-    <!-- Side Bar -->
-    <div class="sidebar">
-        <div class="price_range">
 
-            <h4><b>Price</b></h4>
-            <a href="#" id="under25">Under $25</a>
-            <a href="#" id="25to50">$25 to $50</a>
-            <a href="#" id="50to200">$50 to $200</a>
-            <a href="#" id="over200">$200 and Above</a>
-        </div>
-        <div class="condition">
-            <h4><b>Condition</b></h4>
-            <a href="#" id="new">New</a>
-            <a href="#" id="used">Used</a>
+    <div class="container-fluid results_container">
+        <div class="row">
+            <div class="col-lg-2 sidebar_column">
+                <div class="sidebar">
+                    <div class="price_range">
+                        <h4><b>Price</b></h4>
+                        <a href="#" id="under25">Under $25</a>
+                        <a href="#" id="25to50">$25 to $50</a>
+                        <a href="#" id="50to200">$50 to $200</a>
+                        <a href="#" id="over200">$200 and Above</a>
+                    </div>
+                    <div class="condition">
+                        <h4><b>Condition</b></h4>
+                        <a href="#" id="new">New</a>
+                        <a href="#" id="used">Used</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-10 card_column">
+                <table id="search-results">
+                    {{#each product}}
+                    <tr>
+                        <td>
+                            <div class="results_card_container">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="results_image">
+                                                <img width="150"
+                                                    src="https://thumbs-prod.si-cdn.com/mHAHLSMfYOtZJs_PDnkqAgPFd6Q=/fit-in/1600x0/https://public-media.si-cdn.com/filer/00/a1/00a1f7bf-556f-48ef-a4da-10ea981a9337/mona.jpg"
+                                                    alt="Picture">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="info">
+                                                <div class="featured_text">
+                                                    <h1><a href="/products/{{this.pid}}">{{this.name}}</a></h1>
+                                                    <div class="seller">
+                                                        <p>by {{this.seller}}</p>
+                                                    </div>
+                                                    <p class="price">${{this.price}}</p>
+
+                                                    <div class="description">
+                                                        <p>{{this.description}}</p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="card_footer">
+                                                <div class="contact_seller">
+                                                    <button type="button">Contact Seller</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </table>
+            </div>
         </div>
     </div>
-
-    <table id="search-results">
-        {{#each product}}
-        <tr>
-            <td>
-                <div class="results_card_container">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="results_image">
-                                    <img width="150"
-                                        src="https://thumbs-prod.si-cdn.com/mHAHLSMfYOtZJs_PDnkqAgPFd6Q=/fit-in/1600x0/https://public-media.si-cdn.com/filer/00/a1/00a1f7bf-556f-48ef-a4da-10ea981a9337/mona.jpg"
-                                        alt="Picture">
-                                </div>
-                            </div>
-                            <div class="col-lg-8">
-                                <div class="info">
-                                    <div class="featured_text">
-                                        <h1><a href="/products/{{this.pid}}">{{this.name}}</a></h1>
-                                        <div class="seller">
-                                            <p>by {{this.seller}}</p>
-                                        </div>
-                                        <p class="price">${{this.price}}</p>
-
-                                        <div class="description">
-                                            <p>{{this.description}}</p>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="card_footer">
-                                    <div class="contact_seller">
-                                        <button type="button">Contact Seller</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-            </td>
-        </tr>
-        {{/each}}
-    </table>
 
     {{#if (gt pageCount 1)}}
     <div class="pagination-container">
