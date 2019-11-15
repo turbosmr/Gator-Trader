@@ -34,13 +34,14 @@
             For Demonstration Only</div>
     </nav>
 
-    <!-- Nav Bar-->
+    <!-- Navbar (Brand, Links, Search Bar, Sell Button, User Dropdown Menu) -->
     <nav class="navbar navbar-expand-sm sticky-top">
         <div class="container-fluid mx-0 px-0">
             <div class="row align-items-center no-gutters" style="width: 100%">
-
                 <div class="d-block d-sm-block d-md-none d-lg-none d-xl-none" style="width: 100%">
                     <div class="row align-items-center no-gutters">
+                        <!-- Render sell button inline with brand and user dropdown menu when 576px <= width < 768px -->
+                        <!-- Hide sell button when width < 576px -->
                         <div class="col-12 col-sm-4 col-md-4 col-lg-auto">
                             <div class="d-none d-sm-block d-md-none d-lg-none d-xl-none">
                                 <div style="text-align: center;">
@@ -51,24 +52,16 @@
                             </div>
                         </div>
 
+                        <!-- Brand -->
                         <div class="col-12 col-sm-4 col-md-4 col-lg-auto">
                             <div style="text-align: center;">
-                                <!-- Brand -->
                                 <a class="navbar-brand mx-0" href="/">
                                     <img src="/images/main/GatorTraderLogo2.png" style="width:150px" alt="">
                                 </a>
                             </div>
                         </div>
 
-
-                        <div class="col-12 d-none d-sm-none d-md-none d-lg-none d-xl-none">
-                            <div style="text-align: center;">
-                                <button class="btn sell-button">
-                                    <a href="/sell">Sell</a>
-                                </button>
-                            </div>
-                        </div>
-
+                        <!-- User dropdown menu -->
                         <div class="col-7 col-sm-4 col-md-4 col-lg-auto" style="margin: auto">
                             <div class="d-block d-sm-block d-md-none d-lg-none d-xl-none">
                                 <div class="dropdown" style="text-align: center;">
@@ -116,8 +109,8 @@
                     </div>
                 </div>
 
-
                 <div class="row align-items-center no-gutters" style="width: 100%">
+                    <!-- Render brand when more than 768px -->
                     <div class="d-none d-sm-none d-md-block d-lg-block d-xl-block">
                         <div class="col-12 col-sm-4 col-md-auto col-lg-auto pl-0">
                             <div style="text-align: center;">
@@ -128,19 +121,21 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-1 col-lg-1">
-                        <!-- Links -->
+
+                    <!-- Links -->
+                    <div class="col-auto col-md-1 col-lg-1">
                         <div class="navbar-nav">
                             <a class="nav-link" href="/about" style="text-align: center;">About</a>
                         </div>
                     </div>
 
+                    <!-- Search bar -->
                     <div class="col-12 col-md-4 col-lg-6 mx-auto mr-3">
                         <form action="/search" method="POST">
                             <div class="row no-gutters align-items-center">
                                 <div class="input-group">
-                                    <!-- Category filter dropdown menu -->
-                                    <div class="input-group-prepend d-none d-lg-block">
+                                    <!-- Render category filter dropdown menu when width <= 576px -->
+                                    <div class="input-group-prepend d-none d-sm-block">
                                         <select name="categories" class="btn category-button dropdown-toggle"
                                             style="height: 100%;">
                                             <option value="all">All Categories</option>
@@ -153,22 +148,21 @@
                                         </select>
                                     </div>
 
-                                    <!--end of col-->
+                                    <!-- Search input field -->
                                     <div class="col px-0">
-                                        <!-- Search input field -->
                                         <input type="text" name="keyword"
                                             class="form-control form-control form-control-borderless" autocomplete="off"
                                             spellcheck="false" placeholder="What are you looking for?"
                                             value="{{keyword}}" id="searchKeyword" maxlength="40">
                                     </div>
-                                    <!--end of col-->
+
                                     <!-- Submit search button -->
                                     <div class="input-group-append">
                                         <button class="btn search-button" type="submit"><i
                                                 class="fa fa-search"></i></button>
                                     </div>
-                                    <!--end of col-->
 
+                                    <!-- Render sell button when width < 576px -->
                                     <div class="col-auto d-block d-sm-none pr-0">
                                         <div style="float: right;">
                                             <button class="btn sell-button">
@@ -180,8 +174,8 @@
                             </div>
                         </form>
                     </div>
-                    <!--end of col-->
 
+                    <!-- Render sell button when width <= 768px-->
                     <div class="col-12 col-md-auto col-lg-auto mr-auto">
                         <div class="d-none d-md-block">
                             <button class="btn sell-button">
@@ -190,6 +184,7 @@
                         </div>
                     </div>
 
+                    <!-- Render user dropdown menu when width <= 768px -->
                     <div class="col-12 col-sm-12 col-md-2 col-lg-2">
                         <div class="d-none d-md-block">
                             <div class="dropdown" style="text-align: right;">
@@ -235,10 +230,7 @@
         </div>
     </nav>
 
-
-
-
-
+    <!-- Nav Bar (Categories) -->
     <nav class="navbar navbar-expand-sm justify-content-center">
         <div class="scrollable-categories mb-2">
             {{#each category}}
@@ -247,10 +239,12 @@
         </div>
     </nav>
 
+    <!-- Content Body -->
     <div class="main">
         {{{body}}}
     </div>
 
+    <!-- Footer -->
     <div class="footer">
         <p>
             <a href="/sell">Sell</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
