@@ -15,6 +15,11 @@ exports.search_results = (limit) => {
         let sql = "SELECT * FROM SalesItem WHERE status = 'approved'";
         let placeholders = [];
 
+        //if category is 9 we search all database for products with the keyword(in this case a class name, ex: CSC 648)
+        if(category == 9) {
+            category = "all";
+        }
+
         if (priceFilter == "under25") {
             min = -0.01;
             max = 25.00;

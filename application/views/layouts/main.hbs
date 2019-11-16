@@ -25,6 +25,7 @@
     <script type="text/javascript" src="/js/typeahead.js"></script>
     <script type="text/javascript" src="/js/sortSearchResults.js"></script>
     <script type="text/javascript" src="/js/filterResults.js"></script>
+    <script type="text/javascript" src="/js/placeholderHelper.js"></script>
 </head>
 
 <body>
@@ -136,12 +137,12 @@
                                     <!-- Render category filter dropdown menu when width <= 576px -->
                                     <div class="input-group-prepend d-none d-sm-block">
                                         <select name="categories" class="btn category-button dropdown-toggle"
-                                            style="height: 100%;">
+                                            style="height: 100%;" onchange="changePlaceholder()" id="dropDownCategories">
                                             <option value="all">All Categories</option>
                                             {{#each category}}
                                             <option value="{{this.cid}}"
                                                 {{#if (eq this.cid @root.searchCriteria.selectedCategoryVal)}} selected
-                                                {{/if}}>
+                                                {{/if}} onclick="changePlaceholder()">
                                                 {{this.name}}
                                             </option>
                                             {{/each}}
@@ -152,7 +153,12 @@
                                     <div class="col px-0">
                                         <input type="text" name="keyword"
                                             class="form-control form-control form-control-borderless typeahead tt-query" autocomplete="off"
-                                            spellcheck="false" placeholder="What are you looking for?"
+                                            spellcheck="false"
+                                            {{#if (eq "9" searchCriteria.selectedCategoryVal)}}
+                                            placeholder="Please enter your class section (ex: CSC 648)" 
+                                            {{else}}
+                                            placeholder="What are you looking for?"
+                                            {{/if}}
                                             value="{{searchCriteria.keyword}}" id="searchKeyword" maxlength="40">
                                     </div>
 
