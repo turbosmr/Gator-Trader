@@ -44,13 +44,15 @@ exports.get = (req, res, next) => {
     res.locals.sql += " LIMIT ? OFFSET ?";
     res.locals.placeholders.push(res.locals.pageLimit, offset);
 
-    db.query('SELECT name FROM Category WHERE cid = ?', searchCriteria.selectedCategoryVal, (err, result) => {
-        if (err) throw err;
-
-        if (result.length > 0) {
-            searchCriteria.selectedCategoryName = result[0].name;
-        }
-    });
+    if (typeof selectedCategoryVal !== 'undefined') {
+        db.query('SELECT name FROM Category WHERE cid = ?', searchCriteria.selectedCategoryVal, (err, result) => {
+            if (err) throw err;
+    
+            if (result.length > 0) {
+                searchCriteria.selectedCategoryName = result[0].name;
+            }
+        });
+    }
 
     db.query(res.locals.sql, res.locals.placeholders, (err, result) => {
         if (err) throw err;

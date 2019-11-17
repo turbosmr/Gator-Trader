@@ -34,7 +34,7 @@ exports.search_results = (limit) => {
         }
 
         // Check if keyword criteria exist
-        if (keyword) {
+        if (keyword && category != '2') {
             sql += " AND (name LIKE ? OR description LIKE ?)";
             let likeKeyword = '%' + keyword + '%';
             placeholders.push(likeKeyword);
@@ -45,6 +45,12 @@ exports.search_results = (limit) => {
         if (category && category != 'all') {
             sql += " AND category = ?";
             placeholders.push(category);
+            // Check if class material category is selected
+            if (category == '2') {
+                sql += " AND classMaterialSection IN (SELECT ClassSection.csid from ClassSection WHERE name LIKE ?)";
+                let likeKeyword2 = '%' + keyword + '%';
+                placeholders.push(likeKeyword2);
+            }
         }
 
         // Check if price filter exist
