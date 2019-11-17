@@ -12,7 +12,7 @@ exports.search_results = (limit) => {
         let min, max = 0;
         let conditionFilter = req.query.cond;
         let sortF = (req.query.sort) ? req.query.sort : "ltoh";
-        let sql = "SELECT SI.*, CAST(SI.price AS CHAR) AS newPrice, RU.username AS sellerEmail FROM SalesItem SI INNER JOIN RegisteredUser RU on SI.seller = RU.sid WHERE status = 'approved'";
+        let sql = "SELECT SI.*, CAST(SI.price AS CHAR) AS newPrice, RU.username AS sellerEmail FROM SalesItem SI INNER JOIN RegisteredUser RU on SI.seller = RU.sid WHERE SI.status = 'approved'";
         let placeholders = [];
 
         // Set min, max for price filter
@@ -46,10 +46,10 @@ exports.search_results = (limit) => {
             sql += " AND category = ?";
             placeholders.push(category);
             // Check if class material category is selected
-            if (category == '2') {
+            if (category == '2' && keyword) {
                 sql += " AND classMaterialSection IN (SELECT ClassSection.csid from ClassSection WHERE name LIKE ?)";
-                let likeKeyword2 = '%' + keyword + '%';
-                placeholders.push(likeKeyword2);
+                let likeKeyword = '%' + keyword + '%';
+                placeholders.push(likeKeyword);
             }
         }
 

@@ -2,7 +2,7 @@ const db = require('../config/db');
 
 // Handle showing sales item page on GET
 exports.salesItem_get = (req, res, next) => {
-    let sql = "SELECT * FROM SalesItem WHERE pid = ?";
+    let sql = "SELECT SI.*, CAST(SI.price AS CHAR) AS price, RU.username AS sellerEmail FROM SalesItem SI INNER JOIN RegisteredUser RU on SI.seller = RU.sid WHERE SI.pid = ?";
     let objToBePassed = {};
 
     db.query(sql, [req.params.pid], (err, result) => {
