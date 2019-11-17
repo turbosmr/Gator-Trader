@@ -5,19 +5,20 @@
                 <h1>Posting an Item for Sale</h1>
             </div>
 
-            <form action="/sell" method="POST">
+            <form action="/sell" method="POST" id="sellForm">
                 <div class="mb-4">
-                    <h5>Product Name</h5>
+                    <h5>Name</h5>
                     <input type="text" id="product" name="product" class="form-control" style="color: black"
-                        maxlength="60">
+                        placeholder="No more than 70 characters" maxlength="70" required>
                 </div>
-                <div class="mb-4">
+                <div class="col-3 px-0 mb-4">
                     <h5>Price ($)</h5>
-                    <input type="number" id="price" name="price" class="form-control" style="color: black" max="99999">
+                    <input type="number" id="price" name="price" class="form-control" style="color: black"
+                        placeholder="0.00" max="99999" required>
                 </div>
                 <div class="mb-4">
                     <h5>Category</h5>
-                    <select name="categories" class="">
+                    <select name="categories" required>
                         <option value="">Choose a category</option>
                         {{#each category}}
                         <option value="{{this.cid}}" {{#if (eq this.cid @root.selectedCategoryVal)}} selected {{/if}}>
@@ -26,61 +27,55 @@
                         {{/each}}
                     </select>
                 </div>
-                <!---
-        <input type="checkbox" id="books" name="category">
-        <label for="defaultCheck">Books</label>
-        <input type="checkbox" id="supplies" name="category">
-        <label for="defaultCheck">Supplies</label>
-        <input type="checkbox" id="service" name="category">
-        <label for="defaultCheck">Service</label>
-        <input type="checkbox" id="electronics" name="category">
-        <label for="defaultCheck">Electronics</label>
-        <input type="checkbox" id="furniture" name="category">
-        <label for="defaultCheck">Furniture</label>
-        <input type="checkbox" id="other" name="category">
-        <label for="defaultCheck">Other</label>
-        -->
 
                 <div class="mb-4">
                     <h5>Condition</h5>
-                    <select name="condition" class="">
+                    <select name="condition" required>
+                        <option value="">-</option>
                         <option value="New">New</option>
-                        <option value="New">Used - Excellent</option>
-                        <option value="New">Used - Good</option>
-                        <option value="New">Used - Decent</option>
-                        <option value="New">Used - Bad</option>
+                        <option value="Used - Excellent">Used - Excellent</option>
+                        <option value="Used - Good">Used - Good</option>
+                        <option value="Used - Fair">Used - Fair</option>
+                        <option value="Used - Salvage">Used - Salvage</option>
                     </select>
                 </div>
-                <!--
-        <input type="checkbox" id="condition" name="condition">
-        <label for="defaultCheck">Excellent</label>
-        <input type="checkbox" id="condition" name="condition">
-        <label for="defaultCheck">Good</label>
-        <input type="checkbox" id="condition" name="condition">
-        <label for="defaultCheck">Decent</label>
-        <input type="checkbox" id="condition" name="condition">
-        <label for="defaultCheck">Bad</label>
-        -->
 
                 <div class="mb-4">
-                    <h5>Location</h5>
-                    <input type="checkbox" id="library" name="location">
-                    <label for="defaultCheck">Library</label>&nbsp;&nbsp;&nbsp;
-                    <input type="checkbox" id="19th ave" name="location">
-                    <label for="defaultCheck">19th Ave</label>&nbsp;&nbsp;&nbsp;
-                    <input type="checkbox" id="shipping" name="location">
-                    <label for="defaultCheck">Ship</label>
+                    <h5>Delivery Method</h5>
+                    <div class="pl-2">
+                        <div class="custom-control custom-checkbox custom-control-inline mb-3">
+                            <input type="checkbox" class="custom-control-input" id="shipping" name="deliveryMethod"
+                                value="shipping">
+                            <label class="custom-control-label" for="shipping">Shipping</label>
+                        </div>
+                        <h6>Pickup Location</h6>
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" class="custom-control-input" id="library" name="deliveryMethod"
+                                value="library">
+                            <label class="custom-control-label" for="library">Library</label>
+                        </div>
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" class="custom-control-input" id="student-center"
+                                name="deliveryMethod" value="student-center">
+                            <label class="custom-control-label" for="student-center">Student Center</label>
+                        </div>
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" class="custom-control-input" id="wellness-center"
+                                name="deliveryMethod" value="wellness-center">
+                            <label class="custom-control-label" for="wellness-center">Wellness Center</label>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="mb-4">
                     <h5>Add Image here</h5>
-                    <input type="file" name="myFile">
+                    <input type="file" name="image" required>
                 </div>
 
                 <div class="mb-4">
-                    <h5>Description:</h5>
-                    <textarea class="form-control" rows="5" id="description" name="text"
-                        style="color: black"></textarea>
+                    <h5>Description</h5>
+                    <textarea class="form-control" rows="5" id="description" name="description"
+                        placeholder="Please enter description here" style="color: black" required></textarea>
                 </div>
 
                 <div class="row justify-content-end mx-0">
@@ -101,3 +96,5 @@
 </script>
 
 </div>
+
+<script type="text/javascript" src="/js/sell.js"></script>

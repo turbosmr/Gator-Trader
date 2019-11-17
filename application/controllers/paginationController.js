@@ -12,14 +12,10 @@ exports.search_results = (limit) => {
         let min, max = 0;
         let conditionFilter = req.query.cond;
         let sortF = (req.query.sort) ? req.query.sort : "ltoh";
-        let sql = "SELECT * FROM SalesItem WHERE status = 'approved'";
+        let sql = "SELECT SI.*, CAST(SI.price AS CHAR) AS newPrice, RU.username AS sellerEmail FROM SalesItem SI INNER JOIN RegisteredUser RU on SI.seller = RU.sid WHERE status = 'approved'";
         let placeholders = [];
 
-        //if category is 9 we search all database for products with the keyword(in this case a class name, ex: CSC 648)
-        if(category == 9) {
-            category = "all";
-        }
-
+        // Set min, max for price filter
         if (priceFilter == "under25") {
             min = -0.01;
             max = 25.00;
@@ -35,9 +31,6 @@ exports.search_results = (limit) => {
         else if (priceFilter == "over200") {
             min = 199.99;
             max = 99999.99;
-        }
-        else {
-            priceFilter = undefined;
         }
 
         // Check if keyword criteria exist

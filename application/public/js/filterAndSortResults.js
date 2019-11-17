@@ -58,9 +58,42 @@ $(document).ready(function () {
         });
     });
 
-    $('#used, .used').click(function () {
+    $('#used-excellent, .used-excellent').click(function () {
         var url = new URL(window.location.href);
-        url.searchParams.set('cond', 'used');
+        url.searchParams.set('cond', 'used - excellent');
+        url.searchParams.delete('page');
+        url = url.toString();
+
+        $.ajax({
+            success: window.location.href = url
+        });
+    });
+
+    $('#used-good, .used-good').click(function () {
+        var url = new URL(window.location.href);
+        url.searchParams.set('cond', 'used - good');
+        url.searchParams.delete('page');
+        url = url.toString();
+
+        $.ajax({
+            success: window.location.href = url
+        });
+    });
+
+    $('#used-fair, .used-fair').click(function () {
+        var url = new URL(window.location.href);
+        url.searchParams.set('cond', 'used - fair');
+        url.searchParams.delete('page');
+        url = url.toString();
+
+        $.ajax({
+            success: window.location.href = url
+        });
+    });
+
+    $('#used-salvage, .used-salvage').click(function () {
+        var url = new URL(window.location.href);
+        url.searchParams.set('cond', 'used - salvage');
         url.searchParams.delete('page');
         url = url.toString();
 

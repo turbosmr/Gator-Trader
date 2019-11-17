@@ -126,7 +126,7 @@ exports.logout = (req, res, next) => {
 exports.dashboard = (req, res, next) => {
     // Retrieve sales items listed by current registered user
     let product = [];
-    let sql = "SELECT SalesItem.pid, SalesItem.name, SalesItem.status, Category.name AS category, SalesItem.price FROM SalesItem INNER JOIN Category ON SalesItem.category = Category.cid WHERE seller = ?";
+    let sql = "SELECT SalesItem.pid, SalesItem.name, SalesItem.status, Category.name AS category, CAST(SalesItem.price AS CHAR) AS price FROM SalesItem INNER JOIN Category ON SalesItem.category = Category.cid WHERE seller = ?";
     let placeholders = [req.user.sid];
 
     db.query(sql, placeholders, (error, result) => {

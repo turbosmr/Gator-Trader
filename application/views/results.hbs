@@ -17,7 +17,10 @@
             <div class="condition_dd">
                 <h4><b>Condition</b></h4>
                 <a class="dropdown-item" href="#" id="new">New</a>
-                <a class="dropdown-item" href="#" id="used">Used</a>
+                <a class="dropdown-item" href="#" id="used-excellent">Used - Excellent</a>
+                <a class="dropdown-item" href="#" id="used-good">Used - Good</a>
+                <a class="dropdown-item" href="#" id="used-fair">Used - Fair</a>
+                <a class="dropdown-item" href="#" id="used-salvage">Used - Salvage</a>
             </div>
         </div>
     </div>
@@ -27,7 +30,7 @@
     <div class="results-sort-button-container">
         <button type="button" class="btn results-sort-button dropdown-toggle" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            Sort by: 
+            Sort by:
             {{#if (eq searchCriteria.sortF "ltoh")}}
             Price: Low to High
             {{/if}}
@@ -60,7 +63,10 @@
         <div class="condition">
             <h4><b>Condition</b></h4>
             <a href="#" class="new">New</a>
-            <a href="#" class="used">Used</a>
+            <a href="#" class="used-excellent">Used - Excellent</a>
+            <a href="#" class="used-good">Used - Good</a>
+            <a href="#" class="used-fair">Used - Fair</a>
+            <a href="#" class="used-salvage">Used - Salvage</a>
         </div>
     </div>
 
@@ -83,12 +89,12 @@
                                     <div class="featured_text">
                                         <h1><a href="/products/{{this.pid}}">{{this.name}}</a></h1>
                                         <div class="seller">
-                                            <p>by {{this.seller}}</p>
+                                            <p>by {{usernameOf this.sellerEmail}}</p>
                                         </div>
-                                        <p class="price">${{this.price}}</p>
+                                        <p class="price">${{this.newPrice}}</p>
 
                                         <div class="description">
-                                            <p>{{this.description}}</p>
+                                            <p>{{{this.description}}}</p>
                                         </div>
                                     </div>
 
@@ -130,7 +136,7 @@
     </div>
     {{/if}}
 
-{{else}}
+    {{else}}
     {{#if searchCriteria.keyword}}
     <div class="row">
         <div class="col-7 col-lg-6 mx-auto mt-4">
@@ -146,28 +152,28 @@
         </div>
     </div>
     {{else}}
-        {{#if searchCriteria.selectedCategoryName}}
-        <div class="row">
-            <div class="col-7 col-lg-6 mx-auto mt-4">
-                <div style="font-size: 3vw;">
-                    <b>No results for category, {{searchCriteria.selectedCategoryName}}.</b>
-                </div>
-                <div style="font-size: 2vw;">
-                    Please select another category
-                </div>
-                <div style="padding-top: 50px; text-align: center;">
-                    <img src="/images/error_alligator_image/alligator.jpg" alt="Cartoon Aligator" style="max-width: 30%;">
-                </div>
+    {{#if searchCriteria.selectedCategoryName}}
+    <div class="row">
+        <div class="col-7 col-lg-6 mx-auto mt-4">
+            <div style="font-size: 3vw;">
+                <b>No results for category, {{searchCriteria.selectedCategoryName}}.</b>
+            </div>
+            <div style="font-size: 2vw;">
+                Please select another category
+            </div>
+            <div style="padding-top: 50px; text-align: center;">
+                <img src="/images/error_alligator_image/alligator.jpg" alt="Cartoon Aligator" style="max-width: 30%;">
             </div>
         </div>
-        {{else}}
-        <div class="card mx-auto mt-4" style="width: 50%;">
-            <div class="px-3 py-3">
-                <h3>No results.</h3>
-                <h6>Try checking your spelling or use more general terms, or select another category</h6>
-            </div>
+    </div>
+    {{else}}
+    <div class="card mx-auto mt-4" style="width: 50%;">
+        <div class="px-3 py-3">
+            <h3>No results.</h3>
+            <h6>Try checking your spelling or use more general terms, or select another category</h6>
         </div>
-        {{/if}}
+    </div>
     {{/if}}
-{{/if}}
+    {{/if}}
+    {{/if}}
 </div>
