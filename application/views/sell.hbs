@@ -1,27 +1,46 @@
 <div class="container my-4">
     <div class="row">
         <div class="col-12 col-sm-10 col-md-8 col-lg-6 mx-auto">
+            <!-- Display error listing item message -->
+            <div class="col-5 mx-auto">
+                {{> message}}
+            </div>
+
             <div class="container header">
                 <h1>Posting an Item for Sale</h1>
             </div>
 
-            <form action="/sell" method="POST" id="sellForm">
+            <form action="{{#if salesItem}}/products/{{salesItem.pid}}/edit{{else}}/sell{{/if}}" method="POST" id="sellForm">
                 <div class="mb-4">
                     <h5>Name</h5>
-                    <input type="text" id="product" name="product" class="form-control" style="color: black"
-                        placeholder="No more than 70 characters" maxlength="70" required>
+                    <input type="text" id="product" name="productName" class="form-control" style="color: black"
+                        placeholder="No more than 70 characters" maxlength="70" value="{{salesItem.name}}" required>
                 </div>
+
                 <div class="col-3 px-0 mb-4">
                     <h5>Price ($)</h5>
-                    <input type="number" id="price" name="price" class="form-control" style="color: black"
-                        placeholder="0.00" max="99999" required>
+                    <input type="text" id="price" name="price" class="form-control" style="color: black"
+                        placeholder="0.00" min="1" max="99999" value="{{salesItem.price}}" required>
                 </div>
+
                 <div class="mb-4">
-                    <h5>Category</h5>
-                    <select name="categories" required>
+                    <h5>Category {{salesItem.category}}</h5>
+                    <select name="category" id="category" required>
                         <option value="">Choose a category</option>
                         {{#each category}}
-                        <option value="{{this.cid}}" {{#if (eq this.cid @root.selectedCategoryVal)}} selected {{/if}}>
+                        <option value="{{this.cid}}" {{#if (eq this.cid @root.salesItem.category)}} selected {{/if}}>
+                            {{this.name}}
+                        </option>
+                        {{/each}}
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <h5>Class Material Section</h5>
+                    <select name="classMaterialSection" id="classMaterialSection" required disabled>
+                        <option value="">-</option>
+                        {{#each classSection}}
+                        <option value="{{this.csid}}" {{#if (eq this.csid salesItem.classMaterialSection)}} selected {{/if}}>
                             {{this.name}}
                         </option>
                         {{/each}}
@@ -32,12 +51,18 @@
                     <h5>Condition</h5>
                     <select name="condition" required>
                         <option value="">-</option>
-                        <option value="New">New</option>
-                        <option value="Used - Excellent">Used - Excellent</option>
-                        <option value="Used - Good">Used - Good</option>
-                        <option value="Used - Fair">Used - Fair</option>
-                        <option value="Used - Salvage">Used - Salvage</option>
+                        <option value="New" {{#if (eq salesItem.condition "New")}} selected {{/if}}>New</option>
+                        <option value="Used - Excellent" {{#if (eq salesItem.condition "Used - Excellent")}} selected {{/if}}>Used - Excellent</option>
+                        <option value="Used - Good" {{#if (eq salesItem.condition "Used - Good")}} selected {{/if}}>Used - Good</option>
+                        <option value="Used - Fair" {{#if (eq salesItem.condition "Used - Fair")}} selected {{/if}}>Used - Fair</option>
+                        <option value="Used - Salvage" {{#if (eq salesItem.condition "Used - Salvage")}} selected {{/if}}>Used - Salvage</option>
                     </select>
+                </div>
+
+                <div class="col-2 px-0 mb-4">
+                    <h5>Quantity</h5>
+                    <input type="number" id="quantity" name="quantity" class="form-control" style="color: black"
+                        placeholder="" min="1" max="10" value="{{salesItem.quantity}}" required>
                 </div>
 
                 <div class="mb-4">
@@ -45,7 +70,7 @@
                     <div class="pl-2">
                         <div class="custom-control custom-checkbox custom-control-inline mb-3">
                             <input type="checkbox" class="custom-control-input" id="shipping" name="deliveryMethod"
-                                value="shipping">
+                                value="shipping" {{#if (eq salesItem.deliveryMethod "Shipping")}} checked {{/if}}>
                             <label class="custom-control-label" for="shipping">Shipping</label>
                         </div>
                         <h6>Pickup Location</h6>
@@ -69,13 +94,13 @@
 
                 <div class="mb-4">
                     <h5>Add Image here</h5>
-                    <input type="file" name="image" required>
+                    <input type="file" name="imageFileName" required>
                 </div>
 
                 <div class="mb-4">
                     <h5>Description</h5>
                     <textarea class="form-control" rows="5" id="description" name="description"
-                        placeholder="Please enter description here" style="color: black" required></textarea>
+                        placeholder="Please enter description here" style="color: black" required>{{salesItem.description}}</textarea>
                 </div>
 
                 <div class="row justify-content-end mx-0">

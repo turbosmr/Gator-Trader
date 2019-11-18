@@ -1,21 +1,29 @@
 {{#if data.isSeller}}
 <div class="itemContainer">
-    {{#if (eq data.salesItem.status "approved")}}
+    {{#if (eq data.salesItem.status "Unapproved")}}
+    <b>Waiting for approval</b>
+    {{else if (eq data.salesItem.status "Active")}}
     <b>Your item is for sale</b>
-    {{else}}
-    <b>Please revise your item</b>
+    {{else if (eq data.salesItem.status "Removed")}}
+    <b>Please revise listing</b>
+    {{else if (eq data.salesItem.status "Ended")}}
+    <b>Your item is inactive</b>
     {{/if}}
 </div>
 
 <div class="itemContainer">
-    <button type="button" class="btn btn-secondary btn-sm">Revise</button>
-    <button type="button" class="btn btn-danger btn-sm">End Listing</button>
+    {{#if (eq data.salesItem.status "Ended")}}
+    <a href="/products/{{data.salesItem.pid}}/relist"><button type="button" class="btn btn-secondary btn-sm">Relist</button></a>
+    {{else}}
+    <a href="/products/{{data.salesItem.pid}}/edit"><button type="button" class="btn btn-secondary btn-sm">Revise</button></a>
+    <a href="/products/{{data.salesItem.pid}}/end"><button type="button" class="btn btn-danger btn-sm">End Listing</button></a>
+    {{/if}}
 </div>
 {{/if}}
 
 {{#if data.isAdmin}}
 <div class="itemContainer">
-    {{#if (eq data.salesItem.status "unapproved")}}
+    {{#if (eq data.salesItem.status "Unapproved")}}
     <a href="#"><button type="button" class="btn btn-success btn-sm">Approve</button></a>
     <a href="#"><button type="button" class="btn btn-danger btn-sm">Remove</button></a>
     {{else}}
@@ -52,12 +60,11 @@
             <div class="col-lg-4">
                 <div class="featured_text">
                     <h1>{{data.salesItem.name}}</h1>
-                    <p class="seller">by {{usernameOf data.salesItem.sellerEmail}}</p>
+                    <p class="seller">by <b>{{usernameOf data.salesItem.sellerEmail}}</b></p>
                     <p class="price">Price: ${{data.salesItem.price}}</p>
                     <ul class="brief_description">
-                        <h4>Features: </h4>
-                        <li>Condition: {{data.salesItem.condition}}</li>
-                        <li>Quantity: {{data.salesItem.quantity}} available</li>
+                        <li><b>Condition:</b> {{data.salesItem.condition}}</li>
+                        <li><b>Quantity:</b> {{data.salesItem.quantity}} available</li>
                     </ul>
                 </div>
             </div>

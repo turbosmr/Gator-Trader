@@ -12,7 +12,7 @@ exports.search_results = (limit) => {
         let min, max = 0;
         let conditionFilter = req.query.cond;
         let sortF = (req.query.sort) ? req.query.sort : "ltoh";
-        let sql = "SELECT SI.*, CAST(SI.price AS CHAR) AS newPrice, RU.username AS sellerEmail FROM SalesItem SI INNER JOIN RegisteredUser RU on SI.seller = RU.sid WHERE SI.status = 'approved'";
+        let sql = "SELECT SI.*, CAST(SI.price AS CHAR) AS newPrice, RU.username AS sellerEmail FROM SalesItem SI INNER JOIN RegisteredUser RU on SI.seller = RU.sid WHERE SI.status = 'Active'";
         let placeholders = [];
 
         // Set min, max for price filter

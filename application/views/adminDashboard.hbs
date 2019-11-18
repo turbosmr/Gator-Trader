@@ -35,7 +35,7 @@
     <div class="tab-pane fade show active" id="unapproved_tab">
         <div class="unapproved_container">
             <h2>Items to Approve</h2>
-            <ul class="unapproved">
+            <ul class="unapproved px-0">
                 <li class="table-header">
                     <div class="col col-7">Name</div>
                     <div class="col col-2">Seller</div>
@@ -65,7 +65,7 @@
     <div class="tab-pane fade" id="approved_tab">
         <div class="approved_container">
             <h2>Approved Items </h2>
-            <ul class="approved">
+            <ul class="approved px-0">
                 <li class="table-header">
                     <div class="col col-7">Name</div>
                     <div class="col col-2">Seller</div>
@@ -73,8 +73,8 @@
                         Actions
                     </div>
                 </li>
-                {{#if approvedSalesItem}}
-                {{#each approvedSalesItem}}
+                {{#if activeSalesItem}}
+                {{#each activeSalesItem}}
                 <li class="table-row">
                     <div class="col col-7"><a href="/products/{{this.pid}}">{{this.name}}</a></div>
                     <div class="col col-2">{{usernameOf this.sellerEmail}}</div>

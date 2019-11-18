@@ -1,5 +1,5 @@
 // Validation to ensure atleast one delivery method is selected
-(function() {
+(function () {
     const form = document.querySelector('#sellForm');
     const checkboxes = form.querySelectorAll('input[type=checkbox]');
     const checkboxLength = checkboxes.length;
@@ -28,5 +28,14 @@
         firstCheckbox.setCustomValidity(errorMessage);
     }
 
+    function showClassSection() {
+        $("#category").change(function () {
+            if ($(this).val() == "2") {
+                $("#classMaterialSection").prop("disabled", false);
+            }
+        });
+    }
+
     init();
+    showClassSection();
 })();

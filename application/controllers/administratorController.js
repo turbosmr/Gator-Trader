@@ -24,10 +24,10 @@ exports.logout = (req, res, next) => {
 }
 
 // Display administrator's dashboard page on GET
-// Contains list of approved and unapproved sales item
+// Contains list of active and unapproved sales item
 // Author @Osbaldo Martinez
 exports.dashboard = (req, res, next) => {
-    let approvedSalesItem = [];
+    let activeSalesItem = [];
     let unapprovedSalesItem = [];
     let sql = "SELECT SI.*, RU.username AS sellerEmail FROM SalesItem SI INNER JOIN RegisteredUser RU on SI.seller = RU.sid";
 
@@ -35,15 +35,16 @@ exports.dashboard = (req, res, next) => {
         if (err) throw err;
 
         for (let i = 0; i < result.length; i++) {
-            if (result[i].status == "Approved") {
-                approvedSalesItem.push(result[i])
-            } else {
+            if (result[i].status == "Active" || result[i].status == "Ended") {
+                activeSalesItem.push(result[i])
+            }
+            else {
                 unapprovedSalesItem.push(result[i]);
             }
         }
 
         res.render('adminDashboard', {
-            approvedSalesItem: approvedSalesItem,
+            activeSalesItem: activeSalesItem,
             unapprovedSalesItem: unapprovedSalesItem
         });
     });
@@ -55,12 +56,19 @@ exports.approve = (req, res, next) => {
     let sql = "UPDATE SalesItem SET status = 2 WHERE pid = ?";
 
     db.query(sql, [productId], (err, result) => {
-        if (err) throw err;
+        if (err) {
+            req.flash('error', 'Error approving item');
+            res.redirect('/user/dashbaord');
+        }
 
         if (result.changedRows > 0) {
             req.flash('success', 'Sucessfully approved item');
+            res.redirect('/admin/dashboard');
         }
-        res.redirect('/admin/dashboard');
+        else {
+            req.flash('error', 'Error approving item');
+            res.redirect('/user/dashbaord');
+        }
     });
 }
 
@@ -70,26 +78,40 @@ exports.disapprove = (req, res, next) => {
     let sql = "UPDATE SalesItem SET status = 3 WHERE pid = ?";
 
     db.query(sql, [productId], (err, result) => {
-        if (err) throw err;
+        if (err) {
+            req.flash('error', 'Error disapproving item');
+            res.redirect('/user/dashbaord');
+        }
 
         if (result.changedRows > 0) {
             req.flash('success', 'Sucessfully disapproved item');
+            res.redirect('/admin/dashboard');
         }
-        res.redirect('/admin/dashboard');
+        else {
+            req.flash('error', 'Error disapproving item');
+            res.redirect('/user/dashbaord');
+        }
     });
 }
 
 // Handle removing of sales item on GET
 exports.remove = (req, res, next) => {
     let productId = req.query.pid;
-    let sql = "UPDATE SalesItem SET status = 4 WHERE pid = ?";
+    let sql = "UPDATE SalesItem SET status = 3 WHERE pid = ?";
 
     db.query(sql, [productId], (err, result) => {
-        if (err) throw err;
+        if (err) {
+            req.flash('error', 'Error removing item');
+            res.redirect('/user/dashbaord');
+        }
 
         if (result.changedRows > 0) {
             req.flash('success', 'Sucessfully removed item');
+            res.redirect('/admin/dashboard');
         }
-        res.redirect('/admin/dashboard');
+        else {
+            req.flash('error', 'Error removing item');
+            res.redirect('/user/dashbaord');
+        }
     });
 }
