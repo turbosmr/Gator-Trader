@@ -13,6 +13,4 @@ router.get('/:pid', salesItemController.salesItem_get);
 
 // GET request to delete sales item
 
-// GET request to approve or disapprove sales item (Administrator)
-
 module.exports = router;

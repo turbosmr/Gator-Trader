@@ -43,5 +43,3 @@ exports.salesItem_get = (req, res, next) => {
 // POST request to update sales item
 
 // GET request to delete sales item
-
-// GET request to approve or disapprove sales item (Administrator)

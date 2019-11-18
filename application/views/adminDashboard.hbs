@@ -1,5 +1,9 @@
 {{!-- Container for account manipulations --}}
-<div class="account_container">
+<div class="account_container mt-4">
+    <!-- Display approval or disapproval success message -->
+    <div class="col-5 mx-auto">
+        {{> message}}
+    </div>
     <h1>Welcome to your Dashboard, {{usernameOf loggedIn.username}}!</h1>
     {{!-- <div class="row">
         <div class="col">
@@ -12,7 +16,6 @@
     {{!-- --------------------------------------------------------------------------------- --}}
     <hr style="border: 3px solid rgb(31, 26, 34); max-width: 50%">
     {{!-- --------------------------------------------------------------------------------- --}}
-
 </div>
 {{!-- Container for the selling section --}}
 
@@ -46,8 +49,8 @@
                     <div class="col col-7"><a href="/products/{{this.pid}}">{{this.name}}</a></div>
                     <div class="col col-2">{{usernameOf this.sellerEmail}}</div>
                     <div class="col col-3">
-                        <a href="#"><button type="button" class="btn btn-success btn-sm">Approve</button></a>
-                        <a href="#"><button type="button" class="btn btn-danger btn-sm">Remove</button></a>
+                        <a href="/admin/approve?pid={{this.pid}}"><button type="button" class="btn btn-success btn-sm">Approve</button></a>
+                        <!--<a href="/admin/disapprove?pid={{this.pid}}"><button type="button" class="btn btn-danger btn-sm">Disapprove</button></a>-->
                     </div>
                 </li>
                 {{/each}}
@@ -76,8 +79,8 @@
                     <div class="col col-7"><a href="/products/{{this.pid}}">{{this.name}}</a></div>
                     <div class="col col-2">{{usernameOf this.sellerEmail}}</div>
                     <div class="col col-3">
-                        <a href="#"><button type="button" class="btn btn-warning btn-sm">Block</button></a>
-                        <a href="#"><button type="button" class="btn btn-danger btn-sm">Remove</button></a>
+                        <!--<a href="#"><button type="button" class="btn btn-warning btn-sm">Block</button></a>-->
+                        <a href="/admin/remove?pid={{this.pid}}"><button type="button" class="btn btn-danger btn-sm">Remove</button></a>
                     </div>
                 </li>
                 {{/each}}

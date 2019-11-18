@@ -35,7 +35,7 @@ exports.dashboard = (req, res, next) => {
         if (err) throw err;
 
         for (let i = 0; i < result.length; i++) {
-            if (result[i].status == "approved") {
+            if (result[i].status == "Approved") {
                 approvedSalesItem.push(result[i])
             } else {
                 unapprovedSalesItem.push(result[i]);
@@ -46,5 +46,50 @@ exports.dashboard = (req, res, next) => {
             approvedSalesItem: approvedSalesItem,
             unapprovedSalesItem: unapprovedSalesItem
         });
+    });
+}
+
+// Handle approving of sales item on GET
+exports.approve = (req, res, next) => {
+    let productId = req.query.pid;
+    let sql = "UPDATE SalesItem SET status = 2 WHERE pid = ?";
+
+    db.query(sql, [productId], (err, result) => {
+        if (err) throw err;
+
+        if (result.changedRows > 0) {
+            req.flash('success', 'Sucessfully approved item');
+        }
+        res.redirect('/admin/dashboard');
+    });
+}
+
+// Handle disapproving of sales item on GET
+exports.disapprove = (req, res, next) => {
+    let productId = req.query.pid;
+    let sql = "UPDATE SalesItem SET status = 3 WHERE pid = ?";
+
+    db.query(sql, [productId], (err, result) => {
+        if (err) throw err;
+
+        if (result.changedRows > 0) {
+            req.flash('success', 'Sucessfully disapproved item');
+        }
+        res.redirect('/admin/dashboard');
+    });
+}
+
+// Handle removing of sales item on GET
+exports.remove = (req, res, next) => {
+    let productId = req.query.pid;
+    let sql = "UPDATE SalesItem SET status = 4 WHERE pid = ?";
+
+    db.query(sql, [productId], (err, result) => {
+        if (err) throw err;
+
+        if (result.changedRows > 0) {
+            req.flash('success', 'Sucessfully removed item');
+        }
+        res.redirect('/admin/dashboard');
     });
 }
