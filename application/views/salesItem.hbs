@@ -39,6 +39,16 @@
             <div class="col-lg-5">
                 <div class="col">
                     <div class="items_page_mini_photos">
+                        {{#if data.salesItem.photoFileName}}
+                        <img id="sm001" src="/images/uploads/{{data.salesItem.photoFileName}}" alt="img1" class="img-thumbnail"
+                            data-img="/images/uploads/{{data.salesItem.photoFileName}}">
+                        <img id="sm002" src="/images/uploads/{{data.salesItem.photoFileName}}" alt="img2" class="img-thumbnail"
+                            data-img="/images/uploads/{{data.salesItem.photoFileName}}">
+                        <img id="sm003" src="/images/uploads/{{data.salesItem.photoFileName}}" alt="img3" class="img-thumbnail"
+                            data-img="/images/uploads/{{data.salesItem.photoFileName}}">
+                        <img id="sm004" src="/images/uploads/{{data.salesItem.photoFileName}}" alt="img4" class="img-thumbnail"
+                            data-img="/images/uploads/{{data.salesItem.photoFileName}}">
+                        {{else}}
                         <img id="sm001" src="/images/items_photos/chair.jpg" alt="img1" class="img-thumbnail"
                             data-img="/images/items_photos/chair.jpg">
                         <img id="sm001" src="/images/items_photos/pencil.jpg" alt="img2" class="img-thumbnail"
@@ -47,13 +57,20 @@
                             data-img="/images/items_photos/eraser.jpg">
                         <img id="sm003" src="/images/items_photos/table.jpg" alt="img4" class="img-thumbnail"
                             data-img="/images/items_photos/table.jpg">
+                        {{/if}}
                     </div>
                 </div>
                 <div class="col">
                     <div class="items_page_main_photo">
-                        <img data-enlargable style="cursor: zoom-in" src="/images/items_photos/chair.jpg"
+                        {{#if data.salesItem.photoFileName}}
+                        <img data-enlargable style="cursor: zoom-in; height: 300px;" src="/images/uploads/{{data.salesItem.photoFileName}}"
+                            id="ProductImage" data-toggle="modal" data-target="#exampleModalCenter"
+                            alt="Responsive image">
+                        {{else}}
+                        <img data-enlargable style="cursor: zoom-in; height: 300px;" src="/images/items_photos/chair.jpg"
                             id="ProductImage" class="img-fluid" data-toggle="modal" data-target="#exampleModalCenter"
                             alt="Responsive image">
+                        {{/if}}
                     </div>
                 </div>
             </div>

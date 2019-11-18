@@ -20,12 +20,12 @@ exports.sell_get = (req, res, next) => {
 
 // Handle submitting sales item for sell on POST
 exports.sell_post = (req, res, next) => {
-    let { productName, price, category, classMaterialSection, condition, quantity, deliveryMethod, imageFileName, description } = req.body;
+    let { productName, price, category, classMaterialSection, condition, quantity, deliveryMethod, description } = req.body;
     let seller = req.user.sid;
-    let sql = "INSERT INTO SalesItem (pid, seller, category, name, price, `condition`, quantity, description, deliveryMethod, classMaterialSection) VALUES (UUID(), ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    let salesItemImageFileName = req.file.filename;
+    let sql = "INSERT INTO SalesItem (pid, seller, category, name, price, `condition`, quantity, description, deliveryMethod, photoFileName, classMaterialSection) VALUES (UUID(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-
-    db.query(sql, [seller, category, productName, price, condition, quantity, description, deliveryMethod, classMaterialSection], (err, result) => {
+    db.query(sql, [seller, category, productName, price, condition, quantity, description, deliveryMethod, salesItemImageFileName, classMaterialSection], (err, result) => {
         if (err) {
             req.flash('error', 'Error listing item');
             res.render('sell');

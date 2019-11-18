@@ -76,7 +76,7 @@ exports.get = (req, res, next) => {
 // Handle rendering of search suggestions on GET
 // Author @Osbaldo Martinez
 exports.suggestions = (req, res, next) => {
-    let sql = "SELECT * FROM SalesItem WHERE name LIKE ? OR description LIKE ?";
+    let sql = "SELECT * FROM SalesItem WHERE (name LIKE ? OR description LIKE ?) AND status = 'Active'";
     let keyword = req.query.key;
     let product = [];
 

@@ -10,7 +10,8 @@
                 <h1>Posting an Item for Sale</h1>
             </div>
 
-            <form action="{{#if salesItem}}/products/{{salesItem.pid}}/edit{{else}}/sell{{/if}}" method="POST" id="sellForm">
+            <form action="{{#if salesItem}}/products/{{salesItem.pid}}/edit{{else}}/sell{{/if}}"
+                enctype="multipart/form-data" method="POST" id="sellForm">
                 <div class="mb-4">
                     <h5>Name</h5>
                     <input type="text" id="product" name="productName" class="form-control" style="color: black"
@@ -40,7 +41,8 @@
                     <select name="classMaterialSection" id="classMaterialSection" required disabled>
                         <option value="">-</option>
                         {{#each classSection}}
-                        <option value="{{this.csid}}" {{#if (eq this.csid salesItem.classMaterialSection)}} selected {{/if}}>
+                        <option value="{{this.csid}}" {{#if (eq this.csid salesItem.classMaterialSection)}} selected
+                            {{/if}}>
                             {{this.name}}
                         </option>
                         {{/each}}
@@ -52,10 +54,14 @@
                     <select name="condition" required>
                         <option value="">-</option>
                         <option value="New" {{#if (eq salesItem.condition "New")}} selected {{/if}}>New</option>
-                        <option value="Used - Excellent" {{#if (eq salesItem.condition "Used - Excellent")}} selected {{/if}}>Used - Excellent</option>
-                        <option value="Used - Good" {{#if (eq salesItem.condition "Used - Good")}} selected {{/if}}>Used - Good</option>
-                        <option value="Used - Fair" {{#if (eq salesItem.condition "Used - Fair")}} selected {{/if}}>Used - Fair</option>
-                        <option value="Used - Salvage" {{#if (eq salesItem.condition "Used - Salvage")}} selected {{/if}}>Used - Salvage</option>
+                        <option value="Used - Excellent" {{#if (eq salesItem.condition "Used - Excellent")}} selected
+                            {{/if}}>Used - Excellent</option>
+                        <option value="Used - Good" {{#if (eq salesItem.condition "Used - Good")}} selected {{/if}}>Used
+                            - Good</option>
+                        <option value="Used - Fair" {{#if (eq salesItem.condition "Used - Fair")}} selected {{/if}}>Used
+                            - Fair</option>
+                        <option value="Used - Salvage" {{#if (eq salesItem.condition "Used - Salvage")}} selected
+                            {{/if}}>Used - Salvage</option>
                     </select>
                 </div>
 
@@ -94,13 +100,14 @@
 
                 <div class="mb-4">
                     <h5>Add Image here</h5>
-                    <input type="file" name="imageFileName" required>
+                    <input type="file" name="imageFileName" required />
                 </div>
 
                 <div class="mb-4">
                     <h5>Description</h5>
                     <textarea class="form-control" rows="5" id="description" name="description"
-                        placeholder="Please enter description here" style="color: black" required>{{salesItem.description}}</textarea>
+                        placeholder="Please enter description here" style="color: black"
+                        required>{{salesItem.description}}</textarea>
                 </div>
 
                 <div class="row justify-content-end mx-0">
