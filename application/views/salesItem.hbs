@@ -13,10 +13,13 @@
 
 <div class="itemContainer">
     {{#if (eq data.salesItem.status "Ended")}}
-    <a href="/products/{{data.salesItem.pid}}/relist"><button type="button" class="btn btn-secondary btn-sm">Relist</button></a>
+    <a href="/products/{{data.salesItem.pid}}/relist"><button type="button"
+            class="btn btn-secondary btn-sm">Relist</button></a>
     {{else}}
-    <a href="/products/{{data.salesItem.pid}}/edit"><button type="button" class="btn btn-secondary btn-sm">Revise</button></a>
-    <a href="/products/{{data.salesItem.pid}}/end"><button type="button" class="btn btn-danger btn-sm">End Listing</button></a>
+    <a href="/products/{{data.salesItem.pid}}/edit"><button type="button"
+            class="btn btn-secondary btn-sm">Revise</button></a>
+    <a href="/products/{{data.salesItem.pid}}/end"><button type="button" class="btn btn-danger btn-sm">End
+            Listing</button></a>
     {{/if}}
 </div>
 {{/if}}
@@ -40,14 +43,14 @@
                 <div class="col">
                     <div class="items_page_mini_photos">
                         {{#if data.salesItem.photoFileName}}
-                        <img id="sm001" src="/images/uploads/{{data.salesItem.photoFileName}}" alt="img1" class="img-thumbnail"
-                            data-img="/images/uploads/{{data.salesItem.photoFileName}}">
-                        <img id="sm002" src="/images/uploads/{{data.salesItem.photoFileName}}" alt="img2" class="img-thumbnail"
-                            data-img="/images/uploads/{{data.salesItem.photoFileName}}">
-                        <img id="sm003" src="/images/uploads/{{data.salesItem.photoFileName}}" alt="img3" class="img-thumbnail"
-                            data-img="/images/uploads/{{data.salesItem.photoFileName}}">
-                        <img id="sm004" src="/images/uploads/{{data.salesItem.photoFileName}}" alt="img4" class="img-thumbnail"
-                            data-img="/images/uploads/{{data.salesItem.photoFileName}}">
+                        <img id="sm001" src="/images/uploads/{{data.salesItem.photoFileName}}" alt="img1"
+                            class="img-thumbnail" data-img="/images/uploads/{{data.salesItem.photoFileName}}">
+                        <img id="sm002" src="/images/uploads/{{data.salesItem.photoFileName}}" alt="img2"
+                            class="img-thumbnail" data-img="/images/uploads/{{data.salesItem.photoFileName}}">
+                        <img id="sm003" src="/images/uploads/{{data.salesItem.photoFileName}}" alt="img3"
+                            class="img-thumbnail" data-img="/images/uploads/{{data.salesItem.photoFileName}}">
+                        <img id="sm004" src="/images/uploads/{{data.salesItem.photoFileName}}" alt="img4"
+                            class="img-thumbnail" data-img="/images/uploads/{{data.salesItem.photoFileName}}">
                         {{else}}
                         <img id="sm001" src="/images/items_photos/chair.jpg" alt="img1" class="img-thumbnail"
                             data-img="/images/items_photos/chair.jpg">
@@ -63,13 +66,13 @@
                 <div class="col">
                     <div class="items_page_main_photo">
                         {{#if data.salesItem.photoFileName}}
-                        <img data-enlargable style="cursor: zoom-in; height: 300px;" src="/images/uploads/{{data.salesItem.photoFileName}}"
-                            id="ProductImage" data-toggle="modal" data-target="#exampleModalCenter"
-                            alt="Responsive image">
+                        <img data-enlargable style="cursor: zoom-in; height: 300px;"
+                            src="/images/uploads/{{data.salesItem.photoFileName}}" id="ProductImage" data-toggle="modal"
+                            data-target="#exampleModalCenter" alt="Responsive image">
                         {{else}}
-                        <img data-enlargable style="cursor: zoom-in; height: 300px;" src="/images/items_photos/chair.jpg"
-                            id="ProductImage" class="img-fluid" data-toggle="modal" data-target="#exampleModalCenter"
-                            alt="Responsive image">
+                        <img data-enlargable style="cursor: zoom-in; height: 300px;"
+                            src="/images/items_photos/chair.jpg" id="ProductImage" class="img-fluid" data-toggle="modal"
+                            data-target="#exampleModalCenter" alt="Responsive image">
                         {{/if}}
                     </div>
                 </div>
@@ -86,8 +89,25 @@
                 </div>
             </div>
             <div class="col-lg-3">
-                <button class="contact_button" type="button">Contact Seller</button>
+                <button class="contact_button" type="button" onclick="openForm()">Contact Seller</button>
                 <div class="pickup_map" id="map"></div>
+            </div>
+
+            <!-- pop up messages -->
+            <div class="chat-popup" id="myForm">
+                <form action="#" action="POST" class="form-container">
+                    <h4>{{data.salesItem.name}}</h4>
+                    <h5>by {{usernameOf data.salesItem.sellerEmail}}</h5>
+                    <textarea placeholder="Type message.." name="msg" required></textarea>
+                    <div class="row justify-content-between">
+                        <div class="col-auto">
+                            <button type="button" class="btn btn-danger" onclick="closeForm()">Close</button>
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-success">Send</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
         <div class="row">
@@ -170,4 +190,13 @@
             $(this).remove();
         }).appendTo('body');
     });
+</script>
+
+<script>
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
+    }
+    function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+    }
 </script>

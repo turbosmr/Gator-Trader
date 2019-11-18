@@ -79,7 +79,8 @@
                         <div class="row">
                             <div class="col-lg-4">
                                 <div class="results_image">
-                                    <img width="150" src="{{#if this.photoFileName}}/images/uploads/{{this.photoFileName}}{{else}}https://thumbs-prod.si-cdn.com/mHAHLSMfYOtZJs_PDnkqAgPFd6Q=/fit-in/1600x0/https://public-media.si-cdn.com/filer/00/a1/00a1f7bf-556f-48ef-a4da-10ea981a9337/mona.jpg{{/if}}">
+                                    <img width="150"
+                                        src="{{#if this.photoFileName}}/images/uploads/{{this.photoFileName}}{{else}}https://thumbs-prod.si-cdn.com/mHAHLSMfYOtZJs_PDnkqAgPFd6Q=/fit-in/1600x0/https://public-media.si-cdn.com/filer/00/a1/00a1f7bf-556f-48ef-a4da-10ea981a9337/mona.jpg{{/if}}">
                                 </div>
                             </div>
                             <div class="col-lg-8">
@@ -105,15 +106,22 @@
                                     <div class="contact_seller">
                                         <button class="button" onclick="openForm()">Contact Seller</button>
                                     </div>
+
                                     <!-- pop up messages -->
                                     <div class="chat-popup" id="myForm">
-                                        <form action="/action_page.php" class="form-container">
-                                            <h4>item decription goes here</h4>
-                                            <h5>Seller's name goes here</h5>
+                                        <form action="#" action="POST" class="form-container">
+                                            <h4>{{this.name}}</h4>
+                                            <h5>by {{usernameOf this.sellerEmail}}</h5>
                                             <textarea placeholder="Type message.." name="msg" required></textarea>
-                                            <button type="submit" class="btn">Send</button>
-                                            <button type="button" class="btn cancel"
-                                                onclick="closeForm()">Close</button>
+                                            <div class="row justify-content-between">
+                                                <div class="col-auto">
+                                                    <button type="button" class="btn btn-danger"
+                                                        onclick="closeForm()">Close</button>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <button type="submit" class="btn btn-success">Send</button>
+                                                </div>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
@@ -175,3 +183,21 @@
     {{/if}}
     {{/if}}
 </div>
+<script>
+    jQuery(document).ready(function () {
+        jQuery('.toggle-nav').click(function (e) {
+            jQuery(this).toggleClass('active');
+            jQuery('.sidebar ul').toggleClass('active');
+            e.preventDefault();
+        });
+    });
+</script>
+
+<script>
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
+    }
+    function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+    }
+</script>

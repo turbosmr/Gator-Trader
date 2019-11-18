@@ -45,6 +45,7 @@
 #search-results {
     padding: 0 !important;
     margin: 0 !important;
+    width: 85%;
 }
 
 #search-results tr td {
