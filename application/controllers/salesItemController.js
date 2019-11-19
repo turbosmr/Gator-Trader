@@ -40,6 +40,8 @@ exports.salesItem_get = (req, res, next) => {
 
 // GET request to edit sales item
 exports.edit_get = (req, res, next) => {
+    let salesItem = {};
+    let classSection = [];
     let sql = "SELECT *, CAST(price AS CHAR) AS price FROM SalesItem WHERE pid = ? AND seller = ?";
 
     db.query(sql, [req.params.pid, req.user.sid], (err, result) => {
@@ -47,20 +49,44 @@ exports.edit_get = (req, res, next) => {
             res.render('error');
         }
         else {
-            res.render('sell', {
-                salesItem: result[0]
-            });
+            salesItem = result[0];
         }
+    });
+
+    sql = "SELECT * FROM ClassSection";
+
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+
+        for (let i = 0; i < result.length; i++) {
+            classSection.push(result[i]);
+        }
+
+        res.render('sell', {
+            salesItem: salesItem,
+            classSection: classSection
+        });
     });
 }
 
-// POST request to update sales item
+// POST request to edit sales item
 exports.edit_post = (req, res, next) => {
     let productId = req.params.pid;
-    let { productName, price, category, classMaterialSection, condition, quantity, deliveryMethod, imageFileName, description } = req.body;
-    let sql = "UPDATE SalesItem SET category = ?, name = ?, price = ?, `condition` = ?, quantity = ?, description = ?, deliveryMethod = ?, classMaterialSection = ? WHERE pid = ?";
+    let { productName, price, category, classMaterialSection, condition, quantity, deliveryMethod, description } = req.body;
+    let salesItemImageFileName = req.file.filename;
+    let sql = "";
+    let placeholders = [];
 
-    db.query(sql, [category, productName, price, condition, quantity, description, deliveryMethod, classMaterialSection, productId], (err, result) => {
+    if (classMaterialSection) {
+        sql = "UPDATE SalesItem SET category = ?, name = ?, price = ?, `condition` = ?, quantity = ?, description = ?, deliveryMethod = ?, photoFileName = ?, classMaterialSection = ? WHERE pid = ?";
+        placeholders = [category, productName, price, condition, quantity, description, deliveryMethod, salesItemImageFileName, classMaterialSection, productId];
+    }
+    else {
+        sql = "UPDATE SalesItem SET category = ?, name = ?, price = ?, `condition` = ?, quantity = ?, description = ?, deliveryMethod = ?, photoFileName = ?, classMaterialSection = NULL WHERE pid = ?";
+        placeholders = [category, productName, price, condition, quantity, description, deliveryMethod, salesItemImageFileName, productId]
+    }
+
+    db.query(sql, placeholders, (err, result) => {
         if (err) {
             req.flash('error', 'Error submitting revision');
             res.redirect('/products/' + req.params.pid + '/edit');

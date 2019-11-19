@@ -34,22 +34,24 @@ exports.search_results = (limit) => {
         }
 
         // Check if keyword criteria exist
-        if (keyword && category != '2') {
-            sql += " AND (name LIKE ? OR description LIKE ?)";
+        if (keyword) {
+            sql += " AND (name LIKE ? OR description LIKE ? OR (classMaterialSection IN (SELECT ClassSection.csid from ClassSection WHERE name LIKE ?)))";
             let likeKeyword = '%' + keyword + '%';
+            placeholders.push(likeKeyword);
             placeholders.push(likeKeyword);
             placeholders.push(likeKeyword);
         }
 
         // Check if category criteria exist
-        if (category && category != 'all') {
-            sql += " AND category = ?";
-            placeholders.push(category);
+        if (category != 'all') {
             // Check if class material category is selected
-            if (category == '2' && keyword) {
-                sql += " AND classMaterialSection IN (SELECT ClassSection.csid from ClassSection WHERE name LIKE ?)";
-                let likeKeyword = '%' + keyword + '%';
-                placeholders.push(likeKeyword);
+            if (category == 'classMaterials') {
+                sql += " AND classMaterialSection IS NOT NULL";
+            }
+            // Category other class material is selected
+            else {
+                sql += " AND category = ?";
+                placeholders.push(category);
             }
         }
 
