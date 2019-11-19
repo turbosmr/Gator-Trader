@@ -51,88 +51,98 @@
 
 <div class="container-fluid mb-3">
 
-    <!-- Side Bar -->
-    <div class="sidebar">
-        <div class="price_range">
-            <h4><b>Price</b></h4>
-            <a href="#" class="under25">Under $25</a>
-            <a href="#" class="25to50">$25 to $50</a>
-            <a href="#" class="50to200">$50 to $200</a>
-            <a href="#" class="over200">$200 and Above</a>
-        </div>
-        <div class="condition">
-            <h4><b>Condition</b></h4>
-            <a href="#" class="new">New</a>
-            <a href="#" class="used-excellent">Used - Excellent</a>
-            <a href="#" class="used-good">Used - Good</a>
-            <a href="#" class="used-fair">Used - Fair</a>
-            <a href="#" class="used-salvage">Used - Salvage</a>
-        </div>
-    </div>
 
-    <table id="search-results">
-        {{#each product}}
-        <tr>
-            <td>
-                <div class="results_card_container">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="results_image">
-                                    <img width="150"
-                                        src="{{#if this.photoFileName}}/images/uploads/{{this.photoFileName}}{{else}}https://thumbs-prod.si-cdn.com/mHAHLSMfYOtZJs_PDnkqAgPFd6Q=/fit-in/1600x0/https://public-media.si-cdn.com/filer/00/a1/00a1f7bf-556f-48ef-a4da-10ea981a9337/mona.jpg{{/if}}">
-                                </div>
-                            </div>
-                            <div class="col-lg-8">
-                                <div class="info">
-                                    <div class="featured_text">
-                                        <h1><a href="/products/{{this.pid}}">{{this.name}}</a></h1>
-                                        <div class="seller">
-                                            <p>by <b>{{usernameOf this.sellerEmail}}</b></p>
-                                        </div>
-                                        <p class="price">${{this.newPrice}}</p>
-
-                                        <div class="description">
-                                            <p>{{{this.description}}}</p>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="card_footer">
-                                    <div class="contact_seller">
-                                        <button class="button" onclick="openForm()">Contact Seller</button>
-                                    </div>
-
-                                    <!-- pop up messages -->
-                                    <div class="chat-popup" id="myForm">
-                                        <form action="#" action="POST" class="form-container">
-                                            <h4>*Item Name*</h4>
-                                            <h5>by *Seller*</h5>
-                                            <textarea placeholder="Type message.." name="msg" required></textarea>
-                                            <div class="row justify-content-between">
-                                                <div class="col-auto">
-                                                    <button type="button" class="btn btn-danger"
-                                                        onclick="closeForm()">Close</button>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <button type="submit" class="btn btn-success">Send</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-2 sidebar_column">
+                <div class="sidebar">
+                    <div class="price_range">
+                        <h4><b>Price</b></h4>
+                        <a href="#" class="under25">Under $25</a>
+                        <a href="#" class="25to50">$25 to $50</a>
+                        <a href="#" class="50to200">$50 to $200</a>
+                        <a href="#" class="over200">$200 and Above</a>
+                    </div>
+                    <div class="condition">
+                        <h4><b>Condition</b></h4>
+                        <a href="#" class="new">New</a>
+                        <a href="#" class="used-excellent">Used - Excellent</a>
+                        <a href="#" class="used-good">Used - Good</a>
+                        <a href="#" class="used-fair">Used - Fair</a>
+                        <a href="#" class="used-salvage">Used - Salvage</a>
                     </div>
                 </div>
-            </td>
-        </tr>
-        {{/each}}
-    </table>
+            </div>
+
+            <div class="col-lg-10 card_column">
+                <table id="search-results">
+                    {{#each product}}
+                    <tr>
+                        <td>
+                            <div class="results_card_container">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="results_image">
+                                                <img width="150"
+                                                    src="{{#if this.photoFileName}}/images/uploads/{{this.photoFileName}}{{else}}https://thumbs-prod.si-cdn.com/mHAHLSMfYOtZJs_PDnkqAgPFd6Q=/fit-in/1600x0/https://public-media.si-cdn.com/filer/00/a1/00a1f7bf-556f-48ef-a4da-10ea981a9337/mona.jpg{{/if}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="info">
+                                                <div class="featured_text">
+                                                    <h1><a href="/products/{{this.pid}}">{{this.name}}</a></h1>
+                                                    <div class="seller">
+                                                        <p>by <b>{{usernameOf this.sellerEmail}}</b></p>
+                                                    </div>
+                                                    <p class="price">${{this.newPrice}}</p>
+
+                                                    <div class="description">
+                                                        <p>{{{this.description}}}</p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="card_footer">
+                                                <div class="contact_seller">
+                                                    <button class="button" onclick="openForm()">Contact Seller</button>
+                                                </div>
+                                                <!-- pop up messages -->
+                                                <div class="chat-popup" id="myForm">
+                                                    <form action="#" action="POST" class="form-container">
+                                                        <h4>*Item Name*</h4>
+                                                        <h5>by *Seller*</h5>
+                                                        <textarea placeholder="Type message.." name="msg"
+                                                            required></textarea>
+                                                        <div class="row justify-content-between">
+                                                            <div class="col-auto">
+                                                                <button type="button" class="btn btn-danger"
+                                                                    onclick="closeForm()">Close</button>
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <button type="submit"
+                                                                    class="btn btn-success">Send</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </table>
+            </div>
+        </div>
+    </div>
 
     {{#if (gt pageCount 1)}}
     <div class="pagination-container">
