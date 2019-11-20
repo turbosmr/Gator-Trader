@@ -121,7 +121,7 @@
 
                 <div class="mb-4">
                     <h5>Add Image here</h5>
-                    <input type="file" name="imageFileName" required />
+                    <input type="file" name="salesItemImages[]" id="salesItemImages" accept="image/png,image/jpeg" multiple required />
                 </div>
 
                 <div class="row justify-content-end mx-0">
@@ -133,13 +133,6 @@
     </div>
 
 </div>
-
-<script>
-    $(".custom-file-input").on("change", function () {
-        var fileName = $(this).val().split("\\").pop();
-        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-    });
-</script>
 
 </div>
 

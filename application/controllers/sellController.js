@@ -23,9 +23,19 @@ exports.sell_post = (req, res, next) => {
     let { productName, price, category, classMaterialSection, condition, quantity, deliveryMethod, description } = req.body;
     let seller = req.user.sid;
     let salesItemImageFileName = req.file.filename;
-    let sql = "INSERT INTO SalesItem (pid, seller, category, name, price, `condition`, quantity, description, deliveryMethod, photoFileName, classMaterialSection) VALUES (UUID(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    let sql = "";
+    let placeholders = [];
 
-    db.query(sql, [seller, category, productName, price, condition, quantity, description, deliveryMethod, salesItemImageFileName, classMaterialSection], (err, result) => {
+    if (classMaterialSection != '') {
+        sql = "INSERT INTO SalesItem (pid, seller, category, name, price, `condition`, quantity, description, deliveryMethod, photoFileName, classMaterialSection) VALUES (UUID(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        placeholders = [seller, category, productName, price, condition, quantity, description, deliveryMethod, salesItemImageFileName, classMaterialSection];
+    }
+    else {
+        sql = "INSERT INTO SalesItem (pid, seller, category, name, price, `condition`, quantity, description, deliveryMethod, photoFileName, classMaterialSection) VALUES (UUID(), ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL)";
+        placeholders = [seller, category, productName, price, condition, quantity, description, deliveryMethod, salesItemImageFileName];
+    }
+
+    db.query(sql, placeholders, (err, result) => {
         if (err) {
             req.flash('error', 'Error listing item');
             res.render('sell');

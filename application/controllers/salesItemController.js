@@ -77,7 +77,7 @@ exports.edit_post = (req, res, next) => {
     let sql = "";
     let placeholders = [];
 
-    if (classMaterialSection) {
+    if (classMaterialSection != '') {
         sql = "UPDATE SalesItem SET category = ?, name = ?, price = ?, `condition` = ?, quantity = ?, description = ?, deliveryMethod = ?, photoFileName = ?, classMaterialSection = ? WHERE pid = ?";
         placeholders = [category, productName, price, condition, quantity, description, deliveryMethod, salesItemImageFileName, classMaterialSection, productId];
     }
