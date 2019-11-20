@@ -84,14 +84,18 @@
                                     <div class="row">
                                         <div class="col-lg-4">
                                             <div class="results_image">
-                                                <img width="150"
-                                                    src="{{#if this.photoFileName}}/images/uploads/{{this.photoFileName}}{{else}}https://thumbs-prod.si-cdn.com/mHAHLSMfYOtZJs_PDnkqAgPFd6Q=/fit-in/1600x0/https://public-media.si-cdn.com/filer/00/a1/00a1f7bf-556f-48ef-a4da-10ea981a9337/mona.jpg{{/if}}">
+
+                                                <!-- added this for results page to open into new page when you click on photo-->
+                                                <a href="/products/{{this.pid}}" target="_blank">
+                                                    <img width="150" src="{{#if this.photoFileName}}/images/uploads/{{this.photoFileName}}{{else}}https://thumbs-prod.si-cdn.com/mHAHLSMfYOtZJs_PDnkqAgPFd6Q=/fit-in/1600x0/https://public-media.si-cdn.com/filer/00/a1/00a1f7bf-556f-48ef-a4da-10ea981a9337/mona.jpg{{/if}}" >                                                                                                
+                                                </a>
                                             </div>
                                         </div>
                                         <div class="col-lg-8">
                                             <div class="info">
                                                 <div class="featured_text">
-                                                    <h1><a href="/products/{{this.pid}}">{{this.name}}</a></h1>
+                                                    <!-- added this link into new page when you click on title link -->
+                                                    <h1><a href="/products/{{this.pid}}" target="_blank"> {{this.name}} </a></h1>
                                                     <div class="seller">
                                                         <p>by <b>{{usernameOf this.sellerEmail}}</b></p>
                                                     </div>
