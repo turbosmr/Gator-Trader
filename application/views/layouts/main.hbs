@@ -2,122 +2,267 @@
 <html lang="en">
 
 <head>
-  <title>SFSU CSC 648 Team 03 Buy & Sell Inc for Students</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="/stylesheets/main.css">
-  <link rel="stylesheet" href="/stylesheets/about.css">
-  <link rel="stylesheet" href="/stylesheets/results.css">
-  <link rel="stylesheet" href="/stylesheets/search.css">
-  <link rel="stylesheet" href="/stylesheets/home.css">
-  <link rel="stylesheet" href="/stylesheets/dashboard.css">
-  <link rel="stylesheet" href="/stylesheets/sell.css">
-  <link rel="stylesheet" href="/stylesheets/item.css">
-  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="/js/typeahead.min.js"></script>
-  <script type="text/javascript" src="/js/typeahead.js"></script>
-  <script type="text/javascript" src="/js/sortSearchResults.js"></script>
-  <script type="text/javascript" src="/js/filterResults.js"></script>
+    <title>SFSU CSC 648 Team 03 Buy & Sell Inc for Students</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="/stylesheets/main.css">
+    <link rel="stylesheet" href="/stylesheets/about.css">
+    <link rel="stylesheet" href="/stylesheets/results.css">
+    <link rel="stylesheet" href="/stylesheets/search.css">
+    <link rel="stylesheet" href="/stylesheets/home.css">
+    <link rel="stylesheet" href="/stylesheets/dashboard.css">
+    <link rel="stylesheet" href="/stylesheets/item.css">
+    <link rel="stylesheet" href="/stylesheets/adminDashboard.css">
+    <link rel="stylesheet" href="/stylesheets/error.css">
+    <link rel="stylesheet" href="/stylesheets/messages.css">
+    <link rel="stylesheet" href="/stylesheets/sell.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/typeahead.min.js"></script>
+    <script type="text/javascript" src="/js/typeahead.js"></script>
+    <script type="text/javascript" src="/js/sortSearchResults.js"></script>
+    <script type="text/javascript" src="/js/filterAndSortResults.js"></script>
+    <script type="text/javascript" src="/js/placeholderHelper.js"></script>
 </head>
 
-<body style="background-color:rgb(243, 243, 243);">
-  <!-- Nav Bar-->
-  <nav class="navbar navbar-expand-sm sticky-top">
-    <a class="navbar-brand" id="bars" href="/">Team 03</a>
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="/about">About</a>
-      </li>
-    </ul>
-    <!-- Search bar -->
-    <form action="/search" method="POST" class="product-search-form">
-      <div class="input-group">
-        <!-- Category filter dropdown menu -->
-        <div class="input-group-prepend">
-          <select name="categories" class="btn category-button dropdown-toggle">
-            <option value="all">All Categories</option>
-            {{#if category}}
+<body>
+    <!-- Disclaimer -->
+    <nav class="navbar navbar-expand-sm justify-content-center">
+        <div class="disclaimer" style="text-align: center;">SFSU Software Engineering Project CSC 648-848, Fall 2019.
+            For Demonstration Only</div>
+    </nav>
+
+    <!-- Navbar (Brand, Links, Search Bar, Sell Button, User Dropdown Menu) -->
+    <nav class="navbar navbar-expand-sm sticky-navbar-top">
+        <div class="container-fluid mx-0 px-0">
+            <div class="row align-items-center no-gutters" style="width: 100%">
+                <div class="d-block d-sm-block d-md-none d-lg-none d-xl-none" style="width: 100%">
+                    <div class="row align-items-center no-gutters">
+                        <!-- Render sell button inline with brand and user dropdown menu when 576px <= width < 768px -->
+                        <!-- Hide sell button when width < 576px -->
+                        <div class="col-12 col-sm-4 col-md-4 col-lg-auto">
+                            <div class="d-none d-sm-block d-md-none d-lg-none d-xl-none">
+                                <div style="text-align: center;">
+                                    <button class="btn sell-button">
+                                        <a href="/sell">Sell</a>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Brand -->
+                        <div class="col-12 col-sm-4 col-md-4 col-lg-auto">
+                            <div style="text-align: center;">
+                                <a class="navbar-brand mx-0" href="/">
+                                    <img src="/images/main/GatorTraderLogo2.png" style="width:150px" alt="">
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- User dropdown menu -->
+                        <div class="col-auto col-sm-4 col-md-4 col-lg-auto" style="margin: auto">
+                            <div class="d-block d-sm-block d-md-none d-lg-none d-xl-none">
+                                <div class="dropdown">
+                                    <a class="dropdown-toggle" href="#" id="dropdownMenuButton" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false" style="color: white;">
+                                        {{#if loggedIn}}
+                                        Hello, <b>{{usernameOf loggedIn.username}}</b>
+                                        {{else}}
+                                        Hello, Sign in
+                                        {{/if}}
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        {{#if loggedIn}}
+                                        {{#if loggedIn.aid}}
+                                        <a class="dropdown-item" href="/admin/dashboard"><span
+                                                class="fas fa-users-cog"></span>
+                                            Dashboard</a>
+                                        <a class="dropdown-item" href="/admin/logout"><span
+                                                class="fa fa-sign-out"></span>
+                                            Log
+                                            Out</a>
+                                        {{else}}
+                                        <a class="dropdown-item" href="/user/dashboard"><span class="fa fa-user"></span>
+                                            Dashboard</a>
+                                        <a class="dropdown-item" href="/user/logout"><span
+                                                class="fa fa-sign-out"></span>
+                                            Log
+                                            Out</a>
+                                        {{/if}}
+                                        {{else}}
+                                        <a class="dropdown-item" href="/user/login"><span class="fa fa-sign-in"></span>
+                                            Sign
+                                            in</a>
+                                        <a class="dropdown-item" href="/user/dashboard"><span class="fa fa-user"></span>
+                                            Dashboard</a>
+                                        <a class="dropdown-item" href="/admin/login"><span
+                                                class="fas fa-users-cog"></span>
+                                            Admin</a>
+                                        {{/if}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row align-items-center no-gutters" style="width: 100%">
+                    <!-- Render brand when more than 768px -->
+                    <div class="d-none d-sm-none d-md-block d-lg-block d-xl-block">
+                        <div class="col-12 col-sm-4 col-md-auto col-lg-auto pl-0">
+                            <div style="text-align: center;">
+                                <!-- Brand -->
+                                <a class="navbar-brand mx-0" href="/">
+                                    <img src="/images/main/GatorTraderLogo2.png" style="width:150px" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Links -->
+                    <div class="col-auto col-md-1 col-lg-1">
+                        <div class="navbar-nav">
+                            <a class="nav-link" href="/about" style="text-align: center;">About</a>
+                        </div>
+                    </div>
+
+                    <!-- Search bar -->
+                    <div class="col-12 col-md-4 col-lg-6 ml-auto mr-3">
+                        <form action="/search" method="POST">
+                            <div class="row no-gutters align-items-center">
+                                <div class="input-group">
+                                    <!-- Render category filter dropdown menu when width <= 576px -->
+                                    <div class="input-group-prepend d-none d-sm-block">
+                                        <select name="categories" class="btn category-button dropdown-toggle"
+                                            style="height: 100%;" onchange="changePlaceholder()"
+                                            id="dropDownCategories">
+                                            <option value="all">All Categories</option>
+                                            <option value="classMaterials" onclick="changePlaceholder()"
+                                                {{#if (eq "classMaterials" @root.searchCriteria.selectedCategoryVal)}} selected
+                                                {{/if}}>Class Materials</option>
+                                            {{#each category}}
+                                            <option value="{{this.cid}}"
+                                                {{#if (eq this.cid @root.searchCriteria.selectedCategoryVal)}} selected
+                                                {{/if}}>
+                                                {{this.name}}
+                                            </option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
+
+                                    <!-- Search input field -->
+                                    <div class="col px-0">
+                                        <input type="text" name="keyword"
+                                            class="form-control form-control form-control-borderless typeahead tt-query"
+                                            autocomplete="off" spellcheck="false"
+                                            {{#if (eq "classMaterials" searchCriteria.selectedCategoryVal)}}
+                                            placeholder="Please enter the class section (ex: CSC 648)" {{else}}
+                                            placeholder="What are you looking for?" {{/if}}
+                                            value="{{searchCriteria.keyword}}" id="searchKeyword" maxlength="40">
+                                    </div>
+
+                                    <!-- Submit search button -->
+                                    <div class="input-group-append">
+                                        <button class="btn search-button" type="submit"><i
+                                                class="fa fa-search"></i></button>
+                                    </div>
+
+                                    <!-- Render sell button when width < 576px -->
+                                    <div class="col-auto d-block d-sm-none pr-0">
+                                        <div style="float: right;">
+                                            <a href="/sell">
+                                                <button class="btn sell-button">Sell</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Render sell button when width <= 768px-->
+                    <div class="col-12 col-md-auto col-lg-auto mr-auto">
+                        <div class="d-none d-md-block">
+                            <a href="/sell">
+                                <button class="btn sell-button">Sell</button>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Render user dropdown menu when width <= 768px -->
+                    <div class="col-12 col-sm-12 col-md-2 col-lg-2">
+                        <div class="d-none d-md-block">
+                            <div class="dropdown" style="text-align: right;">
+                                <a class="dropdown-toggle" href="#" id="dropdownMenuButton" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" style="color: white;">
+                                    {{#if loggedIn}}
+                                    Hello, <b>{{usernameOf loggedIn.username}}</b>
+                                    {{else}}
+                                    Hello, Sign in
+                                    {{/if}}
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                    {{#if loggedIn}}
+                                    {{#if loggedIn.aid}}
+                                    <a class="dropdown-item" href="/admin/dashboard"><span
+                                            class="fas fa-users-cog"></span>
+                                        Dashboard</a>
+                                    <a class="dropdown-item" href="/admin/logout"><span class="fa fa-sign-out"></span>
+                                        Log
+                                        Out</a>
+                                    {{else}}
+                                    <a class="dropdown-item" href="/user/dashboard"><span class="fa fa-user"></span>
+                                        Dashboard</a>
+                                    <a class="dropdown-item" href="/user/logout"><span class="fa fa-sign-out"></span>
+                                        Log
+                                        Out</a>
+                                    {{/if}}
+                                    {{else}}
+                                    <a class="dropdown-item" href="/user/login"><span class="fa fa-sign-in"></span>
+                                        Sign
+                                        in</a>
+                                    <a class="dropdown-item" href="/user/dashboard"><span class="fa fa-user"></span>
+                                        Dashboard</a>
+                                    <a class="dropdown-item" href="/admin/login"><span class="fas fa-users-cog"></span>
+                                        Admin</a>
+                                    {{/if}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Nav Bar (Categories) -->
+    <nav class="navbar navbar-expand-sm justify-content-center">
+        <div class="scrollable-categories mb-2">
             {{#each category}}
-            <option value="{{this.cid}}" {{#if (isEqual this.cid @root.selectedCategory)}} selected {{/if}}>{{this.name}}</option>
+            <a class="" href="/search?c={{this.cid}}">{{this.name}}</a>&nbsp;&nbsp;
             {{/each}}
-            {{/if}}
-          </select>
         </div>
-        <!-- Search input field -->
-        <input type="text" name="keyword" class="typeahead tt-query" autocomplete="off" spellcheck="false"
-          placeholder="What are you looking for?" value="{{keyword}}" id="searchKeyword">
-        <!-- Submit search button -->
-        <div class="input-group-append">
-          <button class="btn search-button" type="submit"><i class="fa fa-search"></i></button>
-        </div>
-      </div>
-    </form>
+    </nav>
 
-    <ul class="navbar-nav ml-auto">
-      <!-- User dropdown menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-          {{#if loggedInUser}}
-          Hello, <b>{{loggedInUser.email}}</b>
-          {{else}}
-          Hello, Sign in
-          {{/if}}
-        </a>
-        <div class="dropdown-menu user-dropdown-menu">
-          {{#if loggedInUser}}
-          <a class="dropdown-item" href="/account/dashboard"><span class="fa fa-user"></span> Dashboard</a>
-          <a class="dropdown-item" href="/users/logout"><span class="fa fa-sign-out"></span> Log Out</a>
-          {{else}}
-          <a class="dropdown-item" href="/users/login"><span class="fa fa-sign-in"></span> Sign in</a>
-          <a class="dropdown-item" href="/account/dashboard"><span class="fa fa-user"></span> Dashboard</a>
-          {{/if}}
-        </div>
-      </li>
-    </ul>
-  </nav>
+    <!-- Content Body -->
+    <div class="main">
+        {{{body}}}
+    </div>
 
-  <nav class="navbar navbar-expand-sm justify-content-center">
-    <ul class="navbar-nav">
-      <!-- Dropdown -->
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-          Shop by Category
-        </a>
-        <div class="dropdown-menu">
-
-            {{#if category}}
-            {{#each category}}
-          <a class="dropdown-item" href="#">{{this.name}}</a>
-          {{/each}}
-          {{/if}}
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/sell">Sell</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Popular</a>
-      </li>
-    </ul>
-  </nav>
-
-  <div class="main">
-    {{{body}}}
-  </div>
-
-  <div class="footer" style="margin-bottom:0">
-    <p>
-      <a href="/sell" style="color: black">Sell</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-      <a href="/about" style="color: black">About</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-      <a href="#" style="color: black">Terms & Conditions</a>&nbsp;&nbsp;&nbsp;
-    </p>
-    <p>For demonstrational and educational purposes only.</p>
-    <p>Copyright © 2019 SFSU CSC 648 Team 03 Buy & Sell Inc for Students. All rights reserved.</p>
-  </div>
+    <!-- Footer -->
+    <div class="footer">
+        <p>
+            <a href="/sell">Sell</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+            <a href="/about">About</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+            <a href="#">Terms & Conditions</a>&nbsp;&nbsp;&nbsp;
+        </p>
+        <p style="margin-bottom: 0;">Copyright © 2019 SFSU CSC 648 Team 03 Buy & Sell Inc for Students. All rights
+            reserved.</p>
+    </div>
 </body>
+
 </html>

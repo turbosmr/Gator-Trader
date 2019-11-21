@@ -3,42 +3,42 @@
 const express = require('express');
 const router = express.Router();
 
-// about home page
+// GET about team page
 router.get('/', (req, res) => {
     res.render('about/about');
 });
 
-// steve's page
+// GET Steve's about page
 router.get('/steve', (req, res) => {
     res.render('about/steve');
 });
 
-// johnson's page
+// GET Johnson's about page
 router.get('/johnson', (req, res) => {
     res.render('about/johnson');
 });
 
-// sergei's page
+// GET Sergei's about page
 router.get('/sergei', (req, res) => {
     res.render('about/sergei');
 });
 
-// tevis' page
+// GET Tevis' about page
 router.get('/tevis', (req, res) => {
     res.render('about/tevis');
 });
 
-// matthew's page
+// GET Matthew's about page
 router.get('/matthew', (req, res) => {
     res.render('about/matthew');
 });
 
-// tim's page
+// GET Tim's about page
 router.get('/tim', (req, res) => {
     res.render('about/tim');
 });
 
-// osbaldo's page
+// GET Osbaldo's about page
 router.get('/osbaldo', (req, res) => {
     res.render('about/osbaldo');
 });

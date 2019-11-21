@@ -1,19 +1,26 @@
-.home-page {
+.home {
     color: black;
-}
- /* Make the image fully responsive */
- .carousel-inner img {
-    width: 100%;
-    height: auto;
-    max-height: 400px;
-  }
-  .carousel-main {
-    margin-top: 20px;
-    margin-bottom: 100px;
-  }
-  .header {
-    margin-top: 50px;
+    text-align: center;
 }
 
-.category-img {
+.home-card {
+    height: 150px;
+    margin-bottom: 20px;
+}
+
+.home-image {
+    height: 100%;
+    object-fit: scale-down;
+    padding-bottom: 50px;
+    padding-top: 20px;
+    -webkit-filter: drop-shadow(5px 5px 5px #222);
+    filter: drop-shadow(5px 5px 5px #222);
+}
+
+.home-page {
+    margin-top: 90px;
+}
+
+.home-page-icons {
+    margin-bottom: 20px;
 }

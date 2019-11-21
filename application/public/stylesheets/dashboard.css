@@ -1,5 +1,6 @@
+/* Page Containers */
 
-.container {
+.sell_container {
     max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
@@ -7,18 +8,58 @@
     padding-right: 10px;
 }
 
-h1 {
+.messages_container {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.account_container {
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.dashboard_tabs{
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* ------------------------------------------------------------- */
+
+/* Account Boxes Styling */
+
+#account {
+    text-align: center;
+    font-weight: 600;
+    background-color: #fff;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
+    margin: 5px 5px 5px 5px;
+    padding: 3px;
+}
+
+#account:hover {
+    background: rgba(182, 165, 182, 0.767);
+    color: #FFFFFF;
+}
+
+.account_container h1 {
     font-size: 40px;
     margin: 20px;
     text-align: center;
     font-weight: bold;
 }
 
-h2 {
-    font-size: 30px;
-    margin: 20px;
-    text-align: center;
-}
+/* ------------------------------------------------------------- */
+
+/* Selling Styling */
 
 .selling li {
     border-radius: 5px;
@@ -27,121 +68,99 @@ h2 {
     justify-content: space-between;
     margin-bottom: 15px;
 }
+
 .selling .table-header {
     background-color: #68b174;
     font-size: 15px;
     font-weight: bold;
     text-transform: uppercase;
 }
+
 .selling .table-row {
     background-color: #fff;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
 }
-.selling .col-1 {
-    flex-basis: 25%;
+
+.selling .col-6 {
     font-weight: bold;
 }
+
+.selling .col-1 {
+    flex-basis: 20%;
+    font-weight: bold;
+}
+
 .selling .table-row .col-2 {
-    flex-basis: 25%;
+    flex-basis: 20%;
     color: green;
     font-weight: bold;
-
 }
+
 .selling .col-3 {
-    flex-basis: 25%;
-}
-.selling .col-4 {
-    flex-basis: 25%;
-    font-weight: bold;
+    flex-basis: 20%;
 }
 
-
-@media screen and (max-width: 700px) {
+.sell_container h2 {
+    font-size: 30px;
+    margin: 20px;
+    text-align: center;
 }
 
 /* --------------------------------------------------------------------------------------------------- */
 
+/* Messages Styling*/
 
-/*** Table Styles **/
-
-.messages {
-  background: white;
-  border-radius:5px;
-  height: 320px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  padding:5px;
-  width: 100%;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
-}
-
-.new_message{
-    background: lightgray;
-    font-weight: bold;
-    
-}
- 
-th {
-  color:rgb(243, 245, 247);;
-  background:#030405;
-  font-size:22px;
-  font-weight: bold;
-  padding:12px;
-  text-align:left;
-}
-  
-tr {
-  border-top: 1px solid rgb(73, 73, 75);
-  border-bottom: 1px solid rgb(73, 73, 75);
-}
- 
-tr:hover td {
-  background:rgb(139, 125, 139);
-  color:#FFFFFF;
-}
- 
-td {
-  background:#FFFFFF;
-  padding:8px;
-  text-align:left;
-  font-weight:normal;
-  font-size:15px;
-  border-right: 1px solid rgb(8, 8, 8);
-}
-
-/* -------------------------------------------------------------------------------- */
-
-
-.buy li {
+.messages li {
     border-radius: 5px;
     padding: 20px 20px;
     display: flex;
     justify-content: space-between;
     margin-bottom: 15px;
 }
-.buy .table-header {
-    background-color: #536dd6;
+
+.messages .table-header {
+    background-color: #686fb1;
     font-size: 15px;
     font-weight: bold;
     text-transform: uppercase;
 }
-.buy .table-row {
+
+.messages .table-row {
     background-color: #fff;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
 }
-.buy .col-1 {
-    flex-basis: 25%;
-    font-weight: bold;
-}
-.buy .table-row .col-2 {
-    flex-basis: 25%;
 
-}
-.buy .col-3 {
-    flex-basis: 25%;
+.messages .col-1 {
+    flex-basis: 20%;
     font-weight: bold;
 }
-.buy .col-4 {
-    flex-basis: 25%;
+
+.messages .table-row .col-2 {
+    flex-basis: 20%;
     font-weight: bold;
+}
+
+.messages .col-3 {
+    flex-basis: 20%;
+    text-decoration: underline;
+}
+
+.messages .col-4 {
+    flex-basis: 20%;
+    font-weight: bold;
+}
+
+.messages .col-5 {
+    flex-basis: 20%;
+    font-weight: bold;
+}
+
+.messages_container h2 {
+    font-size: 30px;
+    margin: 20px;
+    text-align: center;
+}
+
+.messages_container btn {
+    float: right;
 }

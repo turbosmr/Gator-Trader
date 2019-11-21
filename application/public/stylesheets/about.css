@@ -3,11 +3,6 @@
     text-align: center;
 }
 
-.header {
-    text-align: center;
-    margin-bottom: 64px;
-}
-
 .indiv-container {
     margin-bottom: 50px;
 }
@@ -31,15 +26,6 @@ h4.position {
     font-size: 15px;
     padding: 0px;
     margin: 0px;
-}
-
-a {
-    color: black;
-}
-
-a:hover {
-    color: grey;
-    text-decoration: none;
 }
 
 img {

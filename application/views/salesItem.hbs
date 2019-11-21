@@ -1,0 +1,181 @@
+{{#if data.isSeller}}
+<div class="itemContainer">
+    {{#if (eq data.salesItem.status "Unapproved")}}
+    <b>Waiting for approval</b>
+    {{else if (eq data.salesItem.status "Active")}}
+    <b>Your item is for sale</b>
+    {{else if (eq data.salesItem.status "Removed")}}
+    <b>Please revise listing</b>
+    {{else if (eq data.salesItem.status "Ended")}}
+    <b>Your item is inactive</b>
+    {{/if}}
+</div>
+
+<div class="itemContainer">
+    {{#if (eq data.salesItem.status "Ended")}}
+    <a href="/products/{{data.salesItem.pid}}/relist"><button type="button"
+            class="btn btn-secondary btn-sm">Relist</button></a>
+    {{else}}
+    <a href="/products/{{data.salesItem.pid}}/edit"><button type="button"
+            class="btn btn-secondary btn-sm">Revise</button></a>
+    <a href="/products/{{data.salesItem.pid}}/end"><button type="button" class="btn btn-danger btn-sm">End
+            Listing</button></a>
+    {{/if}}
+</div>
+{{/if}}
+
+{{#if data.isAdmin}}
+<div class="itemContainer">
+    {{#if (eq data.salesItem.status "Unapproved")}}
+    <a href="#"><button type="button" class="btn btn-success btn-sm">Approve</button></a>
+    <a href="#"><button type="button" class="btn btn-danger btn-sm">Remove</button></a>
+    {{else}}
+    <a href="#"><button type="button" class="btn btn-warning btn-sm">Block</button></a>
+    <a href="#"><button type="button" class="btn btn-danger btn-sm">Remove</button></a>
+    {{/if}}
+</div>
+{{/if}}
+
+<div class="itemContainer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-5">
+                <div class="col">
+                    <div class="items_page_mini_photos">
+                        {{#each data.salesItemPhoto}}
+                        <img id="sm001" src="/images/uploads/{{@root.data.salesItem.seller}}/salesItems/{{this.photoFileName}}" alt="img1" class="img-thumbnail"
+                            data-img="/images/uploads/{{@root.data.salesItem.seller}}/salesItems/{{this.photoFileName}}">
+                        {{/each}}
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="items_page_main_photo">
+                        <img data-enlargable style="cursor: zoom-in; height: 300px;" src="/images/uploads/{{data.salesItem.seller}}/salesItems/{{data.salesItemPhoto.0.photoFileName}}"
+                            id="ProductImage" class="img-fluid" data-toggle="modal" data-target="#exampleModalCenter"
+                            alt="Responsive image">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="featured_text">
+                    <h1>{{data.salesItem.name}}</h1>
+                    <p class="seller">by <b>{{usernameOf data.salesItem.sellerEmail}}</b></p>
+                    <p class="price">Price: ${{data.salesItem.price}}</p>
+                    <ul class="brief_description">
+                        <li><b>Condition:</b> {{data.salesItem.condition}}</li>
+                        <li><b>Quantity:</b> {{data.salesItem.quantity}} available</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <button class="contact_button" type="button" onclick="openForm()">Contact Seller</button>
+                <div class="pickup_map" id="map"></div>
+            </div>
+
+            <!-- pop up messages -->
+            <div class="chat-popup" id="myForm">
+                <form action="#" action="POST" class="form-container">
+                    <h4>{{data.salesItem.name}}</h4>
+                    <h5>by {{usernameOf data.salesItem.sellerEmail}}</h5>
+                    <textarea placeholder="Type message.." name="msg" required></textarea>
+                    <div class="row justify-content-between">
+                        <div class="col-auto">
+                            <button type="button" class="btn btn-danger" onclick="closeForm()">Close</button>
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-success">Send</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="additional_Info">
+                    <div class="description">
+                        <h4>Description </h4>
+                        <p>{{data.salesItem.description}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    var locations = [
+        ['Loc 1', 37.721199, -122.476845, 4],
+        ['Loc 2', 37.721453, -122.479517, 5],
+        ['Loc 3', 37.723354, -122.477949, 3],
+
+    ];
+    // Initialize and add the map
+    function initMap() {
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 16,
+            center: new google.maps.LatLng(37.722492, -122.477718),
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+
+        var infowindow = new google.maps.InfoWindow();
+
+        var marker, i;
+
+        for (i = 0; i < locations.length; i++) {
+            marker = new google.maps.Marker({
+                position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                map: map
+            });
+
+            google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                return function () {
+                    infowindow.setContent(locations[i][0]);
+                    infowindow.open(map, marker);
+                }
+            })(marker, i));
+        }
+    }
+
+</script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFmPnJOHPJQCfqR09N0nUphOsLAEOVC0k&callback=initMap">
+    </script>
+
+
+
+<!-- https://stackoverflow.com/a/49295093 for the hover photos -->
+<script>
+    $('img[id^=sm00]').hover(function () {
+        $('#ProductImage').attr('src', $(this).data('img'));
+    });
+</script>
+
+<!-- https://stackoverflow.com/a/50430187 for when enlarging photos when click-->
+<script>
+    $('img[data-enlargable]').addClass('img-enlargable').click(function () {
+        var src = $(this).attr('src');
+        $('<div>').css({
+            background: 'RGBA(0,0,0,.5) url(' + src + ') no-repeat center',
+            backgroundSize: 'contain',
+            width: '100%', height: '100%',
+            position: 'fixed',
+            zIndex: '10000',
+            top: '0', left: '0',
+            cursor: 'zoom-out'
+        }).click(function () {
+            $(this).remove();
+        }).appendTo('body');
+    });
+</script>
+
+<script>
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
+    }
+    function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+    }
+</script>

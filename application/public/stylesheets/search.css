@@ -1,16 +1,13 @@
-.category-button,
-.search-button {
+.category-button, .search-button {
     background-color: rgb(139, 125, 139);
     color: white;
+    border-radius: 1;
 }
 
-.typeahead,
-.tt-query,
-.tt-hint {
+.typeahead, .tt-query, .tt-hint {
     border: 0;
     outline: medium none;
     padding: 8px 12px;
-    width: 420px;
 }
 
 .typeahead {

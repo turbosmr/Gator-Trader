@@ -1,25 +1,62 @@
+body {
+    background-color: rgb(216, 215, 215);
+}
+
 .main {
-    min-height: 300px;
+    min-height: 550px;
+}
+
+@media (min-width: 768px) {
+    .sticky-navbar-top {
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 1020 !important;
+    }
 }
 
 .navbar {
-    background-color: lightgray;
+    background-color: rgb(74, 54, 78);
+    padding: 0rem 1rem;
+}
+
+.navbar-brand {
+    -webkit-filter: drop-shadow(5px 5px 5px #222);
+    filter: drop-shadow(5px 5px 5px #222);
+}
+
+.navbar a {
+    color: white;
 }
 
 .footer {
-    background-color: lightgrey;
-    color: black;
+    background-color: rgb(74, 54, 78);
+    color: white;
     text-align: center;
     padding: 30px;
+}
+
+.footer a {
+    color: white;
 }
 
 .footer-pushdown {
     min-height: calc(100% - 89px);
 }
 
-.color {
-    background-color: rgb(139, 125, 139);
-    color: white;
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: black;
+    text-shadow: 2px 2px 2px rgb(139, 125, 139);
+}
+
+a {
+    color: black;
+}
+
+a:hover {
+    color: #FDE21C;
+    text-decoration: none;
 }
 
 #bars {
@@ -29,15 +66,15 @@
     margin-left: 20px;
 }
 
-.center {
-    justify-content: center;
-}
-
 .dropdown-menu {
     background-color: #FFFFFF;
     border: 2px solid rgba(0, 0, 0, 0.2);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     padding: 8px 0;
+}
+
+.dropdown-menu a {
+    color: black;
 }
 
 .dropdown-item:hover {
@@ -47,4 +84,89 @@
 .user-dropdown-menu {
     left: auto;
     right: 0;
+}
+
+.sell-button {
+    background-color: #FDE21C;
+    border: 1px solid #FDE21C;
+}
+
+.sell-button a {
+    color: black;
+}
+
+.sell-button:hover {
+    background: #fff;
+    color: #d3ae0a;
+}
+
+.disclaimer {
+    margin-top: 10px;
+    color: #FDE21C;
+    font-style: italic;
+}
+
+.navbar-brand:hover {
+    /* Start the shake animation and make the animation last for 0.5 seconds */
+    animation: shake 0.5s;
+    /* When the animation is finished, start again */
+    animation-iteration-count: infinite;
+}
+
+@keyframes shake {
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+    10% {
+        transform: translate(-1px, -2px) rotate(-1deg);
+    }
+    20% {
+        transform: translate(-3px, 0px) rotate(1deg);
+    }
+    30% {
+        transform: translate(3px, 2px) rotate(0deg);
+    }
+    40% {
+        transform: translate(1px, -1px) rotate(1deg);
+    }
+    50% {
+        transform: translate(-1px, 2px) rotate(-1deg);
+    }
+    60% {
+        transform: translate(-3px, 1px) rotate(0deg);
+    }
+    70% {
+        transform: translate(3px, 1px) rotate(-1deg);
+    }
+    80% {
+        transform: translate(-1px, -1px) rotate(1deg);
+    }
+    90% {
+        transform: translate(1px, 2px) rotate(0deg);
+    }
+    100% {
+        transform: translate(1px, -2px) rotate(-1deg);
+    }
+}
+
+@media (max-width: 768px) {
+    .col-auto {
+        margin: auto;
+    }
+    .navbar {
+        padding: 0.4rem 1rem;
+    }
+}
+
+@media (max-width: 425px) {
+    .col-12 {
+        margin: auto;
+    }
+}
+
+.scrollable-categories {
+    -webkit-overflow-scrolling: touch;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
 }

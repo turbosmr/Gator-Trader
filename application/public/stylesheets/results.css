@@ -1,254 +1,228 @@
+/* Results Info Bar */
 
-* {
-    box-sizing: border-box;
-  }
+.results-info {
+    color: black;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    align-items: center!important;
+}
 
-  html, body {
-    width: 100%;
-    height: 100%;
-  }
+.results-sort-button-container {
+    padding-right: 30px;
+}
 
-  body{
-    margin: 0 auto;
-  }
+.results-sort-button {
+    background-color: transparent;
+    border: 1;
+    border-color: black;
+}
 
-    .column {
-    float: left;   
-    width: 100%;
-    padding: 10px;
-  }
+.results-sort-button:hover {
+    background-color: #c5c5c5;
+    border: 1;
+    border-color: #FDE21C;
+}
 
-  @media screen and (max-width: 700px) {
-    .column {
-      width: 100%;
-      display: block;
-      margin-bottom: 20px;
+.dropdown_sidebar {
+	display: none;
+}
+
+/* General  */
+
+@media screen and (max-width: 992px) {
+
+	.dropdown_sidebar {
+        display:inline-block;
+        margin-right: 20px;
     }
     .sidebar {
-        display: none;
-        padding-top: 15px;}
-  }
-  
+        display: none
+    }
+
+    .results_card_container { 
+        width: 95vw !important;
+      }
+
+}
+
+#search-results {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 85%;
+}
+
+#search-results tr td {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* ----------------------------------------------------------------- */
+
+/* Side Bar Styling */
 
 .sidebar {
-    float: left;
     height: auto;
-    width: 200px;
+    width: 15vw;
     padding: 16px;
-    text-align: center;
     border-radius: 5px;
     background-color: #ffffff;
-    border-right: lightgray 3px solid;
     box-shadow: 0 6px 6px rgba(0, 0, 0, 0.3);
-    margin-top: 32px;
+    margin-top: 15px;
     text-align: left;
-  }
-  
-  .sidebar a {
+}
+
+.sidebar .condition a {
     text-decoration: none;
     font-size: 18px;
     color: #030002;
     display: block;
-  }
-  
-  .sidebar a:hover {
+}
+
+.sidebar .condition a:hover {
     color: #d3ae0a;
-  }
+}
 
-  .reviews .stars {
-    display: inline-block;
-    list-style: none;
-    padding: 0;
-  }
-  .reviews .stars > li {
-    display: inline-block;
-  }
-    .reviews .stars > li .fa {
-    color: #f7c01b;
-  } 
-  .reviews .stars > li .fa:hover {
-    color: #ffe601;
-  } 
+.sidebar .price_range {
+    margin-bottom: 10px;
+}
 
-  .reviews > span {
-    font-size: 14px;
-    margin-left: 5px;
-    color: #555;
-  }
+.sidebar .price_range a {
+    text-decoration: none;
+    font-size: 18px;
+    color: #030002;
+    display: block;
+}
 
-  .card {
+.sidebar .price_range a:hover {
+    color: #FDE21C;
+}
+
+.price_range_dd {
+ padding: 15px;
+}
+
+.condition_dd {
+    padding: 15px;
+}
+
+/* End of Sidebar Styling */
+
+/* ----------------------------------------------------------------------------- */
+
+/* Product Card Styling */
+
+.results_container{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.sidebar_column{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.card_column{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.results_card_container {
     box-shadow: 0 6px 6px rgba(0, 0, 0, 0.3);
-    transition: 200ms;
     background: #fff;
-    padding-top: 20px;
-    margin-top: 20px;
-  }
-  .card .card_title {
-    display: flex;
-    align-items: center;
-    padding: 30px 40px;
-  }
-  .card .card_title h3 {
-    flex: 0 1 200px;
-    text-align: right;
-    margin: 0;
-    color: #2c2c2c;
-    font-weight: 600;
-    font-size: 20px;
+    border-radius: 5px;
+    padding: 20px; 
+    margin-top: 15px; 
+    width: 81vw;
   }
 
-  .card .card_body {
-    padding: 0 40px;
-    display: flex;
-    flex-flow: row no-wrap;
-    margin-bottom: 25px;
-  }
-  .card .card_body > .photo {
-    box-sizing: border-box;
-    padding: 0 15px;
-    flex: 1 0 40%;
-  }
-
-  .card .card_body > .info {
-    box-sizing: border-box;
-    padding: 0 15px;
-    flex: 1 0 60%;
-  }
-
-  .card .card_body .featured_text h1 {
+  .results_card_container .featured_text h1 {
     margin: 0;
     padding: 0;
-    font-weight: 800;
+    font-weight: 600;
     line-height: 50px;
     color: #181e28;
   }
-  .card .card_body .featured_text p {
-    margin: 0;
-    padding: 0;
-  }
-  .card .card_body .featured_text p.sub {
-    font-size: 20px;
-    text-transform: uppercase;
-    color: #686e77;
+  .results_card_container .featured_text p.seller{
+    font-size: 17px;
     font-weight: 300;
-    margin-bottom: 5px;
+    margin-bottom: 20px;
   }
-  .card .card_body .featured_text p.price {
-    color: #252525;
+  .results_card_container .featured_text p.price {
+    color: #811b1b;
     font-size: 26px;
+    font-weight: 500;
   }
-  .card .card_body .image {
-    padding-top: 15px;
-    width: 100%;
-  }
-  .card .card_body .image img {
-    display: block;
-    max-width: 50%;
-    height: auto;
-  }
-  .card .card_body .description {
-    margin-bottom: 25px;
-  }
-  .card .card_body .description p {
+
+  .results_card_container .featured_text p {
     margin: 0;
-    font-weight: 300;
-    line-height: 27px;
-    font-size: 16px;
-    color: #555;
-  }
-
-  .card .card_footer {
-    padding: 30px 40px;
-    display: flex;
-    flex-flow: row no-wrap;
-    align-items: center;
-    position: relative;
-  }
-
-  .card .card_footer .reviews .stars {
-    display: inline-block;
-    list-style: none;
     padding: 0;
   }
-  .card .card_footer .reviews .stars > li {
-    display: inline-block;
-  }
-  .card .card_footer .reviews .stars > li .fa {
-    color: #f7c01b;
-  } 
-  .card .card_footer .reviews > span {
-    font-size: 14px;
-    margin-left: 5px;
-    color: #555;
-  }
 
-  .card .card_footer::before {
+
+  .results_card_container .card_footer {
+    padding-top: 20px;
+    margin-top: 0;
+  }
+  
+  .results_card_container .card_footer::before {
     content: "";
     position: absolute;
     display: block;
-    top: 0;
-    left: 40px;
-    width: calc(100% - 40px);
+    margin-bottom: 10px;
+    width: calc(100% - 30px);
     height: 3px;
-    background: #000000;
-    background: linear-gradient(to right, #000000 0%, #000000 20%, lightgray 20%, lightgray 100%);
-  }
-  .card .card_footer .seller {
-    flex: 1 0 10px;
-  }
-  .card .card_footer .seller p {
-    margin: 0;
-    text-transform: uppercase;
-    font-weight: 600;
-    font-size: 14px;
-    color: #555;
-  }
-  .card .card_footer .seller h3 {
-    margin: 0;
-    font-size: 20px;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: #000000;
+    background: lightgray;
   }
 
-  .card .card_footer .action2 button {
-    cursor: pointer;
-    border: 1px solid rgb(139, 125, 139);
-    padding: 9px 15px;
-    border-radius: 5px;
-    color: #fff;
-    background: rgb(139, 125, 139);
-    font-size: 14px;
-    transition: 200ms;
-  }
-  .card .card_footer .action2 button:hover {
-    background: #fff;
-    color: rgb(139, 125, 139);
+  .results_card_container .contact_seller {
+      float: right;
+      margin-top: 10px;
   }
 
-  .card .card_footer .action button {
+  .results_card_container .contact_seller button {
     cursor: pointer;
-    border: 1px solid #d3ae0a;
+    border: 1px solid rgb(221, 200, 37);
     padding: 14px 30px;
     border-radius: 5px;
     color: #fff;
-    background: #d3ae0a;
+    background: rgb(221, 200, 37);
     font-size: 16px;
     transition: 200ms;
   }
-  .card .card_footer .action button:hover {
+
+  .results_card_container .contact_seller button:hover {
     background: #fff;
-    color: #d3ae0a;
-  }
+    color: rgb(221, 200, 37);
+}
 
+/* End of Product Card Styling */
 
-  .category {
-    text-decoration: none;
-    font-size: 18px;
-    color: #030002;
-    display: block;
-  }
-  
-  .category h2 {
+.pagination-container {
     margin-top: 20px;
-  }
+}
+
+.page-item, .page-item a {
+    color: black;
+}
+
+.page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: rgb(139, 125, 139);
+    border-color: rgb(139, 125, 139);
+    color: white;
+}
+
+.page-item.active:hover .page-link:hover {
+    color: rgb(139, 125, 139);
+    background-color: white;
+    border-color: rgb(139, 125, 139);
+}
+
+.page-item:hover .page-link:hover {
+    color: grey;
+} 
+
+/* ----------------------------------------------------------------------------------- */

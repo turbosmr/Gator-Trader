@@ -1,0 +1,151 @@
+{{!-- Container for account manipulations --}}
+<div class="account_container mt-4">
+    <!-- Display approval or disapproval success message -->
+    <div class="col-5 mx-auto">
+        {{> message}}
+    </div>
+    <h1>Welcome to your Dashboard, {{usernameOf loggedIn.username}}!</h1>
+    {{!-- <div class="row">
+        <div class="col">
+            <div id="account">
+                <img src="https://cdn1.iconfinder.com/data/icons/technology-devices-2/100/Profile-512.png"
+                    style="width:90px;height:90px;">
+                Edit Your account
+            </div>
+        </div> --}}
+    {{!-- --------------------------------------------------------------------------------- --}}
+    <hr style="border: 3px solid rgb(31, 26, 34); max-width: 50%">
+    {{!-- --------------------------------------------------------------------------------- --}}
+</div>
+{{!-- Container for the selling section --}}
+
+<ul class="nav nav-tabs dashboard_tabs">
+    <li class="nav-item">
+        <a href="#unapproved_tab" class="nav-link active" data-toggle="tab">Unapproved</a>
+    </li>
+    <li class="nav-item">
+        <a href="#approved_tab" class="nav-link" data-toggle="tab">Approved</a>
+    </li>
+    <li class="nav-item">
+        <a href="#messages_tab" class="nav-link" data-toggle="tab">Messages</a>
+    </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade show active" id="unapproved_tab">
+        <div class="unapproved_container">
+            <h2>Items to Approve</h2>
+            <ul class="unapproved px-0">
+                <li class="table-header">
+                    <div class="col col-7">Name</div>
+                    <div class="col col-2">Seller</div>
+                    <div class="col col-3">
+                        Actions
+                    </div>
+                </li>
+                {{#if unapprovedSalesItem}}
+                {{#each unapprovedSalesItem}}
+                <li class="table-row">
+                    <div class="col col-7"><a href="/products/{{this.pid}}">{{this.name}}</a></div>
+                    <div class="col col-2">{{usernameOf this.sellerEmail}}</div>
+                    <div class="col col-3">
+                        <a href="/admin/approve?pid={{this.pid}}"><button type="button" class="btn btn-success btn-sm">Approve</button></a>
+                        <!--<a href="/admin/disapprove?pid={{this.pid}}"><button type="button" class="btn btn-danger btn-sm">Disapprove</button></a>-->
+                    </div>
+                </li>
+                {{/each}}
+                {{else}}
+                <li class="table-row">
+                    No listings to review for approval.
+                </li>
+                {{/if}}
+            </ul>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="approved_tab">
+        <div class="approved_container">
+            <h2>Approved Items </h2>
+            <ul class="approved px-0">
+                <li class="table-header">
+                    <div class="col col-7">Name</div>
+                    <div class="col col-2">Seller</div>
+                    <div class="col col-3">
+                        Actions
+                    </div>
+                </li>
+                {{#if activeSalesItem}}
+                {{#each activeSalesItem}}
+                <li class="table-row">
+                    <div class="col col-7"><a href="/products/{{this.pid}}">{{this.name}}</a></div>
+                    <div class="col col-2">{{usernameOf this.sellerEmail}}</div>
+                    <div class="col col-3">
+                        <!--<a href="#"><button type="button" class="btn btn-warning btn-sm">Block</button></a>-->
+                        <a href="/admin/remove?pid={{this.pid}}"><button type="button" class="btn btn-danger btn-sm">Remove</button></a>
+                    </div>
+                </li>
+                {{/each}}
+                {{else}}
+                <li class="table-row">
+                    No active listings.
+                </li>
+                {{/if}}
+            </ul>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="messages_tab">
+        {{!-- Container for the messages section --}}
+        <div class="admin_messages_container">
+            <h2>Your Messages</h2>
+            <ul class="admin_messages">
+                <li class="table-header">
+                    <div class="col col-1">Item</div>
+                    <div class="col col-2">From</div>
+                    <div class="col col-3">Subject</div>
+                    <div class="col col-4">Received</div>
+                    <div class="col col-5">Chat</div>
+                </li>
+                <li class="table-row">
+                    <div class="col col-1">Chair</div>
+                    <div class="col col-2">Jimmy13</div>
+                    <div class="col col-3">Pickup</div>
+                    <div class="col col-4">24 Oct, 2019</div>
+                    <div class="col col-5">
+                        <button type="button" class="btn btn-primary btn-sm"> Open Chat</button>
+
+                    </div>
+
+                </li>
+                <li class="table-row">
+                    <div class="col col-1">Chair</div>
+                    <div class="col col-2">Alex007</div>
+                    <div class="col col-3">Where?</div>
+                    <div class="col col-4">20 Oct, 2019</div>
+                    <div class="col col-5">
+                        <button type="button" class="btn btn-primary btn-sm"> Open Chat</button>
+
+                    </div>
+
+                </li>
+                <li class="table-row">
+                    <div class="col col-1">Book</div>
+                    <div class="col col-2">Mario777</div>
+                    <div class="col col-3">Discount</div>
+                    <div class="col col-4">27 Oct, 2019</div>
+                    <div class="col col-5">
+                        <button type="button" class="btn btn-primary btn-sm"> Open Chat</button>
+
+                    </div>
+                </li>
+                <li class="table-row">
+                    <div class="col col-1">Computer</div>
+                    <div class="col col-2">Kate B</div>
+                    <div class="col col-3">My offer!!!</div>
+                    <div class="col col-4">17 Oct, 2019</div>
+                    <div class="col col-5">
+                        <button type="button" class="btn btn-primary btn-sm">Open Chat</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

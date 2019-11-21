@@ -1,82 +1,149 @@
-<div class="container">
-    <div class="container header">
-        <h1>Posting an Item for Sale</h1>
+<div class="container my-4">
+    <div class="row">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6 mx-auto">
+            <!-- Display error listing item message -->
+            <div class="col-5 mx-auto">
+                {{> message}}
+            </div>
+
+            <div class="container header">
+                <h1>Posting an Item for Sale</h1>
+            </div>
+
+            <form action="{{#if salesItem}}/products/{{salesItem.pid}}/edit{{else}}/sell{{/if}}"
+                enctype="multipart/form-data" method="POST" id="sellForm">
+                <div class="mb-4">
+                    <h5>Name</h5>
+                    <input type="text" id="product" name="productName" class="form-control" style="color: black"
+                        placeholder="No more than 70 characters" maxlength="70" value="{{salesItem.name}}" required>
+                </div>
+
+                <div class="col-3 px-0 mb-4">
+                    <h5>Price ($)</h5>
+                    <input type="text" id="price" name="price" class="form-control" style="color: black"
+                        placeholder="0.00" min="1" max="99999" value="{{salesItem.price}}" required>
+                </div>
+
+                <div class="mb-4">
+                    <h5>Category</h5>
+                    <select name="category" id="category" required>
+                        <option value="">Choose a category</option>
+                        {{#each category}}
+                        <option value="{{this.cid}}" {{#if (eq this.cid @root.salesItem.category)}} selected {{/if}}>
+                            {{this.name}}
+                        </option>
+                        {{/each}}
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <h5>Is this a class specific material?</h5>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input" id="classSpecificMaterialYes"
+                            name="isClassSpecificMaterial" value="classSpecificMaterialYes"
+                            {{#if salesItem}}{{#if salesItem.classMaterialSection}}checked{{/if}}{{/if}}>
+                        <label class="custom-control-label" for="classSpecificMaterialYes">Yes</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input" id="classSpecificMaterialNo"
+                            name="isClassSpecificMaterial" value="classSpecificMaterialNo"
+                            {{#if salesItem}}{{#if (eq salesItem.classMaterialSection null)}}checked{{/if}}{{/if}}>
+                        <label class="custom-control-label" for="classSpecificMaterialNo">No</label>
+                    </div>
+                </div>
+
+                <div class="mb-4" id="classMaterialSection"
+                    {{#if (eq salesItem.classMaterialSection null)}}style="display: none;" {{/if}}>
+                    <h5>Class Section</h5>
+                    <select name="classMaterialSection">
+                        <option value="">-</option>
+                        {{#each classSection}}
+                        <option value="{{this.csid}}" {{#if (eq this.csid @root.salesItem.classMaterialSection)}}
+                            selected {{/if}}>
+                            {{this.name}}
+                        </option>
+                        {{/each}}
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <h5>Condition</h5>
+                    <select name="condition" required>
+                        <option value="">-</option>
+                        <option value="New" {{#if (eq salesItem.condition "New")}} selected {{/if}}>New</option>
+                        <option value="Used - Excellent" {{#if (eq salesItem.condition "Used - Excellent")}} selected
+                            {{/if}}>Used - Excellent</option>
+                        <option value="Used - Good" {{#if (eq salesItem.condition "Used - Good")}} selected {{/if}}>Used
+                            - Good</option>
+                        <option value="Used - Fair" {{#if (eq salesItem.condition "Used - Fair")}} selected {{/if}}>Used
+                            - Fair</option>
+                        <option value="Used - Salvage" {{#if (eq salesItem.condition "Used - Salvage")}} selected
+                            {{/if}}>Used - Salvage</option>
+                    </select>
+                </div>
+
+                <div class="col-2 px-0 mb-4">
+                    <h5>Quantity</h5>
+                    <input type="number" id="quantity" name="quantity" class="form-control" style="color: black"
+                        placeholder="" min="1" max="10" value="{{salesItem.quantity}}" required>
+                </div>
+
+                <div class="mb-4">
+                    <h5>Delivery Method</h5>
+                    <div class="pl-2">
+                        <div class="custom-control custom-checkbox custom-control-inline mb-3">
+                            <input type="checkbox" class="custom-control-input" id="shipping" name="deliveryMethod"
+                                value="shipping" {{#if (eq salesItem.deliveryMethod "Shipping")}} checked {{/if}}>
+                            <label class="custom-control-label" for="shipping">Shipping</label>
+                        </div>
+                        <h6>Pickup Location</h6>
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" class="custom-control-input" id="library" name="deliveryMethod"
+                                value="library">
+                            <label class="custom-control-label" for="library">Library</label>
+                        </div>
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" class="custom-control-input" id="student-center"
+                                name="deliveryMethod" value="student-center">
+                            <label class="custom-control-label" for="student-center">Student Center</label>
+                        </div>
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" class="custom-control-input" id="wellness-center"
+                                name="deliveryMethod" value="wellness-center">
+                            <label class="custom-control-label" for="wellness-center">Wellness Center</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h5>Description</h5>
+                    <textarea class="form-control" rows="5" id="description" name="description"
+                        placeholder="Please enter description here" style="color: black"
+                        required>{{salesItem.description}}</textarea>
+                </div>
+
+                <div class="mb-4">
+                    <h5>Add Image Here</h5>
+                    <div>
+                        <label for="salesItemImage" id="salesItemImageLabel">Choose up to 4 images to upload (PNG, JPG)</label>
+                        <input type="file" name="salesItemImage" id="salesItemImage"
+                            accept="image/png,image/jpg,image/jpeg" style="width: 1px" multiple required />
+                    </div>
+                    <div class="preview">
+                        <p>No files currently selected for upload</p>
+                    </div>
+                </div>
+
+                <div class="row justify-content-end mx-0">
+                    <button type="reset" class="btn btn-danger" id="resetForm">Reset</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+            </form>
+        </div>
     </div>
 
-    <form>
-        <div class="row">
-            <div class="col-sm">
-                <label for="product">Product Name:</label>
-                <input class="form-control" id="produxt" type="text">
-            </div>
-            <div class="col-sm">
-                <label for="price">Price ($):</label>
-                <input class="form-control" id="price" type="text">
-            </div>
-        </div>
-    </form>
-
-    <form>
-        <p>Catagory</p>
-        <input type="checkbox" id="books" name="catagory">
-        <label for="defaultCheck">Books</label>
-        <input type="checkbox" id="supplies" name="catagory">
-        <label for="defaultCheck">Supplies</label>
-        <input type="checkbox" id="service" name="catagory">
-        <label for="defaultCheck">Service</label>
-        <input type="checkbox" id="electronics" name="catagory">
-        <label for="defaultCheck">Electronics</label>
-        <input type="checkbox" id="furniture" name="catagory">
-        <label for="defaultCheck">Furniture</label>
-        <input type="checkbox" id="other" name="catagory">
-        <label for="defaultCheck">Other</label>
-
-        <p>Condition</p>
-        <input type="checkbox" id="service" name="catagory">
-        <label for="defaultCheck">Excellent</label>
-        <input type="checkbox" id="electronics" name="catagory">
-        <label for="defaultCheck">Good</label>
-        <input type="checkbox" id="furniture" name="catagory">
-        <label for="defaultCheck">Decent</label>
-        <input type="checkbox" id="other" name="catagory">
-        <label for="defaultCheck">Bad</label>
-
-
-        <p>Location</p>
-        <input type="checkbox" id="library" name="location">
-        <label for="defaultCheck">Library</label>
-        <input type="checkbox" id="19th ave" name="location">
-        <label for="defaultCheck">19th Ave</label>
-        <input type="checkbox" id="shipping" name="location">
-        <label for="defaultCheck">Ship only</label>
-
-        <p>Add Image here</p>
-        <div class="custom-file mb-3">
-            <input type="file" class="custom-file-input" id="customFile" name="filename">
-            <label class="custom-file-label" for="customFile">Choose file</label>
-        </div>
-
-    </form>
 </div>
 
-<div class="container">
-    <form action="action">
-        <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea class="form-control" rows="5" id="description" name="text"></textarea>
-        </div>
-        <div class="row">
-            <div class="col-sm"><button type="cancel">Cancel</button></div>
-            <div="col-sm"><button type="submit">Submit</button>
-        </div>
 </div>
 
-<script>
-    $(".custom-file-input").on("change", function () {
-        var fileName = $(this).val().split("\\").pop();
-        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-    });
-</script>
-
-</form>
-</div>
+<script type="text/javascript" src="/js/sell.js"></script>

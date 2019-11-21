@@ -1,145 +1,213 @@
-<div class="container-fluid">
-    {{#if product}}
-    <!-- Side Bar -->
-    <div class="sidebar">
-        <h2>Sort By:</h2>
-        <p>Click the button to sort the products alphabetically:</p>
-        <button onclick="sortTable()">Sort</button>
-        <h3>Seller Rating</h3>
-        <div class="reviews">
-            <ul class="stars">
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-            </ul>
-        </div>
-        <div class="reviews">
-            <ul class="stars">
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star-o"></i></li>
-            </ul>
-        </div>
-        <div class="reviews">
-            <ul class="stars">
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star-o"></i></li>
-                <li><i class="fa fa-star-o"></i></li>
-            </ul>
-        </div>
-        <div class="reviews">
-            <ul class="stars">
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star-o"></i></li>
-                <li><i class="fa fa-star-o"></i></li>
-                <li><i class="fa fa-star-o"></i></li>
-            </ul>
-        </div>
-        <div class="reviews">
-            <ul class="stars">
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star-o"></i></li>
-                <li><i class="fa fa-star-o"></i></li>
-                <li><i class="fa fa-star-o"></i></li>
-                <li><i class="fa fa-star-o"></i></li>
-            </ul>
-        </div>
-        <div class="category">
-            <h2>Price</h2>
-            <a href="#" id="under25">Under $25</a>
-            <a href="#" id="25to50">$25 to $50</a>
-            <a href="#" id="50to200">$50 to $200</a>
-            <a href="#" id="over200">$200 and Above</a>
-        </div>
-        <div class="category">
-            <h2>Category</h2>
-            <input type="radio" name="category" value="Books"> Books<br>
-            <input type="radio" name="category" value="Electronics"> Electronics<br>
-            <input type="radio" name="category" value="Furniture"> Furniture<br>
-            <input type="radio" name="category" value="Services"> Services<br>
-            <input type="radio" name="category" value="Supplies"> Supplies<br>
-            <input type="radio" name="category" value="Other"> Other<br>
-
-        </div>
-        <div class="category">
-            <h2>Condition</h2>
-            <a href="#">Excellent :)</a>
-            <a href="#">Good</a>
-            <a href="#">Decent</a>
-            <a href="#">Bad :(</a>
-        </div>
-
-    </div>
-
-    <table id="search-results" style="width: 70%">
-        {{#each product}}
-        <tr>
-            <td>
-                <div class="col-sm-12">
-                    <div class="column">
-                        <div class="card">
-                            <div class="card_body">
-                                <div class="photo">
-                                    <div class="image">
-                                        <img src="https://thumbs-prod.si-cdn.com/mHAHLSMfYOtZJs_PDnkqAgPFd6Q=/fit-in/1600x0/https://public-media.si-cdn.com/filer/00/a1/00a1f7bf-556f-48ef-a4da-10ea981a9337/mona.jpg"
-                                            alt="Picture">
-                                    </div>
-                                </div>
-                                <div class="info">
-                                    <div class="featured_text">
-                                        <h1><a href="/products/{{this.pid}}">{{this.name}}</a></h1>
-                                        <p class="sub">Nice Painting</p>
-                                        <p class="price">${{this.price}}</p>
-                                    </div>
-                                    <div class="description">
-                                        <p>{{this.description}}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card_footer">
-                                <div class="seller">
-                                    <p>Seller: </p>
-                                    <h3>{{this.seller}}</h3>
-                                    <div class="reviews">
-                                        <ul class="stars">
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                        <span>(10 reviews)</span>
-                                    </div>
-                                    <div class="action2">
-                                        <button type="button">Contact Seller</button>
-                                    </div>
-                                </div>
-                                <div class="action">
-                                    <button type="button">Buy It Now</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </td>
-        </tr>
-        {{/each}}
-    </table>
-    {{else}}
-    <div class="col-sm-4" style="margin: auto;">
-        <div class="column">
-            <div class="card" style="">
-                <h2>No results found for "{{keyword}}".</h2>
-                <h5>Try checking your spelling or use more general terms</h5>
+<!-- Results Info Bar -->
+{{#if product}}
+<div class="d-flex results-info">
+    <div class="dropdown dropdown_sidebar">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            &#9776
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div class="price_range_dd">
+                <h4><b>Price</b></h4>
+                <a class="dropdown-item" href="#" id="under25">Under $25</a>
+                <a class="dropdown-item" href="#" id="25to50">$25 to $50</a>
+                <a class="dropdown-item" href="#" id="50to200">$50 to $200</a>
+                <a class="dropdown-item" href="#" id="over200">$200 and Above</a>
+            </div>
+            <div class="condition_dd">
+                <h4><b>Condition</b></h4>
+                <a class="dropdown-item" href="#" id="new">New</a>
+                <a class="dropdown-item" href="#" id="used-excellent">Used - Excellent</a>
+                <a class="dropdown-item" href="#" id="used-good">Used - Good</a>
+                <a class="dropdown-item" href="#" id="used-fair">Used - Fair</a>
+                <a class="dropdown-item" href="#" id="used-salvage">Used - Salvage</a>
             </div>
         </div>
     </div>
+    <div class="mr-auto">
+        {{{resultsInfo offset pageLimit totalProducts keyword}}}
+    </div>
+    <div class="results-sort-button-container">
+        <button type="button" class="btn results-sort-button dropdown-toggle" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Sort by:
+            {{#if (eq searchCriteria.sortF "ltoh")}}
+            Price: Low to High
+            {{/if}}
+            {{#if (eq searchCriteria.sortF "htol")}}
+            Price: High to Low
+            {{/if}}
+            {{#if (eq searchCriteria.sortF "atoz")}}
+            Alphabetically: A-Z
+            {{/if}}
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="#" id="ltoh">Price: Low to High</a>
+            <a class="dropdown-item" href="#" id="htol">Price: High to Low</a>
+            <a class="dropdown-item" href="#" id="atoz">Alphabetically: A-Z</a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mb-3">
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-2 sidebar_column">
+                <div class="sidebar">
+                    <div class="price_range">
+                        <h4><b>Price</b></h4>
+                        <a href="#" class="under25">Under $25</a>
+                        <a href="#" class="25to50">$25 to $50</a>
+                        <a href="#" class="50to200">$50 to $200</a>
+                        <a href="#" class="over200">$200 and Above</a>
+                    </div>
+                    <div class="condition">
+                        <h4><b>Condition</b></h4>
+                        <a href="#" class="new">New</a>
+                        <a href="#" class="used-excellent">Used - Excellent</a>
+                        <a href="#" class="used-good">Used - Good</a>
+                        <a href="#" class="used-fair">Used - Fair</a>
+                        <a href="#" class="used-salvage">Used - Salvage</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-10 card_column">
+                <table id="search-results">
+                    {{#each product}}
+                    <tr>
+                        <td>
+                            <div class="results_card_container">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="results_image">
+                                                <img width="150"
+                                                    src="{{#if this.photoFileName}}/images/uploads/{{this.photoFileName}}{{else}}https://thumbs-prod.si-cdn.com/mHAHLSMfYOtZJs_PDnkqAgPFd6Q=/fit-in/1600x0/https://public-media.si-cdn.com/filer/00/a1/00a1f7bf-556f-48ef-a4da-10ea981a9337/mona.jpg{{/if}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="info">
+                                                <div class="featured_text">
+                                                    <h1><a href="/products/{{this.pid}}">{{this.name}}</a></h1>
+                                                    <div class="seller">
+                                                        <p>by <b>{{usernameOf this.sellerEmail}}</b></p>
+                                                    </div>
+                                                    <p class="price">${{this.newPrice}}</p>
+
+                                                    <div class="description">
+                                                        <p>{{{this.description}}}</p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="card_footer">
+                                                <div class="contact_seller">
+                                                    <button class="button" onclick="openForm()">Contact Seller</button>
+                                                </div>
+                                                <!-- pop up messages -->
+                                                <div class="chat-popup" id="myForm">
+                                                    <form action="#" action="POST" class="form-container">
+                                                        <h4>*Item Name*</h4>
+                                                        <h5>by *Seller*</h5>
+                                                        <textarea placeholder="Type message.." name="msg"
+                                                            required></textarea>
+                                                        <div class="row justify-content-between">
+                                                            <div class="col-auto">
+                                                                <button type="button" class="btn btn-danger"
+                                                                    onclick="closeForm()">Close</button>
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <button type="submit"
+                                                                    class="btn btn-success">Send</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </table>
+            </div>
+        </div>
+    </div>
+
+    {{#if (gt pageCount 1)}}
+    <div class="pagination-container">
+        <ul class="pagination justify-content-center">
+            {{{pagination pageCount currentPage searchCriteria}}}
+        </ul>
+    </div>
+    {{/if}}
+
+    {{else}}
+    {{#if searchCriteria.keyword}}
+    <div class="row">
+        <div class="col-7 col-lg-6 mx-auto mt-4">
+            <div style="font-size: 3vw;">
+                <b>No results for {{searchCriteria.keyword}}.</b>
+            </div>
+            <div style="font-size: 2vw;">
+                Try checking your spelling or use more general terms
+            </div>
+            <div style="padding-top: 50px; text-align: center;">
+                <img src="/images/error_alligator_image/alligator.jpg" alt="Cartoon Aligator" style="max-width: 30%;">
+            </div>
+        </div>
+    </div>
+    {{else}}
+    {{#if searchCriteria.selectedCategoryName}}
+    <div class="row">
+        <div class="col-7 col-lg-6 mx-auto mt-4">
+            <div style="font-size: 3vw;">
+                <b>No results for category, {{searchCriteria.selectedCategoryName}}.</b>
+            </div>
+            <div style="font-size: 2vw;">
+                Please select another category
+            </div>
+            <div style="padding-top: 50px; text-align: center;">
+                <img src="/images/error_alligator_image/alligator.jpg" alt="Cartoon Aligator" style="max-width: 30%;">
+            </div>
+        </div>
+    </div>
+    {{else}}
+    <div class="card mx-auto mt-4" style="width: 50%;">
+        <div class="px-3 py-3">
+            <h3>No results.</h3>
+            <h6>Try entering a keyword, or select another category</h6>
+        </div>
+    </div>
+    {{/if}}
+    {{/if}}
     {{/if}}
 </div>
+<script>
+    jQuery(document).ready(function () {
+        jQuery('.toggle-nav').click(function (e) {
+            jQuery(this).toggleClass('active');
+            jQuery('.sidebar ul').toggleClass('active');
+            e.preventDefault();
+        });
+    });
+</script>
+
+<script>
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
+    }
+    function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+    }
+</script>
