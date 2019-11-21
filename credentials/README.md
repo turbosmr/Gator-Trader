@@ -7,7 +7,7 @@
 
 # Blow is a list of items required. Missing items will causes points to be deducted from multiple milestone submissions.
 
-1. Server IP: 18.223.247.243
+1. Server IP: 18.216.41.97
 2. SSH username: ubuntu
 3. SSH key: admin.pem
 4. Database IP: csc648-team03.cnzsqesnuc2l.us-east-2.rds.amazonaws.com, Database Port: 3306
@@ -15,7 +15,7 @@
 6. Database password: RLa2OAk0bCqzlweqFUH1
 7. Database name: csc648-team03
 8. Instructions on how to use the above information:<br>
-	a) To connect to server: Open terminal or command prompt, navigate to folder containing SSH key file, paste the following command "ssh -i "admin.pem" ubuntu@ec2-18-223-247-243.us-east-2.compute.amazonaws.com", and press enter.<br>
+	a) To connect to server: Open terminal or command prompt, navigate to folder containing SSH key file, paste the following command "ssh -i "admin.pem" ubuntu@ec2-18-216-41-97.us-east-2.compute.amazonaws.com", and press enter.<br>
 	b) To connect to database: First, download and install a MySQL client (Workbench, DataGrip). Then, enter the database information provided above to connect.<br>
 
 # Most important things to Remember
