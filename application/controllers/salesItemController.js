@@ -2,11 +2,15 @@ const db = require('../config/db');
 
 // Handle showing sales item page on GET
 exports.salesItem_get = (req, res, next) => {
-    let sql = "SELECT SI.*, CAST(SI.price AS CHAR) AS price, RU.username AS sellerEmail FROM SalesItem SI INNER JOIN RegisteredUser RU on SI.seller = RU.sid WHERE SI.pid = ?";
+    let productId = req.params.pid;
+    let sql = "SELECT SI.*, CAST(SI.price AS CHAR) AS price, RU.username AS sellerEmail FROM SalesItem SI INNER JOIN RegisteredUser RU on SI.seller = RU.sid WHERE SI.pid = ?;";
+    sql += "SELECT fileName as photoFileName FROM SalesItemPhoto WHERE product = ?";
     let objToBePassed = {};
 
-    db.query(sql, [req.params.pid], (err, result) => {
-        if (err) throw err;
+    db.query(sql, [productId, productId], (err, result) => {
+        if (err) {
+            res.render('error');
+        }
 
         // Item not found
         if (result.length == 0) {
@@ -14,10 +18,11 @@ exports.salesItem_get = (req, res, next) => {
         }
         // Item found
         else {
-            objToBePassed.salesItem = result[0];
+            objToBePassed.salesItem = result[0][0];
+            objToBePassed.salesItemPhoto = result[1];
 
             // Check if sales item belongs to registered user
-            if (req.isAuthenticated() && result[0].seller == req.user.sid) {
+            if (req.isAuthenticated() && result[0][0].seller == req.user.sid) {
                 objToBePassed.isSeller = true;
             }
 
@@ -26,14 +31,9 @@ exports.salesItem_get = (req, res, next) => {
                 objToBePassed.isAdmin = true;
             }
 
-            if (result[0].status == 'unapproved' && (!(objToBePassed.isSeller) && !(objToBePassed.isAdmin))) {
-                res.render('error');
-            }
-            else {
-                res.render('salesItem', {
-                    data: objToBePassed
-                });
-            }
+            res.render('salesItem', {
+                data: objToBePassed
+            });
         }
     });
 }
@@ -45,6 +45,10 @@ exports.edit_get = (req, res, next) => {
     let sql = "SELECT *, CAST(price AS CHAR) AS price FROM SalesItem WHERE pid = ? AND seller = ?";
 
     db.query(sql, [req.params.pid, req.user.sid], (err, result) => {
+        if (err) {
+            res.render('error');
+        }
+        
         if (result.length == 0) {
             res.render('error');
         }

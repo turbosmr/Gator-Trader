@@ -10,6 +10,6 @@ const salesItemImageUpload = require('../middlewares/salesItemImageUpload');
 router.get('/', sellController.sell_get);
 
 // POST request for sell page
-router.post('/', ensureRegisteredUserAuthenticated, salesItemImageUpload.single('imageFileName'), sellController.sell_post);
+router.post('/', ensureRegisteredUserAuthenticated, salesItemImageUpload.array('salesItemImage', 4), sellController.sell_post);
 
 module.exports = router;

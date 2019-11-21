@@ -42,19 +42,15 @@
             <div class="col-lg-5">
                 <div class="col">
                     <div class="items_page_mini_photos">
-                        <img id="sm001" src="/images/uploads/{{data.salesItem.seller}}/salesItems/{{data.salesItem.photoFileName}}" alt="img1" class="img-thumbnail"
-                            data-img="/images/uploads/{{data.salesItem.seller}}/salesItems/{{data.salesItem.photoFileName}}">
-                        <img id="sm001" src="/images/uploads/{{data.salesItem.seller}}/salesItems/{{data.salesItem.photoFileName}}" alt="img2" class="img-thumbnail"
-                            data-img="/images/uploads/{{data.salesItem.seller}}/salesItems/{{data.salesItem.photoFileName}}">
-                        <img id="sm002" src="/images/uploads/{{data.salesItem.seller}}/salesItems/{{data.salesItem.photoFileName}}" alt="img3" class="img-thumbnail"
-                            data-img="/images/uploads/{{data.salesItem.seller}}/salesItems/{{data.salesItem.photoFileName}}">
-                        <img id="sm003" src="/images/uploads/{{data.salesItem.seller}}/salesItems/{{data.salesItem.photoFileName}}" alt="img4" class="img-thumbnail"
-                            data-img="/images/uploads/{{data.salesItem.seller}}/salesItems/{{data.salesItem.photoFileName}}">
+                        {{#each data.salesItemPhoto}}
+                        <img id="sm001" src="/images/uploads/{{@root.data.salesItem.seller}}/salesItems/{{this.photoFileName}}" alt="img1" class="img-thumbnail"
+                            data-img="/images/uploads/{{@root.data.salesItem.seller}}/salesItems/{{this.photoFileName}}">
+                        {{/each}}
                     </div>
                 </div>
                 <div class="col">
                     <div class="items_page_main_photo">
-                        <img data-enlargable style="cursor: zoom-in" src="/images/uploads/{{data.salesItem.seller}}/salesItems/{{data.salesItem.photoFileName}}"
+                        <img data-enlargable style="cursor: zoom-in; height: 300px;" src="/images/uploads/{{data.salesItem.seller}}/salesItems/{{data.salesItemPhoto.0.photoFileName}}"
                             id="ProductImage" class="img-fluid" data-toggle="modal" data-target="#exampleModalCenter"
                             alt="Responsive image">
                     </div>

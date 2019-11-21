@@ -40,23 +40,26 @@
                     <h5>Is this a class specific material?</h5>
                     <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" class="custom-control-input" id="classSpecificMaterialYes"
-                            name="isClassSpecificMaterial" value="classSpecificMaterialYes" {{#if salesItem}}{{#if salesItem.classMaterialSection}}checked{{/if}}{{/if}}>
+                            name="isClassSpecificMaterial" value="classSpecificMaterialYes"
+                            {{#if salesItem}}{{#if salesItem.classMaterialSection}}checked{{/if}}{{/if}}>
                         <label class="custom-control-label" for="classSpecificMaterialYes">Yes</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" class="custom-control-input" id="classSpecificMaterialNo"
-                            name="isClassSpecificMaterial" value="classSpecificMaterialNo" {{#if salesItem}}{{#if (eq salesItem.classMaterialSection null)}}checked{{/if}}{{/if}}>
+                            name="isClassSpecificMaterial" value="classSpecificMaterialNo"
+                            {{#if salesItem}}{{#if (eq salesItem.classMaterialSection null)}}checked{{/if}}{{/if}}>
                         <label class="custom-control-label" for="classSpecificMaterialNo">No</label>
                     </div>
                 </div>
 
-                <div class="mb-4" id="classMaterialSection" {{#if (eq salesItem.classMaterialSection null)}}style="display: none;"{{/if}}>
+                <div class="mb-4" id="classMaterialSection"
+                    {{#if (eq salesItem.classMaterialSection null)}}style="display: none;" {{/if}}>
                     <h5>Class Section</h5>
                     <select name="classMaterialSection">
                         <option value="">-</option>
                         {{#each classSection}}
-                        <option value="{{this.csid}}" {{#if (eq this.csid @root.salesItem.classMaterialSection)}} selected
-                            {{/if}}>
+                        <option value="{{this.csid}}" {{#if (eq this.csid @root.salesItem.classMaterialSection)}}
+                            selected {{/if}}>
                             {{this.name}}
                         </option>
                         {{/each}}
@@ -120,12 +123,19 @@
                 </div>
 
                 <div class="mb-4">
-                    <h5>Add Image here</h5>
-                    <input type="file" name="salesItemImages[]" id="salesItemImages" accept="image/png,image/jpeg" multiple required />
+                    <h5>Add Image Here</h5>
+                    <div>
+                        <label for="salesItemImage" id="salesItemImageLabel">Choose up to 4 images to upload (PNG, JPG)</label>
+                        <input type="file" name="salesItemImage" id="salesItemImage"
+                            accept="image/png,image/jpg,image/jpeg" style="width: 1px" multiple required />
+                    </div>
+                    <div class="preview">
+                        <p>No files currently selected for upload</p>
+                    </div>
                 </div>
 
                 <div class="row justify-content-end mx-0">
-                    <button type="reset" class="btn btn-danger">Reset</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="reset" class="btn btn-danger" id="resetForm">Reset</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <button type="submit" class="btn btn-success">Submit</button>
                 </div>
             </form>
