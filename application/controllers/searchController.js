@@ -16,6 +16,9 @@ exports.post = (req, res, next) => {
     else if (category) {
         res.redirect('/search?c=' + category);
     }
+    else {
+        res.redirect('/search?c=all');
+    }
 }
 
 // Handle rendering of search results on GET

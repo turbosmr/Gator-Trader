@@ -13,7 +13,7 @@ router.get('/:pid', salesItemController.salesItem_get);
 router.get('/:pid/edit', ensureRegisteredUserAuthenticated, salesItemController.edit_get);
 
 // POST request to edit sales item
-router.post('/:pid/edit', ensureRegisteredUserAuthenticated, salesItemImageUpload.single('imageFileName'), salesItemController.edit_post);
+router.post('/:pid/edit', ensureRegisteredUserAuthenticated, salesItemImageUpload.array('salesItemImage', 4), salesItemController.edit_post);
 
 // GET request to end sales item
 router.get('/:pid/end', ensureRegisteredUserAuthenticated, salesItemController.end);

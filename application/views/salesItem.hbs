@@ -64,6 +64,9 @@
                     <ul class="brief_description">
                         <li><b>Condition:</b> {{data.salesItem.condition}}</li>
                         <li><b>Quantity:</b> {{data.salesItem.quantity}} available</li>
+                        <li><b>Delivery Method:</b> {{data.salesItem.deliveryMethod}}</li>
+                        {{#if data.pickupLocation}}<li><b>Pickup Location: </b></li>{{/if}}
+                        {{#each data.pickupLocation}}<li>{{this.location}}</li>{{/each}}
                     </ul>
                 </div>
             </div>

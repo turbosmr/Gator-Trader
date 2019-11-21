@@ -4,10 +4,12 @@ const db = require('../config/db');
 exports.salesItem_get = (req, res, next) => {
     let productId = req.params.pid;
     let sql = "SELECT SI.*, CAST(SI.price AS CHAR) AS price, RU.username AS sellerEmail FROM SalesItem SI INNER JOIN RegisteredUser RU on SI.seller = RU.sid WHERE SI.pid = ?;";
-    sql += "SELECT fileName as photoFileName FROM SalesItemPhoto WHERE product = ?";
+    sql += "SELECT fileName as photoFileName FROM SalesItemPhoto WHERE product = ?;";
+    sql += "SELECT * FROM PickupLocation WHERE product = ?;"
+    let placeholders = [productId, productId, productId];
     let objToBePassed = {};
 
-    db.query(sql, [productId, productId], (err, result) => {
+    db.query(sql, placeholders, (err, result) => {
         if (err) {
             res.render('error');
         }
@@ -20,6 +22,7 @@ exports.salesItem_get = (req, res, next) => {
         else {
             objToBePassed.salesItem = result[0][0];
             objToBePassed.salesItemPhoto = result[1];
+            objToBePassed.pickupLocation = result[2];
 
             // Check if sales item belongs to registered user
             if (req.isAuthenticated() && result[0][0].seller == req.user.sid) {
@@ -40,36 +43,29 @@ exports.salesItem_get = (req, res, next) => {
 
 // GET request to edit sales item
 exports.edit_get = (req, res, next) => {
-    let salesItem = {};
-    let classSection = [];
-    let sql = "SELECT *, CAST(price AS CHAR) AS price FROM SalesItem WHERE pid = ? AND seller = ?";
+    let productId = req.params.pid;
+    let seller = req.user.sid;
+    let sql = "SELECT *, CAST(price AS CHAR) AS price FROM SalesItem WHERE pid = ? AND seller = ?;";
+    sql += "SELECT * FROM ClassSection;";
+    sql += "SELECT * FROM PickupLocation WHERE product = ?"
+    placeholders = [productId, seller, productId];
 
-    db.query(sql, [req.params.pid, req.user.sid], (err, result) => {
+    db.query(sql, placeholders, (err, result) => {
         if (err) {
             res.render('error');
         }
-        
-        if (result.length == 0) {
+
+        if (typeof result[0][0] == 'undefined') {
             res.render('error');
         }
         else {
-            salesItem = result[0];
+            res.render('sell', {
+                salesItem: result[0][0],
+                classSection: result[1],
+                pickupLocation: result[2],
+                reviseMode: true
+            });
         }
-    });
-
-    sql = "SELECT * FROM ClassSection";
-
-    db.query(sql, (err, result) => {
-        if (err) throw err;
-
-        for (let i = 0; i < result.length; i++) {
-            classSection.push(result[i]);
-        }
-
-        res.render('sell', {
-            salesItem: salesItem,
-            classSection: classSection
-        });
     });
 }
 
@@ -77,17 +73,97 @@ exports.edit_get = (req, res, next) => {
 exports.edit_post = (req, res, next) => {
     let productId = req.params.pid;
     let { productName, price, category, classMaterialSection, condition, quantity, deliveryMethod, description } = req.body;
-    let salesItemImageFileName = req.file.filename;
+    let salesItemImages = req.files;
     let sql = "";
     let placeholders = [];
+    let tempDeliveryMethod = deliveryMethod;
+    let salesItemPlaceholders = [];
 
-    if (classMaterialSection != '') {
-        sql = "UPDATE SalesItem SET category = ?, name = ?, price = ?, `condition` = ?, quantity = ?, description = ?, deliveryMethod = ?, photoFileName = ?, classMaterialSection = ? WHERE pid = ?";
-        placeholders = [category, productName, price, condition, quantity, description, deliveryMethod, salesItemImageFileName, classMaterialSection, productId];
+    // Check if delivery method is shipping only, pickup only, or both
+    if (Array.isArray(tempDeliveryMethod)) {
+        // Shipping and pickup
+        if (tempDeliveryMethod.includes("shipping")) {
+            deliveryMethod = 3;
+        }
+        // Pickup only (multiple locations)
+        else {
+            deliveryMethod = 2;
+        }
     }
     else {
-        sql = "UPDATE SalesItem SET category = ?, name = ?, price = ?, `condition` = ?, quantity = ?, description = ?, deliveryMethod = ?, photoFileName = ?, classMaterialSection = NULL WHERE pid = ?";
-        placeholders = [category, productName, price, condition, quantity, description, deliveryMethod, salesItemImageFileName, productId]
+        // Shipping only
+        if (tempDeliveryMethod == "shipping") {
+            deliveryMethod = 1;
+        }
+        // Pickup only (single location)
+        else {
+            deliveryMethod = 2;
+        }
+    }
+
+    // Check if class material section field is empty
+    if (classMaterialSection != '') {
+        sql += "UPDATE SalesItem SET category = ?, name = ?, price = ?, `condition` = ?, quantity = ?, description = ?, deliveryMethod = ?, classMaterialSection = ? WHERE pid = ?;";
+        salesItemPlaceholders = [category, productName, price, condition, quantity, description, deliveryMethod, classMaterialSection, productId];
+        placeholders.push(...salesItemPlaceholders);
+    }
+    else {
+        sql += "UPDATE SalesItem SET category = ?, name = ?, price = ?, `condition` = ?, quantity = ?, description = ?, deliveryMethod = ?, classMaterialSection = NULL WHERE pid = ?;";
+        salesItemPlaceholders = [category, productName, price, condition, quantity, description, deliveryMethod, productId];
+        placeholders.push(...salesItemPlaceholders);
+    }
+
+    // Store pickup location in DB
+    // First remove existing pickup locations
+    sql += "DELETE FROM PickupLocation WHERE product = ?;";
+    placeholders.push(productId);
+
+    // Pickup only (multiple locations) or shipping & pickup
+    if (Array.isArray(tempDeliveryMethod)) {
+        for (let i = 0; i < tempDeliveryMethod.length; i++) {
+            // Make sure "shipping" is not included as a location
+            if (tempDeliveryMethod[i] != "shipping") {
+                sql += "INSERT INTO PickupLocation (product, location) VALUES (?, ?);";
+                placeholders.push(productId);
+                if (tempDeliveryMethod[i] == "library") {
+                    placeholders.push(1);
+                }
+                else if (tempDeliveryMethod[i] == "student-center") {
+                    placeholders.push(2);
+                }
+                else {
+                    placeholders.push(3);
+                }
+            }
+        }
+    }
+    // Single pickup location
+    else if (tempDeliveryMethod != "shipping") {
+        sql += "INSERT INTO PickupLocation (product, location) VALUES (?, ?);";
+        placeholders.push(productId);
+        if (tempDeliveryMethod == "library") {
+            placeholders.push(1);
+        }
+        else if (tempDeliveryMethod == "student-center") {
+            placeholders.push(2);
+        }
+        else {
+            placeholders.push(3);
+        }
+    }
+
+    // Check if there are new photo(s) being uploaded
+    if (salesItemImages.length > 0) {
+        // First, remove existing sales item photo(s) 
+        sql += "DELETE FROM SalesItemPhoto WHERE product = ?;";
+        placeholders.push(productId);
+
+        // Save filename of uploaded sales item photo(s)
+        for (let i = 0; i < salesItemImages.length; i++) {
+            sql += "INSERT INTO SalesItemPhoto (product, fileName) VALUES (?, ?);";
+            placeholders.push(productId);
+            placeholders.push(salesItemImages[i].filename);
+        }
     }
 
     db.query(sql, placeholders, (err, result) => {
@@ -96,7 +172,7 @@ exports.edit_post = (req, res, next) => {
             res.redirect('/products/' + req.params.pid + '/edit');
         }
 
-        if (result.changedRows >= 0) {
+        if (typeof result !== 'undefined') {
             req.flash('success', 'Successfully revised item');
             res.redirect('/user/dashboard');
         }

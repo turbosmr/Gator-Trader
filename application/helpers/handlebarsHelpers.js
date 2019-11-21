@@ -17,6 +17,12 @@ module.exports = {
     gte: (v1, v2) => {
         return v1 >= v2;
     },
+    and: (v1, v2) => {
+        return v1 && v2;
+    },
+    or: (v1, v2) => {
+        return v1 || v2;
+    },
     resultsInfo: (offset, pageLimit, totalProducts, keyword) => {
         let html = "";
         let posFromOffset = offset + pageLimit;

@@ -7,7 +7,7 @@
             </div>
 
             <div class="container header">
-                <h1>Posting an Item for Sale</h1>
+                <h1>{{#if reviseMode}}Revise an Item{{else}}Listing an Item for Sale{{/if}}</h1>
             </div>
 
             <form action="{{#if salesItem}}/products/{{salesItem.pid}}/edit{{else}}/sell{{/if}}"
@@ -93,23 +93,28 @@
                     <div class="pl-2">
                         <div class="custom-control custom-checkbox custom-control-inline mb-3">
                             <input type="checkbox" class="custom-control-input" id="shipping" name="deliveryMethod"
-                                value="shipping" {{#if (eq salesItem.deliveryMethod "Shipping")}} checked {{/if}}>
+                                value="shipping"
+                                {{#if (or (eq salesItem.deliveryMethod "Shipping Only") (eq salesItem.deliveryMethod "Shipping & Pickup"))}}
+                                checked{{/if}}>
                             <label class="custom-control-label" for="shipping">Shipping</label>
                         </div>
                         <h6>Pickup Location</h6>
                         <div class="custom-control custom-checkbox custom-control-inline">
                             <input type="checkbox" class="custom-control-input" id="library" name="deliveryMethod"
-                                value="library">
+                                value="library"
+                                {{#each pickupLocation}}{{#if (eq this.location "Library")}}checked{{/if}}{{/each}}>
                             <label class="custom-control-label" for="library">Library</label>
                         </div>
                         <div class="custom-control custom-checkbox custom-control-inline">
                             <input type="checkbox" class="custom-control-input" id="student-center"
-                                name="deliveryMethod" value="student-center">
+                                name="deliveryMethod" value="student-center"
+                                {{#each pickupLocation}}{{#if (eq this.location "Student Center")}}checked{{/if}}{{/each}}>
                             <label class="custom-control-label" for="student-center">Student Center</label>
                         </div>
                         <div class="custom-control custom-checkbox custom-control-inline">
                             <input type="checkbox" class="custom-control-input" id="wellness-center"
-                                name="deliveryMethod" value="wellness-center">
+                                name="deliveryMethod" value="wellness-center"
+                                {{#each pickupLocation}}{{#if (eq this.location "Wellness Center")}}checked{{/if}}{{/each}}>
                             <label class="custom-control-label" for="wellness-center">Wellness Center</label>
                         </div>
                     </div>
@@ -125,9 +130,10 @@
                 <div class="mb-4">
                     <h5>Add Image Here</h5>
                     <div>
-                        <label for="salesItemImage" id="salesItemImageLabel">Choose up to 4 images to upload (PNG, JPG)</label>
+                        <label for="salesItemImage" id="salesItemImageLabel">Choose up to 4 images to upload (PNG,
+                            JPG)</label>
                         <input type="file" name="salesItemImage" id="salesItemImage"
-                            accept="image/png,image/jpg,image/jpeg" style="width: 1px" multiple required />
+                            accept="image/png,image/jpg,image/jpeg" style="width: 1px" multiple {{#if reviseMode}}{{else}}required{{/if}} />
                     </div>
                     <div class="preview">
                         <p>No files currently selected for upload</p>
@@ -135,7 +141,8 @@
                 </div>
 
                 <div class="row justify-content-end mx-0">
-                    <button type="reset" class="btn btn-danger" id="resetForm">Reset</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="reset" class="btn btn-danger"
+                        id="resetForm">Reset</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <button type="submit" class="btn btn-success">Submit</button>
                 </div>
             </form>

@@ -43,7 +43,7 @@ exports.search_results = (limit) => {
         }
 
         // Check if category criteria exist
-        if (category != 'all') {
+        if (typeof category !== 'undefined' && category != 'all') {
             // Check if class material category is selected
             if (category == 'classMaterials') {
                 sql += " AND classMaterialSection IS NOT NULL";
@@ -54,6 +54,7 @@ exports.search_results = (limit) => {
                 placeholders.push(category);
             }
         }
+
 
         // Check if price filter exist
         if (priceFilter) {
