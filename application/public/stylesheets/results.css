@@ -26,25 +26,22 @@
 }
 
 .dropdown_sidebar {
-	display: none;
+    display: none;
 }
 
 /* General  */
 
 @media screen and (max-width: 992px) {
-
-	.dropdown_sidebar {
-        display:inline-block;
+    .dropdown_sidebar {
+        display: inline-block;
         margin-right: 20px;
     }
     .sidebar {
         display: none
     }
-
-    .results_card_container { 
+    .results_card_container {
         width: 95vw !important;
-      }
-
+    }
 }
 
 #search-results {
@@ -100,7 +97,7 @@
 }
 
 .price_range_dd {
- padding: 15px;
+    padding: 15px;
 }
 
 .condition_dd {
@@ -113,17 +110,17 @@
 
 /* Product Card Styling */
 
-.results_container{
+.results_container {
     padding-left: 0;
     padding-right: 0;
 }
 
-.sidebar_column{
+.sidebar_column {
     padding-left: 0;
     padding-right: 0;
 }
 
-.card_column{
+.card_column {
     padding-left: 0;
     padding-right: 0;
 }
@@ -132,41 +129,42 @@
     box-shadow: 0 6px 6px rgba(0, 0, 0, 0.3);
     background: #fff;
     border-radius: 5px;
-    padding: 20px; 
-    margin-top: 15px; 
+    padding: 20px;
+    margin-top: 15px;
     width: 81vw;
-  }
+}
 
-  .results_card_container .featured_text h1 {
+.results_card_container .featured_text h1 {
     margin: 0;
     padding: 0;
     font-weight: 600;
     line-height: 50px;
     color: #181e28;
-  }
-  .results_card_container .featured_text p.seller{
+}
+
+.results_card_container .featured_text p.seller {
     font-size: 17px;
     font-weight: 300;
     margin-bottom: 20px;
-  }
-  .results_card_container .featured_text p.price {
+}
+
+.results_card_container .featured_text p.price {
     color: #811b1b;
     font-size: 26px;
     font-weight: 500;
-  }
+}
 
-  .results_card_container .featured_text p {
+.results_card_container .featured_text p {
     margin: 0;
     padding: 0;
-  }
+}
 
-
-  .results_card_container .card_footer {
+.results_card_container .card_footer {
     padding-top: 20px;
     margin-top: 0;
-  }
-  
-  .results_card_container .card_footer::before {
+}
+
+.results_card_container .card_footer::before {
     content: "";
     position: absolute;
     display: block;
@@ -174,14 +172,14 @@
     width: calc(100% - 30px);
     height: 3px;
     background: lightgray;
-  }
+}
 
-  .results_card_container .contact_seller {
-      float: right;
-      margin-top: 10px;
-  }
+.results_card_container .contact_seller {
+    float: right;
+    margin-top: 10px;
+}
 
-  .results_card_container .contact_seller button {
+.results_card_container .contact_seller button {
     cursor: pointer;
     border: 1px solid rgb(221, 200, 37);
     padding: 14px 30px;
@@ -190,9 +188,9 @@
     background: rgb(221, 200, 37);
     font-size: 16px;
     transition: 200ms;
-  }
+}
 
-  .results_card_container .contact_seller button:hover {
+.results_card_container .contact_seller button:hover {
     background: #fff;
     color: rgb(221, 200, 37);
 }
@@ -223,6 +221,6 @@
 
 .page-item:hover .page-link:hover {
     color: grey;
-} 
+}
 
 /* ----------------------------------------------------------------------------------- */

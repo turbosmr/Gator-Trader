@@ -49,7 +49,7 @@
     <div class="tab-pane fade show active" id="items_forSale_tab">
         {{!-- Container for the selling section --}}
         <div class="sell_container">
-            <h2>Items You are Selling </h2>
+            <h2>Items You are Selling</h2>
             <ul class="selling px-0">
                 <li class="table-header">
                     <div class="col col-6">Name</div>
@@ -67,14 +67,17 @@
                     {{#if (eq this.status "Active")}}
                     <div class="col col-2">{{this.status}}</div>
                     {{else}}
-                    <div class="col col-2" style="color: red;">{{this.status}}</div>
+                    <div class="col col-1" style="color: red;">{{this.status}}</div>
                     {{/if}}
                     <div class="col col-4">
                         {{#if (eq this.status "Ended")}}
-                        <a href="/products/{{this.pid}}/relist"><button type="button" class="btn btn-danger btn-sm">Relist</button></a>
+                        <a href="/products/{{this.pid}}/relist"><button type="button"
+                                class="btn btn-danger btn-sm">Relist</button></a>
                         {{else}}
-                        <a href="/products/{{this.pid}}/edit"><button type="button" class="btn btn-secondary btn-sm">Revise</button></a>
-                        <a href="/products/{{this.pid}}/end"><button type="button" class="btn btn-danger btn-sm">End Listing</button></a>
+                        <a href="/products/{{this.pid}}/edit"><button type="button"
+                                class="btn btn-secondary btn-sm">Revise</button></a>
+                        <a href="/products/{{this.pid}}/end"><button type="button" class="btn btn-danger btn-sm">End
+                                Listing</button></a>
                         {{/if}}
                     </div>
                 </li>

@@ -23,7 +23,14 @@ exports.post = (req, res, next) => {
 
 // Handle rendering of search results on GET
 exports.get = (req, res, next) => {
+    let sql = res.locals.sql;
+    let placeholders = res.locals.placeholders;
     let product = [];
+    let pageLimit = res.locals.pageLimit;
+    let currentPage = res.locals.currentPage;
+    let totalPages = res.locals.totalPages;
+    let offset = (pageLimit * currentPage) - pageLimit;
+    let totalProducts = res.locals.totalProducts;
     let searchCriteria = {};
     searchCriteria.keyword = req.query.k;
     searchCriteria.selectedCategoryVal = req.query.c;
@@ -31,47 +38,48 @@ exports.get = (req, res, next) => {
     searchCriteria.conditionFilter = res.locals.conditionFilter;
     searchCriteria.sortF = res.locals.sortF;
 
-    if (res.locals.totalPages > 0) {
-        if (res.locals.currentPage > res.locals.totalPages || res.locals.currentPage < 1) {
+    if (totalPages > 0) {
+        if (currentPage > totalPages || currentPage < 1) {
             return res.redirect('/');
         }
     }
-
-    let offset = (res.locals.pageLimit * res.locals.currentPage) - res.locals.pageLimit;
 
     if (offset < 0) {
         limit += offset;
         offset = 0;
     }
 
-    res.locals.sql += " LIMIT ? OFFSET ?";
-    res.locals.placeholders.push(res.locals.pageLimit, offset);
+    sql += " LIMIT ? OFFSET ?;";
+    placeholders.push(pageLimit, offset);
 
-    if (typeof selectedCategoryVal !== 'undefined') {
-        db.query('SELECT name FROM Category WHERE cid = ?', searchCriteria.selectedCategoryVal, (err, result) => {
-            if (err) throw err;
-    
-            if (result.length > 0) {
-                searchCriteria.selectedCategoryName = result[0].name;
-            }
-        });
+    // Retrieve selected category name
+    if (typeof searchCriteria.selectedCategoryVal !== 'undefined') {
+        sql += "SELECT name FROM Category WHERE cid = ?;";
+        placeholders.push(searchCriteria.selectedCategoryVal);
     }
 
-    db.query(res.locals.sql, res.locals.placeholders, (err, result) => {
-        if (err) throw err;
+    db.query(sql, placeholders, (err, result) => {
+        let salesItems = result[0];
+        let selectedCategoryName = result[1];
 
-        for (let i = 0; i < result.length; i++) {
-            product.push(result[i]);
+        if (err) throw err;
+        
+        for (let i = 0; i < salesItems.length; i++) {
+            product.push(salesItems[i]);
+        }
+
+        if (result[1].length > 0) {
+            searchCriteria.selectedCategoryName = selectedCategoryName[0].name;
         }
 
         res.render('results', {
             product: product,
             searchCriteria: searchCriteria,
-            pageLimit: res.locals.pageLimit,
+            pageLimit: pageLimit,
             offset: offset,
-            totalProducts: res.locals.totalProducts,
-            pageCount: res.locals.totalPages,
-            currentPage: res.locals.currentPage
+            totalProducts: totalProducts,
+            pageCount: totalPages,
+            currentPage: currentPage
         });
     });
 }

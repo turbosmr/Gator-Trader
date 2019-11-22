@@ -126,7 +126,7 @@ exports.logout = (req, res, next) => {
 exports.dashboard = (req, res, next) => {
     // Retrieve sales items listed by current registered user
     let product = [];
-    let sql = "SELECT SalesItem.pid, SalesItem.name, SalesItem.status, Category.name AS category, CAST(SalesItem.price AS CHAR) AS price FROM SalesItem INNER JOIN Category ON SalesItem.category = Category.cid WHERE seller = ?";
+    let sql = "SELECT SI.pid, SI.name, SI.seller, SI.status, Category.name AS category, CAST(SI.price AS CHAR) AS price, SIP.fileName AS photoFileName FROM SalesItem SI INNER JOIN Category ON SI.category = Category.cid LEFT JOIN SalesItemPhoto SIP on SIP.product = (SELECT product FROM SalesItemPhoto SIP2 WHERE SIP2.product = SI.pid LIMIT 1) GROUP BY SI.pid, SI.seller, SI.status HAVING SI.seller = ?";
     let placeholders = [req.user.sid];
 
     db.query(sql, placeholders, (error, result) => {

@@ -12,7 +12,7 @@ exports.search_results = (limit) => {
         let min, max = 0;
         let conditionFilter = req.query.cond;
         let sortF = (req.query.sort) ? req.query.sort : "ltoh";
-        let sql = "SELECT SI.*, CAST(SI.price AS CHAR) AS newPrice, RU.username AS sellerEmail FROM SalesItem SI INNER JOIN RegisteredUser RU on SI.seller = RU.sid WHERE SI.status = 'Active'";
+        let sql = "SELECT SI.*, CAST(SI.price AS CHAR) AS newPrice, RU.username AS sellerEmail, SIP.fileName AS photoFileName FROM SalesItem SI INNER JOIN RegisteredUser RU on SI.seller = RU.sid LEFT JOIN SalesItemPhoto SIP on SIP.product = (SELECT product FROM SalesItemPhoto SIP2 WHERE SIP2.product = SI.pid LIMIT 1) GROUP BY SI.pid, SI.status, SI.price HAVING SI.status = 'Active'";
         let placeholders = [];
 
         // Set min, max for price filter
@@ -89,11 +89,11 @@ exports.search_results = (limit) => {
         res.locals.conditionFilter = conditionFilter;
         res.locals.sortF = sortF;
 
-        res.locals.sql = sql;
-        res.locals.placeholders = placeholders;
-
         res.locals.pageLimit = pageLimit;
         res.locals.currentPage = currentPage;
+
+        res.locals.sql = sql;
+        res.locals.placeholders = placeholders;
 
         db.query(sql, placeholders, (err, result) => {
             if (err) throw (err);

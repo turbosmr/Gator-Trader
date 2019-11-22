@@ -142,8 +142,8 @@
                                             id="dropDownCategories">
                                             <option value="all">All Categories</option>
                                             <option value="classMaterials" onclick="changePlaceholder()"
-                                                {{#if (eq "classMaterials" @root.searchCriteria.selectedCategoryVal)}} selected
-                                                {{/if}}>Class Materials</option>
+                                                {{#if (eq "classMaterials" @root.searchCriteria.selectedCategoryVal)}}
+                                                selected {{/if}}>Class Materials</option>
                                             {{#each category}}
                                             <option value="{{this.cid}}"
                                                 {{#if (eq this.cid @root.searchCriteria.selectedCategoryVal)}} selected
@@ -174,9 +174,8 @@
                                     <!-- Render sell button when width < 576px -->
                                     <div class="col-auto d-block d-sm-none pr-0">
                                         <div style="float: right;">
-                                            <a href="/sell">
-                                                <button class="btn sell-button">Sell</button>
-                                            </a>
+                                            <button class="btn sell-button">
+                                                <a href="/sell">Sell</a></button>
                                         </div>
                                     </div>
                                 </div>
