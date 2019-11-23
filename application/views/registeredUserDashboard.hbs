@@ -44,33 +44,8 @@
 <div class="tab-content">
     <div class="tab-pane fade show active" id="items_forSale_tab">
 
-        <div class="sell_container">
-            <h2>Items You are Selling </h2>
-            <ul class="selling">
-                <li class="table-header">
-                    <div class="col-lg-5">Name</div>
-                    <div class="col-lg-1">Price</div>
-                    <div class="col-lg-2">Status</div>
-                    <div class="col-lg-4">
-                        Actions
-                    </div>
-                </li>
-                <li class="table-row">
-                    <div class="col-lg-5"> <span class="selling_info">Name:&nbsp; </span>Chair </div>
-                    <div class="col-lg-1"><span class="selling_info">Price:&nbsp; </span>$200</div>
-                    <div class="col-lg-2"><span style="color:black;" class="selling_info">Status:&nbsp; </span>Approved
-                    </div>
-
-                    <div class="col-lg-4 selling_btn">
-                        <button type="button" class="btn btn-secondary btn-sm">Revise</button>
-                        <button type="button" class="btn btn-danger btn-sm">End Listing</button>
-                    </div>
-                </li>
-            </ul>
-        </div>
-
         {{!-- Container for the selling section --}}
-        {{!-- <div class="sell_container">
+        <div class="sell_container">
             <h2>Items You are Selling </h2>
             <ul class="selling">
                 <li class="table-header">
@@ -84,14 +59,14 @@
                 {{#if product}}
                 {{#each product}}
                 <li class="table-row">
-                    <div class="col col-5"><a href="/products/{{this.pid}}">{{this.name}}</a> </div>
-                    <div class="col col-1">${{this.price}}</div>
+                    <div class="col col-5"> <span class="selling_info">Name:&nbsp; </span><a href="/products/{{this.pid}}">{{this.name}}</a> </div>
+                    <div class="col col-1"><span class="selling_info">Price:&nbsp; </span>${{this.price}}</div>
                     {{#if (eq this.status "approved")}}
-                    <div class="col col-2">{{this.status}}</div>
+                    <div class="col col-2"><span style="color:black;" class="selling_info">Status:&nbsp; </span>{{this.status}}</div>
                     {{else}}
-                    <div class="col col-2" style="color: red;">{{this.status}}</div>
+                    <div class="col col-2" style="color: red;"><span style="color:black;" class="selling_info">Status:&nbsp; </span>{{this.status}}</div>
                     {{/if}}
-                    <div class="col col-4">
+                    <div class="col-lg-4 selling_btn">
                         <button type="button" class="btn btn-secondary btn-sm">Revise</button>
                         <button type="button" class="btn btn-danger btn-sm">End Listing</button>
                     </div>
@@ -103,7 +78,7 @@
                 </li>
                 {{/if}}
             </ul>
-        </div> --}}
+        </div>
     </div>
     <div class="tab-pane fade" id="dashboard_messages_tab">
         {{!-- Container for the messages section --}}
