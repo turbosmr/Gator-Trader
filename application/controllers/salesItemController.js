@@ -264,7 +264,7 @@ exports.inquiry_get = (req, res, next) => {
     if (typeof inquiryId !== "undefined") {
         sql = "SELECT SI.*, CAST(SI.price AS CHAR) AS price, RU.username AS sellerEmail FROM SalesItem SI INNER JOIN RegisteredUser RU on SI.seller = RU.sid WHERE SI.pid = ?;"
         sql += "SELECT fileName as photoFileName FROM SalesItemPhoto WHERE product = ?;";
-        sql += "SELECT RU2.sid AS senderSid, RU2.username AS senderEmail, M.message AS message, M.time AS time FROM Inquiry I INNER JOIN Message M on I.iid = M.inquiry INNER JOIN SalesItem SI on I.product = SI.pid INNER JOIN RegisteredUser RU on SI.seller = RU.sid INNER JOIN RegisteredUser RU2 on M.from = RU2.sid WHERE I.iid = ? AND I.product = ? AND (I.inquirer = ? OR SI.seller = ?) ORDER BY time ASC;";
+        sql += "SELECT RU2.sid AS senderSid, RU2.username AS senderEmail, I.subject AS subject, M.message AS message, M.time AS time FROM Inquiry I INNER JOIN Message M on I.iid = M.inquiry INNER JOIN SalesItem SI on I.product = SI.pid INNER JOIN RegisteredUser RU on SI.seller = RU.sid INNER JOIN RegisteredUser RU2 on M.from = RU2.sid WHERE I.iid = ? AND I.product = ? AND (I.inquirer = ? OR SI.seller = ?) ORDER BY time ASC;";
         sql += "SELECT * FROM PickupLocation WHERE product = ?;"
         placeholders = [productId, productId, inquiryId, productId, loggedInUser, loggedInUser, productId];
 
@@ -358,52 +358,53 @@ exports.inquiry_post = (req, res, next) => {
     let productId = req.params.pid;
     let inquiryId = req.query.id;
     let sender = req.user.sid;
-    let { message } = req.body;
+    let { subject, message} = req.body;
     let sql = "";
     let placeholders = [];
 
-    if (typeof inquiryId !== "undefined") {
-        sql += "INSERT INTO Message (inquiry, `from`, message) VALUES (?, ?, ?);";
-        placeholders = [inquiryId, sender, message];
-    }
-    else {
-        sql = "INSERT INTO Inquiry (product, inquirer) VALUES (?, ?);"
-        placeholders = [productId, sender];
-    }
-
-    db.query(sql, placeholders, (err, result) => {
-        if (err) {
-            res.render('error');
-        }
-
+    // Check if message is empty
+    if (message !== "") {
         if (typeof inquiryId !== "undefined") {
-            if (result.affectedRows > 0) {
-                res.redirect('/products/' + productId + '/inquiry?id=' + inquiryId);
-            }
-            else {
-                res.render('error');
-            }
+            sql += "INSERT INTO Message (inquiry, `from`, message) VALUES (?, ?, ?);";
+            placeholders = [inquiryId, sender, message];
         }
         else {
-            if (result.affectedRows > 0) {
-                inquiryId = result.insertId;
-                sql = "INSERT INTO Message (inquiry, `from`, message) VALUES (?, ?, ?);";
-                placeholders = [inquiryId, sender, message];
-
-                db.query(sql, placeholders, (err, result) => {
-                    if (result.affectedRows > 0) {
-                        res.redirect('/products/' + productId + '/inquiry?id=' + inquiryId);
-                    }
-                    else {
-                        res.render('error');
-                    }
-                });
-            }
+            sql = "INSERT INTO Inquiry (product, inquirer, subject) VALUES (?, ?, ?);"
+            placeholders = [productId, sender, subject];
         }
-    });
 
-/*     console.log('productId: ' + productId)
-    console.log('inquiryId: ' + inquiryId)
-    console.log('message: ' + message) */
+        db.query(sql, placeholders, (err, result) => {
+            if (err) {
+                res.render('error');
+            }
 
+            if (typeof inquiryId !== "undefined") {
+                if (result.affectedRows > 0) {
+                    res.redirect('/products/' + productId + '/inquiry?id=' + inquiryId);
+                }
+                else {
+                    res.render('error');
+                }
+            }
+            else {
+                if (result.affectedRows > 0) {
+                    inquiryId = result.insertId;
+                    sql = "INSERT INTO Message (inquiry, `from`, message) VALUES (?, ?, ?);";
+                    placeholders = [inquiryId, sender, message];
+
+                    db.query(sql, placeholders, (err, result) => {
+                        if (result.affectedRows > 0) {
+                            res.redirect('/products/' + productId + '/inquiry?id=' + inquiryId);
+                        }
+                        else {
+                            res.render('error');
+                        }
+                    });
+                }
+            }
+        });
+    }
+    else {
+        res.redirect('/products/' + productId + '/inquiry?id=' + inquiryId);
+    }
 }

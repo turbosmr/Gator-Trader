@@ -25,7 +25,10 @@
         <div class="col-6 px-0">
             <div class="card px-3 py-3" style="height: 750px;">
                 {{#if messages}}
-                <div class="card px-2 py-2 scrollable" id="conversation-container">
+                <div class="mb-3">
+                    <h4><b>Subject:</b> {{messages.0.subject}}</h4>
+                </div>
+                <div class="card mb-3 px-2 py-2 scrollable" id="conversation-container">
                     <ul class="list-group" id="conversation">
                         {{#each messages}}
                         <div class="mx-auto">
@@ -38,18 +41,37 @@
                         {{/each}}
                     </ul>
                 </div>
-                {{/if}}
-                <div class="mt-2">
+                <div class="">
                     <form action="" method="POST">
                         <div class="input-group">
                             <textarea name="message" class="form-control" placeholder="Enter message here" rows="3"
-                                style="resize: none;"></textarea>
+                                style="resize: none;" required></textarea>
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-success">Send</button>
                             </div>
                         </div>
                     </form>
                 </div>
+                {{else}}
+                <form action="" method="POST">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Subject</span>
+                        </div>
+                        <div class="col-4 px-0">
+                            <input type="text" name="subject" class="form-control" style="border-radius: 0 .25rem .25rem 0;" placeholder="Enter subject here"
+                                maxlength="40" required>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <textarea name="message" class="form-control" placeholder="Enter message here" rows="3"
+                            style="resize: none;" required></textarea>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-success">Send</button>
+                        </div>
+                    </div>
+                </form>
+                {{/if}}
             </div>
         </div>
     </div>
