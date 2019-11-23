@@ -1,6 +1,6 @@
 const db = require('../config/db');
 
-// Handle showing sales item page on GET
+// Show sales item page on GET
 exports.salesItem_get = (req, res, next) => {
     let productId = req.params.pid;
     let sql = "SELECT SI.*, CAST(SI.price AS CHAR) AS price, RU.username AS sellerEmail FROM SalesItem SI INNER JOIN RegisteredUser RU on SI.seller = RU.sid WHERE SI.pid = ?;";
@@ -14,12 +14,8 @@ exports.salesItem_get = (req, res, next) => {
             res.render('error');
         }
 
-        // Item not found
-        if (result.length == 0) {
-            res.render('error');
-        }
         // Item found
-        else {
+        if (result[0].length !== 0) {
             objToBePassed.salesItem = result[0][0];
             objToBePassed.salesItemPhoto = result[1];
             objToBePassed.pickupLocation = result[2];
@@ -38,10 +34,14 @@ exports.salesItem_get = (req, res, next) => {
                 data: objToBePassed
             });
         }
+        // Item not found
+        else {
+            res.render('error');
+        }
     });
 }
 
-// GET request to edit sales item
+// Show sell page for revising sales item on GET
 exports.edit_get = (req, res, next) => {
     let productId = req.params.pid;
     let seller = req.user.sid;
@@ -69,7 +69,7 @@ exports.edit_get = (req, res, next) => {
     });
 }
 
-// POST request to edit sales item
+// Handle submitting revision of sales item on POST
 exports.edit_post = (req, res, next) => {
     let productId = req.params.pid;
     let { productName, price, category, classMaterialSection, condition, quantity, deliveryMethod, description } = req.body;
@@ -179,7 +179,7 @@ exports.edit_post = (req, res, next) => {
     });
 }
 
-// GET request to end sales item
+// Handle ending listing of sales item on GET
 exports.end = (req, res, next) => {
     let productId = req.params.pid;
     let seller = req.user.sid;
@@ -215,7 +215,7 @@ exports.end = (req, res, next) => {
     });
 }
 
-// GET request to relist sales item
+// Handle relisting sales item on GET
 exports.relist = (req, res, next) => {
     let productId = req.params.pid;
     let seller = req.user.sid;
@@ -249,4 +249,161 @@ exports.relist = (req, res, next) => {
             res.render('error');
         }
     });
+}
+
+// Handle showing contact seller page on GET
+exports.inquiry_get = (req, res, next) => {
+    let productId = req.params.pid;
+    let inquiryId = req.query.id;
+    let loggedInUser = req.user.sid;
+    let messages = [];
+    let sql = "";
+    let placeholders = [];
+
+    // Check if ".../inquiry?id=[inquiryId]" exist
+    if (typeof inquiryId !== "undefined") {
+        sql = "SELECT SI.*, CAST(SI.price AS CHAR) AS price, RU.username AS sellerEmail FROM SalesItem SI INNER JOIN RegisteredUser RU on SI.seller = RU.sid WHERE SI.pid = ?;"
+        sql += "SELECT fileName as photoFileName FROM SalesItemPhoto WHERE product = ?;";
+        sql += "SELECT RU2.sid AS senderSid, RU2.username AS senderEmail, M.message AS message, M.time AS time FROM Inquiry I INNER JOIN Message M on I.iid = M.inquiry INNER JOIN SalesItem SI on I.product = SI.pid INNER JOIN RegisteredUser RU on SI.seller = RU.sid INNER JOIN RegisteredUser RU2 on M.from = RU2.sid WHERE I.iid = ? AND I.product = ? AND (I.inquirer = ? OR SI.seller = ?) ORDER BY time ASC;";
+        sql += "SELECT * FROM PickupLocation WHERE product = ?;"
+        placeholders = [productId, productId, inquiryId, productId, loggedInUser, loggedInUser, productId];
+
+        db.query(sql, placeholders, (err, result) => {
+            if (err) {
+                res.render('error');
+            }
+
+            // Item found
+            if (result[0].length !== 0) {
+                let salesItem = result[0][0];
+                let salesItemPhoto = result[1];
+                let pickupLocation = result[3];
+
+                // Inquiry found
+                if (result[2].length !== 0) {
+                    for (let i = 0; i < result[2].length; i++) {
+                        messages.push(result[2][i]);
+                    }
+
+                    res.render('testInquiry', {
+                        salesItem: salesItem,
+                        salesItemPhoto: salesItemPhoto,
+                        messages: messages,
+                        pickupLocation: pickupLocation
+                    });
+                }
+                // Inquiry not found
+                else {
+                    res.redirect('/products/' + salesItem.pid + '/inquiry');
+                }
+            }
+            // Item not found
+            else {
+                res.render('error');
+            }
+        });
+    }
+    else {
+        sql = "SELECT SI.*, CAST(SI.price AS CHAR) AS price, RU.username AS sellerEmail FROM SalesItem SI INNER JOIN RegisteredUser RU on SI.seller = RU.sid WHERE SI.pid = ?;";
+        sql += "SELECT fileName as photoFileName FROM SalesItemPhoto WHERE product = ?;";
+        sql += "SELECT * FROM Inquiry I INNER JOIN Message M on I.iid = M.inquiry INNER JOIN SalesItem SI on I.product = SI.pid INNER JOIN RegisteredUser RU on SI.seller = RU.sid WHERE I.product = ? AND I.inquirer = ?;";
+        sql += "SELECT * FROM PickupLocation WHERE product = ?;"
+        placeholders = [productId, productId, productId, loggedInUser, productId];
+
+        db.query(sql, placeholders, (err, result) => {
+            if (err) {
+                res.render('error');
+            }
+
+            // Item found
+            if (result[0].length !== 0) {
+                let salesItem = result[0][0];
+                let salesItemPhoto = result[1];
+                let pickupLocation = result[3];
+
+                // Inquiry not found
+                if (result[2].length == 0) {
+                    // Check if user looking to inquire is the seller of the item
+                    if (salesItem.seller == loggedInUser) {
+                        res.render('error', {
+                            error: 'Sorry, but sellers are not permitted to inquire their own items.',
+                            advice: 'Please check your dashboard for inquiries of your items.'
+                        });
+                    }
+                    else {
+                        res.render('testInquiry', {
+                            salesItem: salesItem,
+                            salesItemPhoto: salesItemPhoto,
+                            pickupLocation: pickupLocation
+                        });
+                    }
+                }
+                // Inquiry found
+                else {
+                    let inquiry = result[2][0];
+
+                    res.redirect('/products/' + productId + '/inquiry?id=' + inquiry.iid);
+                }
+            }
+            // Item not found
+            else {
+                res.render('error');
+            }
+        });
+    }
+}
+
+// Handle sending message in contact seller page on POST
+exports.inquiry_post = (req, res, next) => {
+    let productId = req.params.pid;
+    let inquiryId = req.query.id;
+    let sender = req.user.sid;
+    let { message } = req.body;
+    let sql = "";
+    let placeholders = [];
+
+    if (typeof inquiryId !== "undefined") {
+        sql += "INSERT INTO Message (inquiry, `from`, message) VALUES (?, ?, ?);";
+        placeholders = [inquiryId, sender, message];
+    }
+    else {
+        sql = "INSERT INTO Inquiry (product, inquirer) VALUES (?, ?);"
+        placeholders = [productId, sender];
+    }
+
+    db.query(sql, placeholders, (err, result) => {
+        if (err) {
+            res.render('error');
+        }
+
+        if (typeof inquiryId !== "undefined") {
+            if (result.affectedRows > 0) {
+                res.redirect('/products/' + productId + '/inquiry?id=' + inquiryId);
+            }
+            else {
+                res.render('error');
+            }
+        }
+        else {
+            if (result.affectedRows > 0) {
+                inquiryId = result.insertId;
+                sql = "INSERT INTO Message (inquiry, `from`, message) VALUES (?, ?, ?);";
+                placeholders = [inquiryId, sender, message];
+
+                db.query(sql, placeholders, (err, result) => {
+                    if (result.affectedRows > 0) {
+                        res.redirect('/products/' + productId + '/inquiry?id=' + inquiryId);
+                    }
+                    else {
+                        res.render('error');
+                    }
+                });
+            }
+        }
+    });
+
+/*     console.log('productId: ' + productId)
+    console.log('inquiryId: ' + inquiryId)
+    console.log('message: ' + message) */
+
 }

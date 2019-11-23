@@ -1,0 +1,58 @@
+<div class="container-fluid my-4">
+    <div class="header">
+        <h1>Contact Seller</h1>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-2">
+            <div class="card px-4 py-3" style="height: 750px;">
+                <div class="mx-auto mb-4">
+                    <img src="/images/uploads/{{salesItem.seller}}/salesItems/{{salesItemPhoto.0.photoFileName}}"
+                        style="width: 100%;">
+                </div>
+                <h4><a href="/products/{{salesItem.pid}}">{{salesItem.name}}</a></h4>
+                <h5>by {{usernameOf salesItem.sellerEmail}}</h5>
+                <p class="price">Price: ${{salesItem.price}}</p>
+                <ul class="px-0" style="list-style: none;">
+                    <li><b>Condition:</b> {{salesItem.condition}}</li>
+                    <li><b>Quantity:</b> {{salesItem.quantity}} available</li>
+                    <li><b>Delivery Method:</b> {{salesItem.deliveryMethod}}</li>
+                    {{#if pickupLocation}}<li><b>Pickup Location: </b></li>{{/if}}
+                    {{#each pickupLocation}}<li>{{this.location}}</li>{{/each}}
+                </ul>
+            </div>
+        </div>
+        <div class="col-6 px-0">
+            <div class="card px-3 py-3" style="height: 750px;">
+                {{#if messages}}
+                <div class="card px-2 py-2 scrollable" id="conversation-container">
+                    <ul class="list-group" id="conversation">
+                        {{#each messages}}
+                        <div class="mx-auto">
+                            {{this.time}}
+                        </div>
+                        <li
+                            class="list-group-item mb-4 {{#if (eq this.senderSid @root.loggedIn.sid)}}sender{{else}}recipient{{/if}}">
+                            <b>{{#if (eq this.senderSid @root.loggedIn.sid)}}You{{else}}{{usernameOf this.senderEmail}}{{/if}}:</b>
+                            {{this.message}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/if}}
+                <div class="mt-2">
+                    <form action="" method="POST">
+                        <div class="input-group">
+                            <textarea name="message" class="form-control" placeholder="Enter message here" rows="3"
+                                style="resize: none;"></textarea>
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-success">Send</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/js/testInquiry.js"></script>
