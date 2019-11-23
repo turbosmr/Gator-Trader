@@ -43,14 +43,17 @@
                 <div class="col">
                     <div class="items_page_mini_photos">
                         {{#each data.salesItemPhoto}}
-                        <img id="sm001" src="/images/uploads/{{@root.data.salesItem.seller}}/salesItems/{{this.photoFileName}}" alt="img1" class="img-thumbnail"
+                        <img id="sm001"
+                            src="/images/uploads/{{@root.data.salesItem.seller}}/salesItems/{{this.photoFileName}}"
+                            alt="img1" class="img-thumbnail"
                             data-img="/images/uploads/{{@root.data.salesItem.seller}}/salesItems/{{this.photoFileName}}">
                         {{/each}}
                     </div>
                 </div>
                 <div class="col">
                     <div class="items_page_main_photo">
-                        <img data-enlargable style="cursor: zoom-in; height: 300px;" src="/images/uploads/{{data.salesItem.seller}}/salesItems/{{data.salesItemPhoto.0.photoFileName}}"
+                        <img data-enlargable style="cursor: zoom-in; height: 300px;"
+                            src="/images/uploads/{{data.salesItem.seller}}/salesItems/{{data.salesItemPhoto.0.photoFileName}}"
                             id="ProductImage" class="img-fluid" data-toggle="modal" data-target="#exampleModalCenter"
                             alt="Responsive image">
                     </div>
@@ -70,9 +73,9 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-lg-3">
-                <button class="contact_button" type="button" onclick="openForm()">Contact Seller</button>
+            <div class="col-lg-3" style="padding-top: 0px">
                 <div class="pickup_map" id="map"></div>
+                <button class="contact_button" type="button" onclick="openForm()">Contact Seller</button>
             </div>
 
             <!-- pop up messages -->

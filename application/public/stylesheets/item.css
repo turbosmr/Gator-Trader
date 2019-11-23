@@ -49,14 +49,12 @@ padding: 15px;
 
 .itemContainer .contact_button {
   cursor: pointer;
-  border: 1px solid #f0c14b;
-  padding: 9px 15px;
+  border: 1px solid #FDE21C;
+  padding: 14px 30px;
+  margin-top: 50px;
   border-radius: 5px;
-  color: #fff;
-  background: #f0c14b;
-  font-size: 14px;
+  background: #FDE21C;
   transition: 200ms;
-  font-weight: bold;
   }
   
   .itemContainer .pickup_map {
