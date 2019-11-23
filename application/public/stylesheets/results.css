@@ -181,18 +181,17 @@
 
 .results_card_container .contact_seller button {
     cursor: pointer;
-    border: 1px solid rgb(221, 200, 37);
+    border: 1px solid #FDE21C;
     padding: 14px 30px;
     border-radius: 5px;
-    color: #fff;
-    background: rgb(221, 200, 37);
+    background: #FDE21C;
     font-size: 16px;
     transition: 200ms;
 }
 
 .results_card_container .contact_seller button:hover {
     background: #fff;
-    color: rgb(221, 200, 37);
+    color: #FDE21C;
 }
 
 /* End of Product Card Styling */
