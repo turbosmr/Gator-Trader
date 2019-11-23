@@ -1,43 +1,43 @@
 /* Page Containers */
 
 .approved_container {
-    max-width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 10px;
-    padding-right: 10px;
+	max-width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 .unapproved_container {
-    max-width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 10px;
-    padding-right: 10px;
+	max-width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 .admin_messages_container {
-    max-width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 10px;
-    padding-right: 10px;
+	max-width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 .account_container {
-    max-width: 850px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 10px;
-    padding-right: 10px;
+	max-width: 850px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 .dashboard_tabs {
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 10px;
-    padding-right: 10px;
+	max-width: 900px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 /* ------------------------------------------------------------- */
@@ -45,24 +45,24 @@
 /* Account Boxes Styling */
 
 #account {
-    text-align: center;
-    font-weight: 600;
-    background-color: #fff;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
-    margin: 5px 5px 5px 5px;
-    padding: 3px;
+	text-align: center;
+	font-weight: 600;
+	background-color: #fff;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
+	margin: 5px 5px 5px 5px;
+	padding: 3px;
 }
 
 #account:hover {
-    background: rgba(182, 165, 182, 0.767);
-    color: #FFFFFF;
+	background: rgba(182, 165, 182, 0.767);
+	color: #ffffff;
 }
 
 .account_container h1 {
-    font-size: 40px;
-    margin: 20px;
-    text-align: center;
-    font-weight: bold;
+	font-size: 40px;
+	margin: 20px;
+	text-align: center;
+	font-weight: bold;
 }
 
 /* ------------------------------------------------------------- */
@@ -70,41 +70,45 @@
 /* Unapproved Styling */
 
 .unapproved li {
-    border-radius: 5px;
-    padding: 20px 20px;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
+	border-radius: 5px;
+	padding: 20px 20px;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 15px;
 }
 
 .unapproved .table-header {
-    background-color: #c03c3c;
-    font-size: 15px;
-    font-weight: bold;
-    text-transform: uppercase;
+	background-color: #c03c3c;
+	font-size: 15px;
+	font-weight: bold;
+	text-transform: uppercase;
 }
 
 .unapproved .table-row {
-    background-color: #fff;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
+	background-color: #fff;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
 }
 
 .unapproved .col-7 {
-    font-weight: bold;
+	font-weight: bold;
 }
 
 .unapproved .table-row .col-2 {
-    font-weight: bold;
+	font-weight: bold;
 }
 
 .unapproved .col-3 {
-    float: right;
+	float: right;
 }
 
 .unapproved_container h2 {
-    font-size: 30px;
-    margin: 20px;
-    text-align: center;
+	font-size: 30px;
+	margin: 20px;
+	text-align: center;
+}
+
+.unapproved_container .unapproved_info {
+	display: none;
 }
 
 /* --------------------------------------------------------------------------------------------------- */
@@ -114,98 +118,191 @@
 /* Approved Styling */
 
 .approved li {
-    border-radius: 5px;
-    padding: 20px 20px;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
+	border-radius: 5px;
+	padding: 20px 20px;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 15px;
 }
 
 .approved .table-header {
-    background-color: #68b174;
-    font-size: 15px;
-    font-weight: bold;
-    text-transform: uppercase;
+	background-color: #68b174;
+	font-size: 15px;
+	font-weight: bold;
+	text-transform: uppercase;
 }
 
 .approved .table-row {
-    background-color: #fff;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
+	background-color: #fff;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
 }
 
 .approved .col-7 {
-    font-weight: bold;
+	font-weight: bold;
 }
 
 .approved .table-row .col-2 {
-    font-weight: bold;
-}
-
-.approved .col-3 {
-    float: right;
+	font-weight: bold;
 }
 
 .approved_container h2 {
-    font-size: 30px;
-    margin: 20px;
-    text-align: center;
+	font-size: 30px;
+	margin: 20px;
+	text-align: center;
+}
+
+.approved_container .approved_info {
+	display: none;
 }
 
 /* --------------------------------------------------------------------------------------------------- */
 
 /* Messages Styling*/
 
+.admin_messages_container .message_info {
+	display: none;
+}
+.admin_messages {
+	padding-left: 0;
+}
 .admin_messages li {
-    border-radius: 5px;
-    padding: 20px 20px;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
+	border-radius: 5px;
+	padding: 20px 20px;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 15px;
 }
 
 .admin_messages .table-header {
-    background-color: #686fb1;
-    font-size: 15px;
-    font-weight: bold;
-    text-transform: uppercase;
+	background-color: #686fb1;
+	font-size: 15px;
+	font-weight: bold;
+	text-transform: uppercase;
 }
 
 .admin_messages .table-row {
-    background-color: #fff;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
+	background-color: #fff;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
 }
 
-.admin_messages .col-1 {
-    flex-basis: 20%;
-    font-weight: bold;
+.admin_messages .col-lg-2 {
+	flex-basis: 20%;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
-.admin_messages .table-row .col-2 {
-    flex-basis: 20%;
-    font-weight: bold;
+.admin_messages .col-lg-3 {
+	flex-basis: 25%;
+	font-weight: bold;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
-
-.admin_messages .col-3 {
-    flex-basis: 20%;
-    text-decoration: underline;
-}
-
-.admin_messages .col-4 {
-    flex-basis: 20%;
-    font-weight: bold;
-}
-
-.admin_messages .col-5 {
-    flex-basis: 20%;
-    font-weight: bold;
+.admin_messages_container .message_info {
+	display: none;
 }
 
 .admin_messages_container h2 {
-    font-size: 30px;
-    margin: 20px;
-    text-align: center;
+	font-size: 30px;
+	margin: 20px;
+	text-align: center;
 }
 
 .admin_messages_container btn {
-    float: right;
+	float: right;
+}
+/* ------------------------------------------------------------------------------ */
+@media screen and (max-width: 1100px) {
+	.admin_messages_container .message_last {
+		display: none;
+	}
+	.admin_messages_container .message_date {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 960px) {
+	.admin_messages .table-row {
+		border-style: solid;
+		border-color: #686fb1;
+	}
+
+	.admin_messages_container .admin_messages .table-header {
+		display: none;
+	}
+
+	.admin_messages_container .admin_messages li {
+		display: block;
+	}
+	.admin_messages_container .message_btn {
+		text-align: right;
+	}
+	.admin_messages_container .message_info {
+		display: inline-block;
+		font-weight: bold;
+	}
+
+	.admin_messages .col-lg-2 {
+		font-weight: normal;
+	}
+
+	.admin_messages .col-lg-3 {
+		font-weight: normal;
+	}
+
+	.approved .table-row {
+		border-style: solid;
+		border-color: #68b174;
+	}
+	.approved_container .approved .table-header {
+		display: none;
+	}
+
+	.approved_container .approved li {
+		display: block;
+	}
+
+	.approved_container .approved_btn {
+		text-align: right;
+	}
+
+	.approved_container .approved_info {
+		display: inline-block;
+		font-weight: bold;
+	}
+
+	.approved .col-7 {
+		font-weight: normal;
+	}
+
+	.approved .table-row .col-2 {
+		font-weight: normal;
+	}
+
+	.unapproved .table-row {
+		border-style: solid;
+		border-color: #c03c3c;
+	}
+	.unapproved_container .unapproved .table-header {
+		display: none;
+	}
+
+	.unapproved_container .unapproved li {
+		display: block;
+	}
+
+	.unapproved_container .unapproved_btn {
+		text-align: right;
+	}
+	.unapproved_container .unapproved_info {
+		display: inline-block;
+		font-weight: bold;
+	}
+
+	.unapproved .col-7 {
+		font-weight: normal;
+	}
+
+	.unapproved .table-row .col-2 {
+		font-weight: normal;
+	}
 }
