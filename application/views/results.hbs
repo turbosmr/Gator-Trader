@@ -84,14 +84,20 @@
                                     <div class="row">
                                         <div class="col-lg-4">
                                             <div class="results_image">
-                                                <img width="100%;"
-                                                    src="{{#if this.photoFileName}}/images/uploads/{{this.seller}}/salesItems/{{this.photoFileName}}{{/if}}" alt="Item Image">
+                                                <!-- added this, when you click on photo, it goes to new window -->
+                                                <a href="/products/{{this.pid}}" target="_blank">
+                                                    <img width="100%;"
+                                                        src="{{#if this.photoFileName}}/images/uploads/{{this.seller}}/salesItems/{{this.photoFileName}}{{/if}}"
+                                                        alt="Item Image">
+                                                </a>
                                             </div>
                                         </div>
                                         <div class="col-lg-8">
                                             <div class="info">
                                                 <div class="featured_text">
-                                                    <h1><a href="/products/{{this.pid}}">{{this.name}}</a></h1>
+                                                    <!-- added this, when you click on item title link, it goes to new window -->
+                                                    <h1><a href="/products/{{this.pid}}" target="_blank"> {{this.name}}
+                                                        </a></h1>
                                                     <div class="seller">
                                                         <p>by <b>{{usernameOf this.sellerEmail}}</b></p>
                                                     </div>
