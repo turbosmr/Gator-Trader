@@ -1,41 +1,50 @@
 #sellForm ol {
-    padding-left: 0;
+	padding-left: 0;
 }
 
-#sellForm li, #sellForm div>p {
-    background: #eee;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    list-style-type: none;
-    border: 1px solid black;
+#sellForm li,
+#sellForm div > p {
+	background: #eee;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 10px;
+	list-style-type: none;
+	border: 1px solid black;
 }
 
 #sellForm img {
-    height: 64px;
-    order: 1;
+	height: 64px;
+	order: 1;
 }
 
 #sellForm p {
-    line-height: 32px;
-    padding-left: 10px;
+	line-height: 32px;
+	padding-left: 10px;
 }
 
 #sellForm #salesItemImageLabel {
-    background-color: #FDE21C;
-    padding: 5px 10px;
-    border-radius: 5px;
-    border: 1px ridge black;
-    font-size: 0.8rem;
-    height: auto;
+	background-color: #fde21c;
+	padding: 5px 10px;
+	border-radius: 5px;
+	border: 1px ridge black;
+	font-size: 0.8rem;
+	height: auto;
 }
 
 #sellForm #salesItemImageLabel:hover {
-    background-color: rgb(223, 197, 0);
-    color: white;
+	background-color: rgb(223, 197, 0);
+	color: white;
 }
 
 #sellForm #salesItemImageLabel:active {
-    background-color: rgb(133, 117, 0);
-    color: white;
+	background-color: rgb(133, 117, 0);
+	color: white;
+}
+
+.pl-2 .pickup_map {
+	top: 5%;
+	margin-top: 10px;
+	min-height: 300px;
+	border-radius: 5px;
+	background-color: grey;
 }
