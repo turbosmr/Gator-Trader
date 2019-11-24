@@ -102,7 +102,9 @@
                                                         <p>by <b>{{usernameOf this.sellerEmail}}</b></p>
                                                     </div>
                                                     <p class="price">${{this.newPrice}}</p>
-
+                                                    <br>
+                                                    <p><b>Category:</b> {{categoryName this.category}}</p>
+                                                    <br>
                                                     <div class="description">
                                                         <p>{{{this.description}}}</p>
                                                     </div>
@@ -220,21 +222,21 @@
 </script>
 
 <script>
-     $(document).click(function (e) {
-    if (!$(e.target).is("#myForm") && !$(e.target).is(".button") && !$(e.target).is(".submit_b") ) {
-        if ($('#myForm').is(':visible')) {
-            closeForm();
+    $(document).click(function (e) {
+        if (!$(e.target).is("#myForm") && !$(e.target).is(".button") && !$(e.target).is(".submit_b")) {
+            if ($('#myForm').is(':visible')) {
+                closeForm();
+            }
         }
-    }
-});
+    });
 </script>
 
 
 <script>
-function getURL() {
+    function getURL() {
         var url = window.location.href;
-        var lastEl = url.charAt(url.length-1); 
-        document.getElementById(lastEl).setAttribute("style", "text-decoration: underline #fde21c;"); 
-    }    
+        var lastEl = url.charAt(url.length - 1);
+        document.getElementById(lastEl).setAttribute("style", "text-decoration: underline #fde21c;");
+    }
     getURL();
 </script>

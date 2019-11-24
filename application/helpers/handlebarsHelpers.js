@@ -98,6 +98,28 @@ module.exports = {
 
         return html;
     },
+    //temporary soluition for category display of items in search results
+    //Author @Osbaldo Martinez
+    categoryName: (cid) =>{
+        switch(cid) {
+            case 1:
+                return "Books";
+            case 2:
+                return "Electronics";
+            case 3:
+                return "Furniture";
+            case 4:
+                return "Health";
+            case 5:
+                return "Services";
+            case 6:
+                return "Sports";
+            case 7:
+                return "Supplies";
+            case 8:
+                return "Other";
+        }
+      },
     usernameOf: (email) => {;
         if (typeof email === 'string') {
             return email.split("@")[0];
