@@ -97,7 +97,7 @@
         <div class="admin_messages_container">
             <h2>Your Messages</h2>
             <ul class="admin_messages">
-                <table id="myTable">
+                <table id="messages_table">
                     <tr>
                         <th onclick="sortTable(0)">ITEM</th>
                         <th onclick="sortTable(1)">FROM</th>
@@ -139,10 +139,11 @@
     </div>
 </div>
 
+<!-- https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_sort_table_desc -->
 <script>
     function sortTable(n) {
         var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-        table = document.getElementById("myTable");
+        table = document.getElementById("messages_table");
         switching = true;
         dir = "asc"; 
 
