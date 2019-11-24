@@ -132,7 +132,7 @@
                                                             </div>
                                                             <div class="col-auto">
                                                                 <button type="submit"
-                                                                    class="btn btn-success">Send</button>
+                                                                    class="btn btn-success submit_b">Send</button>
                                                             </div>
                                                         </div>
                                                     </form>
@@ -216,4 +216,25 @@
     function closeForm() {
         document.getElementById("myForm").style.display = "none";
     }
+
+</script>
+
+<script>
+     $(document).click(function (e) {
+    if (!$(e.target).is("#myForm") && !$(e.target).is(".button") && !$(e.target).is(".submit_b") ) {
+        if ($('#myForm').is(':visible')) {
+            closeForm();
+        }
+    }
+});
+</script>
+
+
+<script>
+function getURL() {
+        var url = window.location.href;
+        var lastEl = url.charAt(url.length-1); 
+        document.getElementById(lastEl).setAttribute("style", "text-decoration: underline #fde21c;"); 
+    }    
+    getURL();
 </script>

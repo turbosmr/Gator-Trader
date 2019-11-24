@@ -240,9 +240,9 @@
 
     <!-- Nav Bar (Categories) -->
     <nav class="navbar navbar-expand-sm justify-content-center">
-        <div class="scrollable-categories mb-2">
+        <div id="active_category" class="scrollable-categories mb-2">
             {{#each category}}
-            <a class="" href="/search?c={{this.cid}}">{{this.name}}</a>&nbsp;&nbsp;
+            <a id="{{this.cid}}" href="/search?c={{this.cid}}">{{this.name}}</a>&nbsp;&nbsp;
             {{/each}}
         </div>
     </nav>
@@ -265,3 +265,4 @@
 </body>
 
 </html>
+
