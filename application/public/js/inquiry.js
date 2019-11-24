@@ -1,3 +1,4 @@
+// Scrollable chat
 $(document).ready(() => {
     $(function () {
         $('#conversation-container').animate({

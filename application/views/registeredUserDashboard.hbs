@@ -96,53 +96,29 @@
             <h2>Your Messages</h2>
             <ul class="messages px-0">
                 <li class="table-header">
-                    <div class="col col-1">Item</div>
+                    <div class="col col-3">Item</div>
                     <div class="col col-2">Message From</div>
-                    <div class="col col-3">Subject</div>
-                    <div class="col col-4">Received</div>
-                    <div class="col col-5">Chat</div>
+                    <div class="col col-3 subject">Subject</div>
+                    <div class="col col-2">Received</div>
+                    <div class="col col-2">Chat</div>
                 </li>
+                {{#if inquiry}}
+                {{#each inquiry}}
                 <li class="table-row">
-                    <div class="col col-1">Chair</div>
-                    <div class="col col-2">Jimmy13</div>
-                    <div class="col col-3">Pickup</div>
-                    <div class="col col-4">24 Oct, 2019</div>
-                    <div class="col col-5">
-                        <button type="button" class="btn btn-primary btn-sm"> Open Chat</button>
-
-                    </div>
-
-                </li>
-                <li class="table-row">
-                    <div class="col col-1">Chair</div>
-                    <div class="col col-2">Alex007</div>
-                    <div class="col col-3">Where?</div>
-                    <div class="col col-4">20 Oct, 2019</div>
-                    <div class="col col-5">
-                        <button type="button" class="btn btn-primary btn-sm"> Open Chat</button>
-
-                    </div>
-
-                </li>
-                <li class="table-row">
-                    <div class="col col-1">Book</div>
-                    <div class="col col-2">Mario777</div>
-                    <div class="col col-3">Discount</div>
-                    <div class="col col-4">27 Oct, 2019</div>
-                    <div class="col col-5">
-                        <button type="button" class="btn btn-primary btn-sm"> Open Chat</button>
-
+                    <div class="col col-3"><a href="/products/{{this.pid}}" target="_blank">{{this.productName}}</a></div>
+                    <div class="col col-2">{{usernameOf this.messageFrom}}</div>
+                    <div class="col col-3 subject">{{this.subject}}</div>
+                    <div class="col col-2">{{this.time}}</div>
+                    <div class="col col-2">
+                        <a href="/products/{{this.pid}}/inquiry?id={{this.inquiryId}}" class="btn btn-primary btn-sm" target="_blank">Open Chat</a>
                     </div>
                 </li>
+                {{/each}}
+                {{else}}
                 <li class="table-row">
-                    <div class="col col-1">Computer</div>
-                    <div class="col col-2">Kate B</div>
-                    <div class="col col-3">My offer!!!</div>
-                    <div class="col col-4">17 Oct, 2019</div>
-                    <div class="col col-5">
-                        <button type="button" class="btn btn-primary btn-sm">Open Chat</button>
-                    </div>
+                    No inquiries.
                 </li>
+                {{/if}}
             </ul>
         </div>
     </div>

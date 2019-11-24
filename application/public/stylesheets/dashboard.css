@@ -130,29 +130,16 @@
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
 }
 
-.messages .col-1 {
-    flex-basis: 20%;
-    font-weight: bold;
-}
-
-.messages .table-row .col-2 {
-    flex-basis: 20%;
-    font-weight: bold;
-}
-
 .messages .col-3 {
-    flex-basis: 20%;
+    font-weight: bold;
+}
+
+.messages .col-2 {
+    font-weight: bold;
+}
+
+.messages .subject {
     text-decoration: underline;
-}
-
-.messages .col-4 {
-    flex-basis: 20%;
-    font-weight: bold;
-}
-
-.messages .col-5 {
-    flex-basis: 20%;
-    font-weight: bold;
 }
 
 .messages_container h2 {

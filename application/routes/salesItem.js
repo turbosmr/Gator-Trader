@@ -5,6 +5,7 @@ const router = express.Router();
 const { ensureRegisteredUserAuthenticated } = require('../controllers/userAuthenticated');
 const salesItemController = require('../controllers/salesItemController');
 const salesItemImageUpload = require('../middlewares/salesItemImageUpload');
+const inquiryController = require('../controllers/inquiryController');
 
 // GET sales item page
 router.get('/:pid', salesItemController.salesItem_get);
@@ -22,9 +23,9 @@ router.get('/:pid/end', ensureRegisteredUserAuthenticated, salesItemController.e
 router.get('/:pid/relist', ensureRegisteredUserAuthenticated, salesItemController.relist);
 
 // GET contact seller page 
-router.get('/:pid/inquiry', ensureRegisteredUserAuthenticated, salesItemController.inquiry_get);
+router.get('/:pid/inquiry', ensureRegisteredUserAuthenticated, inquiryController.get);
 
 // POST request to send message in contact seller page
-router.post('/:pid/inquiry', ensureRegisteredUserAuthenticated, salesItemController.inquiry_post);
+router.post('/:pid/inquiry', ensureRegisteredUserAuthenticated, inquiryController.post);
 
 module.exports = router;
