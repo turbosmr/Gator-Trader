@@ -50,8 +50,6 @@
 </div>
 
 <div class="container-fluid mb-3">
-
-
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-2 sidebar_column">
@@ -106,7 +104,7 @@
                                                     <p><b>Category:</b> {{categoryName this.category}}</p>
                                                     <br>
                                                     <div class="description">
-                                                        <p>{{{this.description}}}</p>
+                                                        <p>{{this.description}}</p>
                                                     </div>
                                                 </div>
 
@@ -162,31 +160,38 @@
 
     {{else}}
     {{#if searchCriteria.keyword}}
-    <div class="row">
-        <div class="col-7 col-lg-6 mx-auto mt-4">
-            <div style="font-size: 3vw;">
-                <b>No results for {{searchCriteria.keyword}}.</b>
-            </div>
-            <div style="font-size: 2vw;">
-                Try checking your spelling or use more general terms
-            </div>
-            <div style="padding-top: 50px; text-align: center;">
-                <img src="/images/error_alligator_image/alligator.jpg" alt="Cartoon Aligator" style="max-width: 30%;">
+    <div class="container error-template my-4">
+        <div class="row">
+            <div class="col-7 col-lg-6 mx-auto">
+                <div style="font-size: 3vw;">
+                    <b>No results for {{searchCriteria.keyword}}.</b>
+                </div>
+                <div style="font-size: 2vw;">
+                    Try checking your spelling or use more general terms
+                </div>
+                <div style="padding-top: 50px; text-align: center;">
+                    <img src="/images/error_alligator_image/alligator.jpg" alt="Cartoon Aligator"
+                        style="width: 200px; height: auto;">
+                </div>
             </div>
         </div>
     </div>
     {{else}}
     {{#if searchCriteria.selectedCategoryName}}
-    <div class="row">
-        <div class="col-7 col-lg-6 mx-auto mt-4">
-            <div style="font-size: 3vw;">
-                <b>No results for category, {{searchCriteria.selectedCategoryName}}.</b>
-            </div>
-            <div style="font-size: 2vw;">
-                Please select another category
-            </div>
-            <div style="padding-top: 50px; text-align: center;">
-                <img src="/images/error_alligator_image/alligator.jpg" alt="Cartoon Aligator" style="max-width: 30%;">
+
+    <div class="container error-template my-4">
+        <div class="row">
+            <div class="col-auto col-lg-auto mx-auto">
+                <div style="font-size: 3vw;">
+                    <b>No results for category, {{searchCriteria.selectedCategoryName}}.</b>
+                </div>
+                <div style="font-size: 2vw;">
+                    Please select another category
+                </div>
+                <div style="padding-top: 50px; text-align: center;">
+                    <img src="/images/error_alligator_image/alligator.jpg" alt="Cartoon Aligator"
+                        style="width: 200px; height: auto;">
+                </div>
             </div>
         </div>
     </div>
