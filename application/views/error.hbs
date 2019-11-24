@@ -1,11 +1,21 @@
 <div class="container error-template mt-4">
     <div class="row">
-        <div class="col-8 col-lg-8 mx-auto">
+        <div class="col-auto col-lg-auto mx-auto">
             <div style="font-size: 3vw;">
-                <b>Sorry, that page does not exist!</b>
+                <b>
+                    {{#if error}}
+                    {{error}}
+                    {{else}}
+                    Sorry, that page does not exist!
+                    {{/if}}
+                </b>
             </div>
             <div style="font-size: 2vw;">
+                {{#if advice}}
+                {{advice}}
+                {{else}}
                 Try searching or go to the <a href="/" style="text-decoration: underline;">home page</a>.
+                {{/if}}
             </div>
             <div style="padding-top: 50px;">
                 <img src="/images/error_alligator_image/alligator.jpg" alt="Cartoon Aligator" style="max-width: 30%;">

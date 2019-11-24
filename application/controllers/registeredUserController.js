@@ -122,20 +122,33 @@ exports.logout = (req, res, next) => {
 }
 
 // Display registered user's dashboard page on GET
-// Contains list of sales item listed by current registered user
+// Retrieve list of sales item listed by the registered user that is logged in
+// Retrieve list of inquiries of their own items and other items
 exports.dashboard = (req, res, next) => {
-    // Retrieve sales items listed by current registered user
+    let loggedInUser = req.user.sid;
     let product = [];
-    let sql = "SELECT SI.pid, SI.name, SI.seller, SI.status, Category.name AS category, CAST(SI.price AS CHAR) AS price, SIP.fileName AS photoFileName FROM SalesItem SI INNER JOIN Category ON SI.category = Category.cid LEFT JOIN SalesItemPhoto SIP on SIP.product = (SELECT product FROM SalesItemPhoto SIP2 WHERE SIP2.product = SI.pid LIMIT 1) GROUP BY SI.pid, SI.seller, SI.status HAVING SI.seller = ?";
-    let placeholders = [req.user.sid];
+    let inquiry = [];
+    let sql = "SELECT SI.pid, SI.name, SI.seller, SI.status, Category.name AS category, CAST(SI.price AS CHAR) AS price, SIP.fileName AS photoFileName FROM SalesItem SI INNER JOIN Category ON SI.category = Category.cid LEFT JOIN SalesItemPhoto SIP on SIP.product = (SELECT product FROM SalesItemPhoto SIP2 WHERE SIP2.product = SI.pid LIMIT 1) GROUP BY SI.pid, SI.seller, SI.status HAVING SI.seller = ?;";
+    sql += "SELECT SI.pid AS pid, SI.name AS productName, RU2.username AS messageFrom, I.subject AS subject, DATE_FORMAT(convert_tz(MAX(M.time),@@session.time_zone,'-08:00'), '%m-%d-%Y %h:%i %p') AS time, I.iid AS inquiryId FROM Message M INNER JOIN Inquiry I on M.inquiry = I.iid INNER JOIN SalesItem SI on I.product = SI.pid INNER JOIN RegisteredUser RU on SI.seller = RU.sid INNER JOIN RegisteredUser RU2 on M.from = RU2.sid WHERE I.inquirer = ? OR SI.seller = ? GROUP BY productName;";
+    let placeholders = [loggedInUser, loggedInUser, loggedInUser];
 
     db.query(sql, placeholders, (error, result) => {
         if (error) throw error;
 
-        for (let i = 0; i < result.length; i++) {
-            product.push(result[i]);
+        let products = result[0];
+        let inquiries = result[1];
+
+        for (let i = 0; i < products.length; i++) {
+            product.push(products[i]);
         }
 
-        res.render('registeredUserDashboard', { product: product });
+        for (let i = 0; i < inquiries.length; i++) {
+            inquiry.push(inquiries[i]);
+        }
+
+        res.render('registeredUserDashboard', { 
+            product: product,
+            inquiry: inquiry
+        });
     });
 }

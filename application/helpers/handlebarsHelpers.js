@@ -34,7 +34,7 @@ module.exports = {
             html += "Showing " + (offset + 1) + "-" + posFromOffset + " of " + totalProducts;
         }
         else {
-            html += "Showing " + totalProducts;
+            html += "Showing " + totalProducts + " of " + totalProducts;
         }
 
         if (totalProducts > 1) {

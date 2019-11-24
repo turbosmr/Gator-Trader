@@ -145,7 +145,6 @@
 
 .messages .col-lg-3 {
 	flex-basis: 25%;
-	font-weight: bold;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }

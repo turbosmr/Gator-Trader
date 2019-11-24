@@ -33,10 +33,9 @@ body {
 }
 
 .footer {
-	background-color: rgb(74, 54, 78);
-	color: white;
-	text-align: center;
-	padding: 30px;
+    background-color: rgb(74, 54, 78);
+    color: white;
+    text-align: center;
 }
 
 .footer a {

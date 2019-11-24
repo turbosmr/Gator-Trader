@@ -14,7 +14,7 @@
             </div>
         </div> --}}
     {{!-- --------------------------------------------------------------------------------- --}}
-    <hr style="border: 3px solid rgb(31, 26, 34); max-width: 50%">
+    {{!--     <hr style="border: 3px solid rgb(31, 26, 34); max-width: 50%"> --}}
     {{!-- --------------------------------------------------------------------------------- --}}
 </div>
 
@@ -45,10 +45,13 @@
                 {{#if unapprovedSalesItem}}
                 {{#each unapprovedSalesItem}}
                 <li class="table-row">
-                    <div class="col col-7"> <span class="unapproved_info">Name:&nbsp; </span><a href="/products/{{this.pid}}">{{this.name}}</a></div>
-                    <div class="col col-2"> <span class="unapproved_info">Seller:&nbsp; </span>{{usernameOf this.sellerEmail}}</div>
+                    <div class="col col-7"> <span class="unapproved_info">Name:&nbsp; </span><a
+                            href="/products/{{this.pid}}">{{this.name}}</a></div>
+                    <div class="col col-2"> <span class="unapproved_info">Seller:&nbsp;
+                        </span>{{usernameOf this.sellerEmail}}</div>
                     <div class="col col-lg-3 unapproved_btn">
-                        <a href="/admin/approve?pid={{this.pid}}"><button type="button" class="btn btn-success btn-sm">Approve</button></a>
+                        <a href="/admin/approve?pid={{this.pid}}"><button type="button"
+                                class="btn btn-success btn-sm">Approve</button></a>
                         <!--<a href="/admin/disapprove?pid={{this.pid}}"><button type="button" class="btn btn-danger btn-sm">Disapprove</button></a>-->
                     </div>
                 </li>
@@ -75,11 +78,14 @@
                 {{#if activeSalesItem}}
                 {{#each activeSalesItem}}
                 <li class="table-row">
-                    <div class="col-7"> <span class="approved_info">Name:&nbsp; </span><a href="/products/{{this.pid}}">{{this.name}}</a></div>
-                    <div class="col-2"> <span class="approved_info">Seller:&nbsp; </span>{{usernameOf this.sellerEmail}}</div>
+                    <div class="col-7"> <span class="approved_info">Name:&nbsp; </span><a
+                            href="/products/{{this.pid}}">{{this.name}}</a></div>
+                    <div class="col-2"> <span class="approved_info">Seller:&nbsp; </span>{{usernameOf this.sellerEmail}}
+                    </div>
                     <div class="col-lg-3 approved_btn">
                         <!--<a href="#"><button type="button" class="btn btn-warning btn-sm">Block</button></a>-->
-                        <a href="/admin/remove?pid={{this.pid}}"><button type="button" class="btn btn-danger btn-sm">Remove</button></a>
+                        <a href="/admin/remove?pid={{this.pid}}"><button type="button"
+                                class="btn btn-danger btn-sm">Remove</button></a>
                     </div>
                 </li>
                 {{/each}}
@@ -96,7 +102,7 @@
         <div class="admin_messages_container">
             <h2>Your Messages</h2>
             <ul class="admin_messages">
-              <li class="table-header">
+                <li class="table-header">
                     <div class="col-lg-3">Item</div>
                     <div class="col-lg-2">From</div>
                     <div class="col-lg-3 message_last">Last Message</div>

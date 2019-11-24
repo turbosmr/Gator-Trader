@@ -32,7 +32,7 @@
 </div>
 
 {{!-- --------------------------------------------------------------------------------- --}}
-<hr style="border: 3px solid rgb(31, 26, 34); max-width: 50%">
+{{!-- <hr style="border: 3px solid rgb(31, 26, 34); max-width: 50%"> --}}
 {{!-- --------------------------------------------------------------------------------- --}}
 
 <ul class="nav nav-tabs dashboard_tabs">
@@ -72,8 +72,8 @@
                             class="selling_info">Status:&nbsp; </span>{{this.status}}</div>
                     {{/if}}
                     <div class="col-lg-3 selling_btn">
-                        <button type="button" class="btn btn-secondary btn-sm">Revise</button>
-                        <button type="button" class="btn btn-danger btn-sm">End Listing</button>
+                        <a href="/products/{{this.pid}}/edit" class="btn btn-secondary btn-sm">Revise</a>&nbsp;
+                        <a href="/products/{{this.pid}}/end" class="btn btn-danger btn-sm">End Listing</a>
                     </div>
                 </li>
                 {{/each}}
@@ -97,63 +97,27 @@
                     <div class="col-lg-2 message_date">Received</div>
                     <div class="col-lg-2 message_btn">Chat</div>
                 </li>
+                {{#if inquiry}}
+                {{#each inquiry}}
                 <li class="table-row">
                     <div class="col-lg-3 message_item">
-                        <span class="message_info">Item:&nbsp; </span>Chair
+                        <span class="message_info">Item:&nbsp; </span><a href="/products/{{this.pid}}" target="_blank">{{this.productName}}</a>
                     </div>
                     <div class="col-lg-2 message_from">
-                        <span class="message_info">From:&nbsp; </span>Jimmy13
+                        <span class="message_info">From:&nbsp; </span>{{usernameOf this.messageFrom}}
                     </div>
-                    <div class="col-lg-3 message_last">Pickup</div>
-                    <div class="col-lg-2 message_date">24 Oct, 2019</div>
+                    <div class="col-lg-3 message_last">{{this.subject}}</div>
+                    <div class="col-lg-2 message_date">{{this.time}}</div>
                     <div class="col-lg-2 message_btn">
-                        <button type="button" class="btn btn-primary btn-sm">Open</button>
-
+                        <a href="/products/{{this.pid}}/inquiry?id={{this.inquiryId}}" class="btn btn-primary btn-sm" target="_blank">Open Chat</a>
                     </div>
-
                 </li>
+                {{/each}}
+                {{else}}
                 <li class="table-row">
-                    <div class="col-lg-3 message_item">
-                        <span class="message_info">Item:&nbsp; </span>Chair
-                    </div>
-                    <div class="col-lg-2 message_from">
-                        <span class="message_info">From:&nbsp; </span>Alex007
-                    </div>
-                    <div class="col-lg-3 message_last">Where?</div>
-                    <div class="col-lg-2 message_date">20 Oct, 2019</div>
-                    <div class="col-lg-2 message_btn">
-                        <button type="button" class="btn btn-primary btn-sm">Open</button>
-
-                    </div>
-
+                    No inquiries.
                 </li>
-                <li class="table-row">
-                    <div class="col-lg-3 message_item">
-                        <span class="message_info">Item:&nbsp; </span>Book
-                    </div>
-                    <div class="col-lg-2 message_from">
-                        <span class="message_info">From:&nbsp; </span>Mario777
-                    </div>
-                    <div class="col-lg-3 message_last">Discount</div>
-                    <div class="col-lg-2 message_date">27 Oct, 2019</div>
-                    <div class="col-lg-2 message_btn">
-                        <button type="button" class="btn btn-primary btn-sm">Open</button>
-
-                    </div>
-                </li>
-                <li class="table-row">
-                    <div class="col-lg-3 message_item">
-                        <span class="message_info">Item:&nbsp; </span>Computer
-                    </div>
-                    <div class="col-lg-2 message_from">
-                        <span class="message_info">From:&nbsp; </span>Kate B
-                    </div>
-                    <div class="col-lg-3 message_last">My offer!!!</div>
-                    <div class="col-lg-2 message_date">17 Oct, 2019</div>
-                    <div class="col-lg-2 message_btn">
-                        <button type="button" class="btn btn-primary btn-sm">Open</button>
-                    </div>
-                </li>
+                {{/if}}
             </ul>
         </div>
     </div>

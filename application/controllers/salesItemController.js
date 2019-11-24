@@ -1,6 +1,6 @@
 const db = require('../config/db');
 
-// Handle showing sales item page on GET
+// Show sales item page on GET
 exports.salesItem_get = (req, res, next) => {
     let productId = req.params.pid;
     let sql = "SELECT SI.*, CAST(SI.price AS CHAR) AS price, RU.username AS sellerEmail FROM SalesItem SI INNER JOIN RegisteredUser RU on SI.seller = RU.sid WHERE SI.pid = ?;";
@@ -14,12 +14,8 @@ exports.salesItem_get = (req, res, next) => {
             res.render('error');
         }
 
-        // Item not found
-        if (result.length == 0) {
-            res.render('error');
-        }
         // Item found
-        else {
+        if (result[0].length !== 0) {
             objToBePassed.salesItem = result[0][0];
             objToBePassed.salesItemPhoto = result[1];
             objToBePassed.pickupLocation = result[2];
@@ -38,10 +34,14 @@ exports.salesItem_get = (req, res, next) => {
                 data: objToBePassed
             });
         }
+        // Item not found
+        else {
+            res.render('error');
+        }
     });
 }
 
-// GET request to edit sales item
+// Show sell page for revising sales item on GET
 exports.edit_get = (req, res, next) => {
     let productId = req.params.pid;
     let seller = req.user.sid;
@@ -69,7 +69,7 @@ exports.edit_get = (req, res, next) => {
     });
 }
 
-// POST request to edit sales item
+// Handle submitting revision of sales item on POST
 exports.edit_post = (req, res, next) => {
     let productId = req.params.pid;
     let { productName, price, category, classMaterialSection, condition, quantity, deliveryMethod, description } = req.body;
@@ -179,7 +179,7 @@ exports.edit_post = (req, res, next) => {
     });
 }
 
-// GET request to end sales item
+// Handle ending listing of sales item on GET
 exports.end = (req, res, next) => {
     let productId = req.params.pid;
     let seller = req.user.sid;
@@ -215,7 +215,7 @@ exports.end = (req, res, next) => {
     });
 }
 
-// GET request to relist sales item
+// Handle relisting sales item on GET
 exports.relist = (req, res, next) => {
     let productId = req.params.pid;
     let seller = req.user.sid;

@@ -11,6 +11,14 @@
     width: 200px;
     height: 200px;
     border-radius: 50%;
+    transition: filter .2s ease-in-out;
+    transition: opacity .2s ease-in-out;
+}
+
+.avatar:hover {
+    -webkit-filter: grayscale(50%);
+    filter: grayscale(50%);
+    opacity: 0.7;
 }
 
 .name-position-container {
@@ -26,17 +34,6 @@ h4.position {
     font-size: 15px;
     padding: 0px;
     margin: 0px;
-}
-
-img {
-    transition: filter .2s ease-in-out;
-    transition: opacity .2s ease-in-out;
-}
-
-img:hover {
-    -webkit-filter: grayscale(50%);
-    filter: grayscale(50%);
-    opacity: 0.7;
 }
 
 .avatar-container {

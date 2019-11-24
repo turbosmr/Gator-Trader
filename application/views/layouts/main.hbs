@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
 
 <head>
     <title>SFSU CSC 648 Team 03 Buy & Sell Inc for Students</title>
@@ -10,14 +10,15 @@
     <link rel="stylesheet" href="/stylesheets/main.css">
     <link rel="stylesheet" href="/stylesheets/about.css">
     <link rel="stylesheet" href="/stylesheets/results.css">
-    <link rel="stylesheet" href="/stylesheets/search.css">
+    <link rel="stylesheet" href="/stylesheets/searchSuggestion.css">
     <link rel="stylesheet" href="/stylesheets/home.css">
-    <link rel="stylesheet" href="/stylesheets/dashboard.css">
-    <link rel="stylesheet" href="/stylesheets/item.css">
+    <link rel="stylesheet" href="/stylesheets/registeredUserDashboard.css">
+    <link rel="stylesheet" href="/stylesheets/salesItem.css">
     <link rel="stylesheet" href="/stylesheets/adminDashboard.css">
     <link rel="stylesheet" href="/stylesheets/error.css">
     <link rel="stylesheet" href="/stylesheets/messages.css">
     <link rel="stylesheet" href="/stylesheets/sell.css">
+    <link rel="stylesheet" href="/stylesheets/inquiry.css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -27,10 +28,12 @@
     <script type="text/javascript" src="/js/sortSearchResults.js"></script>
     <script type="text/javascript" src="/js/filterAndSortResults.js"></script>
     <script type="text/javascript" src="/js/placeholderHelper.js"></script>
+    <script type="text/javascript" src="/js/inquiry.js"></script>
 </head>
 
-<body>
-    <!-- Disclaimer -->
+<body class="d-flex flex-column h-100">
+    <header>
+        <!-- Disclaimer -->
     <nav class="navbar navbar-expand-sm justify-content-center">
         <div class="disclaimer" style="text-align: center;">SFSU Software Engineering Project CSC 648-848, Fall 2019.
             For Demonstration Only</div>
@@ -192,7 +195,7 @@
                         </div>
                     </div>
 
-                    <!-- Render user dropdown menu when width <= 768px -->
+                    <!-- Render user dropdown menu when width > 768px -->
                     <div class="col-12 col-sm-12 col-md-2 col-lg-2">
                         <div class="d-none d-md-block">
                             <div class="dropdown" style="text-align: right;">
@@ -246,14 +249,16 @@
             {{/each}}
         </div>
     </nav>
+    </header>
+    
 
     <!-- Content Body -->
-    <div class="main">
+    <main role="main" class="flex-shrink-0">
         {{{body}}}
-    </div>
+    </main>
 
     <!-- Footer -->
-    <div class="footer">
+    <footer class="footer mt-auto py-3">
         <p>
             <a href="/sell">Sell</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
             <a href="/about">About</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -261,7 +266,7 @@
         </p>
         <p style="margin-bottom: 0;">Copyright © 2019 SFSU CSC 648 Team 03 Buy & Sell Inc for Students. All rights
             reserved.</p>
-    </div>
+    </footer>
 </body>
 
 </html>
