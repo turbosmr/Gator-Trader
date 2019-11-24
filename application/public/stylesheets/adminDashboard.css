@@ -209,3 +209,22 @@
 .admin_messages_container btn {
     float: right;
 }
+
+.admin_messages_container table {
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+  }
+  
+.admin_messages_container th {
+    cursor: pointer;
+  }
+  
+.admin_messages_container th, td {
+    text-align: left;
+    padding: 16px;
+  }
+  
+.admin_messages_container tr:nth-child(even) {
+    background-color: #f2f2f2
+  }

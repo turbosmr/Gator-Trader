@@ -97,68 +97,14 @@
         <div class="admin_messages_container">
             <h2>Your Messages</h2>
             <ul class="admin_messages">
-                <li class="table-header">
-                    <div class="col col-1">Item</div>
-                    <div class="col col-2">From</div>
-                    <div class="col col-3">Subject</div>
-                    <div class="col col-4">Received</div>
-                    <div class="col col-5">Chat</div>
-                </li>
-                <li class="table-row">
-                    <div class="col col-1">Chair</div>
-                    <div class="col col-2">Jimmy13</div>
-                    <div class="col col-3">Pickup</div>
-                    <div class="col col-4">24 Oct, 2019</div>
-                    <div class="col col-5">
-                        <button type="button" class="btn btn-primary btn-sm"> Open Chat</button>
-
-                    </div>
-
-                </li>
-                <li class="table-row">
-                    <div class="col col-1">Chair</div>
-                    <div class="col col-2">Alex007</div>
-                    <div class="col col-3">Where?</div>
-                    <div class="col col-4">20 Oct, 2019</div>
-                    <div class="col col-5">
-                        <button type="button" class="btn btn-primary btn-sm"> Open Chat</button>
-
-                    </div>
-
-                </li>
-                <li class="table-row">
-                    <div class="col col-1">Book</div>
-                    <div class="col col-2">Mario777</div>
-                    <div class="col col-3">Discount</div>
-                    <div class="col col-4">27 Oct, 2019</div>
-                    <div class="col col-5">
-                        <button type="button" class="btn btn-primary btn-sm"> Open Chat</button>
-
-                    </div>
-                </li>
-                <li class="table-row">
-                    <div class="col col-1">Computer</div>
-                    <div class="col col-2">Kate B</div>
-                    <div class="col col-3">My offer!!!</div>
-                    <div class="col col-4">17 Oct, 2019</div>
-                    <div class="col col-5">
-                        <button type="button" class="btn btn-primary btn-sm">Open Chat</button>
-                    </div>
-                </li>
-            </ul>
-
-            <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-            <table id="admin_messages" class="display" style="width:100%">
-                <thead>
+                <table id="myTable">
                     <tr>
-                        <th>ITEM</th>
-                        <th>FROM</th>
-                        <th>SUBJECT</th>
-                        <th>RECEIVED</th>
+                        <th onclick="sortTable(0)">ITEM</th>
+                        <th onclick="sortTable(1)">FROM</th>
+                        <th onclick="sortTable(2)">SUBJECT</th>
+                        <th onclick="sortTable(3)">RECEIVED</th>
                         <th>CHAT</th>
                     </tr>
-                </thead>
-                <tbody>
                     <tr>
                         <td>Chair</td>
                         <td>Jimmy13</td>
@@ -187,17 +133,51 @@
                         <td>Nov 21, 2019</td>
                         <td><button type="button" class="btn btn-primary btn-sm">Open Chat</button></td>
                     </tr>
-                </tbody>
-            </table>
-
-            <script>
-                $(document).ready(function() {
-                    $('#admin_messages').DataTable( {
-                        "order": [[ 3, "desc" ]]
-                    } );
-                } );
-            </script>
-            
+                </table>     
+            </ul>   
         </div>
     </div>
 </div>
+
+<script>
+    function sortTable(n) {
+        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+        table = document.getElementById("myTable");
+        switching = true;
+        dir = "asc"; 
+
+        while (switching) {
+            switching = false;
+            rows = table.rows;
+
+            for (i = 1; i < (rows.length - 1); i++) {
+                shouldSwitch = false;
+
+                x = rows[i].getElementsByTagName("TD")[n];
+                y = rows[i + 1].getElementsByTagName("TD")[n];
+
+                if (dir == "asc") {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        shouldSwitch= true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            }
+            if (shouldSwitch) {
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+                switchcount ++;      
+            } else {
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
+            }
+        }
+    }
+</script>
