@@ -39,3 +39,7 @@
     background-color: rgb(133, 117, 0);
     color: white;
 }
+
+#card-stack {
+    white-space: pre-wrap;
+}

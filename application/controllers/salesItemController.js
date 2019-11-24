@@ -79,6 +79,8 @@ exports.edit_post = (req, res, next) => {
     let tempDeliveryMethod = deliveryMethod;
     let salesItemPlaceholders = [];
 
+    if (description.includes('\n')) {console.log(description);}
+
     // Check if delivery method is shipping only, pickup only, or both
     if (Array.isArray(tempDeliveryMethod)) {
         // Shipping and pickup
