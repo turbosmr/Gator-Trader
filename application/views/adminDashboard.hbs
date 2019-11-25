@@ -92,93 +92,135 @@
             </ul>
         </div>
     </div>
-    <div class="tab-pane fade" id="messages_tab">
+        <div class="tab-pane fade" id="messages_tab">
         {{!-- Container for the messages section --}}
         <div class="admin_messages_container">
             <h2>Your Messages</h2>
-            <ul class="admin_messages">
-                <table id="messages_table">
-                    <tr>
-                        <th onclick="sortTable(0)">ITEM</th>
-                        <th onclick="sortTable(1)">FROM</th>
-                        <th onclick="sortTable(2)">SUBJECT</th>
-                        <th onclick="sortTable(3)">RECEIVED</th>
-                        <th>CHAT</th>
-                    </tr>
-                    <tr>
-                        <td>Chair</td>
-                        <td>Jimmy13</td>
-                        <td>Pickup</td>
-                        <td>Jan 24, 2019</td>
-                        <td><button type="button" class="btn btn-primary btn-sm">Open Chat</button></td>
-                    </tr>
-                    <tr>
-                        <td>Book</td>
-                        <td>Mario777</td>
-                        <td>Discount</td>
-                        <td>May 30, 2019</td>
-                        <td><button type="button" class="btn btn-primary btn-sm">Open Chat</button></td>
-                    </tr>
-                    <tr>
-                        <td>Chair</td>
-                        <td>Alex007</td>
-                        <td>Where???</td>
-                        <td>Oct 21, 2019</td>
-                        <td><button type="button" class="btn btn-primary btn-sm">Open Chat</button></td>
-                    </tr>
-                    <tr>
-                        <td>Zooooooo</td>
-                        <td>Kate B</td>
-                        <td>WOOOO???</td>
-                        <td>Nov 21, 2019</td>
-                        <td><button type="button" class="btn btn-primary btn-sm">Open Chat</button></td>
-                    </tr>
-                </table>     
-            </ul>   
+            <ul id="a_m" class="admin_messages">
+                <li class="table-header">
+                    <div class="col-lg-3"><a href='#' onclick='sortListDir()'>Item</a>
+</div>
+                    <div class="col-lg-2">From</div>
+                    <div class="col-lg-3 message_last">Last Message</div>
+                    <div class="col-lg-2 message_date">Received</div>
+                    <div class="col-lg-2 message_btn">Chat</div>
+                </li>
+                <li class="table-row">
+                    <div class="col-lg-3 message_item">
+                        <span class="message_info">Item:&nbsp; </span>Chair
+                    </div>
+                    <div class="col-lg-2 message_from">
+                        <span class="message_info">From:&nbsp; </span>Jimmy13
+                    </div>
+                    <div class="col-lg-3 message_last">Pickup</div>
+                    <div class="col-lg-2 message_date">24 Oct, 2019</div>
+                    <div class="col-lg-2 message_btn">
+                        <button type="button" class="btn btn-primary btn-sm">Open</button>
+
+                    </div>
+
+                </li>
+                <li class="table-row">
+                    <div class="col-lg-3 message_item">
+                        <span class="message_info">Item:&nbsp; </span>Chair
+                    </div>
+                    <div class="col-lg-2 message_from">
+                        <span class="message_info">From:&nbsp; </span>Alex007
+                    </div>
+                    <div class="col-lg-3 message_last">Where?</div>
+                    <div class="col-lg-2 message_date">20 Oct, 2019</div>
+                    <div class="col-lg-2 message_btn">
+                        <button type="button" class="btn btn-primary btn-sm">Open</button>
+
+                    </div>
+
+                </li>
+                <li class="table-row">
+                    <div class="col-lg-3 message_item">
+                        <span class="message_info">Item:&nbsp; </span>Book
+                    </div>
+                    <div class="col-lg-2 message_from">
+                        <span class="message_info">From:&nbsp; </span>Mario777
+                    </div>
+                    <div class="col-lg-3 message_last">Discount</div>
+                    <div class="col-lg-2 message_date">27 Oct, 2019</div>
+                    <div class="col-lg-2 message_btn">
+                        <button type="button" class="btn btn-primary btn-sm">Open</button>
+
+                    </div>
+                </li>
+                <li class="table-row">
+                    <div class="col-lg-3 message_item">
+                        <span class="message_info">Item:&nbsp; </span>Computer
+                    </div>
+                    <div class="col-lg-2 message_from">
+                        <span class="message_info">From:&nbsp; </span>Kate B
+                    </div>
+                    <div class="col-lg-3 message_last">My offer!!!</div>
+                    <div class="col-lg-2 message_date">17 Oct, 2019</div>
+                    <div class="col-lg-2 message_btn">
+                        <button type="button" class="btn btn-primary btn-sm">Open</button>
+                    </div>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
 
-<!-- https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_sort_table_desc -->
+
+{{!-- Adjusted Script from W3 schools --}}
 <script>
-    function sortTable(n) {
-        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-        table = document.getElementById("messages_table");
-        switching = true;
-        dir = "asc"; 
-
-        while (switching) {
-            switching = false;
-            rows = table.rows;
-
-            for (i = 1; i < (rows.length - 1); i++) {
-                shouldSwitch = false;
-
-                x = rows[i].getElementsByTagName("TD")[n];
-                y = rows[i + 1].getElementsByTagName("TD")[n];
-
-                if (dir == "asc") {
-                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                        shouldSwitch= true;
-                        break;
-                    }
-                } else if (dir == "desc") {
-                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                        shouldSwitch = true;
-                        break;
-                    }
-                }
-            }
-            if (shouldSwitch) {
-                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                switching = true;
-                switchcount ++;      
-            } else {
-                if (switchcount == 0 && dir == "asc") {
-                    dir = "desc";
-                    switching = true;
-                }
-            }
+function sortListDir() {
+  var list, i, switching, b, shouldSwitch, dir, switchcount = 0;
+  list = document.getElementById("a_m");
+  switching = true;
+  // Set the sorting direction to ascending:
+  dir = "asc";
+  // Make a loop that will continue until no switching has been done:
+  while (switching) {
+    // Start by saying: no switching is done:
+    switching = false;
+    b = list.getElementsByTagName("LI");
+    // Loop through all list-items:
+    for (i = 1; i < (b.length - 1); i++) {
+      // Start by saying there should be no switching:
+      shouldSwitch = false;
+      /* Check if the next item should switch place with the current item,
+      based on the sorting direction (asc or desc): */
+      if (dir == "asc") {
+      if (b[i].getElementsByClassName("message_item")[0].textContent.toLowerCase() >b[i+1].getElementsByClassName("message_item")[0].textContent.toLowerCase()) {
+          /* If next item is alphabetically lower than current item,
+          mark as a switch and break the loop: */
+          shouldSwitch = true;
+          break;
         }
+      } else if (dir == "desc") {
+      if (b[i].getElementsByClassName("message_item")[0].textContent.toLowerCase() <b[i+1].getElementsByClassName("message_item")[0].textContent.toLowerCase()) {
+          /* If next item is alphabetically higher than current item,
+          mark as a switch and break the loop: */
+          shouldSwitch= true;
+          break;
+        }
+      }
     }
+    if (shouldSwitch) {
+      /* If a switch has been marked, make the switch
+      and mark that a switch has been done: */
+      b[i].parentNode.insertBefore(b[i + 1], b[i]);
+      switching = true;
+      // Each time a switch is done, increase switchcount by 1:
+      switchcount ++;
+    } else {
+      /* If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again. */
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
 </script>
+
+</body>
+</html>
