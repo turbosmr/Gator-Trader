@@ -48,8 +48,8 @@ exports.register_post = (req, res, next) => {
         regError.push({ message: 'Please fill in all fields' });
     }
     else {
-        // Check if SFSU email is valid (i.e. contains a valid domain and email is <= 30 characters)
-        if (!(emailValidator.validate(username)) || username.length > 30) {
+        // Check if SFSU email is valid (i.e. contains a valid domain and email is <= 40 characters)
+        if (!(emailValidator.validate(username)) || username.length > 40) {
             regError.push({ message: 'Invalid SFSU email' });
         }
         // Check if SFSU ID is valid (i.e. a 9-digit number that starts with 9)
@@ -129,7 +129,7 @@ exports.dashboard = (req, res, next) => {
     let product = [];
     let inquiry = [];
     let sql = "SELECT SI.pid, SI.name, SI.seller, SI.status, Category.name AS category, CAST(SI.price AS CHAR) AS price, SIP.fileName AS photoFileName FROM SalesItem SI INNER JOIN Category ON SI.category = Category.cid LEFT JOIN SalesItemPhoto SIP on SIP.product = (SELECT product FROM SalesItemPhoto SIP2 WHERE SIP2.product = SI.pid LIMIT 1) GROUP BY SI.pid, SI.seller, SI.status HAVING SI.seller = ?;";
-    sql += "SELECT SI.pid AS pid, SI.name AS productName, RU2.username AS messageFrom, I.subject AS subject, DATE_FORMAT(convert_tz(MAX(M.time),@@session.time_zone,'-08:00'), '%m-%d-%Y %h:%i %p') AS time, I.iid AS inquiryId FROM Message M INNER JOIN Inquiry I on M.inquiry = I.iid INNER JOIN SalesItem SI on I.product = SI.pid INNER JOIN RegisteredUser RU on SI.seller = RU.sid INNER JOIN RegisteredUser RU2 on M.from = RU2.sid WHERE I.inquirer = ? OR SI.seller = ? GROUP BY productName;";
+    sql += "SELECT SI.pid AS pid, SI.name AS productName, RU2.sid AS messageFromSid, RU2.username AS messageFromEmail, M.message AS lastMessage, DATE_FORMAT(convert_tz(MAX(M.time),@@session.time_zone,'-08:00'), '%m-%d-%Y %h:%i %p') AS time, I.iid AS inquiryId FROM Message M INNER JOIN Inquiry I on M.inquiry = I.iid INNER JOIN SalesItem SI on I.product = SI.pid INNER JOIN RegisteredUser RU on SI.seller = RU.sid INNER JOIN RegisteredUser RU2 on M.from = RU2.sid WHERE I.inquirer = ? OR SI.seller = ? GROUP BY productName ORDER BY MAX(M.time) DESC;";
     let placeholders = [loggedInUser, loggedInUser, loggedInUser];
 
     db.query(sql, placeholders, (error, result) => {

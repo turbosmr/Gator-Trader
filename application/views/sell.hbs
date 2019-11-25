@@ -103,20 +103,21 @@
                             <input type="checkbox" class="custom-control-input" id="library" name="deliveryMethod"
                                 value="library"
                                 {{#each pickupLocation}}{{#if (eq this.location "Library")}}checked{{/if}}{{/each}}>
-                            <label class="custom-control-label" for="library">Library</label>
+                            <label class="custom-control-label" for="library">Library (A)</label>
                         </div>
                         <div class="custom-control custom-checkbox custom-control-inline">
                             <input type="checkbox" class="custom-control-input" id="student-center"
                                 name="deliveryMethod" value="student-center"
                                 {{#each pickupLocation}}{{#if (eq this.location "Student Center")}}checked{{/if}}{{/each}}>
-                            <label class="custom-control-label" for="student-center">Student Center</label>
+                            <label class="custom-control-label" for="student-center">Student Center (B)</label>
                         </div>
                         <div class="custom-control custom-checkbox custom-control-inline">
                             <input type="checkbox" class="custom-control-input" id="wellness-center"
                                 name="deliveryMethod" value="wellness-center"
                                 {{#each pickupLocation}}{{#if (eq this.location "Wellness Center")}}checked{{/if}}{{/each}}>
-                            <label class="custom-control-label" for="wellness-center">Wellness Center</label>
+                            <label class="custom-control-label" for="wellness-center">Wellness Center (C)</label>
                         </div>
+                        <div class="pickup_map" id="map"></div>
                     </div>
                 </div>
 
@@ -133,7 +134,8 @@
                         <label for="salesItemImage" id="salesItemImageLabel">Choose up to 4 images to upload (PNG,
                             JPG)</label>
                         <input type="file" name="salesItemImage" id="salesItemImage"
-                            accept="image/png,image/jpg,image/jpeg" style="width: 1px" multiple {{#if reviseMode}}{{else}}required{{/if}} />
+                            accept="image/png,image/jpg,image/jpeg" style="width: 1px" multiple
+                            {{#if reviseMode}}{{else}}required{{/if}} />
                     </div>
                     <div class="preview">
                         <p>No files currently selected for upload</p>
@@ -155,3 +157,44 @@
 </div>
 
 <script type="text/javascript" src="/js/sell.js"></script>
+
+<script>
+    var locations = [
+        ['Library', 37.721375, -122.478172, 'A'],
+        ['Student Center', 37.722617, -122.478602, 'B'],
+        ['Wellness Center', 37.723000, -122.484177, 'C']
+    ];
+
+    // Initialize and add the map
+    function initMap() {
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 16,
+            center: new google.maps.LatLng(37.722265, -122.480673),
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+
+        var infowindow = new google.maps.InfoWindow();
+
+        var marker, i;
+
+        for (i = 0; i < locations.length; i++) {
+            marker = new google.maps.Marker({
+                position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                label: locations[i][3],
+                map: map
+            });
+
+            google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                return function () {
+                    infowindow.setContent(locations[i][0]);
+                    infowindow.open(map, marker);
+                }
+            })(marker, i));
+        }
+    }
+
+</script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFmPnJOHPJQCfqR09N0nUphOsLAEOVC0k&callback=initMap">
+    </script>

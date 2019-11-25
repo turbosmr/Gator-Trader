@@ -118,21 +118,19 @@
     </div>
 </div>
 
-
 <script>
-
     var locations = [
-        ['Loc 1', 37.721199, -122.476845, 4],
-        ['Loc 2', 37.721453, -122.479517, 5],
-        ['Loc 3', 37.723354, -122.477949, 3],
-
+        ['Library', 37.721375, -122.478172, 'A'],
+        ['Student Center', 37.722617, -122.478602, 'B'],
+        ['Wellness Center', 37.723000, -122.484177, 'C']
     ];
+
     // Initialize and add the map
     function initMap() {
 
         var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 16,
-            center: new google.maps.LatLng(37.722492, -122.477718),
+            zoom: 15,
+            center: new google.maps.LatLng(37.721968, -122.481134),
             mapTypeId: google.maps.MapTypeId.ROADMAP
         });
 
@@ -143,6 +141,7 @@
         for (i = 0; i < locations.length; i++) {
             marker = new google.maps.Marker({
                 position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                label: locations[i][3],
                 map: map
             });
 
@@ -159,8 +158,6 @@
 <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFmPnJOHPJQCfqR09N0nUphOsLAEOVC0k&callback=initMap">
     </script>
-
-
 
 <!-- https://stackoverflow.com/a/49295093 for the hover photos -->
 <script>
