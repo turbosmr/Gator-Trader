@@ -367,5 +367,4 @@ lerna-debug.log*
 **/node_modules
 **/.vscode
 **/.idea
-*.gitignore
 *.DS_Store
