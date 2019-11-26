@@ -85,7 +85,7 @@
 	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
 }
 
-.selling .col-lg-5 {
+/* .selling .col-lg-5 {
 	font-weight: bold;
 }
 
@@ -98,7 +98,7 @@
 	flex-basis: 20%;
 	color: green;
 	font-weight: bold;
-}
+} */
 
 .sell_container h2 {
 	font-size: 30px;
@@ -148,6 +148,7 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+
 .messages_container .message_info {
 	display: none;
 }
@@ -211,6 +212,7 @@
 	.sell_container .selling_info {
 		display: inline-block;
 	}
+
 	.messages_container .message_info {
 		display: inline-block;
 	}

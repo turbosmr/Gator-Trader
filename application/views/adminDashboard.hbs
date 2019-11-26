@@ -99,9 +99,9 @@
     {{!-- <div class="tab-pane fade" id="messages_tab">
         <div class="admin_messages_container">
             <h2>Your Messages</h2>
-            <ul class="admin_messages">
+            <ul id="a_m" class="admin_messages">
                 <li class="table-header">
-                    <div class="col-lg-3">Item</div>
+                    <div class="col-lg-3"><a href='#' onclick='sortListDir()'>Item</a></div>
                     <div class="col-lg-2">From</div>
                     <div class="col-lg-3 message_last">Last Message</div>
                     <div class="col-lg-2 message_date">Received</div>
@@ -168,3 +168,62 @@
         </div>
     </div> --}}
 </div>
+
+
+{{!-- Adjusted Script from W3 schools --}}
+{{!-- <script>
+    function sortListDir() {
+        var list, i, switching, b, shouldSwitch, dir, switchcount = 0;
+        list = document.getElementById("a_m");
+        switching = true;
+        // Set the sorting direction to ascending:
+        dir = "asc";
+        // Make a loop that will continue until no switching has been done:
+        while (switching) {
+            // Start by saying: no switching is done:
+            switching = false;
+            b = list.getElementsByTagName("LI");
+            // Loop through all list-items:
+            for (i = 1; i < (b.length - 1); i++) {
+                // Start by saying there should be no switching:
+                shouldSwitch = false;
+                /* Check if the next item should switch place with the current item,
+                based on the sorting direction (asc or desc): */
+                if (dir == "asc") {
+                    if (b[i].getElementsByClassName("message_item")[0].textContent.toLowerCase() > b[i + 1].getElementsByClassName("message_item")[0].textContent.toLowerCase()) {
+                        /* If next item is alphabetically lower than current item,
+                        mark as a switch and break the loop: */
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (b[i].getElementsByClassName("message_item")[0].textContent.toLowerCase() < b[i + 1].getElementsByClassName("message_item")[0].textContent.toLowerCase()) {
+                        /* If next item is alphabetically higher than current item,
+                        mark as a switch and break the loop: */
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            }
+            if (shouldSwitch) {
+                /* If a switch has been marked, make the switch
+                and mark that a switch has been done: */
+                b[i].parentNode.insertBefore(b[i + 1], b[i]);
+                switching = true;
+                // Each time a switch is done, increase switchcount by 1:
+                switchcount++;
+            } else {
+                /* If no switching has been done AND the direction is "asc",
+                set the direction to "desc" and run the while loop again. */
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
+            }
+        }
+    }
+</script> --}}
+
+</body>
+
+</html>

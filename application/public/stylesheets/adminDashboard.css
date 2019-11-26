@@ -220,89 +220,25 @@
 	}
 }
 
-@media screen and (max-width: 960px) {
-	.admin_messages .table-row {
-		border-style: solid;
-		border-color: #686fb1;
-	}
-
-	.admin_messages_container .admin_messages .table-header {
-		display: none;
-	}
-
-	.admin_messages_container .admin_messages li {
-		display: block;
-	}
-	.admin_messages_container .message_btn {
-		text-align: right;
-	}
-	.admin_messages_container .message_info {
-		display: inline-block;
-		font-weight: bold;
-	}
-
-	.admin_messages .col-lg-2 {
-		font-weight: normal;
-	}
-
-	.admin_messages .col-lg-3 {
-		font-weight: normal;
-	}
-
-	.approved .table-row {
-		border-style: solid;
-		border-color: #68b174;
-	}
-	.approved_container .approved .table-header {
-		display: none;
-	}
-
-	.approved_container .approved li {
-		display: block;
-	}
-
-	.approved_container .approved_btn {
-		text-align: right;
-	}
-
-	.approved_container .approved_info {
-		display: inline-block;
-		font-weight: bold;
-	}
-
-	.approved .col-7 {
-		font-weight: normal;
-	}
-
-	.approved .table-row .col-2 {
-		font-weight: normal;
-	}
-
-	.unapproved .table-row {
-		border-style: solid;
-		border-color: #c03c3c;
-	}
-	.unapproved_container .unapproved .table-header {
-		display: none;
-	}
-
-	.unapproved_container .unapproved li {
-		display: block;
-	}
-
-	.unapproved_container .unapproved_btn {
-		text-align: right;
-	}
-	.unapproved_container .unapproved_info {
-		display: inline-block;
-		font-weight: bold;
-	}
-
-	.unapproved .col-7 {
-		font-weight: normal;
-	}
-
-	.unapproved .table-row .col-2 {
-		font-weight: normal;
-	}
+.admin_messages_container btn {
+    float: right;
 }
+
+.admin_messages_container table {
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+  }
+  
+.admin_messages_container th {
+    cursor: pointer;
+  }
+  
+.admin_messages_container th, td {
+    text-align: left;
+    padding: 16px;
+  }
+  
+.admin_messages_container tr:nth-child(even) {
+    background-color: #f2f2f2
+  }
