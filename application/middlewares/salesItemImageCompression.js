@@ -5,7 +5,7 @@
 var compress_images = require('compress-images'); 
 var INPUT_path, OUTPUT_path;
 
-exports.imageCompression = () => {
+const imageCompression = (req, res, next) => {
     INPUT_path = './public/images/uploads/**/*.{jpg,JPG,jpeg,JPEG,png,svg,gif}';
     OUTPUT_path = './public/images/uploads_compressed/';
 
@@ -20,4 +20,8 @@ exports.imageCompression = () => {
             console.log(statistic);
             console.log('-------------');
         });
+    
+        next();
 }
+
+module.exports = imageCompression;

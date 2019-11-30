@@ -1,5 +1,4 @@
 const db = require('../config/db');
-const compression = require('../controllers/imageCompressionController.js');
 
 // Show sales item page on GET
 exports.salesItem_get = (req, res, next) => {
@@ -168,8 +167,6 @@ exports.edit_post = (req, res, next) => {
             placeholders.push(salesItemImages[i].filename);
         }
     }
-
-    compression.imageCompression();
 
     db.query(sql, placeholders, (err, result) => {
         if (err) {

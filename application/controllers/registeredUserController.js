@@ -18,7 +18,7 @@ exports.login_get = (req, res, next) => {
 
 // Handle registered user login authentication via Passport API on POST
 exports.login_post = (req, res, next) => {
-    let { terms, captcha } = req.body;
+    let { terms } = req.body;
     let redirectUrl = req.query.redirectUrl;
 
     // Lazy login; set redirect url so that user is redirected back to appropriate page
@@ -30,12 +30,6 @@ exports.login_post = (req, res, next) => {
     if (!terms) {
         res.render('registeredUserLogin', { 
             message: 'Please indicate that you agree to the terms and conditions.' 
-        });
-    }
-    // Check if captcha is checked
-    else if (!captcha) {
-        res.render('registeredUserLogin', { 
-            message: 'Please indicate that you are not a robot.' 
         });
     }
     // Proceed with login authentication
