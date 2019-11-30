@@ -18,18 +18,35 @@ exports.login_get = (req, res, next) => {
 
 // Handle registered user login authentication via Passport API on POST
 exports.login_post = (req, res, next) => {
+    let { terms, captcha } = req.body;
     let redirectUrl = req.query.redirectUrl;
 
+    // Lazy login; set redirect url so that user is redirected back to appropriate page
     if (redirectUrl == '') {
         redirectUrl = '/user/dashboard';
     }
 
-    passport.authenticate('registered-user-login', {
-        successRedirect: redirectUrl,
-        failureRedirect: '/user/login',
-        failureFlash: true,
-        badRequestMessage: 'Please fill in all fields'
-    })(req, res, next);
+    // Check if terms and conditions is checked
+    if (!terms) {
+        res.render('login', { 
+            message: 'Please indicate that you agree to the terms and conditions.' 
+        });
+    }
+    // Check if captcha is checked
+    else if (!captcha) {
+        res.render('login', { 
+            message: 'Please indicate that you are not a robot.' 
+        });
+    }
+    // Proceed with login authentication
+    else {
+        passport.authenticate('registered-user-login', {
+            successRedirect: redirectUrl,
+            failureRedirect: '/user/login',
+            failureFlash: true,
+            badRequestMessage: 'Please fill in all fields'
+        })(req, res, next);
+    }
 }
 
 // Handle showing registration page for registered user on GET
@@ -39,14 +56,23 @@ exports.register_get = (req, res, next) => {
 
 // Handle registration for registered user on POST
 exports.register_post = (req, res, next) => {
-    let { username, sid, password, password2 } = req.body;
+    let { username, sid, password, confirmPassword, terms, captcha } = req.body;
     let regError = [];
     let dataPassedBack = {};
 
-    // Check required fields
-    if (!username || !sid || !password || !password2) {
+    // Check if required fields are filled
+    if (!username || !sid || !password || !confirmPassword) {
         regError.push({ message: 'Please fill in all fields' });
     }
+    // Check if terms and conditions is checked
+    else if (!terms) {
+        regError.push({ message: 'Please indicate that you agree to the terms and conditions.' });
+    }
+    // Check if captcha is checked
+    else if (!captcha) {
+        regError.push({ message: 'Please indicate that you are not a robot.' });
+    }
+    // Validate input fields
     else {
         // Check if SFSU email is valid (i.e. contains a valid domain and email is <= 40 characters)
         if (!(emailValidator.validate(username)) || username.length > 40) {
@@ -64,7 +90,7 @@ exports.register_post = (req, res, next) => {
             regError.push({ message: 'Password must be between 8-20 characters' });
         }
         // Check if passwords match
-        if (password !== password2) {
+        if (password !== confirmPassword) {
             dataPassedBack.username = username;
             dataPassedBack.sid = sid;
             regError.push({ message: 'Passwords do not match' });
@@ -78,15 +104,15 @@ exports.register_post = (req, res, next) => {
             dataPassedBack
         });
     }
+    // Input validation passed
     else {
-        // Input validation passed
         // Check if username already exists
         db.query("SELECT * FROM RegisteredUser WHERE sid = ? OR username = ?", [sid, username], (err, result) => {
             if (err) throw err;
 
-            if (result.length >= 1) {
+            if (result.length > 0) {
                 regError.push({ message: 'Such user already exists. Please log in.' });
-                res.render('register', {
+                res.render('registeredUserLogin', {
                     regError
                 });
             }
