@@ -28,13 +28,13 @@ exports.login_post = (req, res, next) => {
 
     // Check if terms and conditions is checked
     if (!terms) {
-        res.render('login', { 
+        res.render('registeredUserLogin', { 
             message: 'Please indicate that you agree to the terms and conditions.' 
         });
     }
     // Check if captcha is checked
     else if (!captcha) {
-        res.render('login', { 
+        res.render('registeredUserLogin', { 
             message: 'Please indicate that you are not a robot.' 
         });
     }
