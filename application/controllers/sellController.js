@@ -1,5 +1,6 @@
 const db = require('../config/db');
 const uuidv1 = require('uuid/v1');
+const compression = require('../controllers/imageCompressionController.js');
 
 // Handle showing sell page on GET
 exports.sell_get = (req, res, next) => {
@@ -107,6 +108,8 @@ exports.sell_post = (req, res, next) => {
         placeholders.push(productId);
         placeholders.push(salesItemImages[i].filename);
     }
+
+    compression.imageCompression();
 
     db.query(sql, placeholders, (err, result) => {
         if (err) {
