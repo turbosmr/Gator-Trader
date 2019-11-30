@@ -59,6 +59,9 @@ exports.edit_get = (req, res, next) => {
             res.render('error');
         }
         else {
+            // Intepret and display newline
+            result[0][0].description = result[0][0].description.replace(/<br>/g, "\n");
+
             res.render('sell', {
                 salesItem: result[0][0],
                 classSection: result[1],
@@ -102,6 +105,9 @@ exports.edit_post = (req, res, next) => {
             deliveryMethod = 2;
         }
     }
+
+    // Intepret and store newline
+    description = description.replace(/\r\n|\r|\n/g, "<br>");
 
     // Check if class material section field is empty
     if (classMaterialSection != '') {

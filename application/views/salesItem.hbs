@@ -38,7 +38,7 @@
 
 <div class="itemContainer">
     <div class="container-fluid">
-        <div class="row">
+        <div class="row mx-0">
             <div class="col-lg-5">
                 <div class="col">
                     <div class="items_page_mini_photos">
@@ -65,27 +65,37 @@
                     <p class="seller">by <b>{{usernameOf data.salesItem.sellerEmail}}</b></p>
                     <p class="price">Price: ${{data.salesItem.price}}</p>
                     <ul class="brief_description">
+                        <li><b>Category:</b>{{#each category}}
+                            {{#if (eq @root.data.salesItem.category this.cid)}}
+                            {{this.name}}
+                            {{/if}}
+                            {{/each}}
+                        </li>
                         <li><b>Condition:</b> {{data.salesItem.condition}}</li>
                         <li><b>Quantity:</b> {{data.salesItem.quantity}} available</li>
-                        <li><b>Category:</b>
-                        {{#each category}}
-                        {{#if (eq @root.data.salesItem.category this.cid)}}
-                            {{this.name}}
-                        {{/if}}
-                        {{/each}}
-                        </li>
                         <li><b>Delivery Method:</b> {{data.salesItem.deliveryMethod}}</li>
-                        {{#if data.pickupLocation}}<li><b>Pickup Location: </b></li>{{/if}}
-                        {{#each data.pickupLocation}}<li>{{this.location}}</li>{{/each}}
                     </ul>
                 </div>
             </div>
             <div class="col-lg-3">
-                <div class="pickup_map" id="map"></div>
-                <div class="mt-4">
+                {{#if data.pickupLocation}}
+                <div class="mb-2">
+                    <h4>Pickup Location(s)</h4>
+                    {{#each data.pickupLocation}}
+                    <li>{{this.location}}</li>
+                    {{/each}}
+                </div>
+                <div class="pickup_map mb-4" id="map"></div>
+                <div class="mt-3">
                     <a href="/products/{{data.salesItem.pid}}/inquiry" class="contact_button" target="_blank">Contact
                         Seller</a>
                 </div>
+                {{else}}
+                <div class="mt-3" style="text-align: right;">
+                    <a href="/products/{{data.salesItem.pid}}/inquiry" class="contact_button" target="_blank">Contact
+                        Seller</a>
+                </div>
+                {{/if}}
             </div>
 
             <!-- pop up messages -->
@@ -105,12 +115,12 @@
                 </form>
             </div>
         </div>
-        <div class="row">
+        <div class="row mx-0">
             <div class="col">
                 <div class="additional_Info">
                     <div class="description">
-                        <h4>Description </h4>
-                        <p>{{data.salesItem.description}}</p>
+                        <h4>Description</h4>
+                        {{{data.salesItem.description}}}
                     </div>
                 </div>
             </div>

@@ -54,6 +54,9 @@ exports.sell_post = (req, res, next) => {
         }
     }
 
+    // Intepret and store newline
+    description = description.replace("\n", "<br>");
+
     // Check if class material section field is empty
     if (classMaterialSection != '') {
         sql += "INSERT INTO SalesItem (pid, seller, category, name, price, `condition`, quantity, description, deliveryMethod, classMaterialSection) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";

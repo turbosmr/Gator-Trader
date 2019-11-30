@@ -96,15 +96,17 @@
                                                     <!-- added this, when you click on item title link, it goes to new window -->
                                                     <h1><a href="/products/{{this.pid}}" target="_blank"> {{this.name}}
                                                         </a></h1>
-                                                    <div class="seller">
-                                                        <p>by <b>{{usernameOf this.sellerEmail}}</b></p>
-                                                    </div>
+                                                    <p class="seller">by <b>{{usernameOf this.sellerEmail}}</b></p>
                                                     <p class="price">${{this.newPrice}}</p>
-                                                    <br>
-                                                    <p><b>Category:</b> {{categoryName this.category}}</p>
-                                                    <br>
-                                                    <div class="description">
-                                                        <p>{{this.description}}</p>
+                                                    <p class="category"><b>Category:</b> {{categoryName this.category}}</p>
+                                                    <div class="description" id="module">
+                                                        <b>Description:</b> 
+                                                        <p class="collapse" id="collapseExample{{@index}}" aria-expanded="false">
+                                                            {{{this.description}}}
+                                                        </p>
+                                                        <a role="button" class="collapsed" data-toggle="collapse"
+                                                            href="#collapseExample{{@index}}" aria-expanded="false"
+                                                            aria-controls="collapseExample"></a>
                                                     </div>
                                                 </div>
 
@@ -116,7 +118,8 @@
                                         <div class="col">
                                             <div class="card_footer">
                                                 <div class="contact_seller">
-                                                    <button class="button"><a href="/products/{{this.pid}}/inquiry" target="_blank">Contact Seller</a></button>
+                                                    <button class="button"><a href="/products/{{this.pid}}/inquiry"
+                                                            target="_blank">Contact Seller</a></button>
                                                 </div>
                                                 <!-- pop up messages -->
                                                 <div class="chat-popup" id="myForm">
@@ -234,14 +237,4 @@
             }
         }
     });
-</script>
-
-
-<script>
-    function getURL() {
-        var url = window.location.href;
-        var lastEl = url.charAt(url.length - 1);
-        document.getElementById(lastEl).setAttribute("style", "text-decoration: underline #fde21c;");
-    }
-    getURL();
 </script>
