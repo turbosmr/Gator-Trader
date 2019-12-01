@@ -58,7 +58,7 @@ exports.approve = (req, res, next) => {
     db.query(sql, [productId], (err, result) => {
         if (err) {
             req.flash('error', 'Error approving item');
-            res.redirect('/user/dashbaord');
+            res.redirect('/user/dashboard');
         }
 
         if (result.changedRows > 0) {
@@ -67,7 +67,7 @@ exports.approve = (req, res, next) => {
         }
         else {
             req.flash('error', 'Error approving item');
-            res.redirect('/user/dashbaord');
+            res.redirect('/user/dashboard');
         }
     });
 }
@@ -80,7 +80,7 @@ exports.disapprove = (req, res, next) => {
     db.query(sql, [productId], (err, result) => {
         if (err) {
             req.flash('error', 'Error disapproving item');
-            res.redirect('/user/dashbaord');
+            res.redirect('/user/dashboard');
         }
 
         if (result.changedRows > 0) {
@@ -89,7 +89,7 @@ exports.disapprove = (req, res, next) => {
         }
         else {
             req.flash('error', 'Error disapproving item');
-            res.redirect('/user/dashbaord');
+            res.redirect('/user/dashboard');
         }
     });
 }
@@ -102,7 +102,7 @@ exports.remove = (req, res, next) => {
     db.query(sql, [productId], (err, result) => {
         if (err) {
             req.flash('error', 'Error removing item');
-            res.redirect('/user/dashbaord');
+            res.redirect('/user/dashboard');
         }
 
         if (result.changedRows > 0) {
@@ -111,7 +111,7 @@ exports.remove = (req, res, next) => {
         }
         else {
             req.flash('error', 'Error removing item');
-            res.redirect('/user/dashbaord');
+            res.redirect('/user/dashboard');
         }
     });
 }

@@ -252,10 +252,10 @@
 
         <!-- Nav Bar (Categories) -->
         <nav class="navbar navbar-expand-sm justify-content-center">
-            <div id="active_category" class="scrollable-categories mb-2">
+            <div class="scrollable-categories">
                 {{#each category}}
                 <a href="/search?c={{this.cid}}" {{#if (eq this.cid @root.searchCriteria.selectedCategoryVal)}}
-                    style="text-decoration: underline #fde21c;"{{/if}}>{{this.name}}</a>&nbsp;&nbsp;
+                    style="color: #fde21c; text-decoration: underline;"{{/if}}>{{this.name}}</a>&nbsp;&nbsp;
                 {{/each}}
             </div>
         </nav>

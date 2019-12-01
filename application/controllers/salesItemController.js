@@ -109,12 +109,12 @@ exports.edit_post = (req, res, next) => {
 
     // Check if class material section field is empty
     if (classMaterialSection != '') {
-        sql += "UPDATE SalesItem SET category = ?, name = ?, price = ?, `condition` = ?, quantity = ?, description = ?, deliveryMethod = ?, classMaterialSection = ? WHERE pid = ?;";
+        sql += "UPDATE SalesItem SET category = ?, name = ?, price = ?, `condition` = ?, quantity = ?, description = ?, deliveryMethod = ?, classMaterialSection = ?, status = 1 WHERE pid = ?;";
         salesItemPlaceholders = [category, productName, price, condition, quantity, description, deliveryMethod, classMaterialSection, productId];
         placeholders.push(...salesItemPlaceholders);
     }
     else {
-        sql += "UPDATE SalesItem SET category = ?, name = ?, price = ?, `condition` = ?, quantity = ?, description = ?, deliveryMethod = ?, classMaterialSection = NULL WHERE pid = ?;";
+        sql += "UPDATE SalesItem SET category = ?, name = ?, price = ?, `condition` = ?, quantity = ?, description = ?, deliveryMethod = ?, classMaterialSection = NULL, status = 1 WHERE pid = ?;";
         salesItemPlaceholders = [category, productName, price, condition, quantity, description, deliveryMethod, productId];
         placeholders.push(...salesItemPlaceholders);
     }

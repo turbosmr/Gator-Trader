@@ -33,9 +33,9 @@ body {
 }
 
 .footer {
-    background-color: rgb(74, 54, 78);
-    color: white;
-    text-align: center;
+	background-color: rgb(74, 54, 78);
+	color: white;
+	text-align: center;
 }
 
 .footer a {
@@ -172,4 +172,16 @@ a:hover {
 	overflow-x: scroll;
 	overflow-y: hidden;
 	white-space: nowrap;
+}
+
+.scrollable-categories::-webkit-scrollbar {
+	width: 0 !important
+}
+
+.scrollable-categories {
+	overflow: -moz-scrollbars-none;
+}
+
+.scrollable-categories {
+	-ms-overflow-style: none;
 }
