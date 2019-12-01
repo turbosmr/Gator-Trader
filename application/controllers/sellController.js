@@ -55,7 +55,7 @@ exports.sell_post = (req, res, next) => {
     }
 
     // Intepret and store newline
-    description = description.replace("\n", "<br>");
+    description = description.replace(/\r\n|\r|\n/g, "<br>");
 
     // Check if class material section field is empty
     if (classMaterialSection != '') {

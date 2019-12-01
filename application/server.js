@@ -55,7 +55,6 @@ app.use('/search', require('./routes/search'));
 app.use('/products', require('./routes/salesItem'));
 app.use('/admin', require('./routes/administrator'));
 app.use('/sell', require('./routes/sell'));
-app.use('/message', require('./routes/message'));
 
 // Error-handling middleware
 app.use(function(req, res, next) {
