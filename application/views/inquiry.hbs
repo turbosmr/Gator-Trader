@@ -6,8 +6,8 @@
     <div class="row justify-content-center">
         <div class="col-12 col-sm-4 col-md-4 col-lg-3 col-xl-3 mb-3 mb-md-0">
             <div class="card px-4 py-3">
-                <div id="imageCarousel" class="carousel slide mx-auto mb-4" data-interval="false"
-                    data-ride="carousel" style="width: 100%; height: 300px;">
+                <div id="imageCarousel" class="carousel slide mx-auto mb-4" data-interval="false" data-ride="carousel"
+                    style="width: 100%; height: 300px;">
                     <ol class="carousel-indicators">
                         {{#each salesItemPhoto}}
                         <li data-target="" data-slide-to="{{@index}}" class="{{#if (eq @index 0)}}active{{/if}}"></li>
@@ -33,17 +33,21 @@
                 </div>
                 <div>
                     <h4><a href="/products/{{salesItem.pid}}">{{salesItem.name}}</a></h4>
-                    <h5>by {{usernameOf salesItem.sellerEmail}}</h5>
-                    <ul class="px-0 pt-4" style="list-style: none;">
+                    <p>by <b>{{usernameOf salesItem.sellerEmail}}</b></p>
+                    <ul class="px-0 pt-2 mb-0" style="list-style: none;">
                         <li><b>Price:</b> ${{salesItem.price}}</li>
                         <li><b>Condition:</b> {{salesItem.condition}}</li>
                         <li><b>Quantity:</b> {{salesItem.quantity}} available</li>
                         <li><b>Delivery Method:</b> {{salesItem.deliveryMethod}}</li>
-                        {{#if pickupLocation}}<li><b>Pickup Location: </b></li>{{/if}}
-                        {{#each pickupLocation}}<li>{{this.location}}</li>{{/each}}
                     </ul>
                 </div>
+                {{#if pickupLocation}}
+                <div class="mt-4 mb-2">
+                    <b>Pickup Location(s)</b>
+                    {{#each pickupLocation}}<li>{{this.location}}</li>{{/each}}
+                </div>
                 <div class="pickup_map" id="map" style="min-height: 200px"></div>
+                {{/if}}
             </div>
         </div>
         <div class="col-12 col-sm-8 col-md-7 col-lg-6 col-xl-6 pl-sm-0">
@@ -105,19 +109,18 @@
 <script type="text/javascript" src="/js/inquiry.js"></script>
 
 <script>
-
     var locations = [
-        ['Loc 1', 37.721199, -122.476845, 4],
-        ['Loc 2', 37.721453, -122.479517, 5],
-        ['Loc 3', 37.723354, -122.477949, 3],
-
+        ['Library', 37.721375, -122.478172, 'A'],
+        ['Student Center', 37.722617, -122.478602, 'B'],
+        ['Wellness Center', 37.723000, -122.484177, 'C']
     ];
+
     // Initialize and add the map
     function initMap() {
 
         var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 16,
-            center: new google.maps.LatLng(37.722492, -122.477718),
+            zoom: 15,
+            center: new google.maps.LatLng(37.722783, -122.480617),
             mapTypeId: google.maps.MapTypeId.ROADMAP
         });
 
@@ -128,6 +131,7 @@
         for (i = 0; i < locations.length; i++) {
             marker = new google.maps.Marker({
                 position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                label: locations[i][3],
                 map: map
             });
 

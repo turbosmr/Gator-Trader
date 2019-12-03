@@ -4,8 +4,8 @@
     <b>Waiting for approval</b>
     {{else if (eq data.salesItem.status "Active")}}
     <b>Your item is for sale</b>
-    {{else if (eq data.salesItem.status "Removed")}}
-    <b>Please revise listing</b>
+    {{else if (eq data.salesItem.status "Disapproved")}}
+    <b>Your item was not approved by administrator. Please revise listing.</b>
     {{else if (eq data.salesItem.status "Ended")}}
     <b>Your item is inactive</b>
     {{/if}}
@@ -27,11 +27,13 @@
 {{#if data.isAdmin}}
 <div class="itemContainer">
     {{#if (eq data.salesItem.status "Unapproved")}}
-    <a href="#"><button type="button" class="btn btn-success btn-sm">Approve</button></a>
-    <a href="#"><button type="button" class="btn btn-danger btn-sm">Remove</button></a>
+    <a href="/admin/approve?pid={{this.pid}}"><button type="button"
+            class="btn btn-success btn-sm">Approve</button></a>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="/admin/disapprove?pid={{this.pid}}"><button type="button"
+            class="btn btn-danger btn-sm">Disapprove</button></a>
     {{else}}
-    <a href="#"><button type="button" class="btn btn-warning btn-sm">Block</button></a>
-    <a href="#"><button type="button" class="btn btn-danger btn-sm">Remove</button></a>
+    <a href="/admin/disapprove?pid={{this.pid}}"><button type="button"
+            class="btn btn-danger btn-sm">Disapprove</button></a>
     {{/if}}
 </div>
 {{/if}}
@@ -140,7 +142,7 @@
 
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 15,
-            center: new google.maps.LatLng(37.721968, -122.481134),
+            center: new google.maps.LatLng(37.722783, -122.480617),
             mapTypeId: google.maps.MapTypeId.ROADMAP
         });
 

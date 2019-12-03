@@ -98,10 +98,12 @@
                                                         </a></h1>
                                                     <p class="seller">by <b>{{usernameOf this.sellerEmail}}</b></p>
                                                     <p class="price">${{this.newPrice}}</p>
-                                                    <p class="category"><b>Category:</b> {{categoryName this.category}}</p>
+                                                    <p class="category"><b>Category:</b> {{categoryName this.category}}
+                                                    </p>
                                                     <div class="description" id="module">
-                                                        <b>Description:</b> 
-                                                        <p class="collapse" id="collapseExample{{@index}}" aria-expanded="false">
+                                                        <b>Description:</b>
+                                                        <p class="collapse" id="collapseExample{{@index}}"
+                                                            aria-expanded="false">
                                                             {{{this.description}}}
                                                         </p>
                                                         <a role="button" class="collapsed" data-toggle="collapse"
@@ -122,7 +124,7 @@
                                                             target="_blank">Contact Seller</a></button>
                                                 </div>
                                                 <!-- pop up messages -->
-                                                <div class="chat-popup" id="myForm">
+                                        {{!--   <div class="chat-popup" id="myForm">
                                                     <form action="#" action="POST" class="form-container">
                                                         <h4>*Item Name*</h4>
                                                         <h5>by *Seller*</h5>
@@ -139,7 +141,7 @@
                                                             </div>
                                                         </div>
                                                     </form>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                     </div>

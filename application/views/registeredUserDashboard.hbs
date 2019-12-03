@@ -70,6 +70,8 @@
                     <div class="col-lg-4 selling_item"><span class="selling_info"><b>Item:</b>&nbsp;</span><a href="/products/{{this.pid}}">{{this.name}}</a></div>
                     <div class="col-lg-1 selling_price"><span class="selling_info"><b>Price:</b>&nbsp;</span>${{this.price}}</div>
                     {{#if (eq this.status "Active")}}
+                    <div class="col-lg-2 selling_status" style="color: green;"><span class="selling_info" style="color: black;"><b>Status:</b>&nbsp;</span>{{this.status}}</div>
+                    {{else if (eq this.status "Ended")}}
                     <div class="col-lg-2 selling_status"><span class="selling_info"><b>Status:</b>&nbsp;</span>{{this.status}}</div>
                     {{else}}
                     <div class="col-lg-2 selling_status" style="color: red;"><span class="selling_info" style="color: black;"><b>Status:</b>&nbsp;</span>{{this.status}}</div>
@@ -78,10 +80,10 @@
                     <div class="col-lg-3 selling_btn">
                         {{#if (eq this.status "Ended")}}
                         <a href="/products/{{this.pid}}/relist"><button type="button"
-                                class="btn btn-danger btn-sm">Relist</button></a>
+                                class="btn btn-success btn-sm">Relist</button></a>
                         {{else}}
                         <a href="/products/{{this.pid}}/edit"><button type="button"
-                                class="btn btn-secondary btn-sm">Revise</button></a>
+                                class="btn btn-secondary btn-sm">Revise</button></a>&nbsp;&nbsp;&nbsp;&nbsp;
                         <a href="/products/{{this.pid}}/end"><button type="button" class="btn btn-danger btn-sm">End
                                 Listing</button></a>
                         {{/if}}

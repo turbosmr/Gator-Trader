@@ -70,7 +70,7 @@ exports.get = (req, res, next) => {
         sql += "SELECT fileName as photoFileName FROM SalesItemPhoto WHERE product = ?;";
         
         // Retrieve inquiry information of the sales item that is being inquired by the user that is logged in
-        sql += "SELECT * FROM Inquiry I INNER JOIN WHERE I.product = ? AND I.inquirer = ?;";
+        sql += "SELECT * FROM Inquiry I WHERE I.product = ? AND I.inquirer = ?;";
 
         // Retrieve all pick up locations specific to the sales item that is being inquired
         sql += "SELECT * FROM PickupLocation WHERE product = ?;"

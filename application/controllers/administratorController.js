@@ -37,10 +37,10 @@ exports.dashboard = (req, res, next) => {
         if (err) throw err;
 
         for (let i = 0; i < result.length; i++) {
-            if (result[i].status == "Active" || result[i].status == "Ended") {
+            if (result[i].status == "Active") {
                 activeSalesItem.push(result[i])
             }
-            else {
+            else if (result[i].status == "Unapproved") {
                 unapprovedSalesItem.push(result[i]);
             }
         }
@@ -100,7 +100,7 @@ exports.disapprove = (req, res, next) => {
     });
 }
 
-// Handle removing of sales item on GET
+// Handle removing of sales item on GET (CURRENTLY NOT BEING USED)
 exports.remove = (req, res, next) => {
     let productId = req.query.pid;
 

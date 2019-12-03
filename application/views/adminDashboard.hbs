@@ -37,23 +37,19 @@
             <ul class="unapproved px-0">
                 <li class="table-header">
                     <div class="col col-7">Name</div>
-                    <div class="col col-3">Seller</div>
-                    <div class="col col-4">
+                    <div class="col col-2">Seller</div>
+                    <div class="col col-3">
                         Actions
                     </div>
                 </li>
                 {{#if unapprovedSalesItem}}
                 {{#each unapprovedSalesItem}}
                 <li class="table-row">
-                    <div class="col col-7"> <span class="unapproved_info">Name:&nbsp; </span><a
-                            href="/products/{{this.pid}}">{{this.name}}</a></div>
-                    <div class="col col-3"> <span class="unapproved_info">Seller:&nbsp;
-                        </span>{{usernameOf this.sellerEmail}}</div>
-                    <div class="col col-4 unapproved_btn">
-                        <a href="/admin/approve?pid={{this.pid}}"><button type="button"
-                                class="btn btn-success btn-sm">Approve</button></a>
-                        {{!-- <a href="/admin/disapprove?pid={{this.pid}}"><button type="button"
-                                class="btn btn-danger btn-sm">Disapprove</button></a> --}}
+                    <div class="col col-lg-7"> <span class="unapproved_info">Name:&nbsp; </span><a href="/products/{{this.pid}}">{{this.name}}</a></div>
+                    <div class="col col-lg-2"> <span class="unapproved_info">Seller:&nbsp; </span>{{usernameOf this.sellerEmail}}</div>
+                    <div class="col col-lg-3 unapproved_btn">
+                        <a href="/admin/approve?pid={{this.pid}}"><button type="button" class="btn btn-success btn-sm">Approve</button></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="/admin/disapprove?pid={{this.pid}}"><button type="button" class="btn btn-danger btn-sm">Disapprove</button></a>
                     </div>
                 </li>
                 {{/each}}
@@ -67,24 +63,23 @@
     </div>
     <div class="tab-pane fade" id="approved_tab">
         <div class="approved_container">
-            <h2>Approved Items </h2>
+            <h2>Approved Items</h2>
             <ul class="approved px-0">
                 <li class="table-header">
                     <div class="col-7">Name</div>
-                    <div class="col-3">Seller</div>
-                    <div class="col-2">Actions</div>
+                    <div class="col-2">Seller</div>
+                    <div class="col-2">
+                        Actions
+                    </div>
                 </li>
                 {{#if activeSalesItem}}
                 {{#each activeSalesItem}}
                 <li class="table-row">
-                    <div class="col-7"> <span class="approved_info">Name:&nbsp; </span><a
-                            href="/products/{{this.pid}}">{{this.name}}</a></div>
-                    <div class="col-3"> <span class="approved_info">Seller:&nbsp; </span>{{usernameOf this.sellerEmail}}
-                    </div>
+                    <div class="col-lg-7"> <span class="approved_info">Name:&nbsp; </span><a href="/products/{{this.pid}}">{{this.name}}</a></div>
+                    <div class="col-lg-2"> <span class="approved_info">Seller:&nbsp; </span>{{usernameOf this.sellerEmail}}</div>
                     <div class="col-lg-2 approved_btn">
                         <!--<a href="#"><button type="button" class="btn btn-warning btn-sm">Block</button></a>-->
-                        <a href="/admin/remove?pid={{this.pid}}"><button type="button"
-                                class="btn btn-danger btn-sm">Remove</button></a>
+                        <a href="/admin/disapprove?pid={{this.pid}}"><button type="button" class="btn btn-danger btn-sm">Disapprove</button></a>
                     </div>
                 </li>
                 {{/each}}
