@@ -29,6 +29,8 @@ exports.logout = (req, res, next) => {
 exports.dashboard = (req, res, next) => {
     let activeSalesItem = [];
     let unapprovedSalesItem = [];
+
+    // Retrieve information of all sales items, and include the seller email
     let sql = "SELECT SI.*, RU.username AS sellerEmail FROM SalesItem SI INNER JOIN RegisteredUser RU on SI.seller = RU.sid";
 
     db.query(sql, (err, result) => {
@@ -53,6 +55,8 @@ exports.dashboard = (req, res, next) => {
 // Handle approving of sales item on GET
 exports.approve = (req, res, next) => {
     let productId = req.query.pid;
+
+    // Update status of a sales item to 'Active'
     let sql = "UPDATE SalesItem SET status = 2 WHERE pid = ?";
 
     db.query(sql, [productId], (err, result) => {
@@ -75,6 +79,8 @@ exports.approve = (req, res, next) => {
 // Handle disapproving of sales item on GET
 exports.disapprove = (req, res, next) => {
     let productId = req.query.pid;
+
+    // Update status of a sales item to 'Disapproved'
     let sql = "UPDATE SalesItem SET status = 3 WHERE pid = ?";
 
     db.query(sql, [productId], (err, result) => {
@@ -97,7 +103,9 @@ exports.disapprove = (req, res, next) => {
 // Handle removing of sales item on GET
 exports.remove = (req, res, next) => {
     let productId = req.query.pid;
-    let sql = "UPDATE SalesItem SET status = 3 WHERE pid = ?";
+
+    // Update status of a sales item to 'Removed'
+    let sql = "UPDATE SalesItem SET status = 4 WHERE pid = ?";
 
     db.query(sql, [productId], (err, result) => {
         if (err) {

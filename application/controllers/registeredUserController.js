@@ -148,8 +148,13 @@ exports.dashboard = (req, res, next) => {
     let loggedInUser = req.user.sid;
     let product = [];
     let inquiry = [];
-    let sql = "SELECT SI.pid AS pid, SI.name AS name, SI.status AS status, DATE_FORMAT(convert_tz(SI.submittedAt,@@session.time_zone,'-08:00'), '%m-%d-%Y %h:%i %p') AS dateCreated, Category.name AS category, CAST(SI.price AS CHAR) AS price, SIP.fileName AS photoFileName FROM SalesItem SI INNER JOIN Category ON SI.category = Category.cid LEFT JOIN SalesItemPhoto SIP on SIP.product = (SELECT product FROM SalesItemPhoto SIP2 WHERE SIP2.product = SI.pid LIMIT 1) GROUP BY SI.pid, SI.seller, SI.status HAVING SI.seller = ?;";
+
+    // Retrieve pid, name, price, status, and date created of all sales items that are sold by the user that is logged in. Also, cast sales item price to CHAR to show leading zeros in view page.
+    let sql = "SELECT SI.pid AS pid, SI.name AS name, CAST(SI.price AS CHAR) AS price, SI.status AS status, DATE_FORMAT(convert_tz(SI.submittedAt,@@session.time_zone,'-08:00'), '%m-%d-%Y %h:%i %p') AS dateCreated FROM SalesItem SI WHERE SI.seller = ?;";
+    
+    // Retrieve information of all inquiries of all sales items that the logged in user is inquiring about or is selling and sort it by last received
     sql += "SELECT SI.pid AS pid, SI.name AS productName, RU2.sid AS messageFromSid, RU2.username AS messageFromEmail, M.message AS lastMessage, DATE_FORMAT(convert_tz(MAX(M.time),@@session.time_zone,'-08:00'), '%m-%d-%Y %h:%i %p') AS time, I.iid AS inquiryId FROM Message M INNER JOIN Inquiry I on M.inquiry = I.iid INNER JOIN SalesItem SI on I.product = SI.pid INNER JOIN RegisteredUser RU on SI.seller = RU.sid INNER JOIN RegisteredUser RU2 on M.from = RU2.sid WHERE I.inquirer = ? OR SI.seller = ? GROUP BY productName ORDER BY MAX(M.time) DESC;";
+    
     let placeholders = [loggedInUser, loggedInUser, loggedInUser];
 
     db.query(sql, placeholders, (error, result) => {

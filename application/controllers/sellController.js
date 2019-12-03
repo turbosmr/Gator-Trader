@@ -3,7 +3,10 @@ const uuidv1 = require('uuid/v1');
 
 // Handle showing sell page on GET
 exports.sell_get = (req, res, next) => {
+
+    // Retrieve information of all class sections
     let sql = "SELECT * FROM ClassSection";
+
     let classSection = [];
 
     db.query(sql, (err, result) => {
@@ -59,12 +62,18 @@ exports.sell_post = (req, res, next) => {
 
     // Check if class material section field is empty
     if (classMaterialSection != '') {
+
+        // Create a new sales item
         sql += "INSERT INTO SalesItem (pid, seller, category, name, price, `condition`, quantity, description, deliveryMethod, classMaterialSection) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        
         salesItemPlaceholders = [productId, seller, category, productName, price, condition, quantity, description, deliveryMethod, classMaterialSection];
         placeholders.push(...salesItemPlaceholders);
     }
     else {
+
+        // Create a new sales item
         sql += "INSERT INTO SalesItem (pid, seller, category, name, price, `condition`, quantity, description, deliveryMethod, classMaterialSection) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NULL);";
+        
         salesItemPlaceholders = [productId, seller, category, productName, price, condition, quantity, description, deliveryMethod];
         placeholders.push(...salesItemPlaceholders);
     }
@@ -75,7 +84,10 @@ exports.sell_post = (req, res, next) => {
         for (let i = 0; i < tempDeliveryMethod.length; i++) {
             // Make sure "shipping" is not included as a location
             if (tempDeliveryMethod[i] != "shipping") {
+
+                // Create a new pickup location for a sales item
                 sql += "INSERT INTO PickupLocation (product, location) VALUES (?, ?);";
+
                 placeholders.push(productId);
                 if (tempDeliveryMethod[i] == "library") {
                     placeholders.push(1);
@@ -91,7 +103,10 @@ exports.sell_post = (req, res, next) => {
     }
     // Single pickup location
     else {
+
+        // Create a new pickup location for a sales item
         sql += "INSERT INTO PickupLocation (product, location) VALUES (?, ?);";
+
         placeholders.push(productId);
         if (tempDeliveryMethod == "library") {
             placeholders.push(1);
@@ -106,6 +121,8 @@ exports.sell_post = (req, res, next) => {
 
     // Save filename of uploaded sales item photo(s)
     for (let i = 0; i < salesItemImages.length; i++) {
+
+        // Create a new sales item photos (filename) for a sales item
         sql += "INSERT INTO SalesItemPhoto (product, fileName) VALUES (?, ?);";
         placeholders.push(productId);
         placeholders.push(salesItemImages[i].filename);

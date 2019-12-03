@@ -89,14 +89,6 @@
 	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
 }
 
-.unapproved .col-7 {
-	font-weight: bold;
-}
-
-.unapproved .table-row .col-2 {
-	font-weight: bold;
-}
-
 .unapproved .col-3 {
 	float: right;
 }
@@ -135,14 +127,6 @@
 .approved .table-row {
 	background-color: #fff;
 	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
-}
-
-.approved .col-7 {
-	font-weight: bold;
-}
-
-.approved .table-row .col-2 {
-	font-weight: bold;
 }
 
 .approved_container h2 {

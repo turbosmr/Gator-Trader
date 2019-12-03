@@ -38,7 +38,7 @@
                 <li class="table-header">
                     <div class="col col-7">Name</div>
                     <div class="col col-3">Seller</div>
-                    <div class="col col-2">
+                    <div class="col col-4">
                         Actions
                     </div>
                 </li>
@@ -49,10 +49,11 @@
                             href="/products/{{this.pid}}">{{this.name}}</a></div>
                     <div class="col col-3"> <span class="unapproved_info">Seller:&nbsp;
                         </span>{{usernameOf this.sellerEmail}}</div>
-                    <div class="col col-lg-2 unapproved_btn">
+                    <div class="col col-4 unapproved_btn">
                         <a href="/admin/approve?pid={{this.pid}}"><button type="button"
                                 class="btn btn-success btn-sm">Approve</button></a>
-                        <!--<a href="/admin/disapprove?pid={{this.pid}}"><button type="button" class="btn btn-danger btn-sm">Disapprove</button></a>-->
+                        {{!-- <a href="/admin/disapprove?pid={{this.pid}}"><button type="button"
+                                class="btn btn-danger btn-sm">Disapprove</button></a> --}}
                     </div>
                 </li>
                 {{/each}}

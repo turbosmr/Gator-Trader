@@ -11,10 +11,19 @@ exports.get = (req, res, next) => {
 
     // Check if ".../inquiry?id=[inquiryId]" exist
     if (typeof inquiryId !== "undefined") {
+
+        // Retrieve information of the sales item that is being inquired, cast sales item price to CHAR to show leading zeros in view page, and include the seller email
         sql = "SELECT SI.*, CAST(SI.price AS CHAR) AS price, RU.username AS sellerEmail FROM SalesItem SI INNER JOIN RegisteredUser RU on SI.seller = RU.sid WHERE SI.pid = ?;"
+        
+        // Retrieve all sales item photos (filename) specific to the sales item that is being inquired
         sql += "SELECT fileName as photoFileName FROM SalesItemPhoto WHERE product = ?;";
+        
+        // Retrieve inquiry information of the sales item that is being inquired only if the user that is logged in is either the seller of the sales item or the inquirer. Also, include all messages that belong to the inquiry, the seller email, and the message sender's email. Also, sort messages by the time it was sent in ascending order.
         sql += "SELECT RU2.sid AS senderSid, RU2.username AS senderEmail, I.subject AS subject, M.message AS message, DATE_FORMAT(convert_tz(M.time,@@session.time_zone,'-08:00'), '%m-%d-%Y %h:%i %p') AS time FROM Inquiry I INNER JOIN Message M on I.iid = M.inquiry INNER JOIN SalesItem SI on I.product = SI.pid INNER JOIN RegisteredUser RU on SI.seller = RU.sid INNER JOIN RegisteredUser RU2 on M.from = RU2.sid WHERE I.iid = ? AND I.product = ? AND (I.inquirer = ? OR SI.seller = ?) ORDER BY time ASC;";
+        
+        // Retrieve all pick up locations specific to the sales item that is being inquired
         sql += "SELECT * FROM PickupLocation WHERE product = ?;"
+
         placeholders = [productId, productId, inquiryId, productId, loggedInUser, loggedInUser, productId];
 
         db.query(sql, placeholders, (err, result) => {
@@ -53,10 +62,19 @@ exports.get = (req, res, next) => {
         });
     }
     else {
+
+        // Retrieve information of the sales item that is being inquired, cast sales item price to CHAR to show leading zeros in view page, and include the seller email
         sql = "SELECT SI.*, CAST(SI.price AS CHAR) AS price, RU.username AS sellerEmail FROM SalesItem SI INNER JOIN RegisteredUser RU on SI.seller = RU.sid WHERE SI.pid = ?;";
+
+        // Retrieve all sales item photos (filename) specific to the sales item that is being inquired
         sql += "SELECT fileName as photoFileName FROM SalesItemPhoto WHERE product = ?;";
-        sql += "SELECT * FROM Inquiry I INNER JOIN Message M on I.iid = M.inquiry INNER JOIN SalesItem SI on I.product = SI.pid INNER JOIN RegisteredUser RU on SI.seller = RU.sid WHERE I.product = ? AND I.inquirer = ?;";
+        
+        // Retrieve inquiry information of the sales item that is being inquired by the user that is logged in
+        sql += "SELECT * FROM Inquiry I INNER JOIN WHERE I.product = ? AND I.inquirer = ?;";
+
+        // Retrieve all pick up locations specific to the sales item that is being inquired
         sql += "SELECT * FROM PickupLocation WHERE product = ?;"
+
         placeholders = [productId, productId, productId, loggedInUser, productId];
 
         db.query(sql, placeholders, (err, result) => {
@@ -114,11 +132,17 @@ exports.post = (req, res, next) => {
     // Check if message is empty
     if (message !== "") {
         if (typeof inquiryId !== "undefined") {
+
+            // Store a new message that includes inquiry id, the student id of sender, and the message
             sql += "INSERT INTO Message (inquiry, `from`, message) VALUES (?, ?, ?);";
+
             placeholders = [inquiryId, sender, message];
         }
         else {
+
+            // Store a new inquiry that includes product id, the student id of inquirer, and the subject
             sql = "INSERT INTO Inquiry (product, inquirer, subject) VALUES (?, ?, ?);"
+            
             placeholders = [productId, sender, subject];
         }
 
@@ -138,7 +162,10 @@ exports.post = (req, res, next) => {
             else {
                 if (result.affectedRows > 0) {
                     inquiryId = result.insertId;
+
+                    // Create a new message that includes inquiry id, the student id of sender, and the message
                     sql = "INSERT INTO Message (inquiry, `from`, message) VALUES (?, ?, ?);";
+
                     placeholders = [inquiryId, sender, message];
 
                     db.query(sql, placeholders, (err, result) => {

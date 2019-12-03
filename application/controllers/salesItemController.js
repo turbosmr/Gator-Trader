@@ -3,9 +3,16 @@ const db = require('../config/db');
 // Show sales item page on GET
 exports.salesItem_get = (req, res, next) => {
     let productId = req.params.pid;
+
+    // Retrieve information of a sales item. Also, cast sales item price to CHAR to show leading zeros in view page, and include seller email.
     let sql = "SELECT SI.*, CAST(SI.price AS CHAR) AS price, RU.username AS sellerEmail FROM SalesItem SI INNER JOIN RegisteredUser RU on SI.seller = RU.sid WHERE SI.pid = ?;";
+    
+    // Retrieve all photos (filename) of a sales item
     sql += "SELECT fileName as photoFileName FROM SalesItemPhoto WHERE product = ?;";
+
+    // Retrieve all pick up locations of a sales item
     sql += "SELECT * FROM PickupLocation WHERE product = ?;"
+
     let placeholders = [productId, productId, productId];
     let objToBePassed = {};
 
@@ -45,9 +52,16 @@ exports.salesItem_get = (req, res, next) => {
 exports.edit_get = (req, res, next) => {
     let productId = req.params.pid;
     let seller = req.user.sid;
+
+    // Retrieve information of a sales item that is being sold by the logged in user
     let sql = "SELECT *, CAST(price AS CHAR) AS price FROM SalesItem WHERE pid = ? AND seller = ?;";
+
+    // Retrieve information of all class sections
     sql += "SELECT * FROM ClassSection;";
-    sql += "SELECT * FROM PickupLocation WHERE product = ?"
+
+    // Retrieve all pick up locations of a sales item
+    sql += "SELECT * FROM PickupLocation WHERE product = ?;"
+
     placeholders = [productId, seller, productId];
 
     db.query(sql, placeholders, (err, result) => {
@@ -109,12 +123,18 @@ exports.edit_post = (req, res, next) => {
 
     // Check if class material section field is empty
     if (classMaterialSection != '') {
+        
+        // Update a sales item and set status to 'Unapproved'
         sql += "UPDATE SalesItem SET category = ?, name = ?, price = ?, `condition` = ?, quantity = ?, description = ?, deliveryMethod = ?, classMaterialSection = ?, status = 1 WHERE pid = ?;";
+        
         salesItemPlaceholders = [category, productName, price, condition, quantity, description, deliveryMethod, classMaterialSection, productId];
         placeholders.push(...salesItemPlaceholders);
     }
     else {
+
+        // Update a sales item and set status to 'Unapproved'
         sql += "UPDATE SalesItem SET category = ?, name = ?, price = ?, `condition` = ?, quantity = ?, description = ?, deliveryMethod = ?, classMaterialSection = NULL, status = 1 WHERE pid = ?;";
+        
         salesItemPlaceholders = [category, productName, price, condition, quantity, description, deliveryMethod, productId];
         placeholders.push(...salesItemPlaceholders);
     }
@@ -129,7 +149,10 @@ exports.edit_post = (req, res, next) => {
         for (let i = 0; i < tempDeliveryMethod.length; i++) {
             // Make sure "shipping" is not included as a location
             if (tempDeliveryMethod[i] != "shipping") {
+
+                // Create a new pickup location that includes the product id and location
                 sql += "INSERT INTO PickupLocation (product, location) VALUES (?, ?);";
+
                 placeholders.push(productId);
                 if (tempDeliveryMethod[i] == "library") {
                     placeholders.push(1);
@@ -145,7 +168,10 @@ exports.edit_post = (req, res, next) => {
     }
     // Single pickup location
     else if (tempDeliveryMethod != "shipping") {
+
+        // Create a new pickup location that includes the product id and location
         sql += "INSERT INTO PickupLocation (product, location) VALUES (?, ?);";
+
         placeholders.push(productId);
         if (tempDeliveryMethod == "library") {
             placeholders.push(1);
@@ -160,13 +186,17 @@ exports.edit_post = (req, res, next) => {
 
     // Check if there are new photo(s) being uploaded
     if (salesItemImages.length > 0) {
+
         // First, remove existing sales item photo(s) 
         sql += "DELETE FROM SalesItemPhoto WHERE product = ?;";
         placeholders.push(productId);
 
         // Save filename of uploaded sales item photo(s)
         for (let i = 0; i < salesItemImages.length; i++) {
+
+            // Create a new sales item photo that includes product id and filename of photo
             sql += "INSERT INTO SalesItemPhoto (product, fileName) VALUES (?, ?);";
+
             placeholders.push(productId);
             placeholders.push(salesItemImages[i].filename);
         }
@@ -189,6 +219,8 @@ exports.edit_post = (req, res, next) => {
 exports.end = (req, res, next) => {
     let productId = req.params.pid;
     let seller = req.user.sid;
+
+    // Retrieve information of a sales item that is being sold by the logged in user
     let sql = "SELECT * FROM SalesItem WHERE pid = ? AND seller = ?";
 
     db.query(sql, [productId, seller], (err, result) => {
@@ -197,6 +229,8 @@ exports.end = (req, res, next) => {
         }
 
         if (result.length > 0) {
+            
+            // Update a sales item's status to 'Ended'
             sql = "UPDATE SalesItem SET status = 4 WHERE pid = ?";
 
             db.query(sql, [productId], (err, result) => {
@@ -225,6 +259,8 @@ exports.end = (req, res, next) => {
 exports.relist = (req, res, next) => {
     let productId = req.params.pid;
     let seller = req.user.sid;
+
+    // Retrieve information of a sales item that is being sold by the logged in user
     let sql = "SELECT * FROM SalesItem WHERE pid = ? AND seller = ?";
 
     db.query(sql, [productId, seller], (err, result) => {
@@ -233,6 +269,8 @@ exports.relist = (req, res, next) => {
         }
 
         if (result.length > 0) {
+
+            // Update a sales item's status to 'Unapproved'
             sql = "UPDATE SalesItem SET status = 1 WHERE pid = ?";
 
             db.query(sql, [productId], (err, result) => {

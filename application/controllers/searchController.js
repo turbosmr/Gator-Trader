@@ -52,9 +52,11 @@ exports.get = (req, res, next) => {
     sql += " LIMIT ? OFFSET ?;";
     placeholders.push(pageLimit, offset);
 
-    // Retrieve selected category name
     if (typeof searchCriteria.selectedCategoryVal !== 'undefined') {
+
+        // Retrieve information of all sales item categories
         sql += "SELECT name FROM Category WHERE cid = ?;";
+
         placeholders.push(searchCriteria.selectedCategoryVal);
     }
 
@@ -87,7 +89,10 @@ exports.get = (req, res, next) => {
 // Handle rendering of search suggestions on GET
 // Author @Osbaldo Martinez
 exports.suggestions = (req, res, next) => {
+
+    // Retrieve information of all active sales items
     let sql = "SELECT * FROM SalesItem WHERE (name LIKE ? OR description LIKE ?) AND status = 'Active'";
+    
     let keyword = req.query.key;
     let product = [];
 

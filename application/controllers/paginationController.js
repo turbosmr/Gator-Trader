@@ -12,7 +12,10 @@ exports.search_results = (limit) => {
         let min, max = 0;
         let conditionFilter = req.query.cond;
         let sortF = (req.query.sort) ? req.query.sort : "ltoh";
+
+        // Retrieve information of all approved sales items, and include seller email, first sales item photo (filename). Also, cast sales item price to CHAR to show leading zeros in view page.
         let sql = "SELECT SI.*, CAST(SI.price AS CHAR) AS newPrice, RU.username AS sellerEmail, SIP.fileName AS photoFileName FROM SalesItem SI INNER JOIN RegisteredUser RU on SI.seller = RU.sid LEFT JOIN SalesItemPhoto SIP on SIP.product = (SELECT product FROM SalesItemPhoto SIP2 WHERE SIP2.product = SI.pid LIMIT 1) GROUP BY SI.pid, SI.status, SI.price HAVING SI.status = 'Active'";
+        
         let placeholders = [];
 
         // Set min, max for price filter

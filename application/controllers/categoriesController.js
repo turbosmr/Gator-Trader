@@ -1,5 +1,7 @@
 const db = require('../config/db');
 let category = [];
+
+// Retrieve information of all sales item categories
 let sql = "SELECT * FROM Category";
 
 db.query(sql, (err, result) => {
