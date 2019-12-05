@@ -57,7 +57,7 @@ exports.sell_post = (req, res, next) => {
         }
     }
 
-    // Intepret and store newline
+    // Intepret and store newline for description
     description = description.replace(/\r\n|\r|\n/g, "<br>");
 
     // Check if class material section field is empty
@@ -65,7 +65,7 @@ exports.sell_post = (req, res, next) => {
 
         // Create a new sales item
         sql += "INSERT INTO SalesItem (pid, seller, category, name, price, `condition`, quantity, description, deliveryMethod, classMaterialSection) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
-        
+
         salesItemPlaceholders = [productId, seller, category, productName, price, condition, quantity, description, deliveryMethod, classMaterialSection];
         placeholders.push(...salesItemPlaceholders);
     }
@@ -73,7 +73,7 @@ exports.sell_post = (req, res, next) => {
 
         // Create a new sales item
         sql += "INSERT INTO SalesItem (pid, seller, category, name, price, `condition`, quantity, description, deliveryMethod, classMaterialSection) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NULL);";
-        
+
         salesItemPlaceholders = [productId, seller, category, productName, price, condition, quantity, description, deliveryMethod];
         placeholders.push(...salesItemPlaceholders);
     }
@@ -81,7 +81,9 @@ exports.sell_post = (req, res, next) => {
     // Store pickup location in DB
     // Pickup only (multiple locations) or shipping & pickup
     if (Array.isArray(tempDeliveryMethod)) {
+
         for (let i = 0; i < tempDeliveryMethod.length; i++) {
+
             // Make sure "shipping" is not included as a location
             if (tempDeliveryMethod[i] != "shipping") {
 
@@ -89,6 +91,7 @@ exports.sell_post = (req, res, next) => {
                 sql += "INSERT INTO PickupLocation (product, location) VALUES (?, ?);";
 
                 placeholders.push(productId);
+
                 if (tempDeliveryMethod[i] == "library") {
                     placeholders.push(1);
                 }
@@ -104,18 +107,23 @@ exports.sell_post = (req, res, next) => {
     // Single pickup location
     else {
 
-        // Create a new pickup location for a sales item
-        sql += "INSERT INTO PickupLocation (product, location) VALUES (?, ?);";
+        // Make sure "shipping" is not included as a location
+        if (tempDeliveryMethod != "shipping") {
 
-        placeholders.push(productId);
-        if (tempDeliveryMethod == "library") {
-            placeholders.push(1);
-        }
-        else if (tempDeliveryMethod == "student-center") {
-            placeholders.push(2);
-        }
-        else {
-            placeholders.push(3);
+            // Create a new pickup location for a sales item
+            sql += "INSERT INTO PickupLocation (product, location) VALUES (?, ?);";
+
+            placeholders.push(productId);
+
+            if (tempDeliveryMethod == "library") {
+                placeholders.push(1);
+            }
+            else if (tempDeliveryMethod == "student-center") {
+                placeholders.push(2);
+            }
+            else {
+                placeholders.push(3);
+            }
         }
     }
 
