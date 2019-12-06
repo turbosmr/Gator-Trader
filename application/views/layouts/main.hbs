@@ -2,9 +2,10 @@
 <html lang="en" class="h-100">
 
 <head>
-    <title>SFSU - The Official Gator Trader</title>
+    <title>SFSU - CSC 648 - Gator Trader</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/images/main/GatorTraderLogo2.png" type="image/png" sizes="">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <link rel="stylesheet" href="/stylesheets/main.css">
@@ -255,7 +256,7 @@
             <div class="scrollable-categories">
                 {{#each category}}
                 <a href="/search?c={{this.cid}}" {{#if (eq this.cid @root.searchCriteria.selectedCategoryVal)}}
-                    style="color: #fde21c; text-decoration: underline;"{{/if}}>{{this.name}}</a>&nbsp;&nbsp;
+                    style="color: #fde21c; text-decoration: underline;" {{/if}}>{{this.name}}</a>&nbsp;&nbsp;
                 {{/each}}
             </div>
         </nav>
