@@ -6,7 +6,7 @@ const db = require('./db');
 module.exports = () => {
     passport.use('administrator-login', new LocalStrategy(
         (username, password, done) => {
-            db.query("SELECT * FROM Administrator WHERE username = ? LIMIT 1", username, (error, result) => {
+            db.query("SELECT * FROM Administrators WHERE username = ? LIMIT 1", username, (error, result) => {
                 if (error) return done(error);
                 if (result.length == 0) {
                     return done(null, false, { message: 'Username and/or password is incorrect' });
@@ -30,7 +30,7 @@ module.exports = () => {
     });
 
     passport.deserializeUser((id, done) => {
-        db.query("SELECT * FROM Administrator WHERE aid = ?", id, (err, result) => {
+        db.query("SELECT * FROM Administrators WHERE aid = ?", id, (err, result) => {
             if (err) throw err;
 
             return done(null, result[0]);
