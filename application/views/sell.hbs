@@ -37,27 +37,27 @@
                 </div>
 
                 <div class="mb-4">
-                    <h5>Is this a course specific material?</h5>
+                    <h5>Is this a class specific material?</h5>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" class="custom-control-input" id="courseSpecificMaterialYes"
-                            name="isCourseSpecificMaterial" value="courseSpecificMaterialYes"
+                        <input type="radio" class="custom-control-input" id="classSpecificMaterialYes"
+                            name="isClassSpecificMaterial" value="classSpecificMaterialYes"
                             {{#if salesItem}}{{#if salesItem.classMaterialSection}}checked{{/if}}{{/if}}>
-                        <label class="custom-control-label" for="courseSpecificMaterialYes">Yes</label>
+                        <label class="custom-control-label" for="classSpecificMaterialYes">Yes</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" class="custom-control-input" id="courseSpecificMaterialNo"
-                            name="isCourseSpecificMaterial" value="courseSpecificMaterialNo"
+                        <input type="radio" class="custom-control-input" id="classSpecificMaterialNo"
+                            name="isClassSpecificMaterial" value="classSpecificMaterialNo"
                             {{#if salesItem}}{{#if (eq salesItem.classMaterialSection null)}}checked{{/if}}{{/if}}>
-                        <label class="custom-control-label" for="courseSpecificMaterialNo">No</label>
+                        <label class="custom-control-label" for="classSpecificMaterialNo">No</label>
                     </div>
                 </div>
 
                 <div class="mb-4" id="classMaterialSection"
                     {{#if (eq salesItem.classMaterialSection null)}}style="display: none;" {{/if}}>
-                    <h5>Course</h5>
+                    <h5>Class Section</h5>
                     <select name="classMaterialSection">
                         <option value="">-</option>
-                        {{#each course}}
+                        {{#each classSection}}
                         <option value="{{this.csid}}" {{#if (eq this.csid @root.salesItem.classMaterialSection)}}
                             selected {{/if}}>
                             {{this.name}}
@@ -117,7 +117,7 @@
                                 {{#each pickupLocation}}{{#if (eq this.location "Wellness Center")}}checked{{/if}}{{/each}}>
                             <label class="custom-control-label" for="wellness-center">Wellness Center (C)</label>
                         </div>
-                        <div class="pickup_map" id="map"></div>
+                        <div class="pickup_map" id="map" style="display: none;"></div>
                     </div>
                 </div>
 
@@ -159,11 +159,102 @@
 <script type="text/javascript" src="/js/sell.js"></script>
 
 <script>
-    var locations = [
-        ['Library', 37.721375, -122.478172, 'A'],
-        ['Student Center', 37.722617, -122.478602, 'B'],
-        ['Wellness Center', 37.723000, -122.484177, 'C']
-    ];
+
+    var locations = [];
+
+
+    var checkboxLib = document.querySelector("#library");
+    var checkboxSC = document.querySelector("#student-center");
+    var checkboxWC = document.querySelector("#wellness-center");
+
+checkboxLib.addEventListener( 'change', function() {
+    var m = document.querySelector("#map");
+
+    if(this.checked) {
+        m.style.display="block";
+        locations.push(['Library', 37.721375, -122.478172, 'A']); 
+        initMap();
+    }else if( checkboxSC.checked ||  checkboxWC.checked){
+         m.style.display="block";
+        initMap();
+    }
+    else {
+        m.style.display="none";
+    }
+
+    if(!this.checked){
+        let value = "Library";
+        for(let i=0; i<locations.length; i++){
+            var index = locations[i][0].toString();
+
+            let check = index.localeCompare(value);
+            if(check==0){
+               var x = locations.splice(i, 1);
+            }
+        }
+         initMap();
+    }
+
+});
+
+checkboxSC.addEventListener( 'change', function() {
+    var m = document.querySelector("#map");
+    
+    if(this.checked) {
+        m.style.display="block";
+        locations.push(['Student Center', 37.722617, -122.478602, 'B']);
+        initMap();
+    }else if(checkboxLib.checked ||  checkboxWC.checked){
+         m.style.display="block";
+        initMap();
+    }
+     else {
+        m.style.display="none";
+    }
+
+    if(!this.checked){
+        let value = "Student Center";
+        for(let i=0; i<locations.length; i++){
+            var index = locations[i][0].toString();
+
+            let check = index.localeCompare(value);
+            if(check==0){
+               var x = locations.splice(i, 1);
+            }
+        }
+         initMap();
+    }
+
+    
+});
+
+checkboxWC.addEventListener( 'change', function() {
+    var m = document.querySelector("#map");
+
+    if(this.checked) {
+        m.style.display="block";
+        locations.push(['Wellness Center', 37.723000, -122.484177, 'C']);
+        initMap();
+    }else if(checkboxSC.checked ||  checkboxLib.checked){
+         m.style.display="block";
+        initMap();
+    } 
+    else {
+        m.style.display="none";
+    }
+   if(!this.checked){
+        let value = "Wellness Center";
+        for(let i=0; i<locations.length; i++){
+            var index = locations[i][0].toString();
+
+            let check = index.localeCompare(value);
+            if(check==0){
+                var x = locations.splice(i, 1);
+            }
+        }
+         initMap();
+    }
+});
 
     // Initialize and add the map
     function initMap() {

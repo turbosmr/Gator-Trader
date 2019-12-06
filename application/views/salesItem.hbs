@@ -81,7 +81,7 @@
             </div>
             <div class="col-lg-3">
                 {{#if data.pickupLocation}}
-                <div class="mb-2">
+                <div class="mb-2" id="location_pin">
                     <h4>Pickup Location(s)</h4>
                     {{#each data.pickupLocation}}
                     <li>{{this.location}}</li>
@@ -131,11 +131,33 @@
 </div>
 
 <script>
-    var locations = [
+    /*var locations = [
         ['Library', 37.721375, -122.478172, 'A'],
         ['Student Center', 37.722617, -122.478602, 'B'],
         ['Wellness Center', 37.723000, -122.484177, 'C']
-    ];
+    ];*/
+
+
+var locations = [];
+var lis = document.getElementById("location_pin").getElementsByTagName("li");
+let value1 = "Wellness Center";
+let value2 = "Library";
+let value3 = "Student Center";
+for(let i=0; i<lis.length; i++){
+    console.log(lis[i].innerHTML);
+    if(value1.localeCompare(lis[i].innerHTML)==0){
+        locations.push(['Wellness Center', 37.723000, -122.484177, 'C']);
+            console.log("WC");
+    }
+     if(value2.localeCompare(lis[i].innerHTML)==0){
+        locations.push(['Library', 37.721375, -122.478172, 'A']); 
+            console.log("LIB");
+    }
+     if(value3.localeCompare(lis[i].innerHTML)==0){
+        locations.push(['Student Center', 37.722617, -122.478602, 'B']);
+            console.log("SC");
+    }
+}
 
     // Initialize and add the map
     function initMap() {

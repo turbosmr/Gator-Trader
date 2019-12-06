@@ -29,6 +29,10 @@
 	display: none;
 }
 
+.results_sort_small {
+	display: none;
+}
+
 /* General  */
 
 @media screen and (max-width: 992px) {
@@ -55,6 +59,14 @@
 	margin: 0 !important;
 }
 
+@media screen and (max-width: 473px) {
+	.results_sort_small {
+		display: inline-block;
+	}
+	.results_sort_large {
+		display: none;
+	}
+}
 /* ----------------------------------------------------------------- */
 
 /* Side Bar Styling */
@@ -203,7 +215,8 @@
 	margin-top: 20px;
 }
 
-.page-item, .page-item a {
+.page-item,
+.page-item a {
 	color: black;
 }
 

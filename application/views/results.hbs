@@ -28,7 +28,9 @@
         {{{resultsInfo offset pageLimit totalProducts keyword}}}
     </div>
     <div class="results-sort-button-container">
-        <button type="button" class="btn results-sort-button dropdown-toggle" data-toggle="dropdown"
+
+        
+        <button type="button" class="btn results-sort-button dropdown-toggle results_sort_large" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             Sort by:
             {{#if (eq searchCriteria.sortF "ltoh")}}
@@ -41,6 +43,17 @@
             Alphabetically: A-Z
             {{/if}}
         </button>
+
+         <button type="button" class="btn results-sort-button dropdown-toggle results_sort_small" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {{#if (eq searchCriteria.sortF "ltoh")}}
+            {{/if}}
+            {{#if (eq searchCriteria.sortF "htol")}}
+            {{/if}}
+            {{#if (eq searchCriteria.sortF "atoz")}}
+            {{/if}}
+        </button>
+
         <div class="dropdown-menu dropdown-menu-right">
             <a class="dropdown-item" href="#" id="ltoh">Price: Low to High</a>
             <a class="dropdown-item" href="#" id="htol">Price: High to Low</a>
