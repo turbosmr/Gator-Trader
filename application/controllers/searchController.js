@@ -55,7 +55,7 @@ exports.get = (req, res, next) => {
     if (typeof searchCriteria.selectedCategoryVal !== 'undefined') {
 
         // Retrieve information of all sales item categories
-        sql += "SELECT name FROM Category WHERE cid = ?;";
+        sql += "SELECT name FROM Categories WHERE cid = ?;";
 
         placeholders.push(searchCriteria.selectedCategoryVal);
     }
@@ -91,7 +91,7 @@ exports.get = (req, res, next) => {
 exports.suggestions = (req, res, next) => {
 
     // Retrieve information of all active sales items
-    let sql = "SELECT * FROM SalesItem WHERE (name LIKE ? OR description LIKE ?) AND status = 'Active'";
+    let sql = "SELECT * FROM SalesItems WHERE (name LIKE ? OR description LIKE ?) AND status = 'Active'";
     
     let keyword = req.query.key;
     let product = [];

@@ -2,7 +2,7 @@ const db = require('../config/db');
 let category = [];
 
 // Retrieve information of all sales item categories
-let sql = "SELECT * FROM Category";
+let sql = "SELECT * FROM Categories";
 
 db.query(sql, (err, result) => {
     if (err) throw err;

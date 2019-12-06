@@ -5,13 +5,13 @@ exports.salesItem_get = (req, res, next) => {
     let productId = req.params.pid;
 
     // Retrieve information of a sales item. Also, cast sales item price to CHAR to show leading zeros in view page, and include seller email.
-    let sql = "SELECT SI.*, CAST(SI.price AS CHAR) AS price, RU.username AS sellerEmail FROM SalesItem SI INNER JOIN RegisteredUser RU on SI.seller = RU.sid WHERE SI.pid = ?;";
+    let sql = "SELECT SI.*, CAST(SI.price AS CHAR) AS price, S.username AS sellerEmail FROM SalesItems SI INNER JOIN Students S on SI.seller = S.sid WHERE SI.pid = ?;";
     
     // Retrieve all photos (filename) of a sales item
-    sql += "SELECT fileName as photoFileName FROM SalesItemPhoto WHERE product = ?;";
+    sql += "SELECT fileName as photoFileName FROM SalesItemPhotos WHERE product = ?;";
 
     // Retrieve all pick up locations of a sales item
-    sql += "SELECT * FROM PickupLocation WHERE product = ?;"
+    sql += "SELECT * FROM PickupLocations WHERE product = ?;"
 
     let placeholders = [productId, productId, productId];
     let objToBePassed = {};
@@ -27,7 +27,7 @@ exports.salesItem_get = (req, res, next) => {
             objToBePassed.salesItemPhoto = result[1];
             objToBePassed.pickupLocation = result[2];
 
-            // Check if sales item belongs to registered user
+            // Check if sales item belongs to student that is currently logged in
             if (req.isAuthenticated() && result[0][0].seller == req.user.sid) {
                 objToBePassed.isSeller = true;
             }
@@ -54,13 +54,13 @@ exports.edit_get = (req, res, next) => {
     let seller = req.user.sid;
 
     // Retrieve information of a sales item that is being sold by the logged in user
-    let sql = "SELECT *, CAST(price AS CHAR) AS price FROM SalesItem WHERE pid = ? AND seller = ?;";
+    let sql = "SELECT *, CAST(price AS CHAR) AS price FROM SalesItems WHERE pid = ? AND seller = ?;";
 
-    // Retrieve information of all class sections
-    sql += "SELECT * FROM ClassSection;";
+    // Retrieve information of all courses
+    sql += "SELECT * FROM Courses;";
 
     // Retrieve all pick up locations of a sales item
-    sql += "SELECT * FROM PickupLocation WHERE product = ?;"
+    sql += "SELECT * FROM PickupLocations WHERE product = ?;"
 
     placeholders = [productId, seller, productId];
 
@@ -78,7 +78,7 @@ exports.edit_get = (req, res, next) => {
 
             res.render('sell', {
                 salesItem: result[0][0],
-                classSection: result[1],
+                course: result[1],
                 pickupLocation: result[2],
                 reviseMode: true
             });
@@ -125,7 +125,7 @@ exports.edit_post = (req, res, next) => {
     if (classMaterialSection != '') {
         
         // Update a sales item and set status to 'Unapproved'
-        sql += "UPDATE SalesItem SET category = ?, name = ?, price = ?, `condition` = ?, quantity = ?, description = ?, deliveryMethod = ?, classMaterialSection = ?, status = 1 WHERE pid = ?;";
+        sql += "UPDATE SalesItems SET category = ?, name = ?, price = ?, `condition` = ?, quantity = ?, description = ?, deliveryMethod = ?, classMaterialSection = ?, status = 1 WHERE pid = ?;";
         
         salesItemPlaceholders = [category, productName, price, condition, quantity, description, deliveryMethod, classMaterialSection, productId];
         placeholders.push(...salesItemPlaceholders);
@@ -133,7 +133,7 @@ exports.edit_post = (req, res, next) => {
     else {
 
         // Update a sales item and set status to 'Unapproved'
-        sql += "UPDATE SalesItem SET category = ?, name = ?, price = ?, `condition` = ?, quantity = ?, description = ?, deliveryMethod = ?, classMaterialSection = NULL, status = 1 WHERE pid = ?;";
+        sql += "UPDATE SalesItems SET category = ?, name = ?, price = ?, `condition` = ?, quantity = ?, description = ?, deliveryMethod = ?, classMaterialSection = NULL, status = 1 WHERE pid = ?;";
         
         salesItemPlaceholders = [category, productName, price, condition, quantity, description, deliveryMethod, productId];
         placeholders.push(...salesItemPlaceholders);
@@ -141,7 +141,7 @@ exports.edit_post = (req, res, next) => {
 
     // Store pickup location in DB
     // First remove existing pickup locations
-    sql += "DELETE FROM PickupLocation WHERE product = ?;";
+    sql += "DELETE FROM PickupLocations WHERE product = ?;";
     placeholders.push(productId);
 
     // Pickup only (multiple locations) or shipping & pickup
@@ -151,7 +151,7 @@ exports.edit_post = (req, res, next) => {
             if (tempDeliveryMethod[i] != "shipping") {
 
                 // Create a new pickup location that includes the product id and location
-                sql += "INSERT INTO PickupLocation (product, location) VALUES (?, ?);";
+                sql += "INSERT INTO PickupLocations (product, location) VALUES (?, ?);";
 
                 placeholders.push(productId);
                 if (tempDeliveryMethod[i] == "library") {
@@ -170,7 +170,7 @@ exports.edit_post = (req, res, next) => {
     else if (tempDeliveryMethod != "shipping") {
 
         // Create a new pickup location that includes the product id and location
-        sql += "INSERT INTO PickupLocation (product, location) VALUES (?, ?);";
+        sql += "INSERT INTO PickupLocations (product, location) VALUES (?, ?);";
 
         placeholders.push(productId);
         if (tempDeliveryMethod == "library") {
@@ -188,14 +188,14 @@ exports.edit_post = (req, res, next) => {
     if (salesItemImages.length > 0) {
 
         // First, remove existing sales item photo(s) 
-        sql += "DELETE FROM SalesItemPhoto WHERE product = ?;";
+        sql += "DELETE FROM SalesItemPhotos WHERE product = ?;";
         placeholders.push(productId);
 
         // Save filename of uploaded sales item photo(s)
         for (let i = 0; i < salesItemImages.length; i++) {
 
             // Create a new sales item photo that includes product id and filename of photo
-            sql += "INSERT INTO SalesItemPhoto (product, fileName) VALUES (?, ?);";
+            sql += "INSERT INTO SalesItemPhotos (product, fileName) VALUES (?, ?);";
 
             placeholders.push(productId);
             placeholders.push(salesItemImages[i].filename);
@@ -221,7 +221,7 @@ exports.end = (req, res, next) => {
     let seller = req.user.sid;
 
     // Retrieve information of a sales item that is being sold by the logged in user
-    let sql = "SELECT * FROM SalesItem WHERE pid = ? AND seller = ?";
+    let sql = "SELECT * FROM SalesItems WHERE pid = ? AND seller = ?";
 
     db.query(sql, [productId, seller], (err, result) => {
         if (err) {
@@ -231,7 +231,7 @@ exports.end = (req, res, next) => {
         if (result.length > 0) {
             
             // Update a sales item's status to 'Ended'
-            sql = "UPDATE SalesItem SET status = 4 WHERE pid = ?";
+            sql = "UPDATE SalesItems SET status = 4 WHERE pid = ?";
 
             db.query(sql, [productId], (err, result) => {
                 if (err) {
@@ -261,7 +261,7 @@ exports.relist = (req, res, next) => {
     let seller = req.user.sid;
 
     // Retrieve information of a sales item that is being sold by the logged in user
-    let sql = "SELECT * FROM SalesItem WHERE pid = ? AND seller = ?";
+    let sql = "SELECT * FROM SalesItems WHERE pid = ? AND seller = ?";
 
     db.query(sql, [productId, seller], (err, result) => {
         if (err) {
@@ -271,7 +271,7 @@ exports.relist = (req, res, next) => {
         if (result.length > 0) {
 
             // Update a sales item's status to 'Unapproved'
-            sql = "UPDATE SalesItem SET status = 1 WHERE pid = ?";
+            sql = "UPDATE SalesItems SET status = 1 WHERE pid = ?";
 
             db.query(sql, [productId], (err, result) => {
                 if (err) {

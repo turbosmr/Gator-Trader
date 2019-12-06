@@ -31,9 +31,9 @@ $(document).ready(() => {
 
     /********* End of delivery method checkbox check *********/
 
-    // If sales item is a class specific material, show class section dropdown menu, else hide
-    $('input[name=isClassSpecificMaterial]').click(function () {
-        if (this.id == "classSpecificMaterialYes") {
+    // If sales item is a course specific material, show courses dropdown menu, else hide
+    $('input[name=isCourseSpecificMaterial]').click(function () {
+        if (this.id == "courseSpecificMaterialYes") {
             $("#classMaterialSection").show('slow');
             $("select[name='classMaterialSection']").prop('required', true);
         } else {

@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/stylesheets/results.css">
     <link rel="stylesheet" href="/stylesheets/searchSuggestion.css">
     <link rel="stylesheet" href="/stylesheets/home.css">
-    <link rel="stylesheet" href="/stylesheets/registeredUserDashboard.css">
+    <link rel="stylesheet" href="/stylesheets/studentDashboard.css">
     <link rel="stylesheet" href="/stylesheets/salesItem.css">
     <link rel="stylesheet" href="/stylesheets/adminDashboard.css">
     <link rel="stylesheet" href="/stylesheets/error.css">
@@ -169,7 +169,7 @@
                                                 class="form-control form-control form-control-borderless typeahead tt-query"
                                                 autocomplete="off" spellcheck="false"
                                                 {{#if (eq "classMaterials" searchCriteria.selectedCategoryVal)}}
-                                                placeholder="Please enter the class section (ex: CSC 648)" {{else}}
+                                                placeholder="Please enter a course (ex: CSC 648)" {{else}}
                                                 placeholder="What are you looking for?" {{/if}}
                                                 value="{{searchCriteria.keyword}}" id="searchKeyword" maxlength="40">
                                         </div>

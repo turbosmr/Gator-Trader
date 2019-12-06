@@ -3,7 +3,7 @@ const passport = require('passport');
 const emailValidator = require('../util/email-validator');
 const bcrypt = require('bcryptjs');
 
-// Handle showing registered user login page on GET
+// Handle showing student login page on GET
 exports.login_get = (req, res, next) => {
     let redirectUrl = req.query.redirectUrl;
 
@@ -11,12 +11,12 @@ exports.login_get = (req, res, next) => {
         redirectUrl = req.get('Referrer');
     }
 
-    res.render('registeredUserLogin', {
+    res.render('studentLogin', {
         redirectUrl: redirectUrl
     });
 }
 
-// Handle registered user login authentication via Passport API on POST
+// Handle student login authentication via Passport API on POST
 exports.login_post = (req, res, next) => {
     let { terms } = req.body;
     let redirectUrl = req.query.redirectUrl;
@@ -28,13 +28,13 @@ exports.login_post = (req, res, next) => {
 
     // Check if terms and conditions is checked
     if (!terms) {
-        res.render('registeredUserLogin', { 
+        res.render('studentLogin', { 
             message: 'Please indicate that you agree to the terms and conditions.' 
         });
     }
     // Proceed with login authentication
     else {
-        passport.authenticate('registered-user-login', {
+        passport.authenticate('student-login', {
             successRedirect: redirectUrl,
             failureRedirect: '/user/login',
             failureFlash: true,
@@ -43,12 +43,12 @@ exports.login_post = (req, res, next) => {
     }
 }
 
-// Handle showing registration page for registered user on GET
+// Handle showing registration page for student on GET
 exports.register_get = (req, res, next) => {
     res.render('register');
 }
 
-// Handle registration for registered user on POST
+// Handle registration for student on POST
 exports.register_post = (req, res, next) => {
     let { username, sid, password, confirmPassword, terms, captcha } = req.body;
     let regError = [];
@@ -101,12 +101,12 @@ exports.register_post = (req, res, next) => {
     // Input validation passed
     else {
         // Check if username already exists
-        db.query("SELECT * FROM RegisteredUser WHERE sid = ? OR username = ?", [sid, username], (err, result) => {
+        db.query("SELECT * FROM Students WHERE sid = ? OR username = ?", [sid, username], (err, result) => {
             if (err) throw err;
 
             if (result.length > 0) {
                 regError.push({ message: 'Such user already exists. Please log in.' });
-                res.render('registeredUserLogin', {
+                res.render('studentLogin', {
                     regError
                 });
             }
@@ -121,7 +121,7 @@ exports.register_post = (req, res, next) => {
                         password = hash;
 
                         // Insert new user into database
-                        db.query("INSERT INTO RegisteredUser (sid, username, password) VALUES (?, ?, ?)", [sid, username, password], (error, result) => {
+                        db.query("INSERT INTO Students (sid, username, password) VALUES (?, ?, ?)", [sid, username, password], (error, result) => {
                             if (err) throw err;
 
                             req.flash('success', 'Successfully registered, please login.');
@@ -134,26 +134,26 @@ exports.register_post = (req, res, next) => {
     }
 }
 
-// Handle registered user logout on GET
+// Handle student logout on GET
 exports.logout = (req, res, next) => {
     req.logout();
     req.flash('success', 'You are logged out');
     res.redirect('/');
 }
 
-// Display registered user's dashboard page on GET
-// Retrieve list of sales item listed by the registered user that is logged in
+// Display student's dashboard page on GET
+// Retrieve list of sales item listed by the student that is logged in
 // Retrieve list of inquiries of their own items and other items
 exports.dashboard = (req, res, next) => {
     let loggedInUser = req.user.sid;
     let product = [];
     let inquiry = [];
 
-    // Retrieve pid, name, price, status, and date created of all sales items that are sold by the user that is logged in. Also, cast sales item price to CHAR to show leading zeros in view page.
-    let sql = "SELECT SI.pid AS pid, SI.name AS name, CAST(SI.price AS CHAR) AS price, SI.status AS status, DATE_FORMAT(convert_tz(SI.submittedAt,@@session.time_zone,'-08:00'), '%m-%d-%Y %h:%i %p') AS dateCreated FROM SalesItem SI WHERE SI.seller = ? ORDER BY SI.submittedAt DESC;";
+    // Retrieve pid, name, price, status, and date created of all sales items that are sold by the user that is logged in, and sort it by most recently created. Also, cast sales item price to CHAR to show leading zeros in view page.
+    let sql = "SELECT SI.pid AS pid, SI.name AS name, CAST(SI.price AS CHAR) AS price, SI.status AS status, DATE_FORMAT(convert_tz(SI.submittedAt,@@session.time_zone,'-08:00'), '%m-%d-%Y %h:%i %p') AS dateCreated FROM SalesItems SI WHERE SI.seller = ? ORDER BY SI.submittedAt DESC;";
     
     // Retrieve information of all inquiries of all sales items that the logged in user is inquiring about or is selling and sort it by last received
-    sql += "SELECT SI.pid AS pid, SI.name AS productName, RU2.sid AS messageFromSid, RU2.username AS messageFromEmail, M.message AS lastMessage, DATE_FORMAT(convert_tz(MAX(M.time),@@session.time_zone,'-08:00'), '%m-%d-%Y %h:%i %p') AS time, I.iid AS inquiryId FROM Message M INNER JOIN Inquiry I on M.inquiry = I.iid INNER JOIN SalesItem SI on I.product = SI.pid INNER JOIN RegisteredUser RU on SI.seller = RU.sid INNER JOIN RegisteredUser RU2 on M.from = RU2.sid WHERE I.inquirer = ? OR SI.seller = ? GROUP BY productName ORDER BY MAX(M.time) DESC;";
+    sql += "SELECT SI.pid AS pid, SI.name AS productName, S2.sid AS messageFromSid, S2.username AS messageFromEmail, M.message AS lastMessage, DATE_FORMAT(convert_tz(MAX(M.time),@@session.time_zone,'-08:00'), '%m-%d-%Y %h:%i %p') AS time, I.iid AS inquiryId FROM Messages M INNER JOIN Inquiries I on M.inquiry = I.iid INNER JOIN SalesItems SI on I.product = SI.pid INNER JOIN Students S on SI.seller = S.sid INNER JOIN Students S2 on M.from = S2.sid WHERE I.inquirer = ? OR SI.seller = ? GROUP BY productName ORDER BY MAX(M.time) DESC;";
     
     let placeholders = [loggedInUser, loggedInUser, loggedInUser];
 
@@ -172,7 +172,7 @@ exports.dashboard = (req, res, next) => {
             inquiry.push(inquiries[i]);
         }
 
-        res.render('registeredUserDashboard', { 
+        res.render('studentDashboard', { 
             product: product,
             inquiry: inquiry
         });

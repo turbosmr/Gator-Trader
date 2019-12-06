@@ -4,10 +4,10 @@ const uuidv1 = require('uuid/v1');
 // Handle showing sell page on GET
 exports.sell_get = (req, res, next) => {
 
-    // Retrieve information of all class sections
-    let sql = "SELECT * FROM ClassSection";
+    // Retrieve information of all courses
+    let sql = "SELECT * FROM Courses";
 
-    let classSection = [];
+    let course = [];
 
     db.query(sql, (err, result) => {
         if (err) {
@@ -15,11 +15,11 @@ exports.sell_get = (req, res, next) => {
         }
 
         for (let i = 0; i < result.length; i++) {
-            classSection.push(result[i]);
+            course.push(result[i]);
         }
 
         res.render('sell', {
-            classSection: classSection
+            course: course
         });
     });
 }
@@ -64,7 +64,7 @@ exports.sell_post = (req, res, next) => {
     if (classMaterialSection != '') {
 
         // Create a new sales item
-        sql += "INSERT INTO SalesItem (pid, seller, category, name, price, `condition`, quantity, description, deliveryMethod, classMaterialSection) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        sql += "INSERT INTO SalesItems (pid, seller, category, name, price, `condition`, quantity, description, deliveryMethod, classMaterialSection) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
         salesItemPlaceholders = [productId, seller, category, productName, price, condition, quantity, description, deliveryMethod, classMaterialSection];
         placeholders.push(...salesItemPlaceholders);
@@ -72,7 +72,7 @@ exports.sell_post = (req, res, next) => {
     else {
 
         // Create a new sales item
-        sql += "INSERT INTO SalesItem (pid, seller, category, name, price, `condition`, quantity, description, deliveryMethod, classMaterialSection) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NULL);";
+        sql += "INSERT INTO SalesItems (pid, seller, category, name, price, `condition`, quantity, description, deliveryMethod, classMaterialSection) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NULL);";
 
         salesItemPlaceholders = [productId, seller, category, productName, price, condition, quantity, description, deliveryMethod];
         placeholders.push(...salesItemPlaceholders);
@@ -88,7 +88,7 @@ exports.sell_post = (req, res, next) => {
             if (tempDeliveryMethod[i] != "shipping") {
 
                 // Create a new pickup location for a sales item
-                sql += "INSERT INTO PickupLocation (product, location) VALUES (?, ?);";
+                sql += "INSERT INTO PickupLocations (product, location) VALUES (?, ?);";
 
                 placeholders.push(productId);
 
@@ -111,7 +111,7 @@ exports.sell_post = (req, res, next) => {
         if (tempDeliveryMethod != "shipping") {
 
             // Create a new pickup location for a sales item
-            sql += "INSERT INTO PickupLocation (product, location) VALUES (?, ?);";
+            sql += "INSERT INTO PickupLocations (product, location) VALUES (?, ?);";
 
             placeholders.push(productId);
 
@@ -131,7 +131,7 @@ exports.sell_post = (req, res, next) => {
     for (let i = 0; i < salesItemImages.length; i++) {
 
         // Create a new sales item photos (filename) for a sales item
-        sql += "INSERT INTO SalesItemPhoto (product, fileName) VALUES (?, ?);";
+        sql += "INSERT INTO SalesItemPhotos (product, fileName) VALUES (?, ?);";
         placeholders.push(productId);
         placeholders.push(salesItemImages[i].filename);
     }
