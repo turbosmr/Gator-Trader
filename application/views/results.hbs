@@ -165,11 +165,11 @@
 
     {{else}}
     {{#if searchCriteria.keyword}}
-    <div class="container error-template my-4">
+    <div class="container-fluid error-template my-4">
         <div class="row">
-            <div class="col-7 col-lg-6 mx-auto">
+            <div class="col-auto col-lg-auto mx-auto">
                 <div style="font-size: 3vw;">
-                    <b>No results for {{searchCriteria.keyword}}.</b>
+                    <b>Sorry, we couldn't find any items matching {{searchCriteria.keyword}}.</b>
                 </div>
                 <div style="font-size: 2vw;">
                     Try checking your spelling or use more general terms
@@ -183,12 +183,11 @@
     </div>
     {{else}}
     {{#if searchCriteria.selectedCategoryName}}
-
-    <div class="container error-template my-4">
+    <div class="container-fluid error-template my-4">
         <div class="row">
             <div class="col-auto col-lg-auto mx-auto">
                 <div style="font-size: 3vw;">
-                    <b>No results for category, {{searchCriteria.selectedCategoryName}}.</b>
+                    <b>Sorry, there are no such items under category, {{searchCriteria.selectedCategoryName}}.</b>
                 </div>
                 <div style="font-size: 2vw;">
                     Please select another category
@@ -201,10 +200,20 @@
         </div>
     </div>
     {{else}}
-    <div class="card mx-auto mt-4" style="width: 50%;">
-        <div class="px-3 py-3">
-            <h3>No results.</h3>
-            <h6>Try entering a keyword, or select another category</h6>
+    <div class="container-fluid error-template my-4">
+        <div class="row">
+            <div class="col-auto col-lg-auto mx-auto">
+                <div style="font-size: 3vw;">
+                    <b>Sorry, there are no such items.</b>
+                </div>
+                <div style="font-size: 2vw;">
+                    Try entering a keyword, or select another category
+                </div>
+                <div style="padding-top: 50px; text-align: center;">
+                    <img src="/images/error_alligator_image/alligator.jpg" alt="Cartoon Aligator"
+                        style="width: 200px; height: auto;">
+                </div>
+            </div>
         </div>
     </div>
     {{/if}}

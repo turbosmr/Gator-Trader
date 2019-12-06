@@ -69,7 +69,7 @@ module.exports = {
         if (!searchCriteria.sortF) {
             searchCriteria.sortF = "";
         }
-        
+
         // Previous button
         if (x === 1) {
             html += "<li class=\"page-item disabled\"><a class=\"page-link\" href=\"/search?k=" + searchCriteria.keyword + "&c=" + searchCriteria.selectedCategoryVal + "&pf=" + searchCriteria.priceFilter + "&cond" + searchCriteria.conditionFilter + "&sort=" + searchCriteria.sortF + "&page=" + (x - 1) + "\">Previous</a></li>";
@@ -100,8 +100,8 @@ module.exports = {
     },
     //temporary soluition for category display of items in search results
     //Author @Osbaldo Martinez
-    categoryName: (cid) =>{
-        switch(cid) {
+    categoryName: (cid) => {
+        switch (cid) {
             case 1:
                 return "Books";
             case 2:
@@ -119,13 +119,17 @@ module.exports = {
             case 8:
                 return "Other";
         }
-      },
-    usernameOf: (email) => {;
+    },
+    usernameOf: (email) => {
+        ;
         if (typeof email === 'string') {
             return email.split("@")[0];
         }
         else {
             return email;
         }
+    },
+    json: (data) => {
+        return JSON.stringify(data);
     }
 }
