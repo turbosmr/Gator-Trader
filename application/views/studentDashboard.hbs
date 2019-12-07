@@ -1,0 +1,222 @@
+{{!-- Container for account manipulations --}}
+<div class="account_container mt-4">
+    <!-- Display successfully listing item message -->
+    <div class="col-5 mx-auto">
+        {{> message}}
+    </div>
+    <h1>Welcome to your Dashboard, {{usernameOf loggedIn.username}}!</h1>
+    {{!-- <div class="row">
+        <div class="col">
+            <div id="account">
+                <img src="https://cdn1.iconfinder.com/data/icons/technology-devices-2/100/Profile-512.png"
+                    style="width:90px;height:90px;">
+                Edit Your account
+            </div>
+        </div>
+        <div class="col">
+            <div id="account">
+                <img src="https://docmind-analytics.com/wp-content/uploads/2018/05/LogoMakr_9FI1nX.png"
+                    style="width:90px;height:90px;">
+                Spending Analysis
+            </div>
+        </div>
+
+        <div class="col">
+            <div id="account">
+                <img src="https://www.essent.com/SiteData/SiteID34/Images/Ecommerce-Marketing/Ecommerce%20Marketing%20Recommended%20Products.png"
+                    style="width:90px;height:90px;">
+                Recommendations
+            </div>
+        </div>
+    </div> --}}
+</div>
+
+{{!-- --------------------------------------------------------------------------------- --}}
+{{!-- <hr style="border: 3px solid rgb(31, 26, 34); max-width: 50%"> --}}
+{{!-- --------------------------------------------------------------------------------- --}}
+
+<ul class="nav nav-tabs dashboard_tabs">
+    <li class="nav-item">
+        <a href="#items_forSale_tab" class="nav-link active" data-toggle="tab">Sales Items</a>
+    </li>
+    <li class="nav-item">
+        <a href="#dashboard_messages_tab" class="nav-link" data-toggle="tab">Messages</a>
+    </li>
+</ul>
+
+
+
+
+<div class="tab-content">
+    <div class="tab-pane fade show active" id="items_forSale_tab">
+
+        {{!-- Container for the selling section --}}
+        <div class="sell_container">
+            <h2>Your Sales Items</h2>
+            <ul id="selling" class="selling px-0">
+                <li class="table-header">
+                    <div class="col-lg-4"><a href='#' onclick='sortListDir("selling", "selling_item")'>Name</a></div>
+                    <div class="col-lg-1"><a href='#' onclick='sortListDir("selling", "selling_price")'>Price</a></div>
+                    <div class="col-lg-2"><a href='#' onclick='sortListDir("selling", "selling_status")'>Status</a>
+                    </div>
+                    <div class="col-lg-2">Date Created</div>
+                    <div class="col-lg-3">
+                        Actions
+                    </div>
+                </li>
+                {{#if product}}
+                {{#each product}}
+                <li class="table-row">
+                    <div class="col-lg-4 selling_item"><span class="selling_info"><b>Item:</b>&nbsp;</span><a href="/products/{{this.pid}}">{{this.name}}</a></div>
+                    <div class="col-lg-1 selling_price"><span class="selling_info"><b>Price:</b>&nbsp;</span>${{this.price}}</div>
+                    {{#if (eq this.status "Active")}}
+                    <div class="col-lg-2 selling_status" style="color: green;"><span class="selling_info" style="color: black;"><b>Status:</b>&nbsp;</span>{{this.status}}</div>
+                    {{else if (eq this.status "Ended")}}
+                    <div class="col-lg-2 selling_status"><span class="selling_info"><b>Status:</b>&nbsp;</span>{{this.status}}</div>
+                    {{else}}
+                    <div class="col-lg-2 selling_status" style="color: red;"><span class="selling_info" style="color: black;"><b>Status:</b>&nbsp;</span>{{this.status}}</div>
+                    {{/if}}
+                    <div class="col-lg-2"><span class="selling_info"><b>Date Created:</b>&nbsp;</span>{{this.dateCreated}}</div>
+                    <div class="col-lg-3 selling_btn">
+                        {{#if (eq this.status "Ended")}}
+                        <a href="/products/{{this.pid}}/relist"><button type="button"
+                                class="btn btn-success btn-sm">Relist</button></a>
+                        {{else}}
+                        <a href="/products/{{this.pid}}/edit"><button type="button"
+                                class="btn btn-secondary btn-sm">Revise</button></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="/products/{{this.pid}}/end"><button type="button" class="btn btn-danger btn-sm">End
+                                Listing</button></a>
+                        {{/if}}
+                    </div>
+                </li>
+                {{/each}}
+                {{else}}
+                <li class="table-row">
+                    No active listings.
+                </li>
+                {{/if}}
+            </ul>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="dashboard_messages_tab">
+        {{!-- Container for the messages section --}}
+        <div class="messages_container">
+            <h2>Your Messages</h2>
+            <ul id="user_messages" class="messages px-0">
+                <li class="table-header">
+                    <div class="col-lg-3"><a href='#' onclick='sortListDir("user_messages", "message_item")'>Item</a>
+                    </div>
+                    <div class="col-lg-2">From</div>
+                    <div class="col-lg-3 message_last">Last Message</div>
+                    <div class="col-lg-2 message_date">Received</div>
+                    <div class="col-lg-2 message_btn">Chat</div>
+                </li>
+                {{#if inquiry}}
+                {{#each inquiry}}
+                <li class="table-row">
+                    <div class="col-lg-3 message_item">
+                        <span class="message_info"><b>Item:</b>&nbsp;</span><a href="/products/{{this.pid}}"
+                            target="_blank">{{this.productName}}</a>
+                    </div>
+                    <div class="col-lg-2 message_from">
+                        <span
+                            class="message_info"><b>From:</b>&nbsp;</span>{{#if (eq this.messageFromSid @root.loggedIn.sid)}}You{{else}}{{usernameOf this.messageFromEmail}}{{/if}}
+                    </div>
+                    <div class="col-lg-3 message_last">{{this.lastMessage}}</div>
+                    <div class="col-lg-2 message_date">{{this.time}}</div>
+                    <div class="col-lg-2 message_btn">
+                        <a href="/products/{{this.pid}}/inquiry?id={{this.inquiryId}}" class="btn btn-primary btn-sm"
+                            target="_blank">Open Chat</a>
+                    </div>
+                </li>
+                {{/each}}
+                {{else}}
+                <li class="table-row">
+                    No inquiries.
+                </li>
+                {{/if}}
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+{{!-- Adjusted Script from W3 schools --}}
+<script>
+    function sortListDir(list_id, sort_by) {
+        var list, i, switching, b, shouldSwitch, dir, switchcount = 0;
+        list = document.getElementById(list_id);
+        switching = true;
+        // Set the sorting direction to ascending:
+        dir = "asc";
+        // Make a loop that will continue until no switching has been done:
+        while (switching) {
+            // Start by saying: no switching is done:
+            switching = false;
+            b = list.getElementsByTagName("LI");
+            // Loop through all list-items:
+            for (i = 1; i < (b.length - 1); i++) {
+                // Start by saying there should be no switching:
+                shouldSwitch = false;
+                /* Check if the next item should switch place with the current item,
+                based on the sorting direction (asc or desc): */
+                if (sort_by.localeCompare("selling_price") == 0) {
+                    var price1 = b[i].getElementsByClassName(sort_by)[0].textContent.toLowerCase();
+                    price1 = price1.slice(1);
+                    price1 = parseInt(price1);
+
+                    var price2 = b[i + 1].getElementsByClassName(sort_by)[0].textContent.toLowerCase();
+                    price2 = price2.slice(1);
+                    price2 = parseInt(price2);
+                    if (dir == "asc") {
+                        if (price1 > price2) {
+                            /* If next item is alphabetically lower than current item,
+                            mark as a switch and break the loop: */
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else if (dir == "desc") {
+                        if (price1 < price2) {
+                            /* If next item is alphabetically higher than current item,
+                            mark as a switch and break the loop: */
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+
+                } else {
+                    if (dir == "asc") {
+                        if (b[i].getElementsByClassName(sort_by)[0].textContent.toLowerCase() > b[i + 1].getElementsByClassName(sort_by)[0].textContent.toLowerCase()) {
+                            /* If next item is alphabetically lower than current item,
+                            mark as a switch and break the loop: */
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else if (dir == "desc") {
+                        if (b[i].getElementsByClassName(sort_by)[0].textContent.toLowerCase() < b[i + 1].getElementsByClassName(sort_by)[0].textContent.toLowerCase()) {
+                            /* If next item is alphabetically higher than current item,
+                            mark as a switch and break the loop: */
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (shouldSwitch) {
+                /* If a switch has been marked, make the switch
+                and mark that a switch has been done: */
+                b[i].parentNode.insertBefore(b[i + 1], b[i]);
+                switching = true;
+                // Each time a switch is done, increase switchcount by 1:
+                switchcount++;
+            } else {
+                /* If no switching has been done AND the direction is "asc",
+                set the direction to "desc" and run the while loop again. */
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
+            }
+        }
+    }
+</script>

@@ -29,16 +29,18 @@ exports.logout = (req, res, next) => {
 exports.dashboard = (req, res, next) => {
     let activeSalesItem = [];
     let unapprovedSalesItem = [];
-    let sql = "SELECT SI.*, RU.username AS sellerEmail FROM SalesItem SI INNER JOIN RegisteredUser RU on SI.seller = RU.sid";
+
+    // Retrieve information of all sales items, and include the seller email
+    let sql = "SELECT SI.*, S.username AS sellerEmail FROM SalesItems SI INNER JOIN Students S on SI.seller = S.sid";
 
     db.query(sql, (err, result) => {
         if (err) throw err;
 
         for (let i = 0; i < result.length; i++) {
-            if (result[i].status == "Active" || result[i].status == "Ended") {
+            if (result[i].status == "Active") {
                 activeSalesItem.push(result[i])
             }
-            else {
+            else if (result[i].status == "Unapproved") {
                 unapprovedSalesItem.push(result[i]);
             }
         }
@@ -53,12 +55,14 @@ exports.dashboard = (req, res, next) => {
 // Handle approving of sales item on GET
 exports.approve = (req, res, next) => {
     let productId = req.query.pid;
-    let sql = "UPDATE SalesItem SET status = 2 WHERE pid = ?";
+
+    // Update status of a sales item to 'Active'
+    let sql = "UPDATE SalesItems SET status = 2 WHERE pid = ?";
 
     db.query(sql, [productId], (err, result) => {
         if (err) {
             req.flash('error', 'Error approving item');
-            res.redirect('/user/dashbaord');
+            res.redirect('/user/dashboard');
         }
 
         if (result.changedRows > 0) {
@@ -67,7 +71,7 @@ exports.approve = (req, res, next) => {
         }
         else {
             req.flash('error', 'Error approving item');
-            res.redirect('/user/dashbaord');
+            res.redirect('/user/dashboard');
         }
     });
 }
@@ -75,12 +79,14 @@ exports.approve = (req, res, next) => {
 // Handle disapproving of sales item on GET
 exports.disapprove = (req, res, next) => {
     let productId = req.query.pid;
-    let sql = "UPDATE SalesItem SET status = 3 WHERE pid = ?";
+
+    // Update status of a sales item to 'Disapproved'
+    let sql = "UPDATE SalesItems SET status = 3 WHERE pid = ?";
 
     db.query(sql, [productId], (err, result) => {
         if (err) {
             req.flash('error', 'Error disapproving item');
-            res.redirect('/user/dashbaord');
+            res.redirect('/user/dashboard');
         }
 
         if (result.changedRows > 0) {
@@ -89,20 +95,22 @@ exports.disapprove = (req, res, next) => {
         }
         else {
             req.flash('error', 'Error disapproving item');
-            res.redirect('/user/dashbaord');
+            res.redirect('/user/dashboard');
         }
     });
 }
 
-// Handle removing of sales item on GET
+// Handle removing of sales item on GET (CURRENTLY NOT BEING USED)
 exports.remove = (req, res, next) => {
     let productId = req.query.pid;
-    let sql = "UPDATE SalesItem SET status = 3 WHERE pid = ?";
+
+    // Update status of a sales item to 'Removed'
+    let sql = "UPDATE SalesItems SET status = 4 WHERE pid = ?";
 
     db.query(sql, [productId], (err, result) => {
         if (err) {
             req.flash('error', 'Error removing item');
-            res.redirect('/user/dashbaord');
+            res.redirect('/user/dashboard');
         }
 
         if (result.changedRows > 0) {
@@ -111,7 +119,7 @@ exports.remove = (req, res, next) => {
         }
         else {
             req.flash('error', 'Error removing item');
-            res.redirect('/user/dashbaord');
+            res.redirect('/user/dashboard');
         }
     });
 }

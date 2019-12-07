@@ -28,7 +28,9 @@
         {{{resultsInfo offset pageLimit totalProducts keyword}}}
     </div>
     <div class="results-sort-button-container">
-        <button type="button" class="btn results-sort-button dropdown-toggle" data-toggle="dropdown"
+
+        
+        <button type="button" class="btn results-sort-button dropdown-toggle results_sort_large" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             Sort by:
             {{#if (eq searchCriteria.sortF "ltoh")}}
@@ -41,6 +43,17 @@
             Alphabetically: A-Z
             {{/if}}
         </button>
+
+         <button type="button" class="btn results-sort-button dropdown-toggle results_sort_small" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {{#if (eq searchCriteria.sortF "ltoh")}}
+            {{/if}}
+            {{#if (eq searchCriteria.sortF "htol")}}
+            {{/if}}
+            {{#if (eq searchCriteria.sortF "atoz")}}
+            {{/if}}
+        </button>
+
         <div class="dropdown-menu dropdown-menu-right">
             <a class="dropdown-item" href="#" id="ltoh">Price: Low to High</a>
             <a class="dropdown-item" href="#" id="htol">Price: High to Low</a>
@@ -50,8 +63,6 @@
 </div>
 
 <div class="container-fluid mb-3">
-
-
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-2 sidebar_column">
@@ -84,21 +95,33 @@
                                     <div class="row">
                                         <div class="col-lg-4">
                                             <div class="results_image">
-                                                <img width="150"
-                                                    src="{{#if this.photoFileName}}/images/uploads/{{this.photoFileName}}{{else}}https://thumbs-prod.si-cdn.com/mHAHLSMfYOtZJs_PDnkqAgPFd6Q=/fit-in/1600x0/https://public-media.si-cdn.com/filer/00/a1/00a1f7bf-556f-48ef-a4da-10ea981a9337/mona.jpg{{/if}}">
+                                                <!-- added this, when you click on photo, it goes to new window -->
+                                                <a href="/products/{{this.pid}}" target="_blank">
+                                                    <img width="100%;"
+                                                        src="{{#if this.photoFileName}}/images/uploads_compressed/{{this.seller}}/salesItems/{{this.photoFileName}}{{/if}}"
+                                                        alt="Item Image">
+                                                </a>
                                             </div>
                                         </div>
                                         <div class="col-lg-8">
                                             <div class="info">
                                                 <div class="featured_text">
-                                                    <h1><a href="/products/{{this.pid}}">{{this.name}}</a></h1>
-                                                    <div class="seller">
-                                                        <p>by <b>{{usernameOf this.sellerEmail}}</b></p>
-                                                    </div>
+                                                    <!-- added this, when you click on item title link, it goes to new window -->
+                                                    <h1><a href="/products/{{this.pid}}" target="_blank"> {{this.name}}
+                                                        </a></h1>
+                                                    <p class="seller">by <b>{{usernameOf this.sellerEmail}}</b></p>
                                                     <p class="price">${{this.newPrice}}</p>
-
-                                                    <div class="description">
-                                                        <p>{{{this.description}}}</p>
+                                                    <p class="category"><b>Category:</b> {{categoryName this.category}}
+                                                    </p>
+                                                    <div class="description" id="module">
+                                                        <b>Description:</b>
+                                                        <p class="collapse" id="collapseExample{{@index}}"
+                                                            aria-expanded="false">
+                                                            {{{this.description}}}
+                                                        </p>
+                                                        <a role="button" class="collapsed" data-toggle="collapse"
+                                                            href="#collapseExample{{@index}}" aria-expanded="false"
+                                                            aria-controls="collapseExample"></a>
                                                     </div>
                                                 </div>
 
@@ -110,10 +133,11 @@
                                         <div class="col">
                                             <div class="card_footer">
                                                 <div class="contact_seller">
-                                                    <button class="button" onclick="openForm()">Contact Seller</button>
+                                                    <button class="button"><a href="/products/{{this.pid}}/inquiry"
+                                                            target="_blank">Contact Seller</a></button>
                                                 </div>
                                                 <!-- pop up messages -->
-                                                <div class="chat-popup" id="myForm">
+                                        {{!--   <div class="chat-popup" id="myForm">
                                                     <form action="#" action="POST" class="form-container">
                                                         <h4>*Item Name*</h4>
                                                         <h5>by *Seller*</h5>
@@ -126,11 +150,11 @@
                                                             </div>
                                                             <div class="col-auto">
                                                                 <button type="submit"
-                                                                    class="btn btn-success">Send</button>
+                                                                    class="btn btn-success submit_b">Send</button>
                                                             </div>
                                                         </div>
                                                     </form>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                     </div>
@@ -154,39 +178,55 @@
 
     {{else}}
     {{#if searchCriteria.keyword}}
-    <div class="row">
-        <div class="col-7 col-lg-6 mx-auto mt-4">
-            <div style="font-size: 3vw;">
-                <b>No results for {{searchCriteria.keyword}}.</b>
-            </div>
-            <div style="font-size: 2vw;">
-                Try checking your spelling or use more general terms
-            </div>
-            <div style="padding-top: 50px; text-align: center;">
-                <img src="/images/error_alligator_image/alligator.jpg" alt="Cartoon Aligator" style="max-width: 30%;">
+    <div class="container-fluid error-template my-4">
+        <div class="row">
+            <div class="col-auto col-lg-auto mx-auto">
+                <div style="font-size: 3vw;">
+                    <b>Sorry, we couldn't find any items matching {{searchCriteria.keyword}}.</b>
+                </div>
+                <div style="font-size: 2vw;">
+                    Try checking your spelling or use more general terms
+                </div>
+                <div style="padding-top: 50px; text-align: center;">
+                    <img src="/images/error_alligator_image/alligator.jpg" alt="Cartoon Aligator"
+                        style="width: 200px; height: auto;">
+                </div>
             </div>
         </div>
     </div>
     {{else}}
     {{#if searchCriteria.selectedCategoryName}}
-    <div class="row">
-        <div class="col-7 col-lg-6 mx-auto mt-4">
-            <div style="font-size: 3vw;">
-                <b>No results for category, {{searchCriteria.selectedCategoryName}}.</b>
-            </div>
-            <div style="font-size: 2vw;">
-                Please select another category
-            </div>
-            <div style="padding-top: 50px; text-align: center;">
-                <img src="/images/error_alligator_image/alligator.jpg" alt="Cartoon Aligator" style="max-width: 30%;">
+    <div class="container-fluid error-template my-4">
+        <div class="row">
+            <div class="col-auto col-lg-auto mx-auto">
+                <div style="font-size: 3vw;">
+                    <b>Sorry, there are no such items under category, {{searchCriteria.selectedCategoryName}}.</b>
+                </div>
+                <div style="font-size: 2vw;">
+                    Please select another category
+                </div>
+                <div style="padding-top: 50px; text-align: center;">
+                    <img src="/images/error_alligator_image/alligator.jpg" alt="Cartoon Aligator"
+                        style="width: 200px; height: auto;">
+                </div>
             </div>
         </div>
     </div>
     {{else}}
-    <div class="card mx-auto mt-4" style="width: 50%;">
-        <div class="px-3 py-3">
-            <h3>No results.</h3>
-            <h6>Try entering a keyword, or select another category</h6>
+    <div class="container-fluid error-template my-4">
+        <div class="row">
+            <div class="col-auto col-lg-auto mx-auto">
+                <div style="font-size: 3vw;">
+                    <b>Sorry, there are no such items.</b>
+                </div>
+                <div style="font-size: 2vw;">
+                    Try entering a keyword, or select another category
+                </div>
+                <div style="padding-top: 50px; text-align: center;">
+                    <img src="/images/error_alligator_image/alligator.jpg" alt="Cartoon Aligator"
+                        style="width: 200px; height: auto;">
+                </div>
+            </div>
         </div>
     </div>
     {{/if}}
@@ -210,4 +250,15 @@
     function closeForm() {
         document.getElementById("myForm").style.display = "none";
     }
+
+</script>
+
+<script>
+    $(document).click(function (e) {
+        if (!$(e.target).is("#myForm") && !$(e.target).is(".button") && !$(e.target).is(".submit_b")) {
+            if ($('#myForm').is(':visible')) {
+                closeForm();
+            }
+        }
+    });
 </script>

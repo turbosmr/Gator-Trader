@@ -23,7 +23,7 @@ app.use(bodyParser.json())
 
 app.use(passport.initialize());
 app.use(passport.session());
-require('./config/registeredUserPassport')(passport);
+require('./config/studentPassport')(passport);
 require('./config/administratorPassport')(passport);
 
 // Connect flash
@@ -50,7 +50,7 @@ app.set('view engine', 'hbs');
 // Routes
 app.use('/', require('./routes/index'));
 app.use('/about', require('./routes/about'));
-app.use('/user', require('./routes/registeredUser'));
+app.use('/user', require('./routes/student'));
 app.use('/search', require('./routes/search'));
 app.use('/products', require('./routes/salesItem'));
 app.use('/admin', require('./routes/administrator'));

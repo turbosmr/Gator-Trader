@@ -5,7 +5,7 @@ const router = express.Router();
 const administratorController = require('../controllers/administratorController');
 const { ensureAdminAuthenticated, forwardAuthenticated } = require('../controllers/userAuthenticated');
 
-// GET request to redirect to registered user login page
+// GET request to redirect to admin login page
 router.get('/', (req, res) => {
     res.redirect('admin/login');
 });

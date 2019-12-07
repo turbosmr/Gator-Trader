@@ -1,0 +1,150 @@
+<div class="container-fluid my-4">
+    <div class="header">
+        <h1>Contact Seller</h1>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-4 col-md-4 col-lg-3 col-xl-3 mb-3 mb-md-0">
+            <div class="card px-4 py-3">
+                <div id="imageCarousel" class="carousel slide mx-auto mb-4" data-interval="false" data-ride="carousel"
+                    style="width: 100%; height: 300px;">
+                    <ol class="carousel-indicators">
+                        {{#each salesItemPhoto}}
+                        <li data-target="" data-slide-to="{{@index}}" class="{{#if (eq @index 0)}}active{{/if}}"></li>
+                        {{/each}}
+                    </ol>
+                    <div class="carousel-inner" style="border: 1px solid lightgrey; border-radius: 5px;">
+                        {{#each salesItemPhoto}}
+                        <div class="carousel-item {{#if (eq @index 0)}}active{{/if}}">
+                            <img class=""
+                                src="/images/uploads/{{@root.salesItem.seller}}/salesItems/{{this.photoFileName}}"
+                                style="display:block; margin:auto; width: auto;max-height: 300px;" alt="First slide">
+                        </div>
+                        {{/each}}
+                    </div>
+                    <a class="carousel-control-prev" href="#imageCarousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#imageCarousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+                <div>
+                    <h4><a href="/products/{{salesItem.pid}}">{{salesItem.name}}</a></h4>
+                    <p>by <b>{{usernameOf salesItem.sellerEmail}}</b></p>
+                    <ul class="px-0 pt-2 mb-0" style="list-style: none;">
+                        <li><b>Price:</b> ${{salesItem.price}}</li>
+                        <li><b>Condition:</b> {{salesItem.condition}}</li>
+                        <li><b>Quantity:</b> {{salesItem.quantity}} available</li>
+                        <li><b>Delivery Method:</b> {{salesItem.deliveryMethod}}</li>
+                    </ul>
+                </div>
+                {{#if pickupLocation}}
+                <div class="mt-4 mb-2">
+                    <b>Pickup Location(s)</b>
+                    {{#each pickupLocation}}<li>{{this.location}}</li>{{/each}}
+                </div>
+                <div class="pickup_map" id="map" style="min-height: 200px"></div>
+                {{/if}}
+            </div>
+        </div>
+        <div class="col-12 col-sm-8 col-md-7 col-lg-6 col-xl-6 pl-sm-0">
+            <div class="card px-3 py-3" style="height: 880px;">
+                {{#if messages}}
+                <div class="mb-3">
+                    <h4><b>Subject:</b> {{messages.0.subject}}</h4>
+                </div>
+                <div class="card mb-3 px-2 py-2 scrollable" id="conversation-container">
+                    <ul class="list-group" id="conversation">
+                        {{#each messages}}
+                        <div class="mx-auto">
+                            <i>{{this.time}}</i>
+                        </div>
+                        <li
+                            class="list-group-item mb-4 {{#if (eq this.senderSid @root.loggedIn.sid)}}sender{{else}}recipient{{/if}}">
+                            <b>{{#if (eq this.senderSid @root.loggedIn.sid)}}You{{else}}{{usernameOf this.senderEmail}}{{/if}}:</b>
+                            {{this.message}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+                <div class="">
+                    <form action="" method="POST">
+                        <div class="input-group">
+                            <textarea name="message" class="form-control" placeholder="Enter message here" rows="3"
+                                style="resize: none;" required></textarea>
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-success">Send</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                {{else}}
+                <form action="" method="POST">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Subject</span>
+                        </div>
+                        <div class="col-4 px-0">
+                            <input type="text" name="subject" class="form-control"
+                                style="border-radius: 0 .25rem .25rem 0;" placeholder="Enter subject here"
+                                maxlength="40" required>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <textarea name="message" class="form-control" placeholder="Enter message here" rows="3"
+                            style="resize: none;" required></textarea>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-success">Send</button>
+                        </div>
+                    </div>
+                </form>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/js/inquiry.js"></script>
+
+<script>
+    var locations = [
+        ['Library', 37.721375, -122.478172, 'A'],
+        ['Student Center', 37.722617, -122.478602, 'B'],
+        ['Wellness Center', 37.723000, -122.484177, 'C']
+    ];
+
+    // Initialize and add the map
+    function initMap() {
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 15,
+            center: new google.maps.LatLng(37.722783, -122.480617),
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+
+        var infowindow = new google.maps.InfoWindow();
+
+        var marker, i;
+
+        for (i = 0; i < locations.length; i++) {
+            marker = new google.maps.Marker({
+                position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                label: locations[i][3],
+                map: map
+            });
+
+            google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                return function () {
+                    infowindow.setContent(locations[i][0]);
+                    infowindow.open(map, marker);
+                }
+            })(marker, i));
+        }
+    }
+
+</script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFmPnJOHPJQCfqR09N0nUphOsLAEOVC0k&callback=initMap">
+    </script>

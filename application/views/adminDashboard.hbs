@@ -14,10 +14,9 @@
             </div>
         </div> --}}
     {{!-- --------------------------------------------------------------------------------- --}}
-    <hr style="border: 3px solid rgb(31, 26, 34); max-width: 50%">
+    {{!--     <hr style="border: 3px solid rgb(31, 26, 34); max-width: 50%"> --}}
     {{!-- --------------------------------------------------------------------------------- --}}
 </div>
-{{!-- Container for the selling section --}}
 
 <ul class="nav nav-tabs dashboard_tabs">
     <li class="nav-item">
@@ -26,9 +25,9 @@
     <li class="nav-item">
         <a href="#approved_tab" class="nav-link" data-toggle="tab">Approved</a>
     </li>
-    <li class="nav-item">
+    {{!-- <li class="nav-item">
         <a href="#messages_tab" class="nav-link" data-toggle="tab">Messages</a>
-    </li>
+    </li> --}}
 </ul>
 
 <div class="tab-content">
@@ -46,11 +45,11 @@
                 {{#if unapprovedSalesItem}}
                 {{#each unapprovedSalesItem}}
                 <li class="table-row">
-                    <div class="col col-7"><a href="/products/{{this.pid}}">{{this.name}}</a></div>
-                    <div class="col col-2">{{usernameOf this.sellerEmail}}</div>
-                    <div class="col col-3">
-                        <a href="/admin/approve?pid={{this.pid}}"><button type="button" class="btn btn-success btn-sm">Approve</button></a>
-                        <!--<a href="/admin/disapprove?pid={{this.pid}}"><button type="button" class="btn btn-danger btn-sm">Disapprove</button></a>-->
+                    <div class="col col-lg-7"> <span class="unapproved_info">Name:&nbsp; </span><a href="/products/{{this.pid}}">{{this.name}}</a></div>
+                    <div class="col col-lg-2"> <span class="unapproved_info">Seller:&nbsp; </span>{{usernameOf this.sellerEmail}}</div>
+                    <div class="col col-lg-3 unapproved_btn">
+                        <a href="/admin/approve?pid={{this.pid}}"><button type="button" class="btn btn-success btn-sm">Approve</button></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="/admin/disapprove?pid={{this.pid}}"><button type="button" class="btn btn-danger btn-sm">Disapprove</button></a>
                     </div>
                 </li>
                 {{/each}}
@@ -64,23 +63,23 @@
     </div>
     <div class="tab-pane fade" id="approved_tab">
         <div class="approved_container">
-            <h2>Approved Items </h2>
+            <h2>Approved Items</h2>
             <ul class="approved px-0">
                 <li class="table-header">
-                    <div class="col col-7">Name</div>
-                    <div class="col col-2">Seller</div>
-                    <div class="col col-3">
+                    <div class="col-7">Name</div>
+                    <div class="col-2">Seller</div>
+                    <div class="col-2">
                         Actions
                     </div>
                 </li>
                 {{#if activeSalesItem}}
                 {{#each activeSalesItem}}
                 <li class="table-row">
-                    <div class="col col-7"><a href="/products/{{this.pid}}">{{this.name}}</a></div>
-                    <div class="col col-2">{{usernameOf this.sellerEmail}}</div>
-                    <div class="col col-3">
+                    <div class="col-lg-7"> <span class="approved_info">Name:&nbsp; </span><a href="/products/{{this.pid}}">{{this.name}}</a></div>
+                    <div class="col-lg-2"> <span class="approved_info">Seller:&nbsp; </span>{{usernameOf this.sellerEmail}}</div>
+                    <div class="col-lg-2 approved_btn">
                         <!--<a href="#"><button type="button" class="btn btn-warning btn-sm">Block</button></a>-->
-                        <a href="/admin/remove?pid={{this.pid}}"><button type="button" class="btn btn-danger btn-sm">Remove</button></a>
+                        <a href="/admin/disapprove?pid={{this.pid}}"><button type="button" class="btn btn-danger btn-sm">Disapprove</button></a>
                     </div>
                 </li>
                 {{/each}}
@@ -92,60 +91,135 @@
             </ul>
         </div>
     </div>
-    <div class="tab-pane fade" id="messages_tab">
-        {{!-- Container for the messages section --}}
+    {{!-- Container for the messages section --}}
+    {{!-- <div class="tab-pane fade" id="messages_tab">
         <div class="admin_messages_container">
             <h2>Your Messages</h2>
-            <ul class="admin_messages">
+            <ul id="a_m" class="admin_messages">
                 <li class="table-header">
-                    <div class="col col-1">Item</div>
-                    <div class="col col-2">From</div>
-                    <div class="col col-3">Subject</div>
-                    <div class="col col-4">Received</div>
-                    <div class="col col-5">Chat</div>
+                    <div class="col-lg-3"><a href='#' onclick='sortListDir()'>Item</a></div>
+                    <div class="col-lg-2">From</div>
+                    <div class="col-lg-3 message_last">Last Message</div>
+                    <div class="col-lg-2 message_date">Received</div>
+                    <div class="col-lg-2 message_btn">Chat</div>
                 </li>
                 <li class="table-row">
-                    <div class="col col-1">Chair</div>
-                    <div class="col col-2">Jimmy13</div>
-                    <div class="col col-3">Pickup</div>
-                    <div class="col col-4">24 Oct, 2019</div>
-                    <div class="col col-5">
-                        <button type="button" class="btn btn-primary btn-sm"> Open Chat</button>
+                    <div class="col-lg-3 message_item">
+                        <span class="message_info">Item:&nbsp; </span>Chair
+                    </div>
+                    <div class="col-lg-2 message_from">
+                        <span class="message_info">From:&nbsp; </span>Jimmy13
+                    </div>
+                    <div class="col-lg-3 message_last">Pickup</div>
+                    <div class="col-lg-2 message_date">24 Oct, 2019</div>
+                    <div class="col-lg-2 message_btn">
+                        <button type="button" class="btn btn-primary btn-sm">Open</button>
 
                     </div>
 
                 </li>
                 <li class="table-row">
-                    <div class="col col-1">Chair</div>
-                    <div class="col col-2">Alex007</div>
-                    <div class="col col-3">Where?</div>
-                    <div class="col col-4">20 Oct, 2019</div>
-                    <div class="col col-5">
-                        <button type="button" class="btn btn-primary btn-sm"> Open Chat</button>
+                    <div class="col-lg-3 message_item">
+                        <span class="message_info">Item:&nbsp; </span>Chair
+                    </div>
+                    <div class="col-lg-2 message_from">
+                        <span class="message_info">From:&nbsp; </span>Alex007
+                    </div>
+                    <div class="col-lg-3 message_last">Where?</div>
+                    <div class="col-lg-2 message_date">20 Oct, 2019</div>
+                    <div class="col-lg-2 message_btn">
+                        <button type="button" class="btn btn-primary btn-sm">Open</button>
 
                     </div>
 
                 </li>
                 <li class="table-row">
-                    <div class="col col-1">Book</div>
-                    <div class="col col-2">Mario777</div>
-                    <div class="col col-3">Discount</div>
-                    <div class="col col-4">27 Oct, 2019</div>
-                    <div class="col col-5">
-                        <button type="button" class="btn btn-primary btn-sm"> Open Chat</button>
+                    <div class="col-lg-3 message_item">
+                        <span class="message_info">Item:&nbsp; </span>Book
+                    </div>
+                    <div class="col-lg-2 message_from">
+                        <span class="message_info">From:&nbsp; </span>Mario777
+                    </div>
+                    <div class="col-lg-3 message_last">Discount</div>
+                    <div class="col-lg-2 message_date">27 Oct, 2019</div>
+                    <div class="col-lg-2 message_btn">
+                        <button type="button" class="btn btn-primary btn-sm">Open</button>
 
                     </div>
                 </li>
                 <li class="table-row">
-                    <div class="col col-1">Computer</div>
-                    <div class="col col-2">Kate B</div>
-                    <div class="col col-3">My offer!!!</div>
-                    <div class="col col-4">17 Oct, 2019</div>
-                    <div class="col col-5">
-                        <button type="button" class="btn btn-primary btn-sm">Open Chat</button>
+                    <div class="col-lg-3 message_item">
+                        <span class="message_info">Item:&nbsp; </span>Computer
+                    </div>
+                    <div class="col-lg-2 message_from">
+                        <span class="message_info">From:&nbsp; </span>Kate B
+                    </div>
+                    <div class="col-lg-3 message_last">My offer!!!</div>
+                    <div class="col-lg-2 message_date">17 Oct, 2019</div>
+                    <div class="col-lg-2 message_btn">
+                        <button type="button" class="btn btn-primary btn-sm">Open</button>
                     </div>
                 </li>
             </ul>
         </div>
-    </div>
+    </div> --}}
 </div>
+
+
+{{!-- Adjusted Script from W3 schools --}}
+{{!-- <script>
+    function sortListDir() {
+        var list, i, switching, b, shouldSwitch, dir, switchcount = 0;
+        list = document.getElementById("a_m");
+        switching = true;
+        // Set the sorting direction to ascending:
+        dir = "asc";
+        // Make a loop that will continue until no switching has been done:
+        while (switching) {
+            // Start by saying: no switching is done:
+            switching = false;
+            b = list.getElementsByTagName("LI");
+            // Loop through all list-items:
+            for (i = 1; i < (b.length - 1); i++) {
+                // Start by saying there should be no switching:
+                shouldSwitch = false;
+                /* Check if the next item should switch place with the current item,
+                based on the sorting direction (asc or desc): */
+                if (dir == "asc") {
+                    if (b[i].getElementsByClassName("message_item")[0].textContent.toLowerCase() > b[i + 1].getElementsByClassName("message_item")[0].textContent.toLowerCase()) {
+                        /* If next item is alphabetically lower than current item,
+                        mark as a switch and break the loop: */
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (b[i].getElementsByClassName("message_item")[0].textContent.toLowerCase() < b[i + 1].getElementsByClassName("message_item")[0].textContent.toLowerCase()) {
+                        /* If next item is alphabetically higher than current item,
+                        mark as a switch and break the loop: */
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            }
+            if (shouldSwitch) {
+                /* If a switch has been marked, make the switch
+                and mark that a switch has been done: */
+                b[i].parentNode.insertBefore(b[i + 1], b[i]);
+                switching = true;
+                // Each time a switch is done, increase switchcount by 1:
+                switchcount++;
+            } else {
+                /* If no switching has been done AND the direction is "asc",
+                set the direction to "desc" and run the while loop again. */
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
+            }
+        }
+    }
+</script> --}}
+
+</body>
+
+</html>

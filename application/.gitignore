@@ -360,12 +360,11 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
-# Dependency directories
-node_modules/
-
 # dotenv environment variables file
 .env
 .env.test
 
-.DS_Store
-**/.DS_Store
+**/node_modules
+**/.vscode
+**/.idea
+*.DS_Store

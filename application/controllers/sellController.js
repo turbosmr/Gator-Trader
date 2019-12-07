@@ -3,31 +3,37 @@ const uuidv1 = require('uuid/v1');
 
 // Handle showing sell page on GET
 exports.sell_get = (req, res, next) => {
-    let sql = "SELECT * FROM ClassSection";
-    let classSection = [];
+
+    // Retrieve information of all courses
+    let sql = "SELECT * FROM Courses";
+
+    let course = [];
 
     db.query(sql, (err, result) => {
-        if (err) throw err;
+        if (err) {
+            res.render('error');
+        }
 
         for (let i = 0; i < result.length; i++) {
-            classSection.push(result[i]);
+            course.push(result[i]);
         }
 
         res.render('sell', {
-            classSection: classSection
+            course: course
         });
     });
 }
 
 // Handle submitting sales item for sell on POST
 exports.sell_post = (req, res, next) => {
-    let UUID = uuidv1();
+    let productId = uuidv1();
     let { productName, price, category, classMaterialSection, condition, quantity, deliveryMethod, description } = req.body;
     let seller = req.user.sid;
     let salesItemImages = req.files;
     let sql = "";
     let placeholders = [];
     let tempDeliveryMethod = deliveryMethod;
+    let salesItemPlaceholders = [];
 
     // Check if delivery method is shipping only, pickup only, or both
     if (Array.isArray(tempDeliveryMethod)) {
@@ -39,14 +45,6 @@ exports.sell_post = (req, res, next) => {
         else {
             deliveryMethod = 2;
         }
-        // Store pickup location in DB
-        /*for (let i = 0; i < tempDeliveryMethod.length; i++) {
-            if (tempDeliveryMethod[i] != "shipping") {
-                sql += "INSERT INTO PickupLocation (product, location) VALUES (?, ?);";
-                placeholders.push(UUID);
-                placeholders.push(tempDeliveryMethod[i]);
-            }
-        }*/
     }
     else {
         // Shipping only
@@ -56,24 +54,85 @@ exports.sell_post = (req, res, next) => {
         // Pickup only (single location)
         else {
             deliveryMethod = 2;
-            /*sql += "INSERT INTO PickupLocation (product, location) VALUES (?, ?);";
-            placeholders.push(UUID);
-            placeholders.push(tempDeliveryMethod);*/
         }
     }
 
+    // Intepret and store newline for description
+    description = description.replace(/\r\n|\r|\n/g, "<br>");
+
+    // Check if class material section field is empty
     if (classMaterialSection != '') {
-        sql += "INSERT INTO SalesItem (pid, seller, category, name, price, `condition`, quantity, description, deliveryMethod, classMaterialSection) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
-        placeholders = [UUID, seller, category, productName, price, condition, quantity, description, deliveryMethod, classMaterialSection];
+
+        // Create a new sales item
+        sql += "INSERT INTO SalesItems (pid, seller, category, name, price, `condition`, quantity, description, deliveryMethod, classMaterialSection) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+
+        salesItemPlaceholders = [productId, seller, category, productName, price, condition, quantity, description, deliveryMethod, classMaterialSection];
+        placeholders.push(...salesItemPlaceholders);
     }
     else {
-        sql += "INSERT INTO SalesItem (pid, seller, category, name, price, `condition`, quantity, description, deliveryMethod, classMaterialSection) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NULL);";
-        placeholders = [UUID, seller, category, productName, price, condition, quantity, description, deliveryMethod];
+
+        // Create a new sales item
+        sql += "INSERT INTO SalesItems (pid, seller, category, name, price, `condition`, quantity, description, deliveryMethod, classMaterialSection) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NULL);";
+
+        salesItemPlaceholders = [productId, seller, category, productName, price, condition, quantity, description, deliveryMethod];
+        placeholders.push(...salesItemPlaceholders);
     }
 
+    // Store pickup location in DB
+    // Pickup only (multiple locations) or shipping & pickup
+    if (Array.isArray(tempDeliveryMethod)) {
+
+        for (let i = 0; i < tempDeliveryMethod.length; i++) {
+
+            // Make sure "shipping" is not included as a location
+            if (tempDeliveryMethod[i] != "shipping") {
+
+                // Create a new pickup location for a sales item
+                sql += "INSERT INTO PickupLocations (product, location) VALUES (?, ?);";
+
+                placeholders.push(productId);
+
+                if (tempDeliveryMethod[i] == "library") {
+                    placeholders.push(1);
+                }
+                else if (tempDeliveryMethod[i] == "student-center") {
+                    placeholders.push(2);
+                }
+                else {
+                    placeholders.push(3);
+                }
+            }
+        }
+    }
+    // Single pickup location
+    else {
+
+        // Make sure "shipping" is not included as a location
+        if (tempDeliveryMethod != "shipping") {
+
+            // Create a new pickup location for a sales item
+            sql += "INSERT INTO PickupLocations (product, location) VALUES (?, ?);";
+
+            placeholders.push(productId);
+
+            if (tempDeliveryMethod == "library") {
+                placeholders.push(1);
+            }
+            else if (tempDeliveryMethod == "student-center") {
+                placeholders.push(2);
+            }
+            else {
+                placeholders.push(3);
+            }
+        }
+    }
+
+    // Save filename of uploaded sales item photo(s)
     for (let i = 0; i < salesItemImages.length; i++) {
-        sql += "INSERT INTO SalesItemPhoto (product, fileName) VALUES (?, ?);";
-        placeholders.push(UUID);
+
+        // Create a new sales item photos (filename) for a sales item
+        sql += "INSERT INTO SalesItemPhotos (product, fileName) VALUES (?, ?);";
+        placeholders.push(productId);
         placeholders.push(salesItemImages[i].filename);
     }
 

@@ -12,7 +12,10 @@ exports.search_results = (limit) => {
         let min, max = 0;
         let conditionFilter = req.query.cond;
         let sortF = (req.query.sort) ? req.query.sort : "ltoh";
-        let sql = "SELECT SI.*, CAST(SI.price AS CHAR) AS newPrice, RU.username AS sellerEmail FROM SalesItem SI INNER JOIN RegisteredUser RU on SI.seller = RU.sid WHERE SI.status = 'Active'";
+
+        // Retrieve information of all approved sales items, and include seller email, first sales item photo (filename). Also, cast sales item price to CHAR to show leading zeros in view page.
+        let sql = "SELECT SI.*, CAST(SI.price AS CHAR) AS newPrice, S.username AS sellerEmail, SIP.fileName AS photoFileName FROM SalesItems SI INNER JOIN Students S on SI.seller = S.sid LEFT JOIN SalesItemPhotos SIP on SIP.product = (SELECT product FROM SalesItemPhotos SIP2 WHERE SIP2.product = SI.pid LIMIT 1) GROUP BY SI.pid, SI.status, SI.price HAVING SI.status = 'Active'";
+        
         let placeholders = [];
 
         // Set min, max for price filter
@@ -35,7 +38,7 @@ exports.search_results = (limit) => {
 
         // Check if keyword criteria exist
         if (keyword) {
-            sql += " AND (name LIKE ? OR description LIKE ? OR (classMaterialSection IN (SELECT ClassSection.csid from ClassSection WHERE name LIKE ?)))";
+            sql += " AND (name LIKE ? OR description LIKE ? OR (classMaterialSection IN (SELECT Courses.csid from Courses WHERE name LIKE ?)))";
             let likeKeyword = '%' + keyword + '%';
             placeholders.push(likeKeyword);
             placeholders.push(likeKeyword);
@@ -43,7 +46,7 @@ exports.search_results = (limit) => {
         }
 
         // Check if category criteria exist
-        if (category != 'all') {
+        if (typeof category !== 'undefined' && category != 'all') {
             // Check if class material category is selected
             if (category == 'classMaterials') {
                 sql += " AND classMaterialSection IS NOT NULL";
@@ -54,6 +57,7 @@ exports.search_results = (limit) => {
                 placeholders.push(category);
             }
         }
+
 
         // Check if price filter exist
         if (priceFilter) {
@@ -88,11 +92,11 @@ exports.search_results = (limit) => {
         res.locals.conditionFilter = conditionFilter;
         res.locals.sortF = sortF;
 
-        res.locals.sql = sql;
-        res.locals.placeholders = placeholders;
-
         res.locals.pageLimit = pageLimit;
         res.locals.currentPage = currentPage;
+
+        res.locals.sql = sql;
+        res.locals.placeholders = placeholders;
 
         db.query(sql, placeholders, (err, result) => {
             if (err) throw (err);

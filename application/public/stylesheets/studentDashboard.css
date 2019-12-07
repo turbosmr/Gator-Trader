@@ -1,0 +1,219 @@
+/* Page Containers */
+
+.sell_container {
+	max-width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.messages_container {
+	max-width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+/* .account_container {
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+} */
+
+.dashboard_tabs {
+	max-width: 60%;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+/* ------------------------------------------------------------- */
+
+/* Account Boxes Styling */
+
+/* #account {
+    text-align: center;
+    font-weight: 600;
+    background-color: #fff;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
+    margin: 5px 5px 5px 5px;
+    padding: 3px;
+}
+
+#account:hover {
+    background: rgba(182, 165, 182, 0.767);
+    color: #FFFFFF;
+}
+
+.account_container h1 {
+    font-size: 40px;
+    margin: 20px;
+    text-align: center;
+    font-weight: bold;
+} */
+
+/* ------------------------------------------------------------- */
+
+/* Selling Styling */
+
+.selling {
+	padding-left: 0;
+}
+
+.selling li {
+	border-radius: 5px;
+	padding: 20px 20px;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 15px;
+}
+
+.selling .table-header {
+	background-color: #68b174;
+	font-size: 15px;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.selling .table-row {
+	background-color: #fff;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* .selling .col-lg-5 {
+	font-weight: bold;
+}
+
+.selling .col-lg-1 {
+	flex-basis: 20%;
+	font-weight: bold;
+}
+
+.selling .table-row .col-lg-2 {
+	flex-basis: 20%;
+	color: green;
+	font-weight: bold;
+} */
+
+.sell_container h2 {
+	font-size: 30px;
+	margin: 20px;
+	text-align: center;
+}
+
+.sell_container .selling_info {
+	display: none;
+}
+/* --------------------------------------------------------------------------------------------------- */
+
+/* Messages Styling*/
+
+.messages {
+	padding-left: 0;
+}
+
+.messages li {
+	border-radius: 5px;
+	padding: 20px 20px;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 15px;
+}
+
+.messages .table-header {
+	background-color: #686fb1;
+	font-size: 15px;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.messages .table-row {
+	background-color: #fff;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
+}
+
+.messages .col-lg-2 {
+	flex-basis: 20%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.messages .col-lg-3 {
+	flex-basis: 25%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.messages_container .message_info {
+	display: none;
+}
+
+.messages_container h2 {
+	font-size: 30px;
+	margin: 20px;
+	text-align: center;
+}
+
+.messages_container btn {
+	float: right;
+}
+
+/* --------------------------------------------------------------------- */
+
+@media screen and (max-width: 1100px) {
+	.messages_container .message_last {
+		display: none;
+	}
+	.messages_container .message_date {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 960px) {
+	.selling .table-row {
+		border-style: solid;
+		border-color: #68b174;
+	}
+
+	.messages .table-row {
+		border-style: solid;
+		border-color: #686fb1;
+	}
+
+	.messages_container .messages .table-header {
+		display: none;
+	}
+
+	.sell_container .selling .table-header {
+		display: none;
+	}
+
+	.messages_container .messages li {
+		display: block;
+	}
+
+	.sell_container .selling li {
+		display: block;
+	}
+
+	.sell_container .selling_btn {
+		text-align: right;
+	}
+
+	.messages_container .message_btn {
+		text-align: right;
+	}
+
+	.sell_container .selling_info {
+		display: inline-block;
+	}
+
+	.messages_container .message_info {
+		display: inline-block;
+	}
+}

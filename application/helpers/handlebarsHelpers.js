@@ -17,6 +17,12 @@ module.exports = {
     gte: (v1, v2) => {
         return v1 >= v2;
     },
+    and: (v1, v2) => {
+        return v1 && v2;
+    },
+    or: (v1, v2) => {
+        return v1 || v2;
+    },
     resultsInfo: (offset, pageLimit, totalProducts, keyword) => {
         let html = "";
         let posFromOffset = offset + pageLimit;
@@ -28,7 +34,7 @@ module.exports = {
             html += "Showing " + (offset + 1) + "-" + posFromOffset + " of " + totalProducts;
         }
         else {
-            html += "Showing " + totalProducts;
+            html += "Showing " + totalProducts + " of " + totalProducts;
         }
 
         if (totalProducts > 1) {
@@ -63,7 +69,7 @@ module.exports = {
         if (!searchCriteria.sortF) {
             searchCriteria.sortF = "";
         }
-        
+
         // Previous button
         if (x === 1) {
             html += "<li class=\"page-item disabled\"><a class=\"page-link\" href=\"/search?k=" + searchCriteria.keyword + "&c=" + searchCriteria.selectedCategoryVal + "&pf=" + searchCriteria.priceFilter + "&cond" + searchCriteria.conditionFilter + "&sort=" + searchCriteria.sortF + "&page=" + (x - 1) + "\">Previous</a></li>";
@@ -92,12 +98,38 @@ module.exports = {
 
         return html;
     },
-    usernameOf: (email) => {;
+    //temporary soluition for category display of items in search results
+    //Author @Osbaldo Martinez
+    categoryName: (cid) => {
+        switch (cid) {
+            case 1:
+                return "Books";
+            case 2:
+                return "Electronics";
+            case 3:
+                return "Furniture";
+            case 4:
+                return "Health";
+            case 5:
+                return "Services";
+            case 6:
+                return "Sports";
+            case 7:
+                return "Supplies";
+            case 8:
+                return "Other";
+        }
+    },
+    usernameOf: (email) => {
+        ;
         if (typeof email === 'string') {
             return email.split("@")[0];
         }
         else {
             return email;
         }
+    },
+    json: (data) => {
+        return JSON.stringify(data);
     }
 }
