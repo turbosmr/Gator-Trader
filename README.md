@@ -1,6 +1,6 @@
 # Gator Trader
 
-Gator Trader is an online buy and sell website dedicated to SFSU students. This is a project for Software Engineering class --CSC 648 -- at SFSU, where I was the Team Lead. On our website students can:
+Gator Trader is an online buy and sell website dedicated to SFSU students. This was a project for the Software Engineering class -- CSC 648 -- at SFSU, where I was the Team Lead. On our website students can:
 
 * Register for an account
 * Search for a product by name and/or category
