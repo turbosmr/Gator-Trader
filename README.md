@@ -5,7 +5,7 @@ Gator Trader is an online buy and sell website dedicated to SFSU students. This 
 * Register for an account
 * Search for a product by name and/or category
 * Post an item for sale
-* Search by class name and instructor’s name for class materials
+* Search by class name for class materials
 * Contact the seller of a listing
 * Able to pick out a safe location where they can pick up the product they are purchasing
 
