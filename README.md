@@ -1,8 +1,6 @@
-# Gator Trader
+# Gator Trader (Online Buy and Sell Site for SFSU Students)
 
 By: **Steve Rentschler**
-
-# Online Buy and Sell Site for SFSU Students
 
 ## Demo 
 
