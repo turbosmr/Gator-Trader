@@ -2,6 +2,16 @@
 
 By: **Steve Rentschler**
 
+# Online Multiplayer Chess Game
+
+## Demo 
+
+Here's a demo of Gator Trader:
+
+<img src='https://media.giphy.com/media/dy9Wo9dd6ryVCX6mMf/giphy.gif' width='' alt='Video Walkthrough' />
+
+GIF created with [giphy](https://giphy.com).
+
 ## About:
 
 Gator Trader is an online buy and sell website dedicated to SFSU students. This was a project for the Software Engineering class -- CSC 648 -- at SFSU, where I was the Team Lead. On our website students can:
@@ -18,16 +28,6 @@ We also have an Admin account where the admin can:
 
 * Approve and disapprove listing request(s)
 * Administrator will be able to remove any active listing
-
-# Online Multiplayer Chess Game
-
-## Demo 
-
-Here's a demo of Gator Trader:
-
-<img src='https://media.giphy.com/media/dy9Wo9dd6ryVCX6mMf/giphy.gif' width='' alt='Video Walkthrough' />
-
-GIF created with [giphy](https://giphy.com).
 
 ## Notes
 
