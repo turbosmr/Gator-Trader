@@ -2,9 +2,7 @@
 
 By: **Steve Rentschler**
 
-## Demo 
-
-Here's a demo of Gator Trader:
+## Demo
 
 <img src='https://media.giphy.com/media/dy9Wo9dd6ryVCX6mMf/giphy.gif' width='' alt='Video Walkthrough' />
 
