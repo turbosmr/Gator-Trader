@@ -1,5 +1,7 @@
 # Gator Trader (Online Buy and Sell Site for SFSU Students)
 
+**CSC 648 teamproject**.
+
 By: **Steve Rentschler**
 
 ## Demo
