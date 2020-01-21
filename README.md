@@ -23,7 +23,7 @@ We also have an Admin account where the admin can:
 
 ## Demo 
 
-Here's a demo of our Online Multiplayer Chess Game:
+Here's a demo of Gator Trader:
 
 <img src='https://media.giphy.com/media/dy9Wo9dd6ryVCX6mMf/giphy.gif' width='' alt='Video Walkthrough' />
 
