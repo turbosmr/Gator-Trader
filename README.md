@@ -2,7 +2,7 @@
 
 By: **Steve Rentschler**
 
-# Online Multiplayer Chess Game
+# Online Buy and Sell Site for SFSU Students
 
 ## Demo 
 
