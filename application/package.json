@@ -15,7 +15,7 @@
     "connect-flash": "^0.1.1",
     "email-validator": "^2.0.4",
     "express": "^4.17.1",
-    "express-handlebars": "^3.1.0",
+    "express-handlebars": "^5.3.1",
     "express-paginatorjs": "^1.0.1",
     "express-session": "^1.16.2",
     "mkdirp": "^0.5.1",
