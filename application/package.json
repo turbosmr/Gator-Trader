@@ -14,7 +14,7 @@
     "compress-images": "^1.5.8",
     "connect-flash": "^0.1.1",
     "email-validator": "^2.0.4",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-handlebars": "^3.1.0",
     "express-paginatorjs": "^1.0.1",
     "express-session": "^1.16.2",
